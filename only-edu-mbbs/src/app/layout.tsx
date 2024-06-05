@@ -25,8 +25,6 @@ export default async function RootLayout({
     "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][university]=*"
   );
 
-  console.log("navbar", navData.dropdown, { depth: null });
-
   return (
     <html lang="en">
       <body className={`bg-light dark:bg-dark ${inter.className}`}>

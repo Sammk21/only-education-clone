@@ -10,12 +10,32 @@ import TopUniRail from "@/modules/top-uni-rail";
 import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
+import { getStrapiData } from "@/utils/utils";
 import React from "react";
 
-const StudyUniversity = () => {
+const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
+  console.log(params.slug);
+
+  const getUniQuery =
+    "/api/universities?populate[universityProfile][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][Header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][Header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][Header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate]=true";
+
+  const data = await getStrapiData(getUniQuery);
+
+  const {
+    universityProfile,
+    overview,
+    cta,
+    whythisUniversity,
+    rankComparison,
+    eligibilityCriteria,
+    documentRequired,
+    feesStructure,
+    faq,
+  } = data.data[0];
+
   return (
     <div className="pt-32 mb-16">
-      <GlobalProfileLayout />
+      <GlobalProfileLayout slug={params.slug} data={universityProfile} />
 
       <div className="py-4 bg-greenDark my-12">
         <div className="flex  items-center justify-center gap-x-5  text-light">
