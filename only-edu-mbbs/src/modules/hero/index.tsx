@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 
-
 interface HeaderProps {
   id: number;
   title: string;
@@ -18,7 +17,7 @@ interface HeroProps {
 
 const Hero = ({ data }: HeroProps) => {
   return (
-    <section className="bg-light dark:bg-dark">
+    <section className=" ">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
         <h1 className="mb-4 text-gradient text-6xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-8xl">
           {data.header.title}
