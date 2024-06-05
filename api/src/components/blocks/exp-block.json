@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_exp_rail_exp_blocks",
+  "info": {
+    "displayName": "ExpRail",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "expBlock": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.exp-block",
+      "max": 5
+    }
+  }
+}

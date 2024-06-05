@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_why_this_uni_country_s",
+  "info": {
+    "displayName": "Why this (uni/country)",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Question": {
+      "type": "string"
+    },
+    "Answer": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_exp_blocks",
+  "info": {
+    "displayName": "ExpBlock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "counter": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

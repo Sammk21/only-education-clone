@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_headers",
+  "info": {
+    "displayName": "header",
+    "icon": "heading",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

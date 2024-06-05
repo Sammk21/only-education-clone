@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_university_cards",
+  "info": {
+    "displayName": "UniversityCard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "NoOfStudentsStudying": {
+      "type": "string"
+    }
+  }
+}

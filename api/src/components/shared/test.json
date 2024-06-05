@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_tests",
+  "info": {
+    "displayName": "CriteriaCard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "test": {
+      "type": "string"
+    },
+    "List": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list"
+    }
+  }
+}

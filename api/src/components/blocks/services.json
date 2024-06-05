@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_services",
+  "info": {
+    "displayName": "Services",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
+    "OurServiceInfo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.our-service-summary",
+      "max": 5
+    }
+  }
+}

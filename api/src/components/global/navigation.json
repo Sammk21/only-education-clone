@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_global_navigations",
+  "info": {
+    "displayName": "navigation",
+    "icon": "location-arrow",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.link"
+    },
+    "authButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.link"
+    }
+  }
+}

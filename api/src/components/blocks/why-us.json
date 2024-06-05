@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blocks_why_uses",
+  "info": {
+    "displayName": "Why this",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.header"
+    },
+    "QnA": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.why-this-uni-country"
+    }
+  }
+}

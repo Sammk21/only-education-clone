@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_why_mbbs_abroads",
+  "info": {
+    "displayName": "Why mbbs Abroad",
+    "icon": "question"
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.header"
+    },
+    "SubDescription": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_blocks_why_abroads",
+  "info": {
+    "displayName": "Why Abroad",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "List": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list"
+    },
+    "Heading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    }
+  }
+}

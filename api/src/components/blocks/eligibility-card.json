@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_eligibility_cards",
+  "info": {
+    "displayName": "Eligibility Card",
+    "icon": "check",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
+    "criteriaList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list-with-heading"
+    }
+  }
+}

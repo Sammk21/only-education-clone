@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_popular_courses",
+  "info": {
+    "displayName": "PopularCourses",
+    "icon": "filter",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list"
+    }
+  }
+}

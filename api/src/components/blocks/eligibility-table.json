@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_blocks_eligibility_tables",
+  "info": {
+    "displayName": "Table",
+    "icon": "grid",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "text"
+    },
+    "FeesStructureTable": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "subTitle": {
+      "type": "text"
+    }
+  }
+}

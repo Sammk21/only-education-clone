@@ -1,0 +1,47 @@
+{
+  "kind": "singleType",
+  "collectionName": "landing_pages",
+  "info": {
+    "singularName": "landing-page",
+    "pluralName": "landing-pages",
+    "displayName": "Landing page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.hero"
+    },
+    "experienceRail": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.exp-block"
+    },
+    "topUniversities": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.features-with-images"
+    },
+    "Services": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.services"
+    },
+    "whyOnlyEducation": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.why-us"
+    }
+  }
+}

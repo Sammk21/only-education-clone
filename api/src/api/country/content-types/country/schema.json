@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Country",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "CountryProfile": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.profiles"
+    },
+    "WhyThisCountry": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.why-abroad"
+    },
+    "EligibilityCriteria": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.eligibility-card"
+    },
+    "FeesStructure": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.eligibility-table"
+    },
+    "TopUniversitiesInCountry": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.features-with-images"
+    },
+    "Faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.faq"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::university.university",
+      "inversedBy": "countries"
+    }
+  }
+}

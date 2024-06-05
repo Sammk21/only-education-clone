@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_slices_features_with_images",
+  "info": {
+    "displayName": "TopUniversityData",
+    "icon": "images",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
+    "UniversityData": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.university-card",
+      "max": 10
+    }
+  }
+}

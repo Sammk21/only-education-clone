@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_global_page_headers",
+  "info": {
+    "displayName": "Page Header"
+  },
+  "options": {},
+  "attributes": {
+    "PageHeader": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.header"
+    }
+  }
+}
