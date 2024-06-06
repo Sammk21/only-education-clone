@@ -102,7 +102,7 @@ const Dropdown = ({
   depthLevel = depthLevel + 1;
   const dropdownClass = depthLevel > 1 ? "dropdown-submenu" : "";
 
-  console.log("mylogs", subMenuLinks);
+
 
   return (
     <ul

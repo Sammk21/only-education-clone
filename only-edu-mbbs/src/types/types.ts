@@ -1,6 +1,26 @@
 // types.ts
 
 
+export interface HeaderProps{
+  id:number
+ title: string;
+ description:string| null
+
+}
+
+
+export interface faqProps{
+  id:number
+  question:string
+  answer:string
+}
+
+export interface QnaProps{
+  id:number
+  Question:string
+  Answer:string
+}
+
 export interface Links {
   id: number;
   href: string;

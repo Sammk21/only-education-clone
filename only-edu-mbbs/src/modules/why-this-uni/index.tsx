@@ -1,10 +1,21 @@
+import { HeaderProps, QnaProps } from "@/types/types";
 import React from "react";
+import parse from "html-react-parser";
 
-const WhyThisUni = () => {
+interface Props {
+  data: {
+    header: HeaderProps;
+    qna: QnaProps[];
+  };
+}
+
+const WhyThisUni = ({ data }: Props) => {
+  const { title, description } = data.header;
+
   return (
     <section className=" dark:text-light  text-dark py-12 ">
       <div className="px-6 container mx-auto">
-        <h1 className="text-5xl font-semibold">Why this university</h1>
+        <h1 className="text-5xl font-semibold">{title}</h1>
         <div className="md:grid md:grid-cols-2">
           <div className="h-full items-center justify-center flex">
             <svg
@@ -30,71 +41,12 @@ const WhyThisUni = () => {
           </div>
           <div className=" w-full h-full">
             <ol className="flex flex-col gap-y-10">
-              <li>
-                <h4 className="leading-8 text-3xl  mb-3">MBBS Tuition Fees</h4>
-                <p className="text-sm text-accent">
-                  We have an expert team that assists you in choosing the best
-                  university to complete your Study Abroad dream. We provide
-                  more than 650+ top medical universities for MBBS/other courses
-                  and 25+ nations.
-                </p>
-              </li>
-              <li>
-                <h4 className="leading-8 text-3xl mb-3">
-                  International Students
-                </h4>
-                <p className="text-sm text-accent">
-                  From University selection to all the paperwork, we are
-                  available at every single step. Our expert guidance team
-                  provides complete support for your admission.
-                </p>
-              </li>
-              <li>
-                <h4 className="leading-8 text-3xl mb-3">Criteria</h4>
-                <p className="text-sm text-accent">
-                  Facilitates discovering budget-friendly options tailored to
-                  your needs. For students grappling with the dilemma of
-                  selecting the ideal country and university for study, and for
-                  an individual seeking Permanent Residency in a specific
-                  nation, our counsellors are dedicated to offering expert
-                  guidance, ensuring you make well-informed decisions.
-                </p>
-              </li>
-              <li>
-                <h4 className="leading-8 text-3xl mb-3">Approved by</h4>
-                <p className="text-sm text-accent">
-                  We conduct a pre-departure session for those students who are
-                  ready to Study MBBS Abroad or any other courses. In this
-                  session, students get all the necessary instructions regarding
-                  departure and other things.
-                </p>
-              </li>
-              <li>
-                <h4 className="leading-8 text-3xl mb-3">Facilities</h4>
-                <p className="text-sm text-accent">
-                  Our post-landing services for Permanent Residency (PR)
-                  candidates go beyond the journey's end, ensuring a smooth
-                  transition and successful settlement in your new homeland. Our
-                  dedicated team understands the unique challenges faced by
-                  newcomers and is committed to providing personalized guidance,
-                  whether it's navigating the healthcare system, understanding
-                  local educational opportunities, or connecting with cultural
-                  and social networks.
-                </p>
-              </li>
-              <li>
-                <h4 className="leading-8 text-3xl mb-3">Language</h4>
-                <p className="text-sm text-accent">
-                  Our post-landing services for Permanent Residency (PR)
-                  candidates go beyond the journey's end, ensuring a smooth
-                  transition and successful settlement in your new homeland. Our
-                  dedicated team understands the unique challenges faced by
-                  newcomers and is committed to providing personalized guidance,
-                  whether it's navigating the healthcare system, understanding
-                  local educational opportunities, or connecting with cultural
-                  and social networks.
-                </p>
-              </li>
+              {data.qna.map((item) => (
+                <li key={item.id}>
+                  <h4 className="leading-8 text-3xl  mb-3">{item.Question}</h4>
+                  <p className="text-sm text-accent">{item.Answer}</p>
+                </li>
+              ))}
             </ol>
           </div>
         </div>

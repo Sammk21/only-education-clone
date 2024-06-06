@@ -17,7 +17,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   console.log(params.slug);
 
   const getUniQuery =
-    "/api/universities?populate[universityProfile][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][Header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][Header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][Header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate]=true";
+    "/api/universities?populate[universityProfile][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true";
 
   const data = await getStrapiData(getUniQuery);
 
@@ -39,40 +39,30 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
       <div className="py-4 bg-greenDark my-12">
         <div className="flex  items-center justify-center gap-x-5  text-light">
-          <h1 className="lg:text-4xl text-sm/6">
-            Get connected with our experts{" "}
-          </h1>
+          <h1 className="lg:text-4xl text-sm/6">{cta.title}</h1>
           <button className="px-4  py-2 mt-2 rounded-2xl border border-borderLight dark:border-border  bg-blue-500 text-light text-sm hover:shadow-[1px_1px_0px_0px_rgba(0,0,0)] transition duration-200">
             Enquire Now
           </button>
         </div>
-        {/* <p className="text-center text-accent">For better guidence</p> */}
       </div>
       <div className="mt-6 ">
         <div className="my-8">
           <h2 className="text-center text-4xl font-medium mb-4 dark:text-light">
-            Overview
+            {overview.title}
           </h2>
           <p className="text-center max-w-6xl w-full mx-auto dark:text-accent">
-            {" "}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed harum
-            soluta nostrum architecto dolorum ullam voluptatibus molestias
-            commodi laudantium nulla assumenda possimus sapiente non rerum
-            excepturi quisquam delectus, perferendis incidunt obcaecati error
-            culpa aliquam? Sed, veritatis!
+            {overview.description}
           </p>
         </div>
         <UniHighlights />
-        <WhyThisUni />
-        <UniRanking />
-        <ElegibilityCriteria name="name of uni" />
+        <WhyThisUni data={whythisUniversity} />
+        <UniRanking data={rankComparison} />
+        <ElegibilityCriteria data={eligibilityCriteria} />
         <AdmissionProcessFlow />
-        <DocumentRquired />
-        <div className="my-12">
-          <InfoTableLayout title="bashkir state medical uni fees" />
-        </div>
+        <DocumentRquired data={documentRequired} />
+        <InfoTableLayout data={feesStructure} />
         <CampusHighlight />
-        <QuestionDropdown />
+        <QuestionDropdown data={faq} />
       </div>
     </div>
   );
