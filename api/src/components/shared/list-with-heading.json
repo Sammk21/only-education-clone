@@ -11,7 +11,12 @@
       "type": "string"
     },
     "list": {
-      "type": "string"
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
