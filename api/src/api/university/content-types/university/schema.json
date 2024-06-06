@@ -29,11 +29,6 @@
       "repeatable": false,
       "component": "blocks.cta"
     },
-    "header": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.header"
-    },
     "overview": {
       "type": "component",
       "repeatable": false,
@@ -46,7 +41,7 @@
     },
     "rankComparison": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.rank-comparison"
     },
     "eligibilityCriteria": {
@@ -66,7 +61,7 @@
     },
     "faq": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.faq"
     },
     "countries": {

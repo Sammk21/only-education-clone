@@ -6,12 +6,12 @@
   },
   "options": {},
   "attributes": {
-    "Header": {
+    "header": {
       "type": "component",
       "repeatable": true,
       "component": "shared.header"
     },
-    "QnA": {
+    "qna": {
       "type": "component",
       "repeatable": true,
       "component": "shared.why-this-uni-country"

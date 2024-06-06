@@ -2,11 +2,12 @@
   "collectionName": "components_shared_list_with_headings",
   "info": {
     "displayName": "List with heading",
-    "icon": "layer"
+    "icon": "layer",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
     "list": {
