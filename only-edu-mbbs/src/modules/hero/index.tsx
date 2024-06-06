@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import MySideBar from "../navbar/components/Sidebar";
 
 interface HeaderProps {
   id: number;
