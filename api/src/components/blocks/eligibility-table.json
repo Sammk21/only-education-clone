@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "title": {
+    "Title": {
       "type": "text"
     },
     "FeesStructureTable": {

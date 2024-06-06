@@ -1,17 +1,16 @@
 {
   "collectionName": "components_blocks_rank_comparisons",
   "info": {
-    "displayName": "RankComparison",
-    "description": ""
+    "displayName": "RankComparison"
   },
   "options": {},
   "attributes": {
-    "header": {
+    "Header": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "shared.header"
     },
-    "ranks": {
+    "Ranks": {
       "type": "component",
       "repeatable": false,
       "component": "shared.ranking"

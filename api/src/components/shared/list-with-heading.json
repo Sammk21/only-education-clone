@@ -2,21 +2,15 @@
   "collectionName": "components_shared_list_with_headings",
   "info": {
     "displayName": "List with heading",
-    "icon": "layer",
-    "description": ""
+    "icon": "layer"
   },
   "options": {},
   "attributes": {
-    "title": {
+    "Title": {
       "type": "string"
     },
     "list": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "light"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
+      "type": "string"
     }
   }
 }

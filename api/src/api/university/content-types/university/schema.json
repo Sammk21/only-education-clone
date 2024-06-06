@@ -29,6 +29,11 @@
       "repeatable": false,
       "component": "blocks.cta"
     },
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
     "overview": {
       "type": "component",
       "repeatable": false,
@@ -41,7 +46,7 @@
     },
     "rankComparison": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "blocks.rank-comparison"
     },
     "eligibilityCriteria": {
@@ -61,7 +66,7 @@
     },
     "faq": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "blocks.faq"
     },
     "countries": {
@@ -69,16 +74,6 @@
       "relation": "oneToMany",
       "target": "api::country.country",
       "mappedBy": "university"
-    },
-    "highlights": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.highlights"
-    },
-    "campus": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.campus"
     }
   }
 }

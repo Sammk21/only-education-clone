@@ -2,23 +2,24 @@
   "collectionName": "components_shared_cards",
   "info": {
     "displayName": "card",
-    "icon": "sim-card",
-    "description": ""
+    "icon": "sim-card"
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string"
     },
+    "text": {
+      "type": "string"
+    },
     "image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ]
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
