@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "Header": {
+    "header": {
       "type": "component",
       "repeatable": false,
       "component": "shared.header"

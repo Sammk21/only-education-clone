@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_blocks_why_uses",
+  "collectionName": "components_shared_highlights",
   "info": {
-    "displayName": "Why this",
+    "displayName": "Highlights",
     "description": ""
   },
   "options": {},
@@ -11,10 +11,10 @@
       "repeatable": false,
       "component": "shared.header"
     },
-    "qna": {
+    "key": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.why-this-uni-country"
+      "component": "shared.key"
     }
   }
 }
