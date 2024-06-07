@@ -142,7 +142,7 @@ export default function CollegeFilter() {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <DialogPanel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto  py-4 pb-12 shadow-xl justify-center bg-white">
+                <DialogPanel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto  py-4 pb-12 shadow-xl justify-center bg-light rounded-tl-3xl rounded-bl-3xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
                       Filters
@@ -158,7 +158,7 @@ export default function CollegeFilter() {
                   </div>
 
                   {/* Filters */}
-                  <form className="mt-4 border-t border-gray-200">
+                  <form className="mt-4 border-t border-gray-200 overflow-scroll h-full ">
                     <h3 className="sr-only">Categories</h3>
                     {/* <ul
                       role="list"

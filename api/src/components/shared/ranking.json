@@ -2,14 +2,15 @@
   "collectionName": "components_shared_rankings",
   "info": {
     "displayName": "ranking",
-    "icon": "filter"
+    "icon": "filter",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "objectRank": {
       "type": "string"
     },
-    "WorldRank": {
+    "worldRank": {
       "type": "string"
     }
   }

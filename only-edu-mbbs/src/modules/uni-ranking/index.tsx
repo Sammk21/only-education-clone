@@ -6,7 +6,7 @@ import { FaEarthAsia } from "react-icons/fa6";
 interface Ranks {
   id: number;
   objectRank: string;
-  WorldRank: string;
+  worldRank: string;
 }
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
 const UniRanking = ({ data }: Props) => {
   const { title, description } = data.header;
 
-  const { objectRank, WorldRank } = data.ranks;
+  const { objectRank, worldRank } = data.ranks;
 
   return (
     <section className="py-12 my-12 bg-greenDark rounded-2xl text-light container mx-auto">
@@ -32,7 +32,7 @@ const UniRanking = ({ data }: Props) => {
         </div>
         <div className="flex justify-center items-center flex-col ">
           <FaEarthAsia className="text-8xl mb-3" />
-          <p className="font-medium">{WorldRank}</p>
+          <p className="font-medium">{worldRank}</p>
         </div>
       </div>
     </section>

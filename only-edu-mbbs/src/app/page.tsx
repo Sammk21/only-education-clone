@@ -5,6 +5,7 @@ import OurServices from "@/modules/services";
 import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
+import MySideBar from "@/modules/navbar/components/Sidebar";
 
 const HomePageQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true";
@@ -25,7 +26,6 @@ export default async function Home() {
         <OurServices />
         <WhyUs />
         <NewsLetter />
-
         <CircleFilled className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px]  sm:w-[600px] sm:h-[600px] w-[450px] h-[450px] top-3/4 -left-[20%] opacity-50  -z-10" />
       </div>
     </div>

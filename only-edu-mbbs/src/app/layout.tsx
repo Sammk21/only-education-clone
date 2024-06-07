@@ -5,6 +5,7 @@ import "../styles/normalize.css";
 import Navbar from "@/modules/navbar";
 import Footer from "@/modules/footer";
 import { flattenAttributes, getStrapiData } from "@/utils/utils";
+import MySideBar from "@/modules/navbar/components/Sidebar";
 
 const inter = Ubuntu({
   subsets: ["cyrillic"],
@@ -22,15 +23,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const navData = await getStrapiData(
-    "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][university]=*"
+    "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][country]=true&[populate][dropdown][populate][subMenuLinks][populate][university]=*"
   );
 
   return (
     <html lang="en">
-      <body className={`bg-light dark:bg-dark ${inter.className}`}>
-        <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
-        {children}
-        <Footer />
+      <body className={`bg-light dark:bg-dark  ${inter.className}`}>
+        <div className="relative w-full h-full">
+          <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
+          {children}
+          <Footer />
+          <MySideBar
+            navigation={navData.navigation}
+            dropdown={navData.dropdown}
+          />
+        </div>
       </body>
     </html>
   );

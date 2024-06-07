@@ -5,7 +5,7 @@ const OurServices = () => {
     <section className="bg-greenDark relative dark:bg-light text-light shadow-2xl   dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 my-8">
       <div className="px-6 container mx-auto ">
         <h1 className=" text-5xl mb-8 sm:text-6xl z-10">Our Services</h1>
-        <div className="md:px-36 justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
+        <div className=" justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
           <div className="col-span-3 flex md:block  justify-center items-center">
             <svg
               className="md:w-[400px] md:h-[400px] h-[300px] w-[300px]"
@@ -52,7 +52,10 @@ const OurServices = () => {
             </p>
           </div>
         </div>
-        <div className=" md:px-36  z-10 justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5">
+        <div
+          className=" 
+          z-10 justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5"
+        >
           <div className="col-span-2">
             <h1 className="leading-none text-4xl mb-2">Immigration</h1>
             <h2 className="mb-3 text-lg">
@@ -111,7 +114,7 @@ const OurServices = () => {
             </svg>
           </div>
         </div>
-        <div className="  md:px-36  z-10 justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
+        <div className="    z-10 justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
           <div className="col-span-3 flex md:block  justify-center items-center">
             <svg
               className="md:w-[400px] md:h-[400px] h-[300px] w-[300px]"
@@ -146,7 +149,7 @@ const OurServices = () => {
             </p>
           </div>
         </div>
-        <div className=" md:px-36  z-10justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5">
+        <div className="   z-10justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5">
           <div className="col-span-2 ">
             <h1 className="leading-none text-4xl mb-8">Management</h1>
             <h2 className="mb-3 text-lg">Choose top B-Schools in Pan India</h2>
@@ -185,7 +188,7 @@ const OurServices = () => {
             </svg>
           </div>
         </div>
-        <div className="  md:px-36  z-10 justify-center  items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
+        <div className="    z-10 justify-center  items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
           <div className="col-span-3 flex md:block  justify-center items-center">
             <svg
               className="md:w-[400px] md:h-[400px] h-[300px] w-[300px]"

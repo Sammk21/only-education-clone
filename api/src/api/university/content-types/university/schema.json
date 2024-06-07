@@ -12,12 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
     "slug": {
-      "type": "uid",
-      "targetField": "Title"
+      "type": "uid"
     },
     "universityProfile": {
       "type": "component",
@@ -69,16 +68,6 @@
       "relation": "oneToMany",
       "target": "api::country.country",
       "mappedBy": "university"
-    },
-    "highlights": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.highlights"
-    },
-    "campus": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.campus"
     }
   }
 }

@@ -12,11 +12,10 @@
       "repeatable": false,
       "component": "shared.header"
     },
-    "UniversityData": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.university-card",
-      "max": 10
+    "universities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::university.university"
     }
   }
 }
