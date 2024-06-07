@@ -102,7 +102,7 @@ const Dropdown = ({
   depthLevel = depthLevel + 1;
   const dropdownClass = depthLevel > 1 ? "dropdown-submenu" : "";
 
-
+  console.dir(subMenuLinks, { depth: null });
 
   return (
     <ul
@@ -111,11 +111,11 @@ const Dropdown = ({
       }`}
     >
       {subMenuLinks.map((submenu) => {
-        if (submenu.university && submenu.university.Title) {
+        if (submenu.university && submenu.university.title) {
           return (
             <li key={`uni-${submenu.id}`}>
               <Link href={`${submenu.href}${submenu.university.slug}`}>
-                {submenu.university.Title}
+                {submenu.university.title}
               </Link>
             </li>
           );

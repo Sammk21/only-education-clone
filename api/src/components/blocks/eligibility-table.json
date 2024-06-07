@@ -17,6 +17,14 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::university.university"
+    },
+    "feesStructureTable": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
