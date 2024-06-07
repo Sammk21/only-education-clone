@@ -9,9 +9,9 @@ import MySideBar from "@/modules/navbar/components/Sidebar";
 
 const HomePageQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true";
-
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
+  console.dir(data);
 
   return (
     <div className="pt-28 w-full overflow-hidden">

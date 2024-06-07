@@ -114,7 +114,7 @@ export default function CollegeFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-[30px] ">
+    <div className="bg-white rounded-[30px] my-4">
       <div>
         {/* Mobile filter dialog */}
         <Transition show={mobileFiltersOpen}>
