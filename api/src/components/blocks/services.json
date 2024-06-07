@@ -6,12 +6,12 @@
   },
   "options": {},
   "attributes": {
-    "Header": {
+    "header": {
       "type": "component",
       "repeatable": false,
       "component": "shared.header"
     },
-    "OurServiceInfo": {
+    "ourServiceInfo": {
       "type": "component",
       "repeatable": true,
       "component": "shared.our-service-summary",
