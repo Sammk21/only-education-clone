@@ -16,6 +16,9 @@ const nextConfig = {
       {
         hostname: "localhost",
       },
+      {
+        hostname: "http://192.168.1.4:1337",
+      },
     ],
   },
 };
