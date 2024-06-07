@@ -1,12 +1,15 @@
 {
-  "collectionName": "components_shared_list_with_headings",
+  "collectionName": "components_shared_criteria_lists",
   "info": {
-    "displayName": "List with heading",
-    "icon": "layer",
+    "displayName": "criteriaList",
+    "icon": "filter",
     "description": ""
   },
   "options": {},
   "attributes": {
+    "title": {
+      "type": "string"
+    },
     "list": {
       "type": "customField",
       "options": {

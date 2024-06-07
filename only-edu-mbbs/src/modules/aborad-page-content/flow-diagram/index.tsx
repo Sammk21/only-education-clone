@@ -7,8 +7,7 @@ const FlowDiagram = () => {
   return (
     <section className="py-6 mt-6  mb-20">
       <p className="text-center text-dark dark:text-light pt-6 text-xl font-semibold">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione maxime
-        amet asperiores.
+        Why Study Abroad is the best for Indian Students?
       </p>
       <div className=" flex flex-col px-10 sm:px-12 w-full justify-center">
         <div className=" h-24 mx-auto flex gap-5 ">
