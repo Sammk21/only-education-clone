@@ -14,10 +14,7 @@ import { getStrapiData } from "@/utils/utils";
 import React from "react";
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  console.log(params.slug);
-
-  const getUniQuery =
-    "/api/universities?populate[universityProfile][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true";
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
 
@@ -33,10 +30,16 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     faq,
   } = data.data[0];
 
+  const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
+  const profileImage = data.data[0].universityProfile.profileImage.url;
+
   return (
     <div className="pt-32 mb-16">
-      <GlobalProfileLayout slug={params.slug} data={universityProfile} />
-
+      <GlobalProfileLayout
+        profileImage={profileImage}
+        backgroundImage={backgroundImage}
+        data={universityProfile}
+      />
       <div className="py-4 bg-greenDark my-12">
         <div className="flex  items-center justify-center gap-x-5  text-light">
           <h1 className="lg:text-4xl text-sm/6">{cta.title}</h1>
@@ -60,8 +63,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         <ElegibilityCriteria data={eligibilityCriteria} />
         <AdmissionProcessFlow />
         <DocumentRquired data={documentRequired} />
-        <InfoTableLayout data={feesStructure} />
-        <CampusHighlight />
+        {/* <InfoTableLayout data={feesStructure} />   create table inside layout */}
+        <CampusHighlight /> /** */
         <QuestionDropdown data={faq} />
       </div>
     </div>

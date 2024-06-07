@@ -19,32 +19,32 @@
       "type": "uid",
       "targetField": "Title"
     },
-    "CountryProfile": {
+    "countryProfile": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.profiles"
     },
-    "WhyThisCountry": {
+    "whyThisCountry": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.why-abroad"
     },
-    "EligibilityCriteria": {
+    "eligibilityCriteria": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.eligibility-card"
     },
-    "FeesStructure": {
+    "feesStructure": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.eligibility-table"
     },
-    "TopUniversitiesInCountry": {
+    "topUniversitiesInCountry": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.features-with-images"
     },
-    "Faq": {
+    "faq": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.faq"
@@ -54,6 +54,9 @@
       "relation": "manyToOne",
       "target": "api::university.university",
       "inversedBy": "countries"
+    },
+    "noOfStudentsStudying": {
+      "type": "string"
     }
   }
 }

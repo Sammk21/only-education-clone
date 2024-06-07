@@ -32,17 +32,17 @@ const TopUniRail = () => {
               slidesPerView: 1.2,
               spaceBetween: 10,
             },
-            420: {
+            530: {
               slidesPerView: 2.2,
               spaceBetween: 20,
             },
 
             768: {
-              slidesPerView: 3.2,
+              slidesPerView: 2.2,
               spaceBetween: 30,
             },
             1080: {
-              slidesPerView: 4.3,
+              slidesPerView: 3.3,
               spaceBetween: 40,
             },
           }}

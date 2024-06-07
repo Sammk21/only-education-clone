@@ -33,9 +33,10 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
     setIsScrolled(latest >= 80);
   });
 
+
   return (
     <>
-      <header className="mb-9 w-screen top-0 fixed bg-green-900  dark:bg-only-green-950 z-30">
+      <header className="mb-9 w-screen top-0 fixed bg-greenDark  dark:bg-only-green-950 z-30">
         <div
           className={`bg-only-green-900 dark:bg-only-green-950  text-white transition-all duration-300 ease-out relative overflow-hidden ${
             isScrolled ? "h-0" : "h-[2rem]"

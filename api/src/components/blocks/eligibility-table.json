@@ -10,16 +10,13 @@
     "title": {
       "type": "text"
     },
-    "FeesStructureTable": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "rich"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
-    },
     "subTitle": {
       "type": "text"
+    },
+    "universities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::university.university"
     }
   }
 }

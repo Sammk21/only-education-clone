@@ -6,22 +6,10 @@
   },
   "options": {},
   "attributes": {
-    "Image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "Name": {
-      "type": "string"
-    },
-    "NoOfStudentsStudying": {
-      "type": "string"
+    "universities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::university.university"
     }
   }
 }

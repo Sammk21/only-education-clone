@@ -29,7 +29,7 @@ const StudyMbbsAbroad = () => {
       <TopCountryRail />
       <PopularCoursesAbroad />
       <TopUniRail />
-      <QuestionDropdown />
+      {/* <QuestionDropdown /> */}
     </>
   );
 };

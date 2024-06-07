@@ -110,13 +110,30 @@ const Dropdown = ({
         dropdown ? "show" : ""
       }`}
     >
-      {subMenuLinks.map((submenu) => (
-        <li key={submenu.id}>
-          <Link href={`${submenu.href}${submenu.university.slug}`}>
-            {submenu.university.Title}
-          </Link>
-        </li>
-      ))}
+      {subMenuLinks.map((submenu) => {
+        if (submenu.university && submenu.university.Title) {
+          return (
+            <li key={`uni-${submenu.id}`}>
+              <Link href={`${submenu.href}${submenu.university.slug}`}>
+                {submenu.university.Title}
+              </Link>
+            </li>
+          );
+        }
+        return null;
+      })}
+      {subMenuLinks.map((submenu) => {
+        if (submenu.country && submenu.country.Title) {
+          return (
+            <li key={`country-${submenu.id}`}>
+              <Link href={`${submenu.href}${submenu.country.slug}`}>
+                {submenu.country.Title}
+              </Link>
+            </li>
+          );
+        }
+        return null;
+      })}
     </ul>
   );
 };

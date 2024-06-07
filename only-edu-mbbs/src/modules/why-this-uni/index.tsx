@@ -12,7 +12,7 @@ interface Props {
 const WhyThisUni = ({ data }: Props) => {
   const { title, description } = data.header;
 
-  console.log(data.header);
+
 
   return (
     <section className=" dark:text-light  text-dark py-12 ">

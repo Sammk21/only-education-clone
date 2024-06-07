@@ -1,9 +1,12 @@
+import { ImageAttributes } from "@/types/types";
 import { getStrapiData } from "@/utils/utils";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import React from "react";
 
 interface Props {
-  slug: string;
+  profileImage: string;
+  backgroundImage: string;
+
   data: {
     id: number;
     name: string;
@@ -11,19 +14,14 @@ interface Props {
   };
 }
 
-const GlobalProfileLayout = async ({ data, slug }: Props) => {
+const GlobalProfileLayout = async ({
+  data,
+  backgroundImage,
+  profileImage,
+}: Props) => {
   const { name, description } = data;
-  const imagesQuery = `/api/universities?filters[slug][$eq]=${slug}&populate[universityProfile][populate][0]=backgroundImage&populate[universityProfile][populate][1]=profileImage`;
-  const Imagedata = await getStrapiData(imagesQuery);
-
-  const backgroundImage =
-    Imagedata.data[0].universityProfile.backgroundImage.url;
-  const profileImage =
-    Imagedata.data[0].universityProfile.profileImage.data[0].url;
 
   const baseUrl = "http://localhost:1337";
-
-
 
   return (
     <div className=" bg-light  dark:bg-dark flex flex-wrap items-center border-none  justify-center  ">

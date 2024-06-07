@@ -6,15 +6,18 @@
   },
   "options": {},
   "attributes": {
-    "List": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.list"
-    },
-    "Heading": {
+    "header": {
       "type": "component",
       "repeatable": false,
       "component": "shared.header"
+    },
+    "list": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

@@ -36,6 +36,13 @@ export interface Dropdown {
   subMenuLinks: subMenuLinks[];
 }
 
+export interface CountryProps{
+  id:number
+  Title:string
+  slug:string;
+  noOfStudentsStudying:string;
+}
+
 export interface subMenuLinks{
   id: number;
   href:string
@@ -43,6 +50,7 @@ export interface subMenuLinks{
   target:string | null;
   isExternal: boolean;
   university:University
+  country:CountryProps
 }
 
 interface University{
@@ -71,7 +79,7 @@ interface ImageFormat {
   height: number;
 }
 
-interface ImageAttributes {
+export interface ImageAttributes {
   id: number;
   name: string;
   alternativeText: string;
