@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 interface Theme {
   (path: string): string | Record<string, string | number>;
@@ -11,6 +12,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      
        typography: ({ theme }: any) => ({
         DEFAULT: {
           css: {
@@ -110,6 +112,8 @@ const config: Config = {
   },  
  },
 },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), 
+     require('@tailwindcss/forms'),
+     require('tailwind-scrollbar'),],
 };
 export default config;
