@@ -115,7 +115,7 @@ const Dropdown = ({
           return (
             <li key={`uni-${submenu.id}`}>
               <Link href={`${submenu.href}${submenu.university.slug}`}>
-                {submenu.university.title}
+                {submenu.label}
               </Link>
             </li>
           );
@@ -123,11 +123,11 @@ const Dropdown = ({
         return null;
       })}
       {subMenuLinks.map((submenu) => {
-        if (submenu.country && submenu.country.Title) {
+        if (submenu.country && submenu.country.title) {
           return (
             <li key={`country-${submenu.id}`}>
               <Link href={`${submenu.href}${submenu.country.slug}`}>
-                {submenu.country.Title}
+                {submenu.label}
               </Link>
             </li>
           );

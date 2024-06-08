@@ -11,7 +11,7 @@ import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
 import { getStrapiData } from "@/utils/utils";
-import React, { Suspense } from "react";
+import Reacts from "react";
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;

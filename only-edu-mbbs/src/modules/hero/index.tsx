@@ -19,7 +19,7 @@ interface HeroProps {
 const Hero = ({ data }: HeroProps) => {
   return (
     <section className=" ">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+      <div className=" px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
         <h1 className="mb-4 text-gradient text-6xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-8xl">
           {data.header.title}
         </h1>
@@ -53,7 +53,6 @@ const Hero = ({ data }: HeroProps) => {
             </div>
           </div>
         </div>
-        <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36"></div>
       </div>
     </section>
   );

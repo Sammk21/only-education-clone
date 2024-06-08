@@ -38,7 +38,7 @@ export interface Dropdown {
 
 export interface CountryProps{
   id:number
-  Title:string
+  title:string
   slug:string;
   noOfStudentsStudying:string;
 }

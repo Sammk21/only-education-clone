@@ -14,7 +14,7 @@ const LoginTemplate = () => {
   console.log(currentView);
 
   return (
-    <div className="w-full flex justify-start px-8 py-8 ">
+    <div className="w-full flex justify-start px-8 ">
       {currentView === "sign-in" ? (
         <Login setCurrentView={setCurrentView} />
       ) : (

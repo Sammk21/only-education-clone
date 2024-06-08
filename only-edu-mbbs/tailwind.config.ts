@@ -15,10 +15,18 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "lg": "1080px",
       },
     },
     extend: {
+      screens:{
+        '2lg': "1070px",
+      }
+      ,
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%)',
+      },
+     
       colors: {
         transparent: "transparent",
         light: "#f4f2ee",
