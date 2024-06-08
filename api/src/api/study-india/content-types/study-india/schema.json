@@ -1,0 +1,53 @@
+{
+  "kind": "singleType",
+  "collectionName": "study_indias",
+  "info": {
+    "singularName": "study-india",
+    "pluralName": "study-indias",
+    "displayName": "Study-india",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "indiaProfile": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.profiles"
+    },
+    "whyIndia": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.why-india"
+    },
+    "facts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list-with-heading"
+    },
+    "explore": {
+      "displayName": "explore",
+      "type": "component",
+      "repeatable": false,
+      "component": "global.explore"
+    },
+    "eligibilityTable": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.eligibility-table"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.faq"
+    }
+  }
+}

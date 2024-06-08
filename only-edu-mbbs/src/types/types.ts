@@ -55,7 +55,7 @@ export interface subMenuLinks{
 
 interface University{
   id:number
-  Title:string
+  title:string
   slug:string
 }
 

@@ -6,6 +6,8 @@ import Navbar from "@/modules/navbar";
 import Footer from "@/modules/footer";
 import { flattenAttributes, getStrapiData } from "@/utils/utils";
 import MySideBar from "@/modules/navbar/components/Sidebar";
+import NextBreadcrumb from "@/modules/common/breadcrumbs";
+import { ChevronRightIcon } from "lucide-react";
 
 const inter = Ubuntu({
   subsets: ["cyrillic"],
@@ -29,8 +31,21 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-light dark:bg-dark  ${inter.className}`}>
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full text-gray-400">
           <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
+          <NextBreadcrumb
+            homeElement={"Home"}
+            separator={
+              <span className="flex justify-center items-center">
+                <ChevronRightIcon size={15} />
+              </span>
+            }
+            activeClasses="text-dark"
+            containerClasses="flex py-5 gap-3 mx-16 text-sm "
+            listClasses="text-accent hover:text-dark"
+            capitalizeLinks
+            disabledClasses="cursor-not-allowed "
+          />
           {children}
           <Footer />
           <MySideBar

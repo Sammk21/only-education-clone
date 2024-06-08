@@ -12,10 +12,19 @@
       "repeatable": false,
       "component": "shared.header"
     },
+    "criteriaTable": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
     "criteriaList": {
+      "displayName": "criteriaList",
       "type": "component",
       "repeatable": true,
-      "component": "shared.list-with-heading"
+      "component": "shared.criteria-list"
     }
   }
 }

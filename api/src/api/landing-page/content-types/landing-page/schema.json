@@ -33,7 +33,7 @@
       "repeatable": false,
       "component": "blocks.features-with-images"
     },
-    "Services": {
+    "services": {
       "type": "component",
       "repeatable": false,
       "component": "blocks.services"

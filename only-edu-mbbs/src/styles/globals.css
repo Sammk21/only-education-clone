@@ -186,3 +186,17 @@ background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 }
+
+.swiper-pagination-bullet{
+  background-color: black;
+} .swiper-pagination-bullet-active{
+  background-color: #FF7C00;
+}
+.swiper-pagination {
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+  transition: 300ms opacity;
+  transform: translate3d(0, 0, 0);
+  z-index: 10;
+}

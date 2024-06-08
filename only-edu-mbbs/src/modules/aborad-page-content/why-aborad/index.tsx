@@ -18,7 +18,7 @@ const WhyAbroad = ({ data }: Props) => {
     <>
       <section className="text-dark dark:text-light  my-6">
         <h4 className="text-center text-4xl py-6 mb-6 ">{title}</h4>
-        <div className="list-disc px-6 sm:px-12 flex flex-col gap-y-4 max-w-7xl mx-auto prose ">
+        <div className=" px-6 sm:px-12 flex flex-col gap-y-4 max-w-7xl mx-auto prose ">
           {parse(data.list)}
         </div>
       </section>

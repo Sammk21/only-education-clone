@@ -10,7 +10,7 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.exp-block",
-      "max": 5
+      "max": 6
     }
   }
 }
