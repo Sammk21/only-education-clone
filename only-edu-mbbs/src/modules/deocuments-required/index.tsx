@@ -16,6 +16,8 @@ interface Props {
 }
 
 const DocumentRquired = ({ data }: Props) => {
+  console.dir(list);
+
   const { title, description } = data.header;
 
   return (
