@@ -8,10 +8,11 @@ import { getStrapiData } from "@/utils/utils";
 import MySideBar from "@/modules/navbar/components/Sidebar";
 
 const HomePageQuery =
-  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true";
+  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage";
+
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
-  console.dir(data);
+  // console.dir(data, { depth: null });
 
   return (
     <div className="pt-28 w-full overflow-hidden">
@@ -19,12 +20,12 @@ export default async function Home() {
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />
           <ExperienceRail data={data.experienceRail} />
-          <TopUniRail />
+          <TopUniRail data={data.topUniversities} />
           <CircleFilled className="absolute lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  sm:w-[300px] sm:h-[300px] w-[250px] h-[250px] top-56 -right-[20%] opacity-25  -z-10" />
           <CircleFilled className="absolute lg:w-[800px] lg:h-[800px] md:w-[600px] md:h-[600px]  sm:w-[400px] sm:h-[400px] w-[300px] h-[300px]  top-0 -left-[20%] opacity-35  -z-10" />
         </div>
-        <OurServices />
-        <WhyUs />
+        <OurServices data={data.services} />
+        <WhyUs data={data.whyOnlyEducation} />
         <NewsLetter />
         <CircleFilled className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px]  sm:w-[600px] sm:h-[600px] w-[450px] h-[450px] top-3/4 -left-[20%] opacity-50  -z-10" />
       </div>

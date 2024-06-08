@@ -5,9 +5,20 @@ import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
+import { CountryProps, ImageAttributes } from "@/types/types";
 
-const TopUniRail = () => {
-  //need basic uni details in props
+// // Props interface for the component
+// interface Props {
+//   unidatarail: Unidatarail;
+// }
+interface Props {
+  data: {
+    ImageAttributes: ImageAttributes;
+    CountryProps: CountryProps;
+  };
+}
+const TopUniRail = ({ data }: Props) => {
+  console.dir(data, { depth: null });
 
   return (
     <>
@@ -66,7 +77,7 @@ const TopUniRail = () => {
               </span>
             </div>
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <div className="bg-gray-300 rounded-lg aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer">
               <Image
                 src={
@@ -145,7 +156,7 @@ const TopUniRail = () => {
                 University of mumbai
               </span>
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <span className="flex flex-row-reverse mt-12 gap-x-1">
           <span className="back transition ease-in-out cursor-pointer z-40 p-3  border rounded-full  text-3xl stroke-foreground  textglobal drop-shadow-lg hover:translate-x-1 hover:bg-dark/10 top-1/2 -translate-y-1/2  right-0">

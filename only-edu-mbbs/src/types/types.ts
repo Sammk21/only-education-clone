@@ -79,7 +79,7 @@ interface ImageFormat {
   height: number;
 }
 
-export interface ImageAttributes {
+export interface ImageAttributes {   // To Do reduce incomming objects (query optimization)  
   id: number;
   name: string;
   alternativeText: string;
@@ -90,6 +90,7 @@ export interface ImageAttributes {
     small: ImageFormat;
     thumbnail: ImageFormat;
   };
+
   hash: string;
   ext: string;
   mime: string;

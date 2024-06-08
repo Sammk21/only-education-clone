@@ -1,10 +1,27 @@
 import React from "react";
+import { HeaderProps, QnaProps } from "@/types/types";
 
-const OurServices = () => {
+interface OurServicesInfo {
+  id: number;
+  title: string;
+  subtitle: string;
+  description: string;
+}
+interface Props {
+  data: {
+    id: number;
+    ourServiceInfo: OurServicesInfo[];
+    header: HeaderProps;
+  };
+}
+const OurServices = ({ data }: Props) => {
+  const { title, description } = data.header;
+
   return (
     <section className="bg-greenDark relative dark:bg-light text-light shadow-2xl   dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 my-8">
       <div className="px-6 container mx-auto ">
-        <h1 className=" text-5xl mb-8 sm:text-6xl z-10">Our Services</h1>
+        <h1 className=" text-5xl mb-8 sm:text-6xl z-10">{title}</h1>
+        <p>{description}</p>
         <div className=" justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
           <div className="col-span-3 flex md:block  justify-center items-center">
             <svg
@@ -40,16 +57,11 @@ const OurServices = () => {
             </svg>
           </div>
           <div className="col-span-2">
-            <h4 className="leading-none text-4xl mb-1">MBBS ABROAD</h4>
-            <h5 className="mb-3 text-lg">
-              Dream come true to study MBBS Abroad
-            </h5>
-            <p className="text-accent">
-              There are so many countries that provide affordable MBBS courses.
-              You can choose based on your preferences and spending amount. It
-              looks around our website and clicks the button underneath or knows
-              the depth of details about MBBS Abroad.
-            </p>
+            <h4 className="leading-none text-4xl mb-1">
+              {data.ourServiceInfo[0].title}
+            </h4>
+            <h5 className="mb-3 text-lg">{data.ourServiceInfo[0].subtitle}</h5>
+            <p className="text-accent">{data.ourServiceInfo[0].description}</p>
           </div>
         </div>
         <div
@@ -57,16 +69,11 @@ const OurServices = () => {
           z-10 justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5"
         >
           <div className="col-span-2">
-            <h1 className="leading-none text-4xl mb-2">Immigration</h1>
-            <h2 className="mb-3 text-lg">
-              Migrate for dreams; Stay for reality
-            </h2>
-            <p className="text-accent">
-              There are so many countries that provide affordable MBBS courses.
-              You can choose based on your preferences and spending amount. It
-              looks around our website and clicks the button underneath or knows
-              the depth of details about MBBS Abroad.
-            </p>
+            <h1 className="leading-none text-4xl mb-2">
+              {data.ourServiceInfo[1].title}
+            </h1>
+            <h2 className="mb-3 text-lg">{data.ourServiceInfo[1].subtitle}</h2>
+            <p className="text-accent">{data.ourServiceInfo[1].description}</p>
           </div>
           <div className="flex col-span-3 justify-center items-center md:justify-end">
             <svg
@@ -137,28 +144,21 @@ const OurServices = () => {
             </svg>
           </div>
           <div className="col-span-2">
-            <h1 className="leading-none text-4xl mb-1">Engneering</h1>
-            <h2 className="mb-2 text-lg">
-              Searching the best engneering colleges
-            </h2>
-            <p className="text-accent">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Aspernatur pariatur harum facere molestiae inventore. At
-              reprehenderit vitae, architecto eius ut qui quam suscipit.
-              Molestias.
-            </p>
+            <h1 className="leading-none text-4xl mb-1">
+              {" "}
+              {data.ourServiceInfo[2].title}
+            </h1>
+            <h2 className="mb-2 text-lg">{data.ourServiceInfo[2].subtitle}</h2>
+            <p className="text-accent">{data.ourServiceInfo[2].description}</p>
           </div>
         </div>
         <div className="   z-10justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5">
           <div className="col-span-2 ">
-            <h1 className="leading-none text-4xl mb-8">Management</h1>
-            <h2 className="mb-3 text-lg">Choose top B-Schools in Pan India</h2>
-            <p className="text-accent">
-              There are so many countries that provide affordable MBBS courses.
-              className="text-accent"You can choose based on your preferences
-              and spending amount. It looks around our website and clicks the
-              button underneath or knows the depth of details about MBBS Abroad.
-            </p>
+            <h1 className="leading-none text-4xl mb-1">
+              {data.ourServiceInfo[3].title}
+            </h1>
+            <h2 className="mb-3 text-lg">{data.ourServiceInfo[3].subtitle}</h2>
+            <p className="text-accent">{data.ourServiceInfo[3].description}</p>
           </div>
           <div className=" flex col-span-3 justify-center items-center md:justify-end">
             <svg
@@ -211,16 +211,11 @@ const OurServices = () => {
             </svg>
           </div>
           <div className="col-span-2">
-            <h1 className="leading-none text-4xl mb-8">Test Prep</h1>
-            <h2 className="mb-3 text-lg ">
-              Searching the best engneering colleges
-            </h2>
-            <p className="text-accent">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Aspernatur pariatur harum facere molestiae inventore. At
-              reprehenderit vitae, architecto eius ut qui quam suscipit.
-              Molestias.
-            </p>
+            <h1 className="leading-none text-4xl mb-1">
+              {data.ourServiceInfo[4].title}
+            </h1>
+            <h2 className="mb-3 text-lg ">{data.ourServiceInfo[4].subtitle}</h2>
+            <p className="text-accent">{data.ourServiceInfo[4].description}</p>
           </div>
         </div>
       </div>
