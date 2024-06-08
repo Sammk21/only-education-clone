@@ -12,8 +12,12 @@
       "required": false
     },
     "answer": {
-      "type": "richtext",
-      "required": false
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "light"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

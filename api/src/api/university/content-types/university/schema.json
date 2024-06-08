@@ -13,25 +13,30 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "required": true
     },
     "universityProfile": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.profiles"
+      "component": "blocks.profiles",
+      "required": true
     },
     "cta": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.cta"
+      "component": "blocks.cta",
+      "required": false
     },
     "overview": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.header"
+      "component": "shared.header",
+      "required": true
     },
     "whythisUniversity": {
       "type": "component",
