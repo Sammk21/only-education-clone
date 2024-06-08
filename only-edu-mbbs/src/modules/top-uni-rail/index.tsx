@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/pagination";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 const TopUniRail = () => {
@@ -11,17 +12,22 @@ const TopUniRail = () => {
 
   return (
     <>
-      <div className="px-2 sm:px-12 mt-12 relative marginTB">
-        <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-10 flex-col items-center flex sm:flex-row">
+      <div className="px-2 sm:px-12 mt-12 relative ">
+        <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 flex-col items-center flex sm:flex-row">
           <span className="mb-2">Top 4 universities</span>
           <span className="sm:text-lg text-sm font-light text-accent sm:ml-2">
             to get admissons in
           </span>
         </h4>
+
         <Swiper
           speed={600}
           spaceBetween={40}
-          pagination={{ clickable: true }}
+          loop={true}
+          pagination={{
+            el: ".swiper-pagination",
+            clickable: true,
+          }}
           autoplay={{
             delay: 2000,
             disableOnInteraction: true,
@@ -51,7 +57,7 @@ const TopUniRail = () => {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="rounded-lg aspect-video flex flex-col p-4  relative group overflow-hidden cursor-pointer border border-borderLight dark:border-border">
+            <div className="rounded-lg group aspect-video flex flex-col p-4  relative group overflow-hidden cursor-pointer border border-borderLight dark:border-border">
               <Image
                 src={
                   "https://images.unsplash.com/photo-1665901680991-d2dcba89ef55?q=80&w=3352&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -64,6 +70,12 @@ const TopUniRail = () => {
               <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center">
                 University of mumbai
               </span>
+              <span className=" absolute top-1/2 left-1/2 -translate-x-1/2 h-6  -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden ">
+                <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full  text-light justify-center">
+                  238k students studying here
+                </p>
+              </span>
+              <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out "></span>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -80,6 +92,12 @@ const TopUniRail = () => {
               <span className="font-bold absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light  w-full flex justify-center">
                 University of moscow
               </span>
+              <span className=" absolute top-1/2 left-1/2 -translate-x-1/2 h-6  w-full -translate-y-1/2 z-10 text-sm font-normal text-light overflow-hidden ">
+                <p className="translate-y-[100%] group-hover:translate-y-0 scale-90 group-hover:scale-100 transition-all duration-[380ms] ease-in-out flex items-center w-full  text-light justify-center">
+                  238k students stduying here
+                </p>
+              </span>
+              <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out "></span>
             </div>{" "}
           </SwiperSlide>
           <SwiperSlide>
@@ -147,6 +165,10 @@ const TopUniRail = () => {
             </div>
           </SwiperSlide>
         </Swiper>
+
+        <div className=" w-full absolute bottom-16">
+          <div className="swiper-pagination"></div>
+        </div>
         <span className="flex flex-row-reverse mt-12 gap-x-1">
           <span className="back transition ease-in-out cursor-pointer z-40 p-3  border rounded-full  text-3xl stroke-foreground  textglobal drop-shadow-lg hover:translate-x-1 hover:bg-dark/10 top-1/2 -translate-y-1/2  right-0">
             <MdOutlineArrowRightAlt />
@@ -162,3 +184,5 @@ const TopUniRail = () => {
 };
 
 export default TopUniRail;
+
+

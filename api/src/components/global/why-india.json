@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_global_why_indias",
+  "info": {
+    "displayName": "Why India",
+    "icon": "chartBubble"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
+    },
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.header"
+    }
+  }
+}

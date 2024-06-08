@@ -1,13 +1,10 @@
 import AboutUsContent from "@/modules/about-page-content";
+import NextBreadcrumb from "@/modules/common/breadcrumbs";
+import { ChevronRightIcon } from "lucide-react";
 import React from "react";
 
 const page = () => {
-  return (
-    <section className="pt-28">
-      {" "}
-      <AboutUsContent />
-    </section>
-  );
+  return <AboutUsContent />;
 };
 
 export default page;

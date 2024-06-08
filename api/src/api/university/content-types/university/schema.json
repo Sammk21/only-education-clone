@@ -68,6 +68,9 @@
       "relation": "oneToMany",
       "target": "api::country.country",
       "mappedBy": "university"
+    },
+    "noOfStudentsStudying": {
+      "type": "string"
     }
   }
 }

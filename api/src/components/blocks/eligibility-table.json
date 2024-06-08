@@ -7,18 +7,12 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "text"
+    "header": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
     },
-    "subTitle": {
-      "type": "text"
-    },
-    "universities": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::university.university"
-    },
-    "feesStructureTable": {
+    "eligibityTable": {
       "type": "customField",
       "options": {
         "output": "HTML",

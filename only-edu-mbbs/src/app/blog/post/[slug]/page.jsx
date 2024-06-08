@@ -25,7 +25,7 @@ export default async function Blog({ params }) {
   const { title, description, ckeditor_content, createdAt } = data.data[0];
 
   return (
-    <div className="pt-28 w-full ">
+    <div className=" w-full ">
       <main
         className={`${mosterrat.className} prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light mx-auto pt-8 pb-16 lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
       >

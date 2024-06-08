@@ -10,13 +10,13 @@ import GlobalProfileLayout from "../global-profile-layout";
 const StudyIndiaPage = () => {
   return (
     <section>
-      <GlobalProfileLayout />
-      {/* <StudyInBanner /> */}
+      {/* <GlobalProfileLayout /> */}
+      <StudyInBanner />
       <WhyInida />
-      {/* <Facts /> */}
+      <Facts />
       <ExploreOptions />
       <EligibilityIndiaCourse />
-      <QuestionDropdown />
+      {/* <QuestionDropdown /> */}
     </section>
   );
 };
