@@ -82,24 +82,30 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
             </span>
           </Link>
 
-          <div>
-            <ul className=" hidden lg:flex  text-sm font-normal">
-              <ul className="flex justify-center items-center">
-                {dropdown.map((link: Dropdown) => {
-                  const depthLevel = 0;
-                  return (
-                    <DropDownItems
-                      items={link}
-                      key={link.id}
-                      depthLevel={depthLevel}
-                    />
-                  );
-                })}
-                {navigation.links.map((link: Links) => {
-                  return <MenuItems items={link} key={link.id} />;
-                })}
-              </ul>
+          <div className=" hidden 2lg:flex  text-sm font-normal">
+            <ul className="flex justify-center items-center">
+              {dropdown.map((link: Dropdown) => {
+                const depthLevel = 0;
+                return (
+                  <DropDownItems
+                    items={link}
+                    key={link.id}
+                    depthLevel={depthLevel}
+                  />
+                );
+              })}
+              {navigation.links.map((link: Links) => {
+                return <MenuItems items={link} key={link.id} />;
+              })}
             </ul>
+          </div>
+
+          <div className="px-1">
+            <Link href={"/auth"} className="relative z-20">
+              <span className="px-8 py-2 rounded-full relative bg-custom-gradient text-white text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
+                login
+              </span>
+            </Link>
           </div>
           <AnimatePresence mode="wait">
             {isScrolled && (

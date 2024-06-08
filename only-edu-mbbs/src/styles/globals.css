@@ -200,3 +200,19 @@ background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7
   transform: translate3d(0, 0, 0);
   z-index: 10;
 }
+
+ @keyframes slideAnimation {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .slideToClose {
+    animation: slideAnimation 1.5s ease-in-out infinite;
+  }

@@ -23,12 +23,12 @@ const StudyMbbsAbroad = () => {
       <section className="pt-28 text-dark container mx-auto overflow-hidden ">
         <CountrySelect />
         <VideoPlayer />
-        <WhyAbroad />
+        {/* <WhyAbroad /> */}
         <ElegibilityCriteriaTable />
       </section>
       <TopCountryRail />
       <PopularCoursesAbroad />
-      <TopUniRail />
+      {/* <TopUniRail /> */}
       {/* <QuestionDropdown /> */}
     </>
   );

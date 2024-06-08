@@ -8,7 +8,7 @@ const CampusHighlight = () => {
         Campus highlight
       </h2>
       <div className=" flex flex-col sm:grid grid-cols-3  px-6 gap-x-12 max-w-7xl mx-auto font-medium">
-        <div className="py-7">
+        <div className="">
           <div className="aspect-video relative rounded-3xl overflow-hidden">
             <Image
               src="https://images.unsplash.com/photo-1613946069412-38f7f1ff0b65?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
