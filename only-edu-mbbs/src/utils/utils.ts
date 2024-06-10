@@ -45,12 +45,9 @@ export async function getStrapiData(path: string) {
   
 
 
-<<<<<<< HEAD
-  const baseUrl = process.env.API_URL || `http://192.168.1.28:1337`;
 
-=======
   const baseUrl = process.env.API_URL || `http://localhost:1337`;
->>>>>>> 0e4feeb2c418a4fe7ceb7854bbc951189fa73ecf
+
 
   try {
     const response = await fetch(baseUrl + path, { cache: "no-store" }); 

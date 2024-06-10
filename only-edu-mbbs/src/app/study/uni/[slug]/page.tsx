@@ -10,10 +10,7 @@ import TopUniRail from "@/modules/top-uni-rail";
 import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
-<<<<<<< HEAD
-import { getStrapiData } from "@/utils/utils";
 import CallToAction from "@/modules/footer/call-to-action";
-=======
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
@@ -39,7 +36,7 @@ export async function generateMetadata({
   };
 }
 
->>>>>>> 0e4feeb2c418a4fe7ceb7854bbc951189fa73ecf
+
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
