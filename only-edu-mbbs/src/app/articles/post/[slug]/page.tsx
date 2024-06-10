@@ -1,8 +1,10 @@
 import React from "react";
 import { Montserrat, Merriweather } from "next/font/google";
 import NewsLetter from "@/modules/newsletter";
+import { MetaProps } from "@/types/types";
+import { getMetaData, getStrapiData } from "@/utils/utils";
+import { Metadata } from "next";
 
-import { getStrapiData } from "@/utils/utils";
 import parse from "html-react-parser";
 
 const mosterrat = Montserrat({
@@ -16,7 +18,31 @@ const merriweather = Merriweather({
   display: "swap",
 });
 
-export default async function Blog({ params }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data: MetaProps = await getMetaData("articles", params.slug);
+  const baseUrl = "http://localhost:1337";
+  const { seo } = data.data[0];
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    openGraph: {
+      images: [
+        {
+          url: baseUrl + seo?.metaImage?.url || "",
+        },
+      ],
+    },
+    keywords: seo?.keywords,
+    viewport: seo.metaViewport,
+    robots: seo.metaRobots,
+  };
+}
+
+export default async function Blog({ params }: { params: { slug: string } }) {
   console.log(params.slug);
 
   const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}`;

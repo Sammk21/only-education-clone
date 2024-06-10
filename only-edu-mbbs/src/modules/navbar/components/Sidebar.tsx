@@ -40,6 +40,7 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                   </p>
                   {navigation.links.map((link) => (
                     <li
+                      key={link.id}
                       className={`py-2 pl-1 mx-2  mr-1 rounded-xl ${
                         isActive(link.href) ? "bg-accent/20" : ""
                       } flex items-center gap-x-2 `}
@@ -51,18 +52,15 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                   ))}
                 </ul>
                 {dropdown.map((item) => (
-                  <>
+                  <div key={item.id}>
                     <ul>
-                      <p
-                        key={item.id}
-                        className="pl-6 text-dark text-lg font-medium mb-3 border-y py-2"
-                      >
+                      <p className="pl-6 text-dark text-lg font-medium mb-3 border-y py-2">
                         {item.label}
                       </p>
                       {item.subMenuLinks.map((link) => (
                         <li
-                          key={link.id}
-                          className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 "
+                          key={link.href}
+                          className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2"
                         >
                           <Link
                             className="pl-3"
@@ -72,17 +70,17 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                           </Link>
                         </li>
                       ))}
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 ">
+                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
                         <Link className="pl-3" href="">
                           IIT Mumbai
                         </Link>
                       </li>
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 ">
+                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
                         <Link href="#" className="pl-3">
                           Harvard university
                         </Link>
                       </li>
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 ">
+                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
                         <Link href="#" className="pl-3">
                           IIT Madras
                         </Link>
@@ -91,7 +89,7 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                     <p className="mt-1 ml-6 text-blue-500 underline mb-3 flex items-center gap-x-1">
                       view all <GoArrowRight className="-rotate-45" />
                     </p>
-                  </>
+                  </div>
                 ))}
               </div>
             </div>

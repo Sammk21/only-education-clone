@@ -24,7 +24,10 @@
       "displayName": "criteriaList",
       "type": "component",
       "repeatable": true,
-      "component": "shared.criteria-list"
+      "component": "shared.criteria-list",
+      "required": true,
+      "max": 4,
+      "min": 3
     }
   }
 }

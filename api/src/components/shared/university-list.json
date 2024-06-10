@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_university_lists",
+  "info": {
+    "displayName": "universityList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "avgPackage": {
+      "type": "string"
+    },
+    "fees": {
+      "type": "string"
+    },
+    "examsAccepted": {
+      "type": "enumeration",
+      "enum": [
+        "jee",
+        "neet",
+        "cat",
+        "jee advance",
+        "neet ug ",
+        "neet pg"
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "ownership": {
+      "type": "string"
+    }
+  }
+}
