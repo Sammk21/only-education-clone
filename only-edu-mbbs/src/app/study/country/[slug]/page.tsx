@@ -5,9 +5,33 @@ import CountryProfile from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import InfoTableLayout from "@/modules/table-layout";
 import TopUniRail from "@/modules/top-uni-rail";
-import { getStrapiData } from "@/utils/utils";
+import { ImageAttributes, MetaProps } from "@/types/types";
+import { getCachedData, getMetaData, getStrapiData } from "@/utils/utils";
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+``;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data: MetaProps = await getMetaData("countries", params.slug);
+  const baseUrl = "http://localhost:1337";
+  const { seo } = data.data[0];
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    openGraph: {
+      images: [
+        {
+          url: baseUrl + seo?.metaImage?.url || "",
+        },
+      ],
+    },
+  };
+}
 
 const StudyCountry = async ({ params }: { params: { slug: string } }) => {
   const getCountryQuery = `/api/countries?filters[slug][$eq]=${params.slug}&populate[countryProfile][populate][profileImage][populate]=true&populate[countryProfile][populate][backgroundImage][populate]=true&populate[whyThisCountry][populate][header]populate=true&populate[eligibilityCriteria][populate][header]populate=true&populate[eligibilityCriteria][populate][criteriaList]populate=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][faq][populate]=true`;
@@ -30,7 +54,7 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
       <WhyAbroad data={whyThisCountry} />
       <ElegibilityCriteria data={eligibilityCriteria} />
       <InfoTableLayout data={feesStructure} />
-      <TopUniRail />
+      {/* <TopUniRail /> */}
       <QuestionDropdown data={faq} />
     </div>
   );

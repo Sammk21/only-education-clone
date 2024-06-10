@@ -4,9 +4,9 @@ import React, { Suspense } from "react";
 import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { CountryProps, ImageAttributes } from "@/types/types";
+import { ImageAttributes } from "@/types/types";
+import "@/styles/swiper-pagination/pagination.css";
 
 // interface Props {
 //   data: {
@@ -36,7 +36,7 @@ interface Props {
 }
 const TopUniRail = ({ data }: Props) => {
   // console.dir(data, { depth: null });
-  const baseUrl = "http://192.168.1.4:1337";
+  const baseUrl = "http://localhost:1337";
 
   return (
     <>
@@ -51,7 +51,6 @@ const TopUniRail = ({ data }: Props) => {
         <Swiper
           speed={600}
           spaceBetween={40}
-          loop={true}
           pagination={{
             el: ".swiper-pagination",
             clickable: true,
@@ -104,6 +103,7 @@ const TopUniRail = ({ data }: Props) => {
                   </p>
                 </span>
                 <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+                <span className="w-full h-[50%] absolute bottom-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 ease-out"></span>
               </div>
             </SwiperSlide>
           ))}
@@ -113,10 +113,10 @@ const TopUniRail = ({ data }: Props) => {
           <div className="swiper-pagination"></div>
         </div>
         <span className="flex flex-row-reverse mt-12 gap-x-1">
-          <span className="back transition ease-in-out cursor-pointer z-40 p-3  border rounded-full  text-3xl stroke-foreground  textglobal drop-shadow-lg hover:translate-x-1 hover:bg-dark/10 top-1/2 -translate-y-1/2  right-0">
+          <span className="back transition ease-in-out cursor-pointer z-40 p-3  border rounded-full  text-3xl text-black  textglobal drop-shadow-lg hover:translate-x-1 hover:bg-dark/10 top-1/2 -translate-y-1/2  right-0">
             <MdOutlineArrowRightAlt />
           </span>
-          <span className="front transition ease-in-out  cursor-pointer rotate-180 z-40 p-3  border rounded-full text-3xl stroke-foreground textglobal drop-shadow-lg  hover:-translate-x-1 top-1/2 hover:bg-dark/10 -translate-y-1/2 left-0">
+          <span className="front transition ease-in-out  cursor-pointer rotate-180 z-40 p-3  border rounded-full text-3xl text-black textglobal drop-shadow-lg  hover:-translate-x-1 top-1/2 hover:bg-dark/10 -translate-y-1/2 left-0">
             <MdOutlineArrowRightAlt />
           </span>
         </span>
