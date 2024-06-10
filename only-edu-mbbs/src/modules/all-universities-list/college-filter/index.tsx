@@ -12,6 +12,7 @@
   }
   ```
 */
+"use client";
 
 import { Fragment, useState } from "react";
 import {
@@ -114,7 +115,7 @@ export default function CollegeFilter() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-[30px] my-4">
+    <div className="sm:w-[20%]">
       <div>
         {/* Mobile filter dialog */}
         <Transition show={mobileFiltersOpen}>
@@ -256,12 +257,16 @@ export default function CollegeFilter() {
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
+          <section
+            aria-labelledby="products-heading"
+            className="sm:pb-24 sm:pt-6"
+          >
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+            {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4"> */}
+            <div>
               {/* Filters */}
               <form className="hidden lg:block bg-white ">
                 <h3 className="sr-only">Categories</h3>
@@ -337,15 +342,9 @@ export default function CollegeFilter() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">
-                {/* Your content */}
+              {/* <div className="lg:col-span-3">
                 <CollegeList />
-                <CollegeList />
-                <CollegeList />
-                <CollegeList />
-                <CollegeList />
-                <CollegeList />
-              </div>
+              </div> */}
             </div>
           </section>
         </main>
