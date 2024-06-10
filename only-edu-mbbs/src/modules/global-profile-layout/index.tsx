@@ -21,7 +21,7 @@ const GlobalProfileLayout = async ({
 }: Props) => {
   const { name, description } = data;
 
-  const baseUrl = "http://localhost:1337";
+  const baseUrl = "http://192.168.1.28:1337";
 
   return (
     <div className=" bg-light  dark:bg-dark flex flex-wrap items-center border-none  justify-center  ">
