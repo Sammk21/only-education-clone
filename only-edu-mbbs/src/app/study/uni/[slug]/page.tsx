@@ -62,9 +62,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         <ElegibilityCriteria data={eligibilityCriteria} />
         <AdmissionProcessFlow />
         <DocumentRquired data={documentRequired} />
-
         <InfoTableLayout data={feesStructure} />
-
         <CampusHighlight />
         <QuestionDropdown data={faq} />
       </div>
