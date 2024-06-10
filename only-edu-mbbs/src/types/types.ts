@@ -131,5 +131,47 @@ interface MetaData {
 
 export interface BlogListResponse {
   data: ArticleAttributes[];
-  // meta: MetaData;
+}
+
+export interface MetaSocialsProps {
+  id: number;
+  socialNetwork: string;
+  title: string;
+  description: string;
+}
+
+export interface SeoProps {
+  id: number;
+  metaTitle: string;
+  metaDescription: string;
+  keywords?: string | null;
+  metaRobots?: string | null;
+  structuredData?: object | null;
+  metaViewport?: string | null;
+  canonicalURL?: string | null;
+  metaImage:ImageAttributes | null
+  metaSocial: MetaSocialsProps[];
+}
+
+export interface CountryData {
+  id: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  slug: string;
+  noOfStudentsStudying: string;
+  seo: SeoProps;
+}
+
+export interface MetaProps {
+  data: CountryData[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }

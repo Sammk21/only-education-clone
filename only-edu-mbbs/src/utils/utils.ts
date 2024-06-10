@@ -55,6 +55,36 @@ export async function getStrapiData(path: string) {
   }
 }
 
+export async function getCachedData(path: string) {
+
+  const baseUrl = process.env.API_URL || `http://localhost:1337`;
+
+  try {
+    const response = await fetch(baseUrl + path); 
+    const data = await response.json();
+    const flattenedData = flattenAttributes(data);
+    return flattenedData;
+  } catch (error) {
+    console.error(error);
+  }
+
+}
+
+export async function getMetaData(plural:string, slug:string){
+ const seoQuery = `/api/${plural}?filters[slug][$eq]=${slug}&populate[seo][populate][metaSocial][populate]=true&populate[seo][populate][metaImage][populate]=true`;
+  const baseUrl = process.env.API_URL || `http://localhost:1337`;
+
+  try {
+    const response = await fetch(baseUrl + seoQuery); 
+    const data = await response.json();
+    const flattenedData = flattenAttributes(data);
+    return flattenedData;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
 }

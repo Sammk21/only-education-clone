@@ -12,7 +12,7 @@ const HomePageQuery =
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
-  console.dir(data, { depth: null });
+
 
   return (
     <div className="pt-28 w-full overflow-hidden">
