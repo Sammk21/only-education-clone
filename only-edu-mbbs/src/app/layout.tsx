@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/normalize.css";
+// import "../styles/swiper-pagination/pagination.css";
 import Navbar from "@/modules/navbar";
 import Footer from "@/modules/footer";
 import { flattenAttributes, getStrapiData } from "@/utils/utils";
@@ -31,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-light dark:bg-dark  ${inter.className}`}>
-        <div className="relative w-full h-full text-gray-400">
+        <div className="relative w-full h-full text-gray-400 ">
           <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
           <NextBreadcrumb
             homeElement={"Home"}
@@ -41,8 +42,8 @@ export default async function RootLayout({
               </span>
             }
             activeClasses="text-dark"
-            containerClasses="flex py-5 gap-3 mx-16 text-sm "
-            listClasses="text-accent hover:text-dark"
+            containerClasses="flex items-center py-5 gap-3 mx-3 sm:mx-12 lg:mx-16 text-sm"
+            listClasses="text-accent hover:text-dark line-clamp-1"
             capitalizeLinks
             disabledClasses="cursor-not-allowed "
           />

@@ -1,12 +1,13 @@
+import { HandIcon } from "lucide-react";
 import React from "react";
 import { BsCalendar } from "react-icons/bs";
 import { TbHandMiddleFinger } from "react-icons/tb";
 
 const NewsLetter = () => {
   return (
-    <div className="relative isolate overflow-hidden bg-greenDark pb-16 my-8 sm:py-24 lg:py-32 container mx-auto rounded-3xl">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
+    <div className="relative isolate overflow-hidden bg-greenDark pb-16 my-8 sm:py-24 lg:py-32 mx-3 max-w-7xl lg:mx-auto rounded-3xl">
+      <div className="mx-auto  px-6 lg:px-8">
+        <div className="mx-auto grid max-w-2xl pt-6 grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Subscribe to our newsletter.
@@ -36,7 +37,7 @@ const NewsLetter = () => {
               </button>
             </div>
           </div>
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
             <div className="flex flex-col items-start">
               <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
                 <BsCalendar className="h-6 w-6 text-white" aria-hidden="true" />
@@ -49,10 +50,7 @@ const NewsLetter = () => {
             </div>
             <div className="flex flex-col items-start">
               <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                <TbHandMiddleFinger
-                  className="h-6 w-6 text-white"
-                  aria-hidden="true"
-                />
+                <HandIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
               <dt className="mt-4 font-semibold text-white">No spam</dt>
               <dd className="mt-2 leading-7 text-gray-400">
@@ -60,7 +58,7 @@ const NewsLetter = () => {
                 Voluptate incididunt anim.
               </dd>
             </div>
-          </dl>
+          </div>
         </div>
       </div>
     </div>

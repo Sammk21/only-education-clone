@@ -6,21 +6,6 @@ import { GoArrowRight } from "react-icons/go";
 import { usePathname } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 
-import {
-  Cloud,
-  CreditCard,
-  Keyboard,
-  LifeBuoy,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-  Users,
-} from "lucide-react";
 
 export default function MySideBar({ navigation, dropdown }: NavbarProps) {
   const path = usePathname();

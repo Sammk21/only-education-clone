@@ -45,7 +45,7 @@ const GlobalProfileLayout = async ({
           </div>
         </div>
         <div className="">
-          <div className="text-center px-14">
+          <div className="text-center px-4 md:px-14">
             <h2 className=" text-3xl font-bold dark:text-light">{name}</h2>
 
             <p className="mt-2 text-accent text-sm">{description}</p>

@@ -10,7 +10,7 @@ const WhyUs = ({ data }: Props) => {
   const { title, description } = data.header;
   return (
     <section className=" dark:text-light  text-dark pb-12 my-8">
-      <div className="px-6 container mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-semibold">{title}</h1>
         <p>{description}</p>
         <div className="md:grid md:grid-cols-2">

@@ -19,7 +19,7 @@ const OurServices = ({ data }: Props) => {
 
   return (
     <section className="bg-greenDark relative dark:bg-light text-light shadow-2xl   dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 my-8">
-      <div className="px-6 container mx-auto ">
+      <div className="max-w-7xl mx-auto ">
         <h1 className=" text-5xl mb-8 sm:text-6xl z-10">{title}</h1>
         <p>{description}</p>
         <div className=" justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">

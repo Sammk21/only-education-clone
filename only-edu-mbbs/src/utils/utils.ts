@@ -44,7 +44,10 @@ export function flattenAttributes(data:any):any {
 export async function getStrapiData(path: string) {
   
 
+
   const baseUrl = process.env.API_URL || `http://192.168.1.28:1337`;
+
+
   try {
     const response = await fetch(baseUrl + path, { cache: "no-store" }); 
     const data = await response.json();
