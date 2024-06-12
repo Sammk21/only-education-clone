@@ -77,7 +77,8 @@
         "Yogita",
         "Zhankana",
         "Parveen"
-      ]
+      ],
+      "required": true
     }
   }
 }

@@ -9,7 +9,7 @@
   "attributes": {
     "description": {
       "type": "text",
-      "required": false,
+      "required": true,
       "default": "get to know abow why this country is best for studiying anything dowen below. (not a required feild)"
     },
     "title": {
