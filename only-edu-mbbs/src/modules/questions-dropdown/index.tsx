@@ -35,7 +35,7 @@ const QuestionDropdown = ({ data }: Props) => {
                   </span>
                   <IoIosArrowForward className="size-5 fill-dark dark:fill-light rotate-90 dark:group-data-[hover]:fill-light/50 group-data-[hover]:fill-dark/50 group-data-[open]:-rotate-90" />
                 </DisclosureButton>
-                <DisclosurePanel className="mt-2 text-sm/5 prose dark:text-light/70 text-dark/50">
+                <DisclosurePanel className="mt-2 text-sm/5  dark:text-light/70 text-dark/50">
                   {parse(item.answer)}
                 </DisclosurePanel>
               </Disclosure>

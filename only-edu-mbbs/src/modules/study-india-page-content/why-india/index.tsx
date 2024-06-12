@@ -3,13 +3,27 @@ import { HiOutlineAcademicCap } from "react-icons/hi";
 import { PiFediverseLogoDuotone } from "react-icons/pi";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { SiIndiansuperleague } from "react-icons/si";
+import { HeaderProps, QnaProps } from "@/types/types";
 
-const WhyInida = () => {
+interface listProps {
+  id: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  data: {
+    id: number;
+    list: listProps[];
+    header: HeaderProps;
+  };
+}
+const WhyInida = ({ data }: Props) => {
+  console.dir(data);
   return (
     <section className="sm:px-12 py-6 my-6 px-2 ">
-      <h4 className="text-center text-4xl py-6 mb-6 ">
-        Why Choose India for Your Higher Education?
-      </h4>
+      <h4 className="text-center text-4xl pt-6 mb-6 ">{data.header.title}</h4>
+      <p className="text-center"> {data.header.description}</p>
 
       <div>
         <div className="max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-0 mt-5">
@@ -17,12 +31,10 @@ const WhyInida = () => {
             <div className="text-5xl">
               <HiOutlineAcademicCap />
             </div>
-            <div className="">
-              <h2 className="text-xl mb-2">Academic Excellence</h2>
-              <p className="text-dark/50 text-sm">
-                Indian institutions consistently rank among the top in the
-                world, renowned for their academic rigor and research
-                opportunities.
+            <div className="py-4">
+              <h2 className="text-[20px] mb-2">{data.list[0].title}</h2>
+              <p className="text-dark/50 text-[16px]">
+                {data.list[0].description}
               </p>
             </div>
           </div>
@@ -30,12 +42,10 @@ const WhyInida = () => {
             <div className="text-5xl">
               <PiFediverseLogoDuotone />
             </div>
-            <div className="">
-              <h2 className="text-xl mb-2">Academic Excellence</h2>
-              <p className="text-dark/50 text-sm">
-                Indian institutions consistently rank among the top in the
-                world, renowned for their academic rigor and research
-                opportunities.
+            <div className="py-4">
+              <h2 className="text-[20px] mb-2">{data.list[1].title}</h2>
+              <p className="text-dark/50 text-[16px]">
+                {data.list[1].description}
               </p>
             </div>
           </div>
@@ -43,12 +53,10 @@ const WhyInida = () => {
             <div className="text-5xl">
               <SiIndiansuperleague />
             </div>
-            <div className="">
-              <h2 className="text-xl mb-2">Academic Excellence</h2>
-              <p className="text-dark/50 text-sm">
-                Indian institutions consistently rank among the top in the
-                world, renowned for their academic rigor and research
-                opportunities.
+            <div className="py-4">
+              <h2 className="text-[20px] mb-2">{data.list[2].title}</h2>
+              <p className="text-dark/50 text-[16px]">
+                {data.list[2].description}
               </p>
             </div>
           </div>
@@ -56,12 +64,10 @@ const WhyInida = () => {
             <div className="text-5xl">
               <AiOutlineGlobal />
             </div>
-            <div className="">
-              <h2 className="text-xl mb-2">Academic Excellence</h2>
-              <p className="text-dark/50 text-sm">
-                Indian institutions consistently rank among the top in the
-                world, renowned for their academic rigor and research
-                opportunities.
+            <div className="py-4">
+              <h2 className="text-[20px] mb-2">{data.list[3].title}</h2>
+              <p className="text-dark/50 text-[16px]">
+                {data.list[3].description}
               </p>
             </div>
           </div>

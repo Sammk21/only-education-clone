@@ -21,7 +21,7 @@ const ExploreOptions = ({ data }: Props) => {
   return (
     <section className="sm:px-12 py-6 my-6 px-2">
       <h4 className="text-center text-4xl py-6 mb-6 ">{title}</h4>
-      <p className="text-cente">{description}</p>
+      <p className="text-center">{description}</p>
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
         <svg
           className="md:w-[400px] md:h-[400px] h-[300px] w-[300px]"
@@ -72,31 +72,30 @@ const ExploreOptions = ({ data }: Props) => {
             className="fill-dark dark:fill-light"
           />
         </svg>
-        <div>
-          <div className="max-w-lg  overflow-hidden   rounded-2xl">
-            <div className="md:px-6 sm:px-4 px-2 py-4 flex flex-col gap-y-2">
-              {data.list.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`max-w-sm overflow-hidden border border-l-[3px] rounded-2xl ${
-                    index === 0
-                      ? "border-l-yellow-500 dark:border-l-yellow-500"
-                      : index === 1
-                      ? "border-l-blue-500 dark:border-l-blue-500"
-                      : index === 2
-                      ? "border-l-green-500 dark:border-l-green-500"
-                      : "border-l-red-500 dark:border-l-red-500"
-                  } border-borderLight dark:border-border`}
-                >
-                  <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">{item.title}</div>
-                    <span className="text-accent text-base">
-                      {parse(item.list)}
-                    </span>
-                  </div>
+
+        <div className="max-w-lg  overflow-hidden   rounded-2xl">
+          <div className="md:px-6 sm:px-4 px-2 py-4 flex flex-col gap-y-2">
+            {data.list.map((item, index) => (
+              <div
+                key={item.id}
+                className={` overflow-hidden border border-l-[3px] rounded-2xl ${
+                  index === 0
+                    ? "border-l-yellow-500 dark:border-l-yellow-500"
+                    : index === 1
+                    ? "border-l-blue-500 dark:border-l-blue-500"
+                    : index === 2
+                    ? "border-l-green-500 dark:border-l-green-500"
+                    : "border-l-red-500 dark:border-l-red-500"
+                } border-borderLight dark:border-border`}
+              >
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">{item.title}</div>
+                  <span className="text-accent text-base">
+                    {parse(item.list)}
+                  </span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

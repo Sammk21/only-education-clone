@@ -16,7 +16,7 @@ const ElegibilityCriteriaTable = ({ data }: Props) => {
         {data[0].header.title}
       </h4>
       <p className="text-center">{data[0].header.description}</p>
-      <div className="flex prose  prose-table:text-sm pt-6 max-w-4xl mx-auto w-full justify-center items-center text-sm  text-dark dark:text-accent ">
+      <div className="flex prose  prose-table:text-sm pt-6 max-w-7xl mx-auto w-full justify-center items-center text-sm  text-dark dark:text-accent ">
         {/* <table className=" w-full max-w-5xl text-sm text-left rtl:text-right text-dark dark:text-accent  t">
           <thead className="text-xs text-dark uppercase bg-accent dark:bg-foreground borber-b border-b-dark dark:text-light">
             <tr>

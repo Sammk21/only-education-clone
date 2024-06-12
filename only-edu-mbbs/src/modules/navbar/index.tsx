@@ -83,6 +83,9 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
 
           <div className=" hidden 2lg:flex  text-sm font-normal">
             <ul className="flex justify-center items-center">
+              {navigation.links.map((link: Links) => {
+                return <MenuItems items={link} key={link.id} />;
+              })}
               {dropdown.map((link: Dropdown) => {
                 const depthLevel = 0;
                 return (
@@ -92,9 +95,6 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
                     depthLevel={depthLevel}
                   />
                 );
-              })}
-              {navigation.links.map((link: Links) => {
-                return <MenuItems items={link} key={link.id} />;
               })}
             </ul>
           </div>
