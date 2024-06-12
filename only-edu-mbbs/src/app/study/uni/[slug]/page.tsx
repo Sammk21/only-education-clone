@@ -10,6 +10,7 @@ import TopUniRail from "@/modules/top-uni-rail";
 import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
+
 import CallToAction from "@/modules/footer/call-to-action";
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
@@ -21,7 +22,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
-  const baseUrl = "http://localhost:1337";
+  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
   const { seo } = data.data[0];
   return {
     title: seo.metaTitle,
@@ -35,7 +36,6 @@ export async function generateMetadata({
     },
   };
 }
-
 
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {

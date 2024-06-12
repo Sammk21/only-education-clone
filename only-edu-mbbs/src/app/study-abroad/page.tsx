@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Disclosure,
@@ -14,22 +13,28 @@ import ElegibilityCriteriaTable from "@/modules/aborad-page-content/elegibility-
 import CountrySelect from "@/modules/aborad-page-content/countries-select";
 import PopularCoursesAbroad from "@/modules/aborad-page-content/popular-courses-abroad";
 import QuestionDropdown from "@/modules/questions-dropdown";
+import { getStrapiData } from "@/utils/utils";
 
-// import required modules
+const StudyMbbsAbroad = async () => {
+  const studyAbroadQuey =
+    "/api/study-abroad?populate[whyAbroad][populate][qna][populate]=true&populate[whyAbroad][populate][header][populate]=true&populate[eligibilityTable][populate][header][populate]=true&populate[topCountries][populate][Header][populate]=true&populate[topCountries][populate][CountryCard][populate][universities][populate][0]=universityProfile.backgroundImage&populate[popularCourses][populate][list]=true&populate[popularCourses][populate][header][populate]=true&populate[faq][populate][header][populate]=true&populate[faq][populate][faq][populate]=true";
 
-const StudyMbbsAbroad = () => {
+  const data = await getStrapiData(studyAbroadQuey);
+  const { whyAbroad, eligibilityTable, topCountries, popularCourses, faq } =
+    data;
+
   return (
     <>
-      <section className="pt-28 text-dark container mx-auto overflow-hidden ">
+      <section className="pt-2 text-dark  mx-auto overflow-hidden ">
         <CountrySelect />
-        <VideoPlayer />
-        {/* <WhyAbroad /> */}
-        <ElegibilityCriteriaTable />
+        {/* <VideoPlayer /> */}
+        <WhyAbroad data={whyAbroad} />
+        <ElegibilityCriteriaTable data={eligibilityTable} />
       </section>
-      <TopCountryRail />
-      <PopularCoursesAbroad />
+      <TopCountryRail data={topCountries} />
+      <PopularCoursesAbroad data={popularCourses} />
       {/* <TopUniRail /> */}
-      {/* <QuestionDropdown /> */}
+      <QuestionDropdown data={faq} />
     </>
   );
 };

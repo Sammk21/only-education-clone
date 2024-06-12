@@ -36,7 +36,7 @@ interface Props {
 }
 const TopUniRail = ({ data }: Props) => {
   // console.dir(data, { depth: null });
-  const baseUrl = "http://localhost:1337";
+  const baseUrl = "http://192.168.1.28:1337";
 
   return (
     <>

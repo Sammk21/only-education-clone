@@ -10,12 +10,10 @@ const StudyAbroad = () => {
     <div className="pt-28 container mx-auto px-6">
       <CountrySelect />
       <MbbsAbroadInfo />
-      <ElegibilityCriteria name={"MBBS"} />
-      <InfoTableLayout
-        title={"Medical licencing Exams after MBBS abroad "}
-      />{" "}
+      {/* <ElegibilityCriteria name={"MBBS"} /> */}
+      {/* <InfoTableLayout title={"Medical licencing Exams after MBBS abroad "}/> */}
       {/**send dynamic data to table regarding medical exam info */}
-      <QuestionDropdown />
+      {/* <QuestionDropdown /> */}
     </div>
   );
 };

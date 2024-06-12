@@ -44,8 +44,6 @@ export function flattenAttributes(data:any):any {
 export async function getStrapiData(path: string) {
   
 
-
-
   const baseUrl = process.env.API_URL || `http://localhost:1337`;
 
 
@@ -61,7 +59,7 @@ export async function getStrapiData(path: string) {
 
 export async function getCachedData(path: string) {
 
-  const baseUrl = process.env.API_URL || `http://localhost:1337`;
+  const baseUrl = process.env.API_URL || `http://192.168.1.28:1337`;
 
   try {
     const response = await fetch(baseUrl + path); 
@@ -76,7 +74,7 @@ export async function getCachedData(path: string) {
 
 export async function getMetaData(plural:string, slug:string){
  const seoQuery = `/api/${plural}?filters[slug][$eq]=${slug}&populate[seo][populate][metaSocial][populate]=true&populate[seo][populate][metaImage][populate]=true`;
-  const baseUrl = process.env.API_URL || `http://localhost:1337`;
+  const baseUrl = process.env.STRAPI_URL;
 
   try {
     const response = await fetch(baseUrl + seoQuery); 
@@ -90,7 +88,7 @@ export async function getMetaData(plural:string, slug:string){
 
 
 export function getStrapiURL() {
-  return process.env.NEXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337";
+  return process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 }
 
 export function getStrapiMedia(url: string | null) {

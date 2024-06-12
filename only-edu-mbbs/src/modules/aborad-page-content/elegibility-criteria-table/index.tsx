@@ -1,13 +1,23 @@
+import { HeaderProps } from "@/types/types";
 import React from "react";
+import parse from "html-react-parser";
 
-const ElegibilityCriteriaTable = () => {
+interface Props {
+  data: {
+    id: number;
+    eligibityTable: string;
+    header: HeaderProps;
+  }[];
+}
+const ElegibilityCriteriaTable = ({ data }: Props) => {
   return (
     <section className="py-6 my-6 ">
       <h4 className="text-4xl text-center text-dark  dark:text-light ">
-        Eligibility Criteria for UG or PG Courses{" "}
+        {data[0].header.title}
       </h4>
-      <div className="relative overflow-x-auto flex justify-center pt-6 rounded-2xl ">
-        <table className=" w-full max-w-5xl text-sm text-left rtl:text-right text-dark dark:text-accent  t">
+      <p className="text-center">{data[0].header.description}</p>
+      <div className="flex prose  prose-table:text-sm pt-6 max-w-4xl mx-auto w-full justify-center items-center text-sm  text-dark dark:text-accent ">
+        {/* <table className=" w-full max-w-5xl text-sm text-left rtl:text-right text-dark dark:text-accent  t">
           <thead className="text-xs text-dark uppercase bg-accent dark:bg-foreground borber-b border-b-dark dark:text-light">
             <tr>
               <th
@@ -49,7 +59,8 @@ const ElegibilityCriteriaTable = () => {
               </td>
             </tr>
           </tbody>
-        </table>
+        </table> */}
+        <div>{parse(data[0].eligibityTable)}</div>
       </div>
     </section>
   );
