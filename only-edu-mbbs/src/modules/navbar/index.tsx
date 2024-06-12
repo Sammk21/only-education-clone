@@ -33,7 +33,6 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
     setIsScrolled(latest >= 80);
   });
 
-
   return (
     <>
       <header className="mb-9 w-screen top-0 fixed bg-greenDark  dark:bg-only-green-950 z-30">

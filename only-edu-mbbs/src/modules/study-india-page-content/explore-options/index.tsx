@@ -1,10 +1,28 @@
+import { HeaderProps } from "@/types/types";
 import React from "react";
+import parse from "html-react-parser";
 
-const ExploreOptions = () => {
+interface CriteriaListProps {
+  id: number;
+  title: string;
+  list: string;
+}
+
+interface Props {
+  data: {
+    id: number;
+    header: HeaderProps;
+    list: CriteriaListProps[];
+    criteriaTable: string;
+  };
+}
+const ExploreOptions = ({ data }: Props) => {
+  const { title, description } = data.header;
   return (
     <section className="sm:px-12 py-6 my-6 px-2">
-      <h4 className="text-center text-4xl py-6 mb-6 ">Explore Your Options</h4>
-      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-start">
+      <h4 className="text-center text-4xl py-6 mb-6 ">{title}</h4>
+      <p className="text-cente">{description}</p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
         <svg
           className="md:w-[400px] md:h-[400px] h-[300px] w-[300px]"
           //   width="500"
@@ -55,35 +73,29 @@ const ExploreOptions = () => {
           />
         </svg>
         <div>
-          <div className="max-w-lg  overflow-hidden border border-l-[3px] border-l-yellow-500 dark:border-l-yellow-500 border-borderLight dark:border-border rounded-2xl">
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">Engineering Courses</div>
-              <p className="text-accent text-base">
-                India boasts world-class engineering institutions that offer
-                cutting-edge programs in various specializations. Whether you're
-                interested in computer science, mechanical engineering, or
-                electrical engineering, we'll help you find the perfect fit.
-              </p>
-            </div>
-          </div>
-          <div className="max-w-lg   overflow-hidden dark:border-border border-borderLight border border-l-[3px] border-l-green-500  dark:border-l-green-500 rounded-2xl mt-4">
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">Engineering Courses</div>
-              <p className="text-accent   text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                exercitationem praesentium nihil.
-              </p>
-            </div>
-          </div>
-          <div className="max-w-lg   overflow-hidden dark:border-border border-borderLight border border-l-[3px] border-l-blue-500  dark:border-l-blue-500 rounded-2xl mt-4">
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">Engineering Courses</div>
-              <p className="text-accent   text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                exercitationem praesentium nihil.
-              </p>
+          <div className="max-w-lg  overflow-hidden   rounded-2xl">
+            <div className="md:px-6 sm:px-4 px-2 py-4 flex flex-col gap-y-2">
+              {data.list.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`max-w-sm overflow-hidden border border-l-[3px] rounded-2xl ${
+                    index === 0
+                      ? "border-l-yellow-500 dark:border-l-yellow-500"
+                      : index === 1
+                      ? "border-l-blue-500 dark:border-l-blue-500"
+                      : index === 2
+                      ? "border-l-green-500 dark:border-l-green-500"
+                      : "border-l-red-500 dark:border-l-red-500"
+                  } border-borderLight dark:border-border`}
+                >
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">{item.title}</div>
+                    <span className="text-accent text-base">
+                      {parse(item.list)}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

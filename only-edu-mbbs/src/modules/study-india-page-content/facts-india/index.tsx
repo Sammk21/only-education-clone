@@ -8,7 +8,7 @@ import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 const Facts = () => {
   return (
-    <section className=" rounded-t-2xl  container mx-auto sm:px-12 mt-12">
+    <section className=" rounded-t-2xl   mx-auto sm:px-12 mt-12">
       <h4 className="text-center text-4xl py-6 mb-6  ">Facts about India</h4>
       <Swiper
         speed={600}

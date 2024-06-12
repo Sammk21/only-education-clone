@@ -12,8 +12,6 @@ interface Props {
 const WhyThisUni = ({ data }: Props) => {
   const { title, description } = data.header;
 
-
-
   return (
     <section className=" dark:text-light  text-dark py-12 ">
       <div className="px-6 container mx-auto">
