@@ -9,12 +9,14 @@
     "header": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.header"
+      "component": "shared.header",
+      "required": true
     },
     "qna": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.why-this-uni-country"
+      "component": "shared.why-this-uni-country",
+      "required": true
     }
   }
 }

@@ -46,7 +46,7 @@
     },
     "faq": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "blocks.faq"
     }
   }

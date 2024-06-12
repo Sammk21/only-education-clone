@@ -9,12 +9,14 @@
     "header": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.header"
+      "component": "shared.header",
+      "required": true
     },
     "ranks": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.ranking"
+      "component": "shared.ranking",
+      "required": true
     }
   }
 }

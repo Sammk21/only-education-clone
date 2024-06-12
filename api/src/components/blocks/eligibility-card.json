@@ -10,7 +10,8 @@
     "header": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.header"
+      "component": "shared.header",
+      "required": true
     },
     "criteriaTable": {
       "type": "customField",
@@ -18,7 +19,8 @@
         "output": "HTML",
         "preset": "light"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor.CKEditor",
+      "required": true
     },
     "criteriaList": {
       "displayName": "criteriaList",

@@ -41,32 +41,38 @@
     "whythisUniversity": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.why-us"
+      "component": "blocks.why-us",
+      "required": true
     },
     "rankComparison": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.rank-comparison"
+      "component": "blocks.rank-comparison",
+      "required": true
     },
     "eligibilityCriteria": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.eligibility-card"
+      "component": "blocks.eligibility-card",
+      "required": true
     },
     "documentRequired": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.popular-courses"
+      "component": "blocks.popular-courses",
+      "required": true
     },
     "feesStructure": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.eligibility-table"
+      "component": "blocks.eligibility-table",
+      "required": true
     },
     "faq": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.faq"
+      "component": "blocks.faq",
+      "required": true
     },
     "countries": {
       "type": "relation",
@@ -75,17 +81,36 @@
       "mappedBy": "university"
     },
     "noOfStudentsStudying": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "benifits": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.university-list"
+      "component": "shared.university-list",
+      "required": true
     },
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "required": false
+    },
+    "authorName": {
+      "type": "enumeration",
+      "enum": [
+        "Omkar",
+        "Sam",
+        "Sarfraj",
+        "Adesh",
+        "Dhanashree",
+        "Afreen",
+        "Ketkki",
+        "Premita",
+        "Yogita",
+        "Zhankana",
+        "Parveen"
+      ]
     }
   }
 }

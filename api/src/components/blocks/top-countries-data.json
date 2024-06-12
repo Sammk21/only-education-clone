@@ -8,12 +8,12 @@
   "attributes": {
     "CountryCard": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.university-card"
     },
     "Header": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.header"
     }
   }
