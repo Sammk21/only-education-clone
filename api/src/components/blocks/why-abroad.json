@@ -9,13 +9,14 @@
     "header": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.header"
+      "component": "shared.header",
+      "required": true
     },
     "list": {
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "standard"
+        "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor"
     }

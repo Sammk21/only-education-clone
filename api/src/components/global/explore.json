@@ -1,13 +1,14 @@
 {
   "collectionName": "components_global_explores",
   "info": {
-    "displayName": "explore"
+    "displayName": "explore",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "header": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.header"
     },
     "list": {

@@ -99,6 +99,27 @@
         }
       },
       "type": "text"
+    },
+    "authorName": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "Omkar",
+        "Sam",
+        "Sarfraj",
+        "Adesh",
+        "Dhanashree",
+        "Afreen",
+        "Ketkki",
+        "Premita",
+        "Yogita",
+        "Zhankana",
+        "Parveen"
+      ]
     }
   }
 }

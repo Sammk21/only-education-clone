@@ -18,11 +18,6 @@
     "description": {
       "type": "text"
     },
-    "whyAbroad": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.why-abroad"
-    },
     "eligibilityTable": {
       "type": "component",
       "repeatable": true,
@@ -32,6 +27,21 @@
       "type": "component",
       "repeatable": false,
       "component": "blocks.top-countries-data"
+    },
+    "whyAbroad": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.why-us"
+    },
+    "popularCourses": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.popular-courses"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.faq"
     }
   }
 }
