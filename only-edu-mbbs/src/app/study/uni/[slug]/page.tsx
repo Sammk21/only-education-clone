@@ -64,17 +64,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={universityProfile}
       />
-      {/* <div className="py-4 bg-greenDark my-12">
-        <div className="flex  items-center justify-center gap-x-5  text-light">
-          <h1 className="lg:text-4xl text-sm/6">{cta.title}</h1>
-          <button className="px-4  py-2 mt-2 rounded-2xl border border-borderLight dark:border-border  bg-blue-500 text-light text-sm hover:shadow-[1px_1px_0px_0px_rgba(0,0,0)] transition duration-200">
-            Enquire Now
-          </button>
-        </div>
-      </div> */}
       <CallToAction />
-
-      <div className="mt-6 ">
+      <div className="mt-6 px-3 ">
         <div className="my-8">
           <h2 className="text-center text-4xl font-medium mb-4 dark:text-light">
             {overview.title}

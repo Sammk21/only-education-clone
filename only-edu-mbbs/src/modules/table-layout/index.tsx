@@ -14,7 +14,6 @@ const InfoTableLayout = ({ data }: Props) => {
   const { eligibityTable } = data;
   const { title, description } = data.header;
 
-  console.log(title, description);
 
   return (
     <section className="py-6 my-16">

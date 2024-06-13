@@ -18,6 +18,7 @@ import Link from "next/link";
 import { Navigation, Dropdown, Links } from "@/types/types";
 import { DropDownItems } from "./components/Dropdown";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export interface NavbarProps {
   navigation: Navigation;

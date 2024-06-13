@@ -47,13 +47,13 @@ const ElegibilityCriteria = ({ data }: Props) => {
   };
 
   return (
-    <div className="text-dark dark:text-light py-6 my-6 max-w-6xl mx-auto">
+    <div className="text-dark dark:text-light py-6 my-6 max-w-6xl mx-auto ">
       <h4 className="leading-none text-4xl mb-6 text-center text-dark dark:text-light">
         {title}
       </h4>
       <p className="text-center text-accent mb-6">{description}</p>
       {data.criteriaTable && (
-        <div className="prose pt-6 max-w-4xl mx-auto w-full justify-center">
+        <div className="prose pt-6 max-w-4xl mx-auto w-full justify-center overflow-x-auto">
           {parse(data.criteriaTable)}
         </div>
       )}

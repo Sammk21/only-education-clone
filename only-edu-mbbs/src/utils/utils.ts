@@ -74,10 +74,10 @@ export async function getCachedData(path: string) {
 
 export async function getMetaData(plural:string, slug:string){
  const seoQuery = `/api/${plural}?filters[slug][$eq]=${slug}&populate[seo][populate][metaSocial][populate]=true&populate[seo][populate][metaImage][populate]=true`;
-  const baseUrl = process.env.STRAPI_URL;
+  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
 
   try {
-    const response = await fetch(baseUrl + seoQuery); 
+    const response = await fetch(baseUrl + seoQuery, {cache: "no-store"}); 
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;

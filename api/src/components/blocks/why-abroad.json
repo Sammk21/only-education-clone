@@ -12,13 +12,10 @@
       "component": "shared.header",
       "required": true
     },
-    "list": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "light"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
+    "qna": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.why-this-uni-country"
     }
   }
 }
