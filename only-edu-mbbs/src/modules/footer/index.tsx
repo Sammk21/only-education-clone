@@ -11,8 +11,14 @@ import {
 
 import { GoDeviceMobile, GoLocation, GoMail } from "react-icons/go";
 import CallToAction from "./call-to-action";
+import { Dropdown, Navigation } from "@/types/types";
 
-const Footer = () => {
+export interface NavbarProps {
+  navigation: Navigation;
+}
+
+const Footer = ({ navigation }: NavbarProps) => {
+  console.dir("hello world", navigation);
   return (
     <footer className=" w-full rounded-t-[28px]  z-10  mt-1">
       <CallToAction />
@@ -31,47 +37,15 @@ const Footer = () => {
 
               <div className="flex-col flex text-sm text-dark mb-8">
                 <ul>
-                  <li>
-                    <div className="footer-item footer-item-title text-gray-500 mb-3">
-                      <span>Sitemap</span>
-                    </div>
-                  </li>
-                  <li>
-                    <a className="footer-item" href="https://avvr.nl">
-                      <span>Home</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="footer-item"
-                      href="https://avvr.nl/expertises"
-                    >
-                      <span>About us</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="footer-item" href="https://avvr.nl/team">
-                      <span>Our Services</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="footer-item" href="https://avvr.nl/actueel">
-                      <span>Immigration</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a className="footer-item" href="https://avvr.nl/over-ons">
-                      <span>Blog</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="footer-item"
-                      href="https://avvr.nl/werken-bij"
-                    >
-                      <span>Test series</span>
-                    </a>
-                  </li>
+                  {navigation.links.map((item) => (
+                    <li key={item.id}>
+                      <div className="footer-item footer-item-title text-gray-500 mb-3">
+                        <Link href={item.href}>
+                          <span> {item.label}</span>
+                        </Link>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </div>
 

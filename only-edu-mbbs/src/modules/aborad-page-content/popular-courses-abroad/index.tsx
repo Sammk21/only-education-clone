@@ -13,8 +13,6 @@ interface Props {
   };
 }
 const PopularCoursesAbroad = ({ data }: Props) => {
-  console.dir(data);
-
   return (
     <>
       <section className="px-6 border-y bg-greenDark rounded-t-[28px]  dark:border-y-border  border-y-borderLight dark:text-light py-12">

@@ -1,5 +1,6 @@
 import { subMenuLinks } from "@/types/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { RiArrowDownSLine, RiArrowRightSLine } from "react-icons/ri";
 
@@ -22,6 +23,8 @@ export interface DropDownItemProps {
 export const DropDownItems = ({ items, depthLevel }: MenuItemProps) => {
   const [dropdown, setDropdown] = useState(false);
   const ref = useRef<HTMLLIElement>(null);
+  const path = usePathname();
+  const isActive = (href: string) => path === href;
 
   useEffect(() => {
     const handler = (event: MouseEvent | TouchEvent) => {
@@ -63,7 +66,9 @@ export const DropDownItems = ({ items, depthLevel }: MenuItemProps) => {
       <>
         <Link
           href={items.href || "#"}
-          className="hover:text-dark/50 dark:text-dark/80 items-center gap-r-1"
+          className={`py-2 pl-1 mx-2  mr-1  hover:bg-accent/20 transition duration-200 rounded-2xl ${
+            isActive(items?.href || "#") ? "bg-accent/20" : ""
+          } flex items-center gap-x-2 `}
           type="button"
           aria-haspopup="menu"
           aria-expanded={dropdown ? "true" : "false"}
@@ -102,7 +107,8 @@ const Dropdown = ({
   depthLevel = depthLevel + 1;
   const dropdownClass = depthLevel > 1 ? "dropdown-submenu" : "";
 
-  console.dir(subMenuLinks, { depth: null });
+  const path = usePathname();
+  const isActive = (href: string) => path === href;
 
   return (
     <ul
@@ -114,7 +120,12 @@ const Dropdown = ({
         if (submenu.university && submenu.university.title) {
           return (
             <li key={`uni-${submenu.id}`}>
-              <Link href={`${submenu.href}${submenu.university.slug}`}>
+              <Link
+                className={`py-2 pl-1 mx-2  mr-1  hover:bg-accent/20 transition duration-200 rounded-2xl ${
+                  isActive(submenu?.href || "#") ? "bg-accent/20" : ""
+                } flex items-center gap-x-2 `}
+                href={`${submenu.href}${submenu.university.slug}`}
+              >
                 {submenu.label}
               </Link>
             </li>
@@ -126,7 +137,12 @@ const Dropdown = ({
         if (submenu.country && submenu.country.title) {
           return (
             <li key={`country-${submenu.id}`}>
-              <Link href={`${submenu.href}${submenu.country.slug}`}>
+              <Link
+                className={`py-2 pl-1 mx-2  mr-1  hover:bg-accent/20 transition duration-200 rounded-2xl ${
+                  isActive(submenu?.href || "#") ? "bg-accent/20" : ""
+                } flex items-center gap-x-2 `}
+                href={`${submenu.href}${submenu.country.slug}`}
+              >
                 {submenu.label}
               </Link>
             </li>

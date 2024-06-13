@@ -1,8 +1,8 @@
 {
-  "name": "foodadvisor",
+  "name": "onlyeducation",
   "private": true,
   "version": "2.0.1",
-  "description": "Official Strapi Demo Application",
+  "description": "Official onlyeducation application",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",

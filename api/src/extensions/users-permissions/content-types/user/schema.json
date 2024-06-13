@@ -9,17 +9,10 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
-    "username": {
-      "type": "string",
-      "minLength": 3,
-      "unique": true,
-      "configurable": false,
-      "required": true
-    },
+   
     "email": {
       "type": "email",
       "minLength": 6,
@@ -76,17 +69,27 @@
       "mappedBy": "author"
     },
     "picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "job": {
       "type": "string",
       "required": true
+    },
+    "firstname": {
+      "type": "string",
+      "required": true,
+       "minLength":3
+    },
+    "lastname": {
+      "type": "string",
+      "required": false
     }
   }
 }

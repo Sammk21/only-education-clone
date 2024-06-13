@@ -4,18 +4,15 @@ import { Label } from "../ui/label";
 import { cn } from "@/util/cn";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LOGIN_VIEW } from "../../templates/login-template";
+import { registerUserAction } from "@/app/data/actions/auth-actions";
 
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
+import { IconBrandGoogle } from "@tabler/icons-react";
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;
 };
 
-interface IFormInput {
+export interface IFormInput {
   firstName: string;
   lastName: string;
   email: string;
@@ -30,7 +27,9 @@ export function Register({ setCurrentView }: Props) {
     handleSubmit,
     watch,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    registerUserAction(data);
+  };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-light mb-6 dark:bg-black border dark:border-border border-borderLight">

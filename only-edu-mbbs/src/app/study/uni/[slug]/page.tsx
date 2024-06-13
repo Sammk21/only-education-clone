@@ -22,21 +22,20 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
-  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
-  const { seo } = data.data[0];
+  const baseUrl = process.env.API_URL || "http://localhost:1337";
+  // const { seo } = data.data[0];
   return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-    openGraph: {
-      images: [
-        {
-          url: baseUrl + seo?.metaImage?.url || "",
-        },
-      ],
-    },
+    // title: seo.metaTitle,
+    // description: seo.metaDescription,
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: baseUrl + seo?.metaImage?.url || "",
+    //     },
+    //   ],
+    // },
   };
 }
-
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
@@ -65,17 +64,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={universityProfile}
       />
-      {/* <div className="py-4 bg-greenDark my-12">
-        <div className="flex  items-center justify-center gap-x-5  text-light">
-          <h1 className="lg:text-4xl text-sm/6">{cta.title}</h1>
-          <button className="px-4  py-2 mt-2 rounded-2xl border border-borderLight dark:border-border  bg-blue-500 text-light text-sm hover:shadow-[1px_1px_0px_0px_rgba(0,0,0)] transition duration-200">
-            Enquire Now
-          </button>
-        </div>
-      </div> */}
       <CallToAction />
-
-      <div className="mt-6 ">
+      <div className="mt-6 px-3 ">
         <div className="my-8">
           <h2 className="text-center text-4xl font-medium mb-4 dark:text-light">
             {overview.title}

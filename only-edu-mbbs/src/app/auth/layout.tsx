@@ -11,7 +11,7 @@ export default async function AccountPageLayout({
 }) {
   // const customer = await getCustomer().catch(() => null)
 
-  const customer = false;
+  const customer = true;
 
   return (
     <AccountLayout customer={customer}>

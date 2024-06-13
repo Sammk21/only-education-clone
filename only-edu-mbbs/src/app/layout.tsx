@@ -28,7 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const navData = await getStrapiData(
-    "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][country]=true&[populate][dropdown][populate][subMenuLinks][populate][university]=*"
+    "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][country]=true&[populate][dropdown][populate][subMenuLinks][populate][university]=*&[populate][footer][populate][footerColumns][populate][links][populate]=true"
   );
 
   return (
@@ -53,7 +53,7 @@ export default async function RootLayout({
             disabledClasses="cursor-not-allowed "
           />
           {children}
-          <Footer />
+          <Footer navigation={navData.navigation} />
           <MySideBar
             navigation={navData.navigation}
             dropdown={navData.dropdown}

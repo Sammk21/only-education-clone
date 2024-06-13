@@ -14,23 +14,6 @@ interface Props {
 const WhyAbroad = ({ data }: Props) => {
   return (
     <>
-      {/* <section className="text-dark dark:text-light mt-6">
-        <h4 className="text-center text-4xl pt-6  ">{data.header.title}</h4>
-        <p className="text-center  pt-1 mb-6 ">{data.header.description}</p>
-        <div className="px-6 sm:px-12 flex flex-col gap-y-4 max-w-7xl mx-auto prose">
-          <ol className="flex flex-col gap-y-10">
-            {data.qna.map((item) => (
-              <li key={item.id}>
-                <h4 className="leading-8 text-3xl mb-3 mt-0">
-                  {item.Question}
-                </h4>
-                <p className="text-sm text-accent">{item.Answer}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section> */}
-
       <section className=" dark:text-light  text-dark py-12 ">
         <div className="px-6 container mx-auto">
           <h1 className="text-5xl font-semibold">{data.header.title}</h1>
@@ -58,8 +41,8 @@ const WhyAbroad = ({ data }: Props) => {
                 />
               </svg>
             </div>
-            <div className=" w-full h-full">
-              <ol className="flex flex-col gap-y-10">
+            <div className=" w-full h-full py-8">
+              <ul className="flex flex-col gap-y-10">
                 {data.qna.map((item) => (
                   <li key={item.id}>
                     <h4 className="leading-8 text-3xl  mb-3">
@@ -68,7 +51,7 @@ const WhyAbroad = ({ data }: Props) => {
                     <p className="text-sm text-accent">{item.Answer}</p>
                   </li>
                 ))}
-              </ol>
+              </ul>
             </div>
           </div>
         </div>
