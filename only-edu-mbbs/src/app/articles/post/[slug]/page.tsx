@@ -24,7 +24,8 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("articles", params.slug);
-  const baseUrl = "http://localhost:1337";
+  const baseUrl = process.env.API_URL || "http://localhost:1337";
+
   const { seo } = data.data[0];
   return {
     title: seo.metaTitle,

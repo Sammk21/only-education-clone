@@ -22,21 +22,20 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
-  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
-  const { seo } = data.data[0];
+  const baseUrl = process.env.API_URL || "http://localhost:1337";
+  // const { seo } = data.data[0];
   return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-    openGraph: {
-      images: [
-        {
-          url: baseUrl + seo?.metaImage?.url || "",
-        },
-      ],
-    },
+    // title: seo.metaTitle,
+    // description: seo.metaDescription,
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: baseUrl + seo?.metaImage?.url || "",
+    //     },
+    //   ],
+    // },
   };
 }
-
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;

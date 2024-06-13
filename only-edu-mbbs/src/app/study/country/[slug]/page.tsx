@@ -18,7 +18,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("countries", params.slug);
-  const baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
+  const baseUrl = process.env.API_URL || "http://localhost:1337";
   const { seo } = data.data[0];
   return {
     title: seo.metaTitle,
