@@ -12,6 +12,6 @@ export async function getData(path: string) {
     const flattenedData = flattenAttributes(data);
     return flattenedData;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 }

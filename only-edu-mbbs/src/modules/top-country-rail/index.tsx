@@ -44,7 +44,7 @@ interface Props {
 }
 
 const TopCountryRail = ({ data }: Props) => {
-  const baseUrl = "http://192.168.1.28:1337";
+  const baseUrl = "https://admin.onlyeducation.co.in" || process.env.API_URL;
 
   return (
     <div className="sm:px-12 py-6 my-6 px-2">
@@ -102,10 +102,6 @@ const TopCountryRail = ({ data }: Props) => {
 
               <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2  items-center -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center gap-x-4">
                 <p className=" text-lg font-medium"> {university.title}</p>
-                {/* <span className="h-[3px] w-[3px] rounded-full bg-light"></span>
-                <p className=" mt-[3px] text-sm text-light">
-                  {university.title}
-                </p> */}
               </span>
               <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-dark via-dark/20 to-dark/0"></span>
             </div>

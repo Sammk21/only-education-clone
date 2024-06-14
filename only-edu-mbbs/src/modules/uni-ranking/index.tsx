@@ -22,7 +22,7 @@ const UniRanking = ({ data }: Props) => {
   const { objectRank, worldRank } = data.ranks;
 
   return (
-    <section className="py-12 my-12 bg-greenDark rounded-2xl text-light container mx-auto">
+    <section className="py-12 my-12 bg-greenDark rounded-2xl text-light  mx-auto">
       <h4 className="text-center text-3xl font-medium mb-6">{title}</h4>
       <p className="text-center max-w-5xl mx-auto mb-5">{description}</p>
       <div className="w-full h-full flex  justify-around ">

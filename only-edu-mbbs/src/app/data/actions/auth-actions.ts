@@ -32,6 +32,8 @@ confirmPassword: z.string().min(8,{
 
 export async function registerUserAction(formData:IFormInput){
 
+
+    
     const validatedFields = RegisterSchema.safeParse(formData)
 
      if(!validatedFields.success){

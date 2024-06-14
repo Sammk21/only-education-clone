@@ -7,7 +7,7 @@ const universityListQuery =
 
 export default async function UniversitiesList() {
   const data = await getStrapiData(universityListQuery);
-  // console.dir(data, { depth: null });
+
   return (
     // <UniversitiesListPage data={data}
     <div className="bg-white rounded-[30px] my-4">

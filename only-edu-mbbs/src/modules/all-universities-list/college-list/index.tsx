@@ -34,9 +34,7 @@ interface Props {
   data: UniversitiesData;
 }
 const CollegeList = ({ data }: Props) => {
-  const baseUrl = "http://192.168.1.28:1337";
-
-  console.dir(data.data[0].slug, { depth: null });
+  const baseUrl = "https://admin.onlyeducation.co.in";
 
   return (
     <section className="sm:w-[70%] sm:mt-[5%] mb-4 p-4">
