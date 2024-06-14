@@ -18,7 +18,6 @@ export interface NavbarProps {
 }
 
 const Footer = ({ navigation }: NavbarProps) => {
-  console.dir("hello world", navigation);
   return (
     <footer className=" w-full rounded-t-[28px]  z-10  mt-1">
       <CallToAction />
@@ -36,6 +35,7 @@ const Footer = ({ navigation }: NavbarProps) => {
               </Link>
 
               <div className="flex-col flex text-sm text-dark mb-8">
+                <h2 className="mb-3 text-[16px]">Useful Link</h2>
                 <ul>
                   {navigation.links.map((item) => (
                     <li key={item.id}>

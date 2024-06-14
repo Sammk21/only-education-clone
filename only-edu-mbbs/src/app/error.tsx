@@ -8,7 +8,7 @@ export default function Error({
   error: Error & { digest?: string };
 }) {
   useEffect(() => {
-    console.error(error);
+    // console.error(error);
   }, [error]);
 
   return (

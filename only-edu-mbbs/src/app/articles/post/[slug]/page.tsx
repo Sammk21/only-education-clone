@@ -6,6 +6,7 @@ import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 
 import parse from "html-react-parser";
+import Image from "next/image";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -44,8 +45,6 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  console.log(params.slug);
-
   const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}`;
   const data = await getStrapiData(blogQuery);
 
@@ -66,13 +65,13 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                 {title}
               </h1>
               <div className=" flex  items-center mr-3 text-sm text-dark dark:text-light mb-2">
-                <img
+                <Image
                   className="mr-4 w-12 h-12 rounded-full my-auto object-cover"
                   src={
                     "http://localhost:1337/uploads/Screenshot_2024_06_03_at_6_48_36_PM_ccdfa1f40f.png"
                   }
                   alt="Jese Leos"
-                />
+                ></Image>
                 <div className="flex flex-col">
                   <p
                     rel="author"
@@ -191,11 +190,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             <footer className="flex justify-between items-center">
               <div className="flex items-center">
                 <p className="inline-flex my-0 items-center mr-3 font-semibold text-sm text-dark dark:text-light">
-                  <img
+                  <Image
                     className="mr-2 w-6 h-6 my-0 rounded-full"
                     src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
                     alt="Michael Gough"
-                  />
+                  ></Image>
                   Michael Gough
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -285,11 +284,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             <footer className="flex justify-between items-center mb-2">
               <div className="flex items-center">
                 <p className="inline-flex items-center my-0 mr-3 font-semibold text-sm text-dark dark:text-light">
-                  <img
+                  <Image
                     className="mr-2 w-6 h-6 rounded-full my-0"
                     src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                     alt="Jese Leos"
-                  />
+                  ></Image>
                   Jese Leos
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 my-0">
@@ -376,11 +375,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             <footer className="flex justify-between items-center mb-2 ">
               <div className="flex items-center">
                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-dark dark:text-light">
-                  <img
+                  <Image
                     className="mr-2 w-6 h-6 rounded-full"
                     src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                     alt="Bonnie Green"
-                  />
+                  ></Image>
                   Bonnie Green
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -469,11 +468,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             <footer className="flex justify-between items-center mb-2">
               <div className="flex items-center">
                 <p className="inline-flex items-center mr-3 font-semibold text-sm text-dark dark:text-light">
-                  <img
+                  <Image
                     className="mr-2 w-6 h-6 rounded-full"
                     src="https://flowbite.com/docs/images/people/profile-picture-4.jpg"
                     alt="Helene Engels"
-                  />
+                  ></Image>
                   Helene Engels
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -570,11 +569,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             <article className="max-w-xs">
               <a href="#">
-                <img
+                <Image
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-1.png"
                   className="mb-3 rounded-lg"
                   alt="Image 1"
-                />
+                ></Image>
               </a>
               <h2 className="mb-1 text-xl font-bold leading-tight text-dark dark:text-light">
                 <a href="#">Our first office</a>
@@ -592,11 +591,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
             <article className="max-w-xs">
               <a href="#">
-                <img
+                <Image
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-2.png"
                   className="mb-5 rounded-lg"
                   alt="Image 2"
-                />
+                ></Image>
               </a>
               <h2 className="mb-2 text-xl font-bold leading-tight text-dark dark:text-light">
                 <a href="#">Enterprise design tips</a>
@@ -614,11 +613,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
             <article className="max-w-xs">
               <a href="#">
-                <img
+                <Image
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-3.png"
                   className="mb-5 rounded-lg"
                   alt="Image 3"
-                />
+                ></Image>
               </a>
               <h2 className="mb-2 text-xl font-bold leading-tight text-dark dark:text-light">
                 <a href="#">We partnered with Google</a>
@@ -636,11 +635,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
             <article className="max-w-xs">
               <a href="#">
-                <img
+                <Image
                   src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/article/blog-4.png"
                   className="mb-5 rounded-lg"
                   alt="Image 4"
-                />
+                ></Image>
               </a>
               <h2 className="mb-2 text-xl font-bold leading-tight text-dark dark:text-light">
                 <a href="#">Our first project with React</a>

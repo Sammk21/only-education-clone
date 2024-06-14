@@ -11,10 +11,10 @@ const nextConfig = {
         hostname: "plus.unsplash.com",
       },
       {
-        hostname: "flowbite.s3.amazonaws.com",
+        hostname: "localhost",
       },
       {
-        hostname: "localhost",
+        hostname: "admin.onlyeducation.co.in",
       },
       {
         hostname: "192.168.1.28",
