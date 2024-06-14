@@ -12,7 +12,7 @@ const merriweather = Merriweather({
 });
 
 export default function PostList({ post }) {
-  const imageUrl = "http://localhost:1337";
+  const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
 
   // const label = post.label;
@@ -40,10 +40,10 @@ export default function PostList({ post }) {
         <div className={cx("group cursor-pointer grid gap-1")}>
           <div className="flex mt-3 gap-1 sm:gap-10 justify-between">
             <Link
-              href={`/blog/post/${post.slug}`}
+              href={`/articles/post/${post.slug}`}
               className="sm:w-[70%] w-[70%]"
             >
-              <h2 className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2">
+              <h2 className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
                 {post.title}
               </h2>
               <p
@@ -53,8 +53,8 @@ export default function PostList({ post }) {
               </p>
             </Link>
             <Link
-              href={`/blog/post/${post.slug}`}
-              className="relative block aspect-square h-20 w-20 sm:h-28 sm:w-28"
+              href={`/articles/post/${post.slug}`}
+              className="relative hidden sm:block aspect-square h-20 w-[100px]  sm:h-28 sm:w-28"
             >
               <Image
                 src={imageUrl + image}
