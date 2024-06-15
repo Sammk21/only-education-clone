@@ -111,7 +111,7 @@ interface CategoryAttributes {
   updatedAt: string;
 }
 
-interface ArticleAttributes {
+export interface ArticleAttributes {
   id: number;
   title: string;
   slug: string;

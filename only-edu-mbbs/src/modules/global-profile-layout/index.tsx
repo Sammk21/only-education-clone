@@ -2,11 +2,18 @@ import { ImageAttributes } from "@/types/types";
 import { getStrapiData } from "@/utils/utils";
 import Image, { ImageProps } from "next/image";
 import React from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaTrophy } from "react-icons/fa6";
+import { FaGraduationCap } from "react-icons/fa6";
 
+interface Listprops {
+  id: number;
+  list: string;
+}
 interface Props {
   profileImage: string;
   backgroundImage: string;
-
+  universityInfo: Listprops[];
   data: {
     id: number;
     name: string;
@@ -18,6 +25,7 @@ const GlobalProfileLayout = async ({
   data,
   backgroundImage,
   profileImage,
+  universityInfo,
 }: Props) => {
   const { name, description } = data;
 
@@ -46,10 +54,26 @@ const GlobalProfileLayout = async ({
         </div>
         <div className="">
           <div className="text-center px-4 md:px-14">
-            <h2 className=" text-3xl font-bold dark:text-light">{name}</h2>
+            <h2 className=" text-3xl font-bold dark:text-light text-dark">
+              {name}
+            </h2>
 
-            <p className="mt-2 text-accent text-sm">{description}</p>
+            {/* <p className="mt-2 text-accent text-sm">{description}</p> */}
           </div>
+          <ul className="flex justify-center gap-4 sm:gap-6 mt-2 ">
+            <li className="flex items-center gap-1">
+              <FaLocationDot className="text-[#616061]" />
+              {universityInfo[0].list}
+            </li>
+            <li className="flex items-center gap-1">
+              <FaTrophy className="text-[#616061]" />
+              {universityInfo[1].list}
+            </li>
+            <li className="flex items-center gap-1">
+              <FaGraduationCap className="text-[#616061]" />
+              {universityInfo[2].list}
+            </li>
+          </ul>
           <hr className="mt-6" />
         </div>
       </div>
