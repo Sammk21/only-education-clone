@@ -1,9 +1,8 @@
-import React from "react";
-import BlogPage from "../../modules/blog-components/blog/BlogPage";
-import { getArticles, getStrapiData } from "@/utils/utils";
-import { Metadata } from "next";
+import BlogPage from "@/modules/blog-components/blog/BlogPage";
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
 import NewsLetter from "@/modules/newsletter";
+import { getArticles } from "@/utils/utils";
+import { Metadata } from "next";
 
 const blogListQuery =
   "/api/articles?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category";

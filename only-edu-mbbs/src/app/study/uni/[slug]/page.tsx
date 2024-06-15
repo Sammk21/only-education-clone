@@ -15,6 +15,7 @@ import CallToAction from "@/modules/footer/call-to-action";
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
+import PlacementInfo from "@/modules/placement";
 
 export async function generateMetadata({
   params,
@@ -38,7 +39,7 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=ture&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
 
@@ -52,6 +53,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     documentRequired,
     feesStructure,
     faq,
+    universityInfo,
+    placement,
   } = data.data[0];
 
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
@@ -63,11 +66,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         profileImage={profileImage}
         backgroundImage={backgroundImage}
         data={universityProfile}
+        universityInfo={universityInfo}
       />
       <CallToAction />
       <div className="mt-6 px-3 ">
         <div className="my-8">
-          <h2 className="text-center text-4xl font-medium mb-4 dark:text-light">
+          <h2 className="text-center text-4xl font-medium mb-4 dark:text-light text-dark">
             {overview.title}
           </h2>
           <p className="text-center max-w-6xl w-full mx-auto dark:text-accent">
@@ -81,6 +85,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         <AdmissionProcessFlow />
         <DocumentRquired data={documentRequired} />
         <InfoTableLayout data={feesStructure} />
+        <PlacementInfo data={placement} />
         <CampusHighlight />
         <QuestionDropdown data={faq} />
       </div>
