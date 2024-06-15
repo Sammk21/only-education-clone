@@ -21,6 +21,7 @@ const LoginTemplate = () => {
         <Register setCurrentView={setCurrentView} />
       )}
     </div>
+
   );
 };
 

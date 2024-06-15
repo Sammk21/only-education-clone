@@ -19,6 +19,7 @@ import { Navigation, Dropdown, Links } from "@/types/types";
 import { DropDownItems } from "./components/Dropdown";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { EnquiryDialog } from "../enquiry-dialog";
 
 export interface NavbarProps {
   navigation: Navigation;
@@ -101,11 +102,12 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
           </div>
 
           <div className="px-1">
-            <Link href={"/auth"} className="relative z-20">
+            {/* <Link href={"/auth"} className="relative z-20">
               <span className="px-8 py-2 rounded-full relative bg-custom-gradient text-white text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
                 login
               </span>
-            </Link>
+            </Link> */}
+            <EnquiryDialog />
           </div>
           <AnimatePresence mode="wait">
             {isScrolled && (
