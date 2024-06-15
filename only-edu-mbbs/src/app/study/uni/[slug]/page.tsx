@@ -24,17 +24,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
   const baseUrl = process.env.API_URL || "http://localhost:1337";
-  // const { seo } = data.data[0];
+  const { seo } = data.data[0];
   return {
-    // title: seo.metaTitle,
-    // description: seo.metaDescription,
-    // openGraph: {
-    //   images: [
-    //     {
-    //       url: baseUrl + seo?.metaImage?.url || "",
-    //     },
-    //   ],
-    // },
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    openGraph: {
+      images: [
+        {
+          url: baseUrl + seo?.metaImage?.url || "",
+        },
+      ],
+    },
   };
 }
 

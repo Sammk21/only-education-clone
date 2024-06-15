@@ -1,55 +1,82 @@
-/* eslint-disable react/jsx-no-bind */
+"use client";
+import { FC } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-// "use client";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+} from "@/components/ui/pagination";
 
-// import { useRouter, useSearchParams } from "next/navigation";
-// import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/components/ui/button";
 
-// export default function Pagination({ pageIndex, isFirstPage, isLastPage }) {
-//   const router = useRouter();
+interface PaginationProps {
+  pageCount: number;
+}
 
-//   const searchParams = useSearchParams();
-//   const params = new URLSearchParams(searchParams);
+interface PaginationArrowProps {
+  direction: "left" | "right";
+  href: string;
+  isDisabled: boolean;
+}
 
-//   // Define functions for navigating to the next and previous pages
-//   // These functions update the page query parameter in the URL
-//   const handleNextPage = () => {
-//     params.set("page", (pageIndex + 1).toString());
-//     const query = params.toString();
+const PaginationArrow: FC<PaginationArrowProps> = ({
+  direction,
+  href,
+  isDisabled,
+}) => {
+  const router = useRouter();
+  const isLeft = direction === "left";
+  const disabledClassName = isDisabled
+    ? "bg-gray-300 text-dark border cursor-not-allowed"
+    : "";
 
-//     router.push(`/archive?${query}`);
-//   };
+  return (
+    <Button
+      onClick={() => router.push(href)}
+      className={`bg-dark text-light hover:bg-dark/80 ${disabledClassName}`}
+      aria-disabled={isDisabled}
+      disabled={isDisabled}
+    >
+      {isLeft ? "«" : "»"}
+    </Button>
+  );
+};
 
-//   const handlePrevPage = () => {
-//     params.set("page", (pageIndex - 1).toString());
-//     const query = params.toString();
+export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
 
-//     router.push(`/archive?${query}`);
-//   };
+  const createPageURL = (pageNumber: number | string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
+  };
 
-//   return (
-//     <div className="mt-10 flex items-center justify-center">
-//       <nav
-//         className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-//         aria-label="Pagination"
-//       >
-//         <button
-//           disabled={isFirstPage}
-//           onClick={handlePrevPage}
-//           className="relative inline-flex items-center gap-1 rounded-l-md border border-gray-300 bg-white px-3 py-2 pr-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
-//         >
-//           <ChevronLeftIcon className="h-3 w-3" aria-hidden="true" />
-//           <span>Previous</span>
-//         </button>
-//         <button
-//           onClick={handleNextPage}
-//           disabled={isLastPage}
-//           className="relative inline-flex items-center gap-1 rounded-r-md border border-gray-300 bg-white px-3 py-2 pl-4 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 disabled:pointer-events-none disabled:opacity-40 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-300"
-//         >
-//           <span>Next</span>
-//           <ChevronRightIcon className="h-3 w-3" aria-hidden="true" />
-//         </button>
-//       </nav>
-//     </div>
-//   );
-// }
+  return (
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationArrow
+            direction="left"
+            href={createPageURL(currentPage - 1)}
+            isDisabled={currentPage <= 1}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <span className="p-2 font-semibold text-dark">
+            Page {currentPage}
+          </span>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationArrow
+            direction="right"
+            href={createPageURL(currentPage + 1)}
+            isDisabled={currentPage >= pageCount}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}
