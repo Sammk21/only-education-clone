@@ -20,12 +20,11 @@ export interface NavbarProps {
 const Footer = ({ navigation }: NavbarProps) => {
   return (
     <footer className=" w-full rounded-t-[28px]  z-10  mt-1">
-      <CallToAction />
       <div className="h-full w-full flex justify-center items-center border-t bg-light border-t-borderLight pt-12 rounded-3xl">
         <section className="w-full bottom-0  mx-auto flex flex-col rounded-3xl  bg-light z-0">
           <div className="sm:px-14 px-4 py-1 ">
             <div className="row h-full flex-col gap-y-9 sm:flex-row flex justify-between">
-              <Link className="aspect-video relative" href="/">
+              <Link className=" w-48 h-28 md:w-60 md:h-36 relative" href="/">
                 <Image
                   src={"/onlyedu.svg"}
                   alt="logo"
