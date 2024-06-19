@@ -6,24 +6,50 @@ import { LuFlagTriangleRight } from "react-icons/lu";
 import { ImageAttributes } from "@/types/types";
 import { University } from "lucide-react";
 
-interface Benifits {
+// interface Benifits {
+//   id: number;
+//   avgPackage: string;
+//   fees: string;
+//   examsAccepted: string;
+//   location: string | null;
+//   ownership: string;
+// }
+interface ownership {
   id: number;
-  avgPackage: string;
-  fees: string;
-  examsAccepted: string;
-  location: string | null;
-  ownership: string;
+  title: string;
+  slug: string;
 }
-
+interface streams {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface indian_state {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface data {
+  id: number;
+  title: string;
+  slug: string;
+}
 interface UniversityProfile {
   backgroundImage: ImageAttributes;
+  fees: string;
+  avgPackage: string;
 }
 interface University {
   title: string;
   id: number;
   slug: string;
   universityProfile: UniversityProfile;
-  benifits: Benifits;
+  ownership: ownership;
+  indian_state: indian_state;
+  streams: streams;
+  exams: {
+    data: data[];
+  };
 }
 
 interface UniversitiesData {
@@ -35,6 +61,7 @@ interface Props {
 }
 const CollegeList = ({ data }: Props) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
+  console.dir(data, { depth: null });
 
   return (
     <section className="sm:w-[70%] sm:mt-[5%] mb-4 p-4">
@@ -63,7 +90,7 @@ const CollegeList = ({ data }: Props) => {
                 <p className="flex items-center mr-4">
                   <IoLocationOutline />
                   <span className=" line-clamp-1">
-                    {university?.benifits?.location}
+                    {university.indian_state.title}
                   </span>
                 </p>
                 <p className="flex items-center">
@@ -71,17 +98,25 @@ const CollegeList = ({ data }: Props) => {
 
                   <span className=" line-clamp-1">
                     {" "}
-                    {university?.benifits?.ownership}
+                    {university.ownership.title}
                   </span>
                 </p>
               </div>
             </Link>
             <div className="flex  mt-1 text-gray-500 dark:text-neutral-400 text-sm flex-col sm:flex-row">
-              <p className="">{university?.benifits?.fees}</p>
-              <span className="mx-2 hidden  sm:block">|</span>
-              <p className=" ">{university?.benifits?.avgPackage}</p>
-              <span className="mx-2 hidden  sm:block">|</span>
-              <p className="">{university?.benifits?.examsAccepted}</p>
+              <p>
+                {university.exams.data.map((item, index) => (
+                  <span className="mr-1" key={item.id}>
+                    {item.title}
+                  </span>
+                ))}
+              </p>
+              <p className="sm:mx-2">
+                | Fees: {university.universityProfile.fees}
+              </p>{" "}
+              <p className="sm:mx-2">
+                | Avg Package: {university.universityProfile.avgPackage}
+              </p>
             </div>
             <div className="mt-4  ">
               <Link

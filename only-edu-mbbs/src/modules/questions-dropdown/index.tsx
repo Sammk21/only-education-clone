@@ -22,7 +22,7 @@ const QuestionDropdown = ({ data }: Props) => {
   return (
     <>
       <section className=" py-6 my-6  px-2 sm:px-6">
-        <h4 className="text-center text-2xl text-dark dark:text-light">
+        <h4 className="sm:text-center text-2xl text-dark dark:text-light">
           {title}
         </h4>
         <div className=" pt-6 w-full ">
@@ -30,7 +30,7 @@ const QuestionDropdown = ({ data }: Props) => {
             {faq.map((item) => (
               <Disclosure key={item.id} as="div" className="p-6">
                 <DisclosureButton className="group flex w-full items-center justify-between">
-                  <span className="text-sm/6 font-medium dark:text-light  text-dark dark:group-data-[hover]:text-light/50 group-data-[hover]:text-dark/80">
+                  <span className="text-sm/6 font-medium dark:text-light text-start sm:text-center  text-dark dark:group-data-[hover]:text-light/50 group-data-[hover]:text-dark/80">
                     {item.question}
                   </span>
                   <IoIosArrowForward className="size-5 fill-dark dark:fill-light rotate-90 dark:group-data-[hover]:fill-light/50 group-data-[hover]:fill-dark/50 group-data-[open]:-rotate-90" />

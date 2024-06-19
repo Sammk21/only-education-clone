@@ -26,13 +26,13 @@ const UniRanking = ({ data }: Props) => {
       <h4 className="text-center text-3xl font-medium mb-6">{title}</h4>
       <p className="text-center max-w-5xl mx-auto mb-5">{description}</p>
       <div className="w-full h-full flex  justify-around ">
-        <div className="flex justify-center flex-col ">
-          <FaChartBar className="text-8xl mb-3" />
-          <p className="font-medium">{objectRank}</p>
+        <div className="flex justify-center items-center flex-col ">
+          <FaChartBar className="md:text-8xl text-6xl sm:text-7xl mb-3" />
+          <p className="font-medium text-sm sm:text-xl">{objectRank}</p>
         </div>
         <div className="flex justify-center items-center flex-col ">
-          <FaEarthAsia className="text-8xl mb-3" />
-          <p className="font-medium">{worldRank}</p>
+          <FaEarthAsia className="md:text-8xl text-6xl sm:text-7xl mb-3" />
+          <p className="font-medium text-sm sm:text-xl">{worldRank}</p>
         </div>
       </div>
     </section>
