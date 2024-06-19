@@ -6,14 +6,6 @@ import { LuFlagTriangleRight } from "react-icons/lu";
 import { ImageAttributes } from "@/types/types";
 import { University } from "lucide-react";
 
-// interface Benifits {
-//   id: number;
-//   avgPackage: string;
-//   fees: string;
-//   examsAccepted: string;
-//   location: string | null;
-//   ownership: string;
-// }
 interface ownership {
   id: number;
   title: string;
@@ -61,8 +53,6 @@ interface Props {
 }
 const CollegeList = ({ data }: Props) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
-  console.dir(data, { depth: null });
-
   return (
     <section className="sm:w-[70%] sm:mt-[5%] mb-4 p-4">
       {data.data.map((university) => (

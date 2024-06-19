@@ -72,7 +72,32 @@ function classNames(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function CollegeFilter() {
+
+interface statesProps {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface examsProps {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface Props {
+  ownership: {
+    id: number;
+    title: string;
+    slug: string;
+  };
+  indianStates: statesProps[];
+  exams: examsProps[];
+}
+
+export default function CollegeFilter({
+  ownership,
+  indianStates,
+  exams,
+}: Props) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
