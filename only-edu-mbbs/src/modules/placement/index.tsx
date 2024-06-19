@@ -1,15 +1,21 @@
+// import { parse } from "path";
 import React from "react";
+import parse from "html-react-parser";
 
 interface Listprops {
   id: number;
   list: string;
 }
-
+interface documents {
+  id: number;
+  description: string;
+  title: string;
+}
 interface Props {
   data: {
     id: number;
     list: Listprops[];
-    placementTable: Listprops[];
+    placementTable: string;
   };
 }
 const PlacementInfo = ({ data }: Props) => {
@@ -34,29 +40,8 @@ const PlacementInfo = ({ data }: Props) => {
           </li>
         ))}
       </ul>
-      <div className="">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Particulars</th>
-              <th>Statistics</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Total Number of Students Eligible for Placements</td>
-              <td>{data.placementTable[0].list}</td>
-            </tr>
-            <tr>
-              <td>Total Students Placed</td>
-              <td>{data.placementTable[1].list}</td>
-            </tr>
-            <tr>
-              <td>Total Students Placed</td>
-              <td>{data.placementTable[2].list}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="w-full overflow-x-scroll rounded-lg prose-tr:border-b prose-td:divide-y prose-td:divide-gray-200 prose-td:dark:divide-neutral-700   pt-6 prose-td:py-3 px prose-td:px-6  text-dark prose-tr: prose-table:w-full prose-figure:w-full prose-figure:mx-0 prose-table:border prose-figure:rounded-lg  prose-th:py-4 prose-th:bg-gray-50 prose-th:text-start prose-th:px-4">
+        {parse(data.placementTable)}
       </div>
     </section>
   );

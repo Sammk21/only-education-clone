@@ -13,12 +13,41 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
       screens: {
         "lg": "1080px",
       },
     },
     extend: {
+      typography:{
+        DEFAULT:{
+          css:{
+            figure:{
+             marginTop:"0",
+             marginBottom:"0",
+            },
+            table: {
+            width:"100%",
+            borderWidth: "1px"
+            } ,
+            th:{
+            textAlign:"start",
+            backgroundColor: "rgb(249 250 251)",
+            paddingTop:"1rem",
+            paddingBottom:"1rem"
+            },
+            td:{
+             paddingLeft:"1rem",
+             paddingRight:"1rem",
+             paddingTop: "0.75rem" ,
+             paddingBottom: "0.75rem"
+  
+            },
+            tr:{
+             border:"0.5px solid gray"
+            },
+          }
+        }
+      },
       screens:{
         '2lg': "1070px",
       }
@@ -29,7 +58,7 @@ const config = {
      
       colors: {
         transparent: "transparent",
-        light: "#f4f2ee",
+        light: "#ffffff",
         dark: "#09090b",
         accent: "#a1a1aa",
         foreground: "#27272a",

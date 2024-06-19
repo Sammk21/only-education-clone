@@ -3,7 +3,7 @@ import CollegeList from "@/modules/all-universities-list/college-list";
 import { getStrapiData } from "@/utils/utils";
 import React from "react";
 const universityListQuery =
-  "/api/universities?populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[benifits][populate]=true";
+  "/api/universities?populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
 
 export default async function UniversitiesList() {
   const data = await getStrapiData(universityListQuery);

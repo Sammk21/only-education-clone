@@ -14,7 +14,7 @@ export function EnquiryDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="px-8 py-2 rounded-full relative  text-dark text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
+        <button className="sm:px-8 py-2 px-2 text-xs rounded-full relative  text-dark sm:text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
           Enquire now
         </button>
       </DialogTrigger>

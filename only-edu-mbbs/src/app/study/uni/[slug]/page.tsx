@@ -6,7 +6,6 @@ import DocumentRquired from "@/modules/deocuments-required";
 import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import InfoTableLayout from "@/modules/table-layout";
-import TopUniRail from "@/modules/top-uni-rail";
 import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
@@ -39,7 +38,7 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=ture&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=ture&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true&populate[documentRequired][populate][documents][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
 
@@ -68,16 +67,16 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         data={universityProfile}
         universityInfo={universityInfo}
       />
-      <CallToAction />
       <div className="mt-6 px-3 ">
-        <div className="my-8">
-          <h2 className="text-center text-4xl font-medium mb-4 dark:text-light text-dark">
+        <div className="my-8 container">
+          <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
             {overview.title}
           </h2>
-          <p className="text-center max-w-6xl w-full mx-auto dark:text-accent">
+          <p className=" max-w-6xl w-full mx-auto dark:text-accent">
             {overview.description}
           </p>
         </div>
+        <CallToAction data={cta} />
         <UniHighlights />
         <WhyThisUni data={whythisUniversity} />
         <UniRanking data={rankComparison} />
