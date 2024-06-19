@@ -99,7 +99,7 @@ const TopUniRail = ({ data }: Props) => {
                 </span>
                 <span className="absolute top-1/2 left-1/2 -translate-x-1/2 h-6 -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden">
                   <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full text-light justify-center">
-                    {university.noOfStudentsStudying}
+                    {university.noOfStudentsStudying} students studying here.
                   </p>
                 </span>
                 <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
