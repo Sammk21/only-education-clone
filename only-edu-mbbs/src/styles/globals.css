@@ -66,14 +66,6 @@
     }
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
-  }
 .hamburger {
   cursor: pointer;
 }
@@ -94,20 +86,6 @@
   stroke-dasharray: 12 63;
 }
 
-/* .checked svg {
-  transform: rotate(-45deg);
-} */
-
-/* .checked .lineTopBottom {
-  stroke-dasharray: 20 300;
-  stroke-dashoffset: -32.42;
-}
-.logo {
-  text-decoration: none;
-  font-size: 25px;
-  color: inherit;
-  margin-right: 20px;
-} */
 
 
 
@@ -181,7 +159,7 @@
 
 
 .text-gradient{
-  background: #FFB76B;
+background: #FFB76B;
 background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
