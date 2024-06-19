@@ -78,6 +78,7 @@ const filters = [
       { value: "Public_Private", label: "Public Private", checked: true },
     ],
   },
+
   {
     id: "fees",
     name: "Fees",
@@ -161,7 +162,7 @@ export default function CollegeFilter() {
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200 overflow-scroll h-full ">
                     <h3 className="sr-only">Categories</h3>
-                    {/* <ul
+                    <ul
                       role="list"
                       className="px-2 py-3 font-medium text-gray-900"
                     >
@@ -172,7 +173,7 @@ export default function CollegeFilter() {
                           </a>
                         </li>
                       ))}
-                    </ul> */}
+                    </ul>
 
                     {filters.map((section, index) => (
                       <Disclosure
