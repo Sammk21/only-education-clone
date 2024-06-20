@@ -175,3 +175,19 @@ export interface MetaProps {
     };
   };
 }
+
+export interface ServerResponse {
+  data: null | any;
+  error?: {
+    status: number;
+    name: string;
+    message: string;
+    details: {
+      errors: Array<{
+        path: string[];
+        message: string;
+        name: string;
+      }>;
+    };
+  };
+}

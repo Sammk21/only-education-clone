@@ -5,43 +5,92 @@ import {
 } from "@/modules/account/components/register";
 import { Label } from "@/modules/account/components/ui/label";
 import { Input } from "@/modules/account/components/ui/input";
-import React, { useState } from "react";
+import React, { ErrorInfo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import axios from "axios";
-interface EnquiryFormInput {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: number;
+import { enquiryFormSchema } from "@/utils/utils";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type EnquiryFormInput = z.infer<typeof enquiryFormSchema>;
+
+interface EnquiryFromProps {
+  onClose: () => void;
+  setStatus: React.Dispatch<React.SetStateAction<null | "success" | "error">>;
 }
 
-export function EnquiryFrom() {
+export function EnquiryFrom({ onClose, setStatus }: EnquiryFromProps) {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<EnquiryFormInput>();
+    reset,
+  } = useForm<EnquiryFormInput>({
+    resolver: zodResolver(enquiryFormSchema),
+  });
+  const [serverErrors, setServerErrors] = useState({ email: "", phone: "" });
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EnquiryFormInput> = async (data) => {
+    setLoading(true);
     try {
       const response = await axios.post(
-        process.env.API_URL + "/api/enquiries",
+        "https://admin.onlyeducation.co.in/api/enquiries",
         {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-          phone: data.phone,
+          data: {
+            firstname: data.firstName,
+            lastname: data.lastName,
+            email: data.email,
+            phone: data.phone,
+          },
         }
       );
-      console.log("Form submitted successfully:", response.data);
-    } catch (error) {
-      console.error("Error submitting form:", error);
+
+      if (response.status === 200 || response.status === 201) {
+        window.alert("Your request has been submitted successfully!");
+        reset(); // Clear the form
+        setStatus("success");
+        setTimeout(() => {
+          setStatus(null);
+          onClose(); // Close the dialog
+        }, 200); // Adjust timeout as needed for animation duration
+      } else {
+        window.alert(
+          "There was a problem with your submission. Please try again."
+        );
+        setStatus("error");
+      }
+    } catch (error: any) {
+      if (error.response?.data?.error?.status === 400) {
+        const validationErrors = error.response.data.error.details.errors;
+        const errorMessages = { email: "", phone: "" };
+        validationErrors.forEach((err: any) => {
+          if (err.path.includes("email")) {
+            errorMessages.email = err.message;
+          }
+          if (err.path.includes("phone")) {
+            errorMessages.phone = err.message;
+          }
+        });
+        setServerErrors(errorMessages);
+        setStatus("error");
+      } else {
+        window.alert("Error submitting form: " + error.message);
+        setStatus("error");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+    e.target.value = value; // Set the input value
+  };
+
   return (
-    <div className="min-w-2xl grid grid-cols-2 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border dark:border-border border-borderLight">
+    <div className="min-w-2xl grid grid-cols-2 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border border-border border-borderLight">
       <div className="w-full h-full overflow-hidden relative ">
         <span className="w-full h-full absolute left-0 top-0 bg-black/40 z-10"></span>
         <Image
@@ -62,22 +111,12 @@ export function EnquiryFrom() {
               className={`dark:border ${
                 errors.firstName ? "dark:border-error" : ""
               }`}
-              {...register("firstName", {
-                required: true,
-                maxLength: 15,
-                minLength: 2,
-                pattern: /^[A-Za-z]+$/i,
-              })}
+              {...register("firstName")}
               aria-invalid={errors.firstName ? "true" : "false"}
             />
-            {errors.firstName?.type === "pattern" && (
+            {errors.firstName && (
               <p role="alert" className="text-error text-[10px] font-medium">
-                Enter a valid name
-              </p>
-            )}
-            {errors.firstName?.type === "required" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                First name is required
+                {errors.firstName.message}
               </p>
             )}
           </LabelInputContainer>
@@ -90,22 +129,12 @@ export function EnquiryFrom() {
               className={`dark:border ${
                 errors.lastName ? "dark:ring-error" : ""
               }`}
-              {...register("lastName", {
-                required: true,
-                maxLength: 15,
-                minLength: 2,
-                pattern: /^[A-Za-z]+$/i,
-              })}
+              {...register("lastName")}
               aria-invalid={errors.lastName ? "true" : "false"}
             />
-            {errors.lastName?.type === "pattern" && (
+            {errors.lastName && (
               <p role="alert" className="text-error text-[10px] font-medium">
-                Enter a valid name
-              </p>
-            )}
-            {errors.lastName?.type === "required" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                Last name is required
+                {errors.lastName.message}
               </p>
             )}
           </LabelInputContainer>
@@ -117,53 +146,49 @@ export function EnquiryFrom() {
             placeholder="youremail@host.com"
             type="email"
             className={`dark:border ${errors.email ? "dark:ring-error" : ""}`}
-            {...register("email", {
-              required: true,
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
-            })}
+            {...register("email")}
             aria-invalid={errors.email ? "true" : "false"}
           />
-          {errors.email?.type === "pattern" && (
+          {errors.email && (
             <p role="alert" className="text-error text-[10px] font-medium">
-              Enter a valid email address
+              {errors.email.message}
             </p>
           )}
-          {errors.email?.type === "required" && (
+          {serverErrors.email && (
             <p role="alert" className="text-error text-[10px] font-medium">
-              Email is required
+              email already exists!
             </p>
           )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="phone">phone</Label>
+          <Label htmlFor="phone">Phone</Label>
           <Input
             id="phone"
             placeholder="+91"
-            type="phone"
+            type="tel" // Use type="tel" for phone input
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
-            {...register("phone", {
-              required: true,
-              maxLength: 10,
-            })}
+            {...register("phone")}
+            onInput={handlePhoneInput} // Handle numeric input only
             aria-invalid={errors.phone ? "true" : "false"}
           />
-          {errors.phone?.type === "required" && (
+          {errors.phone && (
             <p role="alert" className="text-error text-[10px] font-medium">
-              phone is required
+              phone already exists!
             </p>
           )}
-          {errors.phone?.type === "minLength" && (
+          {serverErrors.phone && (
             <p role="alert" className="text-error text-[10px] font-medium">
-              Enter valid phone number
+              {serverErrors.phone}
             </p>
           )}
         </LabelInputContainer>
 
         <button
-          className="bg-gradient-to-br relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium"
+          className="bg-gradient-to-br relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium flex justify-center items-center"
           type="submit"
+          disabled={loading}
         >
-          Enquire now &rarr;
+          {loading ? <div className="spinner"></div> : "Enquire now →"}
           <BottomGradient />
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
