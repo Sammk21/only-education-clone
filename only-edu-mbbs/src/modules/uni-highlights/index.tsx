@@ -13,7 +13,7 @@ const UniHighlights = () => {
       <h3 className=" text-4xl font-medium text-center mb-8 text-dark">
         Highlights
       </h3>
-      <div className="sm:flex sm:justify-evenly grid xs:grid-rows-2 grid-flow-col gap-16 justify-items-center px-6 grid-rows-3 relative">
+      <div className="lg:flex lg:justify-evenly grid md:grid-rows-2 xs:grid-rows-2 grid-flow-col gap-16 justify-items-center px-6 grid-rows-3 relative">
         <div className=" xs:h-16 xs:w-16 w-full h-full sm:w-24 sm:h-24  bg-[#e8e6e2] dark:bg-foreground  rounded-lg relative mb-4 ">
           <span className="w-full h-full relative flex justify-center items-center dark:text-light">
             <FaUniversity className=" text-4xl sm:text-6xl text-foreground/70 dark:text-accent " />

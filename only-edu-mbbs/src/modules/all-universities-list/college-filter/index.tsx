@@ -1,3 +1,5 @@
+// this is filter code
+
 "use client";
 
 import { useState } from "react";
@@ -33,12 +35,14 @@ interface Props {
   exams: {
     data: Option[];
   };
+  setFun: (updatedAttributes: object) => void;
 }
 
 export default function CollegeFilter({
   ownership,
   indianStates,
   exams,
+  setFun,
 }: Props) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<
@@ -79,7 +83,6 @@ export default function CollegeFilter({
       })),
     },
   ];
-
   const handleCheckboxChange = (sectionId: string, value: string) => {
     setSelectedFilters((prevSelectedFilters) => {
       const sectionFilters = prevSelectedFilters[sectionId];
@@ -93,16 +96,14 @@ export default function CollegeFilter({
         ...prevSelectedFilters,
         [sectionId]: updatedSectionFilters,
       };
-
-      // Log the updated filters to the console
-      console.log(updatedFilters);
-
+      // console.log(updatedFilters);
+      setFun(updatedFilters);
       return updatedFilters;
     });
   };
 
   return (
-    <div className="sm:w-[20%]">
+    <div className="lg:w-[20%]">
       <div>
         <Transition show={mobileFiltersOpen}>
           <Dialog
@@ -241,7 +242,7 @@ export default function CollegeFilter({
 
           <section
             aria-labelledby="products-heading"
-            className="sm:pb-24 sm:pt-6"
+            className="lg:pb-24 lg:pt-6"
           >
             <h2 id="products-heading" className="sr-only">
               Products

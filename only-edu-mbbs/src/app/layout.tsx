@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Ubuntu } from "next/font/google";
+import { Roboto, Ubuntu } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/normalize.css";
 // import "../styles/swiper-pagination/pagination.css";
@@ -11,7 +11,7 @@ import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import Head from "next/head";
 
-const inter = Ubuntu({
+const inter = Roboto({
   subsets: ["cyrillic"],
   weight: ["300", "400", "500", "700"],
 });
