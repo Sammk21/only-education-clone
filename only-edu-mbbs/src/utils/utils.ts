@@ -51,7 +51,7 @@ const token = "7f7bbcd327ab5f52019fa52ef88b5ba700afeb751ca328e81758b7639d47ae0fc
 export async function getStrapiData(path: string) {
   
   try {
-    const response = await fetch(baseUrl + path, {cache:"no-store", headers: {Authorization:`Bearer ${token}`}}); 
+    const response = await fetch(baseUrl + path, {headers: {Authorization:`Bearer ${token}`}}); 
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;

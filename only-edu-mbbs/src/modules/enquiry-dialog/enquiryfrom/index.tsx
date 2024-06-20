@@ -23,7 +23,22 @@ export function EnquiryFrom() {
     handleSubmit,
   } = useForm<EnquiryFormInput>();
 
-  const onSubmit: SubmitHandler<EnquiryFormInput> = async (data) => {};
+  const onSubmit: SubmitHandler<EnquiryFormInput> = async (data) => {
+    try {
+      const response = await axios.post(
+        process.env.API_URL + "/api/enquiries",
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+        }
+      );
+      console.log("Form submitted successfully:", response.data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
   return (
     <div className="min-w-2xl grid grid-cols-2 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border dark:border-border border-borderLight">
@@ -128,7 +143,7 @@ export function EnquiryFrom() {
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
             {...register("phone", {
               required: true,
-              minLength: 10,
+              maxLength: 10,
             })}
             aria-invalid={errors.phone ? "true" : "false"}
           />
