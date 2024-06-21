@@ -40,14 +40,14 @@ export default function CollegeFilter({
   const [selectedFilters, setSelectedFilters] = useState<
     Record<string, string[]>
   >({
-    location: [],
+    indian_state: [],
     ownership: [],
-    fees: [],
+    exams: [],
   });
 
   const filters = [
     {
-      id: "location",
+      id: "indian_state",
       name: "Location",
       options: indianStates.data.map((state) => ({
         value: state.slug,
@@ -65,7 +65,7 @@ export default function CollegeFilter({
       })),
     },
     {
-      id: "fees",
+      id: "exams",
       name: "Exams",
       options: exams.data.map((exam) => ({
         value: exam.slug,
@@ -88,7 +88,7 @@ export default function CollegeFilter({
         ...prevSelectedFilters,
         [sectionId]: updatedSectionFilters,
       };
-      // console.log(value);
+
       // Trigger an effect to fetch new data based on the updated filters
       fetchNewData(updatedFilters);
 
@@ -107,7 +107,7 @@ export default function CollegeFilter({
       )
       .join("&");
 
-    filterQuery += `${queryParams}populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true`;
+    filterQuery += `${queryParams}&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true`;
 
     try {
       const response = await fetch(filterQuery);
@@ -151,14 +151,14 @@ export default function CollegeFilter({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-6 shadow-xl">
+                <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto py-4 pb-12 shadow-xl justify-center bg-light rounded-tl-3xl rounded-bl-3xl">
                   <div className="flex items-center justify-between px-4">
                     <h2 className="text-lg font-medium text-gray-900">
                       Filters
                     </h2>
                     <button
                       type="button"
-                      className="-mr-2 flex h-10 w-10 items-center justify-center p-2 text-gray-400 hover:text-gray-500"
+                      className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md p-2 text-gray-400"
                       onClick={() => setMobileFiltersOpen(false)}
                     >
                       <span className="sr-only">Close menu</span>
@@ -166,19 +166,20 @@ export default function CollegeFilter({
                     </button>
                   </div>
 
-                  <form className="mt-4 border-t border-gray-200">
+                  <form className="mt-4 border-t border-gray-200 overflow-scroll h-full">
                     <h3 className="sr-only">Categories</h3>
 
-                    {filters.map((section) => (
+                    {filters.map((section, index) => (
                       <Disclosure
                         as="div"
                         key={section.id}
                         className="border-t border-gray-200 px-4 py-6"
+                        defaultOpen={index === 0}
                       >
                         {({ open }) => (
                           <>
-                            <h3 className="-mx-2 -my-3 flow-root">
-                              <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                            <h3 className="-mx-2 -my-3 flow-root ">
+                              <Disclosure.Button className="flex w-full items-center justify-between px-2 py-3 text-gray-400 hover:text-gray-500">
                                 <span className="font-medium text-gray-900">
                                   {section.name}
                                 </span>
@@ -197,29 +198,32 @@ export default function CollegeFilter({
                                 </span>
                               </Disclosure.Button>
                             </h3>
-                            <Disclosure.Panel className="pt-6">
+                            <Disclosure.Panel className="pt-6 overflow-y-auto h-32 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500">
                               <div className="space-y-6">
                                 {section.options.map((option, optionIdx) => (
                                   <div
-                                    key={optionIdx}
+                                    key={option.value}
                                     className="flex items-center"
                                   >
                                     <input
-                                      id={`filter-${section.id}-${optionIdx}`}
+                                      id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
-                                      defaultValue={option.value}
+                                      value={option.value}
                                       type="checkbox"
-                                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                      checked={selectedFilters[
+                                        section.id
+                                      ].includes(option.value)}
                                       onChange={() =>
                                         handleCheckboxChange(
                                           section.id,
                                           option.value
                                         )
                                       }
+                                      className="h-4 w-4 rounded border-gray-300 text-green-900 focus:outline-offset-0"
                                     />
                                     <label
-                                      htmlFor={`filter-${section.id}-${optionIdx}`}
-                                      className="ml-3 text-sm text-gray-600"
+                                      htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                      className="ml-3 min-w-0 flex-1 text-gray-500"
                                     >
                                       {option.label}
                                     </label>
@@ -252,34 +256,59 @@ export default function CollegeFilter({
         <div className="hidden lg:block">
           <form className="space-y-10 divide-y divide-gray-200">
             <h3 className="sr-only">Categories</h3>
-            {filters.map((section) => (
-              <div key={section.id} className="border-b border-gray-200 pb-6">
-                <h3 className="text-lg font-medium text-gray-900">
-                  {section.name}
-                </h3>
-                <div className="mt-4 space-y-4">
-                  {section.options.map((option, optionIdx) => (
-                    <div key={optionIdx} className="flex items-center">
-                      <input
-                        id={`filter-${section.id}-${optionIdx}`}
-                        name={`${section.id}[]`}
-                        defaultValue={option.value}
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                        onChange={() =>
-                          handleCheckboxChange(section.id, option.value)
-                        }
-                      />
-                      <label
-                        htmlFor={`filter-${section.id}-${optionIdx}`}
-                        className="ml-3 text-sm text-gray-600"
-                      >
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {filters.map((section, index) => (
+              <Disclosure
+                as="div"
+                key={section.id}
+                className="border-b border-gray-200 py-6"
+                defaultOpen={index === 0}
+              >
+                {({ open }) => (
+                  <>
+                    <h3 className="-my-3 flow-root ">
+                      <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
+                        <span className="font-medium text-gray-900">
+                          {section.name}
+                        </span>
+                        <span className="ml-6 flex items-center">
+                          {open ? (
+                            <MinusIcon className="h-5 w-5" aria-hidden="true" />
+                          ) : (
+                            <PlusIcon className="h-5 w-5" aria-hidden="true" />
+                          )}
+                        </span>
+                      </Disclosure.Button>
+                    </h3>
+                    <Disclosure.Panel className="pt-6 overflow-y-auto h-32 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-500">
+                      <div className="space-y-4">
+                        {section.options.map((option, optionIdx) => (
+                          <div key={option.value} className="flex items-center">
+                            <input
+                              id={`filter-${section.id}-${optionIdx}`}
+                              name={`${section.id}[]`}
+                              value={option.value}
+                              type="checkbox"
+                              checked={selectedFilters[section.id].includes(
+                                option.value
+                              )}
+                              onChange={() =>
+                                handleCheckboxChange(section.id, option.value)
+                              }
+                              className="h-4 w-4 rounded border-gray-300 text-green-900 focus:outline-offset-0"
+                            />
+                            <label
+                              htmlFor={`filter-${section.id}-${optionIdx}`}
+                              className="ml-3 text-sm text-gray-600"
+                            >
+                              {option.label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </Disclosure.Panel>
+                  </>
+                )}
+              </Disclosure>
             ))}
           </form>
         </div>
