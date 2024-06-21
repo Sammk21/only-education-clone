@@ -1,6 +1,7 @@
 import BlogPage from "@/modules/blog-components/blog/BlogPage";
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
 import NewsLetter from "@/modules/newsletter";
+import { SearchParamsProps } from "@/types/types";
 import { getArticles } from "@/utils/utils";
 import { Metadata } from "next";
 
@@ -12,21 +13,11 @@ export const metadata: Metadata = {
   description: "this is the article page for Article section of only education",
 };
 
-interface SearchParamsProps {
-  searchParams?: {
-    query?: string;
-    page?: number;
-  };
-}
-
 async function BlogIndexPage({ searchParams }: Readonly<SearchParamsProps>) {
-  // const query = searchParams?.query ?? "";
   const currentPage = Number(searchParams?.page) || 1;
   const data = await getArticles(blogListQuery, currentPage);
 
   const { pagination } = data.meta;
-
-  console.dir(pagination);
 
   return (
     <>

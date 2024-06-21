@@ -1,6 +1,9 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
-import { getStrapiData } from "@/utils/utils";
+
+import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
+import { SearchParamsProps } from "@/types/types";
+import { getStrapiData, getUniversities } from "@/utils/utils";
 import React from "react";
 
 const universityListQuery =
@@ -9,15 +12,20 @@ const ownershipQuery = "/api/ownerships?populate=true";
 const indianStatesQuery = "/api/indian-states?populate=true";
 const examsQuery = "/api/exams?populate=true";
 
-export default async function UniversitiesList() {
-  const data = await getStrapiData(universityListQuery);
+export default async function UniversitiesList({
+  searchParams,
+}: Readonly<SearchParamsProps>) {
+  const currentPage = Number(searchParams?.page) || 1;
+  const data = await getUniversities(universityListQuery, currentPage);
   const ownership = await getStrapiData(ownershipQuery);
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
 
+  const { pagination } = data.meta;
+
   return (
     <div className="bg-white rounded-[30px] my-4">
-      <div className="flex flex-col sm:flex-row justify-center">
+      <div className="flex flex-col relative lg:flex-row justify-center">
         <CollegeFilter
           exams={exams}
           ownership={ownership}
@@ -25,6 +33,7 @@ export default async function UniversitiesList() {
         />
         <CollegeList data={data} />
       </div>
+      <PaginationComponent pageCount={pagination.pageCount} />
     </div>
   );
 }
