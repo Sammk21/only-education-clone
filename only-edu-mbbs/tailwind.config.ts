@@ -18,6 +18,7 @@ const config = {
       },
     },
     extend: {
+      
       typography:{
         DEFAULT:{
           css:{

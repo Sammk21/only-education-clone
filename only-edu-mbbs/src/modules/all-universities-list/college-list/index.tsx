@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,18 +7,13 @@ import { FaDownload, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
 import SearchBox from "@/app/searchbox";
 import MeiliSearch from "meilisearch";
-// import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 interface Props {
   data: UniversitiesData;
-  // filterData: UniversitiesData;
 }
-
-
 interface FilteredProps {
-
   university: Universitylist;
 }
 
@@ -35,30 +29,30 @@ const CollegeList = ({ data }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [noResults, setNoResults] = useState<boolean>(false);
 
-  useEffect(() => {
-    const search = async () => {
-      if (query) {
-        setLoading(true);
-        try {
-          const searchResults = await searchIndex.search<Universitylist>(query);
-          if (searchResults.hits.length === 0) {
-            setNoResults(true); // Set noResults state to true when no results are found
-            setResults([]); // Clear results when no results are found
-          } else {
-            setResults(searchResults.hits);
-            setNoResults(false); // Reset noResults state if results are found
-          }
-        } catch (error) {
-          console.error("Search error:", error);
-        } finally {
-          setLoading(false);
+  const search = async () => {
+    if (query) {
+      setLoading(true);
+      try {
+        const searchResults = await searchIndex.search<Universitylist>(query);
+        if (searchResults.hits.length === 0) {
+          setNoResults(true); // Set noResults state to true when no results are found
+          setResults([]); // Clear results when no results are found
+        } else {
+          setResults(searchResults.hits);
+          setNoResults(false); // Reset noResults state if results are found
         }
-      } else {
-        setResults([]); // Reset results when query is empty
-        setNoResults(false); // Reset noResults state when query is empty
+      } catch (error) {
+        console.error("Search error:", error);
+      } finally {
+        setLoading(false);
       }
-    };
+    } else {
+      setResults([]); // Reset results when query is empty
+      setNoResults(false); // Reset noResults state when query is empty
+    }
+  };
 
+  useEffect(() => {
     search();
   }, [query, data.data]);
 

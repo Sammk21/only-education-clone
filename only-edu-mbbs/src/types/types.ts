@@ -239,7 +239,17 @@ export interface UniversitiesData {
 }
 
 export interface SearchParamsProps {
-  searchParams?: {
+  searchParams: {
+    locations?: string;
+    exams?: string;
+    ownerships?: string;
+    query?: string;
+    page?: number;
+  };
+  filterParams?: {
+    locations?: string;
+    exams?: string;
+    ownerships?: string;
     query?: string;
     page?: number;
   };
