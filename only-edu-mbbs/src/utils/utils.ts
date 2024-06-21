@@ -1,4 +1,5 @@
-import qs from "qs"
+
+import { z } from "zod";
 
 
  const baseUrl = process.env.API_URL || `http://192.168.1.28:1337`;
@@ -115,3 +116,21 @@ export function getStrapiMedia(url: string | null) {
   if (url.startsWith("http") || url.startsWith("//")) return url;
   return `${getStrapiURL()}${url}`;
 }
+
+export const enquiryFormSchema = z.object({
+  firstName: z
+    .string()
+    .min(2, "First name must be at least 2 characters")
+    .max(15, "First name must be at most 15 characters")
+    .regex(/^[A-Za-z]+$/, "Enter a valid first name"),
+  lastName: z
+    .string()
+    .min(2, "Last name must be at least 2 characters")
+    .max(15, "Last name must be at most 15 characters")
+    .regex(/^[A-Za-z]+$/, "Enter a valid last name"),
+  email: z.string().email("Enter a valid email address"),
+  phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 characters")
+    .max(10, "Phone number must be at most 10 characters"),
+});
