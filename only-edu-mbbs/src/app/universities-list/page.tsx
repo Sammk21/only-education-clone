@@ -1,6 +1,5 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
-import DynamicSearchComponent from "@/modules/all-universities-list/dynamicSearch";
 import { getStrapiData } from "@/utils/utils";
 import React from "react";
 

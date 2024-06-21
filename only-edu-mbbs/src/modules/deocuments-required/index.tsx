@@ -31,7 +31,7 @@ const DocumentRquired = ({ data }: Props) => {
         </h4>
       </div>
       <p className=" text-accent mb-6">{description}</p>
-      <div className="flex justify-between flex-col sm:flex-row max-w-5xl mx-auto">
+      <div className="flex justify-between flex-col sm:flex-row ">
         <ul className=" space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
           {data.documents.map((item) => (
             <li key={item.id} className="flex ">

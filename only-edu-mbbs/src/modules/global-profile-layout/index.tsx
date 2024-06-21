@@ -62,15 +62,15 @@ const GlobalProfileLayout = async ({
           </div>
           <ul className="flex justify-center gap-4 sm:gap-6 mt-2 ">
             <li className="flex items-center gap-1">
-              <FaLocationDot className="text-[#616061]" />
+              <FaLocationDot className="text-[#fc7318]" />
               {universityInfo[0].list}
             </li>
             <li className="flex items-center gap-1">
-              <FaTrophy className="text-[#616061]" />
+              <FaTrophy className="text-[#fc7318]" />
               {universityInfo[1].list}
             </li>
             <li className="flex items-center gap-1">
-              <FaGraduationCap className="text-[#616061]" />
+              <FaGraduationCap className="text-[#fc7318]" />
               {universityInfo[2].list}
             </li>
           </ul>

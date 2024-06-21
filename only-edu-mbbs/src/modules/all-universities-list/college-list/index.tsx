@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -11,7 +12,9 @@ import MeiliSearch from "meilisearch";
 
 interface Props {
   data: UniversitiesData;
+  // filterData: UniversitiesData;
 }
+
 interface uni {
   university: Universitylist;
 }

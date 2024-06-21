@@ -1,30 +1,39 @@
-/*
-"use client";
+// import React from "react";
+// import CollegeFilter from "./college-filter";
 
-import React, { useState } from "react";
-import CollegeFilter from "./college-filter";
-import { getStrapiData } from "@/utils/utils";
-import CollegeList from "./college-list";
-import { FunnelIcon } from "@heroicons/react/24/outline";
-import { ImageAttributes } from "@/types/types";
-
-// const getFilteredValue=(location:string, fees:string, ownership:string, )=>{
-
-//   const data = getStrapiData("")
-
-//   return data
+// interface Ownership {
+//   id: number;
+//   title: string;
+//   slug: string;
+// }
+// interface exams {
+//   id: number;
+//   title: string;
+//   slug: string;
+// }
+// interface IndianState {
+//   id: number;
+//   title: string;
+//   slug: string;
 // }
 
-const UniversitiesListPage = () => {
-  return (
-    <div className="bg-white rounded-[30px] my-4">
-      <div className="flex flex-col sm:flex-row justify-center">
-        <CollegeFilter />
-        <CollegeList />
-      </div>
-    </div>
-  );
-};
+// interface Props {
+//   data: {
+//     exams: exams[];
+//     ownership: Ownership[];
+//     indianStates: IndianState[];
+//   };
+// }
+// const AllUniversitiesFilter = ({ data }: Props) => {
+//   return (
+//     <div>
+//       <CollegeFilter
+//         data={data}
+//         ownership={ownership}
+//         indianStates={indianStates}
+//       />
+//     </div>
+//   );
+// };
 
-export default UniversitiesListPage;
-*/
+// export default AllUniversitiesFilter;
