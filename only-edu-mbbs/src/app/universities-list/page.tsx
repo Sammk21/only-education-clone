@@ -1,28 +1,22 @@
-import "instantsearch.css/themes/algolia-min.css";
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
+import DynamicSearchComponent from "@/modules/all-universities-list/dynamicSearch";
 import { getStrapiData } from "@/utils/utils";
 import React from "react";
-import { MeiliSearch } from "meilisearch";
+
 const universityListQuery =
-  "/api/universities?populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
+  "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
 const ownershipQuery = "/api/ownerships?populate=true";
 const indianStatesQuery = "/api/indian-states?populate=true";
 const examsQuery = "/api/exams?populate=true";
 
 export default async function UniversitiesList() {
-  const client = new MeiliSearch({
-    host: "https://search.onlyeducation.co.in",
-    apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
-  });
-
   const data = await getStrapiData(universityListQuery);
   const ownership = await getStrapiData(ownershipQuery);
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
 
   return (
-    // <UniversitiesListPage data={data}
     <div className="bg-white rounded-[30px] my-4">
       <div className="flex flex-col sm:flex-row justify-center">
         <CollegeFilter
@@ -35,4 +29,3 @@ export default async function UniversitiesList() {
     </div>
   );
 }
-

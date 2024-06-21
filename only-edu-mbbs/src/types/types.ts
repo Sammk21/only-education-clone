@@ -191,3 +191,47 @@ export interface ServerResponse {
     };
   };
 }
+
+interface ownership {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface streams {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface indian_state {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface data {
+  id: number;
+  title: string;
+  slug: string;
+}
+export interface UniversityProfile {
+  backgroundImage: ImageAttributes;
+  fees: string;
+  avgPackage: string;
+  description: string;
+}
+export interface Universitylist {
+  title?: string;
+  id?: number;
+  slug?: string;
+  universityProfile?: UniversityProfile;
+  ownership?: ownership;
+  indian_state?: indian_state;
+  streams?: streams;
+  searchableImage?:ImageAttributes
+  exams?: {
+    data: data[];
+  };
+}
+
+export interface UniversitiesData {
+  data: Universitylist[];
+}

@@ -94,8 +94,6 @@ export default function CollegeFilter({
         [sectionId]: updatedSectionFilters,
       };
 
-      // Log the updated filters to the console
-      console.log(updatedFilters);
 
       return updatedFilters;
     });
