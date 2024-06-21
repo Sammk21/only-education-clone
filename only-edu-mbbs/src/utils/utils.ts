@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 
- const baseUrl = process.env.API_URL || `http://192.168.1.28:1337`;
+ const baseUrl = process.env.API_URL || `https://admin.onlyeducation.co.in`;
 
 export function flattenAttributes(data:any):any {
   // Check if data is a plain object; return as is if not

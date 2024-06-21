@@ -1,3 +1,4 @@
+import AllUniversitiesFilter from "@/modules/all-universities-list";
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
 import { getStrapiData } from "@/utils/utils";
@@ -18,12 +19,13 @@ export default async function UniversitiesList() {
   return (
     <div className="bg-white rounded-[30px] my-4">
       <div className="flex flex-col sm:flex-row justify-center">
-        <CollegeFilter
+        <AllUniversitiesFilter
           exams={exams}
           ownership={ownership}
           indianStates={indianStates}
+          data={data}
         />
-        <CollegeList data={data} />
+        {/* <CollegeList data={data} /> */}
       </div>
     </div>
   );

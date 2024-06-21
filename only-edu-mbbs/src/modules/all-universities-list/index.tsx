@@ -1,39 +1,57 @@
-// import React from "react";
-// import CollegeFilter from "./college-filter";
+"use client";
 
-// interface Ownership {
-//   id: number;
-//   title: string;
-//   slug: string;
-// }
-// interface exams {
-//   id: number;
-//   title: string;
-//   slug: string;
-// }
-// interface IndianState {
-//   id: number;
-//   title: string;
-//   slug: string;
-// }
+import React, { useState } from "react";
+import CollegeFilter from "./college-filter";
+import { UniversitiesData } from "@/types/types";
+import CollegeList from "./college-list";
 
-// interface Props {
-//   data: {
-//     exams: exams[];
-//     ownership: Ownership[];
-//     indianStates: IndianState[];
-//   };
-// }
-// const AllUniversitiesFilter = ({ data }: Props) => {
-//   return (
-//     <div>
-//       <CollegeFilter
-//         data={data}
-//         ownership={ownership}
-//         indianStates={indianStates}
-//       />
-//     </div>
-//   );
-// };
+interface Option {
+  id: number;
+  title: string;
+  slug: string;
+}
 
-// export default AllUniversitiesFilter;
+interface Props {
+  ownership: {
+    data: Option[];
+  };
+  indianStates: {
+    data: Option[];
+  };
+  exams: {
+    data: Option[];
+  };
+  data: UniversitiesData;
+}
+
+const AllUniversitiesFilter = ({
+  exams,
+  ownership,
+  indianStates,
+  data,
+}: Props) => {
+  const [filteredData, setFilteredData] = useState<UniversitiesData | null>(
+    null
+  );
+
+  const onFilterDataReceived = (newData: UniversitiesData | null) => {
+    setFilteredData(newData);
+  };
+
+  return (
+    <div className="bg-white rounded-[30px] my-4">
+      <div className="flex flex-col sm:flex-row justify-center">
+        <CollegeFilter
+          exams={exams}
+          ownership={ownership}
+          indianStates={indianStates}
+          onFilterDataReceived={onFilterDataReceived} // Pass callback
+        />
+        {/* Pass both data and filteredData to CollegeList */}
+        <CollegeList data={data} filteredData={filteredData} />
+      </div>
+    </div>
+  );
+};
+
+export default AllUniversitiesFilter;

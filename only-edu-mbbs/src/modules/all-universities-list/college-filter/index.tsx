@@ -1,5 +1,5 @@
-"use client"; // Ensure this is a client component
-
+// college-filter.tsx
+"use client";
 import { useState } from "react";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import {
@@ -8,10 +8,7 @@ import {
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-
-function classNames(...classes: (string | undefined | null | false)[]): string {
-  return classes.filter(Boolean).join(" ");
-}
+import { getStrapiData } from "@/utils/utils";
 
 interface Option {
   id: number;
@@ -29,12 +26,14 @@ interface Props {
   exams: {
     data: Option[];
   };
+  onFilterDataReceived: (data: any) => void;
 }
 
 export default function CollegeFilter({
   ownership,
   indianStates,
   exams,
+  onFilterDataReceived,
 }: Props) {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<
@@ -98,26 +97,27 @@ export default function CollegeFilter({
 
   const fetchNewData = async (filters: Record<string, string[]>) => {
     // Construct dynamic filter query based on updatedFilters
-    let filterQuery = "https://admin.onlyeducation.co.in/api/universities?";
-    const queryParams = Object.entries(filters)
-      .map(([key, values]) =>
-        values
-          .map((value: string) => `filters[${key}][slug][$eq]=${value}`)
-          .join("&")
-      )
-      .join("&");
+    let filterQuery = "/api/universities?";
+    const queryParams = Object.entries(filters).map(([key, values]) =>
+      values
+        .map((value: string) => `filters[${key}][slug][$eq]=${value}`)
+        .join("&")
+    );
 
     filterQuery += `${queryParams}&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true`;
 
     try {
-      const response = await fetch(filterQuery);
+      const response = await getStrapiData(filterQuery);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
 
       const newFilterData = await response.json();
-      console.log("Filtered Data:", newFilterData);
+      // console.log("Filtered Data:", newFilterData);
+
+      // Pass filtered data to parent component
+      onFilterDataReceived(newFilterData);
     } catch (error) {
       console.error("Failed to fetch new data:", error);
     }

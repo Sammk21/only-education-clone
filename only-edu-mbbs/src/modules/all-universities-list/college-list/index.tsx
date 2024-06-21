@@ -1,25 +1,22 @@
-"use client";
-
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { LuFlagTriangleRight } from "react-icons/lu";
-import { UniversitiesData, Universitylist } from "@/types/types";
 import { FaDownload, FaRegPaperPlane } from "react-icons/fa";
 import SearchBox from "@/app/searchbox";
 import MeiliSearch from "meilisearch";
+import { UniversitiesData, Universitylist } from "@/types/types";
 
 interface Props {
   data: UniversitiesData;
-  // filterData: UniversitiesData;
+
+  filteredData: UniversitiesData | null;
 }
 
-interface uni {
-  university: Universitylist;
-}
-
-const CollegeList = ({ data }: Props) => {
+const CollegeList = ({ data, filteredData }: Props) => {
+  console.log("sam", data);
+  console.log("sarfr", filteredData);
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -38,11 +35,11 @@ const CollegeList = ({ data }: Props) => {
           const searchResults = await searchIndex.search<Universitylist>(query);
           console.dir(searchResults.hits);
           if (searchResults.hits.length === 0) {
-            setNoResults(true); // Set noResults state to true when no results are found
-            setResults([]); // Clear results when no results are found
+            setNoResults(true);
+            setResults([]);
           } else {
             setResults(searchResults.hits);
-            setNoResults(false); // Reset noResults state if results are found
+            setNoResults(false);
           }
         } catch (error) {
           console.error("Search error:", error);
@@ -50,8 +47,8 @@ const CollegeList = ({ data }: Props) => {
           setLoading(false);
         }
       } else {
-        setResults([]); // Reset results when query is empty
-        setNoResults(false); // Reset noResults state when query is empty
+        setResults([]);
+        setNoResults(false);
       }
     };
 
@@ -66,19 +63,27 @@ const CollegeList = ({ data }: Props) => {
           <span>No university found</span>
         </div>
       )}
-      {(query && results.length > 0 ? results : data.data).map(
-        (university: Universitylist) => (
-          <FilteredUniversityItem key={university.id} university={university} />
-        )
-      )}
+      {/* Use filteredData if available, otherwise fallback to data */}
+      {(query && results.length > 0
+        ? results
+        : filteredData?.data || data.data
+      ).map((university: Universitylist) => (
+        <FilteredUniversityItem key={university.id} university={university} />
+      ))}
     </section>
   );
 };
 
 export default CollegeList;
 
-const FilteredUniversityItem = ({ university }: uni) => {
+const FilteredUniversityItem = ({
+  university,
+}: {
+  university: Universitylist;
+}) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
+
+  console.dir(university);
   return (
     <div
       key={university?.id}
@@ -86,13 +91,13 @@ const FilteredUniversityItem = ({ university }: uni) => {
     >
       <div className="flex mb-2 flex-col sm:flex-row justify-between">
         <Link href={`study/uni/${university?.slug}`}>
-          <Image
+          {/* <Image
             className="rounded-xl w-full h-50 sm:h-40 sm:w-70"
             src={baseUrl + university?.searchableImage?.url}
             alt="Image Description"
             width={300}
             height={100}
-          />
+          /> */}
         </Link>
         <div className="sm:pl-6 sm:pr-2 my-4 sm:my-0">
           <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">
