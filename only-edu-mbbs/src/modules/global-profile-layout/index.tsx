@@ -8,12 +8,14 @@ import { FaGraduationCap } from "react-icons/fa6";
 
 interface Listprops {
   id: number;
-  list: string;
+  location: string;
+  Approvedby: string;
+  establishment: string;
 }
 interface Props {
   profileImage: string;
   backgroundImage: string;
-  universityInfo: Listprops[];
+  universityInfo: Listprops;
   data: {
     id: number;
     name: string;
@@ -28,6 +30,7 @@ const GlobalProfileLayout = async ({
   universityInfo,
 }: Props) => {
   const { name, description } = data;
+  console.dir(universityInfo, { depth: null });
 
   const baseUrl = "https://admin.onlyeducation.co.in";
 
@@ -63,15 +66,18 @@ const GlobalProfileLayout = async ({
           <ul className="flex justify-center gap-4 sm:gap-6 mt-2 ">
             <li className="flex items-center gap-1">
               <FaLocationDot className="text-[#fc7318]" />
-              {universityInfo[0].list}
+              {/* {universityInfo[0].list} */}
+              {universityInfo.location}
             </li>
             <li className="flex items-center gap-1">
               <FaTrophy className="text-[#fc7318]" />
-              {universityInfo[1].list}
+              {/* {universityInfo[1].list} */} Approved by :{" "}
+              {universityInfo.Approvedby}
             </li>
             <li className="flex items-center gap-1">
               <FaGraduationCap className="text-[#fc7318]" />
-              {universityInfo[2].list}
+              {/* {universityInfo[1].list} */} Estd :{" "}
+              {universityInfo.establishment}
             </li>
           </ul>
           <hr className="mt-6" />

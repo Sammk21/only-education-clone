@@ -6,7 +6,6 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 
-
 const HomePageQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage";
 

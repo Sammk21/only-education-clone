@@ -20,7 +20,7 @@ interface Props {
 }
 const PlacementInfo = ({ data }: Props) => {
   return (
-    <section className="container">
+    <section className="container" id="placement">
       <h2 className="text-4xl font-medium  mb-6 text-dark">
         Placement Facility
       </h2>
