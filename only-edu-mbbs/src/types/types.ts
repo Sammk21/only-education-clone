@@ -141,17 +141,19 @@ export interface MetaSocialsProps {
 }
 
 export interface SeoProps {
-  id: number;
-  metaTitle: string;
-  metaDescription: string;
-  keywords?: string | null;
-  metaRobots?: string | null;
-  structuredData?: object | null;
-  metaViewport?: string | null;
-  canonicalURL?: string | null;
-  metaImage:ImageAttributes | null
-  metaSocial: MetaSocialsProps[];
+    id: number;
+    metaTitle: string;
+    metaDescription: string;
+    keywords?: string | null;
+    metaRobots?: string | null;
+    structuredData?: object | null;
+    metaViewport?: string | null;
+    canonicalURL?: string | null;
+    metaImage:ImageAttributes | null
+    metaSocial: MetaSocialsProps[];
+ 
 }
+
 
 export interface CountryData {
   id: number;
@@ -234,4 +236,21 @@ export interface Universitylist {
 
 export interface UniversitiesData {
   data: Universitylist[];
+}
+
+export interface SearchParamsProps {
+  searchParams: {
+    locations?: string;
+    exams?: string;
+    ownerships?: string;
+    query?: string;
+    page?: number;
+  };
+  filterParams?: {
+    locations?: string;
+    exams?: string;
+    ownerships?: string;
+    query?: string;
+    page?: number;
+  };
 }

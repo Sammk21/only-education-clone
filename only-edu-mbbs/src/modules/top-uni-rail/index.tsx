@@ -5,8 +5,9 @@ import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { ImageAttributes } from "@/types/types";
+import { ImageAttributes, Universitylist } from "@/types/types";
 import "@/styles/swiper-pagination/pagination.css";
+import { Link, University } from "lucide-react";
 
 // interface Props {
 //   data: {
@@ -30,12 +31,12 @@ interface UniversitiesData {
   universities: {
     data: University[];
   };
+  // UniversitiesData: UniversitiesData;
 }
 interface Props {
   data: UniversitiesData;
 }
 const TopUniRail = ({ data }: Props) => {
-  // console.dir(data, { depth: null });
   const baseUrl = "https://admin.onlyeducation.co.in";
 
   return (
