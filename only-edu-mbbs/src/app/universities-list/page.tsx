@@ -8,7 +8,8 @@ import { getStrapiData, getUniversities } from "@/utils/utils";
 import React from "react";
 
 const ownershipQuery = "/api/ownerships?populate=true";
-const indianStatesQuery = "/api/indian-states?populate=true";
+const indianStatesQuery =
+  "/api/indian-states?populate[universities][populate]=true";
 const examsQuery = "/api/exams?populate=true";
 
 export default async function UniversitiesList({
@@ -22,26 +23,25 @@ export default async function UniversitiesList({
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
 
+  let { locationsParam, examsParam, ownershipsParam } = searchParams;
+  let filterParams = { locationsParam, examsParam, ownershipsParam }; //to send it as a prop
   if (searchParams) {
-    const { locations, exams, ownerships } = searchParams;
-
-    if (locations) {
-      console.dir(locations);
-      const locationFilters = locations
+    if (locationsParam) {
+      const locationFilters = locationsParam
         .split(",")
         .map((location) => `filters[indian_state][slug][$eq]=${location}`)
         .join("&");
       universityListQuery += `&${locationFilters}`;
     }
-    if (exams) {
-      const examFilters = exams
+    if (examsParam) {
+      const examFilters = examsParam
         .split(",")
         .map((exam) => `filters[exams][slug][$eq]=${exam}`)
         .join("&");
       universityListQuery += `&${examFilters}`;
     }
-    if (ownerships) {
-      const ownershipFilters = `filters[ownership][slug][$eq]=${ownerships}`;
+    if (ownershipsParam) {
+      const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
       universityListQuery += `&${ownershipFilters}`;
     }
   }
@@ -51,24 +51,28 @@ export default async function UniversitiesList({
   const { pagination } = data.meta;
 
   return (
-    <div className="bg-white rounded-[30px] my-4">
-      <div className="flex flex-col relative lg:flex-row justify-center">
-        <CollegeFilter
-          exams={exams}
-          ownership={ownership}
-          indianStates={indianStates}
-        />
-        {data.data.length > 0 ? (
-          <CollegeList data={data} />
-        ) : (
-          <div className=" w-[70%] flex justify-center items-center">
-            <span className=" text-red-500 bg-red-300/50 border-red-500 border rounded-xl mb-6 mx-10 w-full h-10 justify-center flex items-center">
-              No university found
-            </span>
-          </div>
-        )}
+    <>
+      <div className="bg-white rounded-[30px] my-4">
+        <div className="flex flex-col relative lg:flex-row justify-center">
+          <CollegeFilter
+            exams={exams}
+            ownership={ownership}
+            indianStates={indianStates}
+            filterParams={filterParams}
+          />
+          {data.data.length > 0 ? (
+            <CollegeList data={data} />
+          ) : (
+            <div className=" w-[70%] flex justify-center ">
+              <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
+                Uh oh... no result found
+              </span>
+            </div>
+          )}
+        </div>
+        <PaginationComponent pageCount={pagination.pageCount} />
       </div>
-      <PaginationComponent pageCount={pagination.pageCount} />
-    </div>
+      <div className="w-full h-3 "></div>
+    </>
   );
 }

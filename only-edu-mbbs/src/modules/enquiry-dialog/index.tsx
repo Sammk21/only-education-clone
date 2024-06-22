@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { EnquiryFrom } from "./enquiryfrom";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export function EnquiryDialog() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +17,12 @@ export function EnquiryDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className="sm:px-8 py-2 px-2 text-xs rounded-full relative text-dark sm:text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
+        <Button
+          className="hover:border-green-500 hover:bg-light"
+          variant={"outline"}
+        >
           Enquire now
-        </button>
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-6xl bg-white rounded-xl" status={status}>
         <DialogHeader>

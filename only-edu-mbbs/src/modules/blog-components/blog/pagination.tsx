@@ -6,6 +6,7 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
+  PaginationLink,
 } from "@/components/ui/pagination";
 
 import { Button } from "@/components/ui/button";
@@ -20,29 +21,6 @@ interface PaginationArrowProps {
   isDisabled: boolean;
 }
 
-const PaginationArrow: FC<PaginationArrowProps> = ({
-  direction,
-  href,
-  isDisabled,
-}) => {
-  const router = useRouter();
-  const isLeft = direction === "left";
-  const disabledClassName = isDisabled
-    ? "bg-gray-300 text-dark border cursor-not-allowed"
-    : "";
-
-  return (
-    <Button
-      onClick={() => router.push(href)}
-      className={`bg-dark text-light hover:bg-dark/80 ${disabledClassName}`}
-      aria-disabled={isDisabled}
-      disabled={isDisabled}
-    >
-      {isLeft ? "«" : "»"}
-    </Button>
-  );
-};
-
 export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -55,7 +33,7 @@ export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
   };
 
   return (
-    <Pagination>
+    <Pagination className="text-dark">
       <PaginationContent>
         <PaginationItem>
           <PaginationArrow
@@ -64,11 +42,17 @@ export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
             isDisabled={currentPage <= 1}
           />
         </PaginationItem>
-        <PaginationItem>
-          <span className="p-2 font-semibold text-dark">
-            Page {currentPage}
-          </span>
-        </PaginationItem>
+        {[...Array(pageCount)].map((_, index) => (
+          <PaginationItem className="" key={index}>
+            <PaginationLink
+              className="hover:bg-accent/10 noselect"
+              href={createPageURL(index + 1)}
+              isActive={index + 1 === currentPage}
+            >
+              {index + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
         <PaginationItem>
           <PaginationArrow
             direction="right"
@@ -80,3 +64,25 @@ export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
     </Pagination>
   );
 }
+
+const PaginationArrow: FC<PaginationArrowProps> = ({
+  direction,
+  href,
+  isDisabled = false,
+}) => {
+  const router = useRouter();
+  const disabledClassName = isDisabled
+    ? "bg-gray-300 text-dark border cursor-not-allowed"
+    : "";
+
+  return (
+    <Button
+      onClick={() => !isDisabled && router.push(href)} // Only push if not disabled
+      className={`bg-orange-500 text-light hover:bg-dark/80 noselect ${disabledClassName}`}
+      aria-disabled={isDisabled}
+      disabled={isDisabled}
+    >
+      {direction === "left" ? "« Previous" : "Next »"}
+    </Button>
+  );
+};

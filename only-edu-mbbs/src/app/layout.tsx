@@ -10,6 +10,7 @@ import MySideBar from "@/modules/navbar/components/Sidebar";
 import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import Head from "next/head";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Roboto({
   subsets: ["cyrillic"],
@@ -58,6 +59,7 @@ export default async function RootLayout({
             navigation={navData.navigation}
             dropdown={navData.dropdown}
           />
+          <Toaster />
         </div>
       </body>
     </html>
