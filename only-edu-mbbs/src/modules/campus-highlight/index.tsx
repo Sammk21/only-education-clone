@@ -8,8 +8,8 @@ import { TiGroup } from "react-icons/ti";
 
 const CampusHighlight = () => {
   return (
-    <section className="py-6 my-6 sm:container">
-      <h2 className="text-4xl font-medium  mb-6 text-dark">Campus Highlight</h2>
+    <section className="my-8 sm:container">
+      <h2 className="text-4xl font-medium  mb-4 text-dark">Campus Highlight</h2>
       <div>
         <p>
           The campus is also home to a modern library, a museum, an auditorium,

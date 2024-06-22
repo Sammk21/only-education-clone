@@ -20,6 +20,10 @@ interface Props {
     id: number;
     name: string;
     description: string;
+
+    location: string;
+    Approvedby: string;
+    establishment: string;
   };
 }
 
@@ -66,18 +70,16 @@ const GlobalProfileLayout = async ({
           <ul className="flex justify-center gap-4 sm:gap-6 mt-2 ">
             <li className="flex items-center gap-1">
               <FaLocationDot className="text-[#fc7318]" />
-              {/* {universityInfo[0].list} */}
-              {universityInfo.location}
+
+              {data.location}
             </li>
             <li className="flex items-center gap-1">
               <FaTrophy className="text-[#fc7318]" />
-              {/* {universityInfo[1].list} */} Approved by :{" "}
-              {universityInfo.Approvedby}
+              Approved by : {data.Approvedby}
             </li>
             <li className="flex items-center gap-1">
               <FaGraduationCap className="text-[#fc7318]" />
-              {/* {universityInfo[1].list} */} Estd :{" "}
-              {universityInfo.establishment}
+              Estd : {data.establishment}
             </li>
           </ul>
           <hr className="mt-6" />
