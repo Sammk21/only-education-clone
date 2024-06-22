@@ -57,12 +57,19 @@ const CollegeList = ({ data }: Props) => {
   }, [query, data.data]);
 
   return (
-    <section className="lg:w-[70%] mb-4 p-4">
+    <section className="lg:w-[70%] mb-4 px-4">
       <SearchBox query={query} setQuery={setQuery} />
       {query && noResults && (
-        <div className="h-10 flex justify-center items-center text-red-500 bg-red-300/50 border-red-500 border rounded-xl mb-6">
-          <span>No university found</span>
-        </div>
+        <>
+          <div className=" w-full flex justify-center ">
+            <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
+              Uh oh... no result found
+            </span>
+          </div>
+          <p className="text-dark text-center my-5 font-medium">
+            You might want to check these out
+          </p>
+        </>
       )}
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
@@ -78,23 +85,21 @@ export default CollegeList;
 const FilteredUniversityItem = ({ university }: FilteredProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
   return (
-    <div
+    <Link
+      href={`study/uni/${university?.slug}`}
       key={university?.id}
-      className="justify-between m-auto mb-4 sm:p-4 p-2 flex flex-col border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
+      className="justify-between m-auto mb-4 sm:p-4 p-2 flex flex-col border shadow-sm rounded-xl  hover:bg-accent/10 "
     >
       <div className="flex mb-2 flex-col sm:flex-row justify-between">
         <div className="sm:grid-cols-8 sm:grid-rows-1 w-full h-full grid grid-rows-5">
-          <Link
-            className="row-span-3 sm:col-span-2 relative aspect-video h-full w-full"
-            href={`study/uni/${university?.slug}`}
-          >
+          <div className="row-span-3 sm:col-span-2 relative aspect-video overflow-hidden h-full w-full">
             <Image
-              className="rounded-xl w-full object-cover object-center h-full "
+              className="rounded-lg w-full object-cover object-center h-full "
               src={baseUrl + university?.searchableImage?.url}
               alt="Image Description"
               fill={true}
             />
-          </Link>
+          </div>
           <div className="sm:pl-6 sm:col-span-5 sm:pr-2 my-4 sm:my-0 row-span-2 ">
             <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">
               {university?.title}
@@ -118,13 +123,13 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
             </p>
           </div>
         </div>
-        <div className="flex sm:flex-col flex-row space-y-3">
+        <div className="flex sm:flex-col flex-row space-x-3 sm:space-x-0 sm:space-y-3">
           <Button className="bg-orange-500 hover:bg-orange-400">
             <FaDownload className="mr-1" />
             Broucher
           </Button>
           <Button
-            className="text-accent bg-accent/10 hover:bg-transparent"
+            className="text-accent bg-accent/10 hover:bg-transparent w-full"
             variant="outline"
           >
             <FaRegPaperPlane className="mr-1" />
@@ -141,15 +146,15 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
           <span className="">{university?.universityProfile?.avgPackage}</span>
         </p>
       </div>
-      <div className="flex h-5 items-center space-x-4 text-sm">
+      <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm  scroll-m-0 overflow-x-auto">
         <div className="hover:text-orange-500 cursor-pointer">Admission</div>
-        <Separator orientation="vertical" />
+        <Separator className="space-x-1" orientation="vertical" />
         <div className="hover:text-orange-500 cursor-pointer">Placements</div>
-        <Separator orientation="vertical" />
+        <Separator className="space-x-1" orientation="vertical" />
         <div className="hover:text-orange-500 cursor-pointer">Courses</div>
         <Separator orientation="vertical" />
         <div className="hover:text-orange-500 cursor-pointer">Facilities</div>
       </div>
-    </div>
+    </Link>
   );
 };

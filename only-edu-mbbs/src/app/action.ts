@@ -1,7 +1,8 @@
 'use server'
 
 import { flattenAttributes } from "@/utils/utils";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
+
 
  
 export async function getData(path: string) {
@@ -13,7 +14,6 @@ export async function getData(path: string) {
     const flattenedData = flattenAttributes(data);
     return flattenedData;
   } catch (error) {
-    // console.error(error);
   }
 }
 
@@ -24,11 +24,16 @@ export const updatedFilters = async (formData: FormData) => {
 
    if (locations.length > 0 || exams.length > 0 || ownerships.length > 0) {
     const params = new URLSearchParams();
-    if (locations.length > 0) params.append('locations', locations.join(','));
-    if (exams.length > 0) params.append('exams', exams.join(','));
-    if (ownerships.length > 0) params.append('ownerships', ownerships.join(','));
+    if (locations.length > 0) params.append('locationsParam', locations.join(','));
+    if (exams.length > 0) params.append('examsParam', exams.join(','));
+    if (ownerships.length > 0) params.append('ownershipsParam', ownerships.join(','));
     redirect(`/universities-list?${params.toString()}`);
   } else {
     redirect('/universities-list');
   }
 };
+
+export const deleteFilters = async (event: React.FormEvent) => {
+   event.preventDefault();
+   redirect(`/universities-list`)
+}

@@ -18,7 +18,7 @@ const OurServices = ({ data }: Props) => {
   const { title, description } = data.header;
 
   return (
-    <section className="bg-greenDark relative dark:bg-light text-light shadow-2xl   dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 my-8">
+    <section className="bg-greenDark relative dark:bg-light text-light shadow-2xl   dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 px-3 my-8">
       <div className="max-w-7xl mx-auto ">
         <h1 className=" text-5xl mb-8 sm:text-6xl z-10">{title}</h1>
         <p>{description}</p>
