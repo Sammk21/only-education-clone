@@ -223,7 +223,7 @@ export interface UniversityProfile {
 export interface Universitylist {
   title?: string;
   id?: number;
-  slug?: string;
+  slug: string;
   universityProfile?: UniversityProfile;
   ownership?: ownership;
   indian_state?: indian_state;

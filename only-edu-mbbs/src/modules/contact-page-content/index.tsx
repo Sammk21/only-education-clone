@@ -5,7 +5,7 @@ import ContactUsPageContent from "./contact-page-content";
 const ContactUsPage = () => {
   return (
     <div>
-      <ContactBannerImage />
+      {/* <ContactBannerImage /> */}
       <ContactUsPageContent />
     </div>
   );

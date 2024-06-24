@@ -1,7 +1,12 @@
-import Image from "next/image";
-import React from "react";
-import MySideBar from "../navbar/components/Sidebar";
+"use client";
 
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
+import { Universitylist } from "@/types/types";
+import MeiliSearch from "meilisearch";
+import SearchBox from "@/app/searchbox";
+import Link from "next/link";
 interface HeaderProps {
   id: number;
   title: string;
@@ -17,43 +22,79 @@ interface HeroProps {
 }
 
 const Hero = ({ data }: HeroProps) => {
+  const client = new MeiliSearch({
+    host: "https://search.onlyeducation.co.in",
+    apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
+  });
+
+  const searchIndex = client.index("university");
+  const [query, setQuery] = useState<string>("");
+  const [results, setResults] = useState<Universitylist[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [noResults, setNoResults] = useState<boolean>(false);
+
+  const search = async () => {
+    if (query) {
+      setLoading(true);
+      try {
+        const searchResults = await searchIndex.search<Universitylist>(query);
+        if (searchResults.hits.length === 0) {
+          setNoResults(true); // Set noResults state to true when no results are found
+          setResults([]); // Clear results when no results are found
+        } else {
+          setResults(searchResults.hits);
+          setNoResults(false); // Reset noResults state if results are found
+        }
+      } catch (error) {
+        console.error("Search error:", error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setResults([]); // Reset results when query is empty
+      setNoResults(false); // Reset noResults state when query is empty
+    }
+  };
+  console.log(results);
+  useEffect(() => {
+    search();
+  }, [query, data]);
   return (
-    <section className=" ">
-      <div className=" px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-        <h1 className="mb-4 text-gradient text-6xl font-extrabold tracking-tight leading-none  md:text-5xl lg:text-8xl">
-          {data.header.title}
+    <section className=" relative h-[250px] sm:h-[450px]">
+      <div className="z-20 absolute w-full top-10 sm:top-24 flex flex-col items-center px-2">
+        <h1 className="mb-8 mt-0 sm:text-5xl text-2xl text-center font-extrabold tracking-tight leading-none   text-light">
+          Right Guidance, Bright Future
         </h1>
-        <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          {data.header.description}
-        </p>
-        <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-          <div className=" w-full sm:max-w-96 relative mt-6">
-            <input
-              type="email"
-              placeholder="Email address"
-              autoComplete="email"
-              aria-label="Email address"
-              className="block w-full dark:text-light  text-dark  rounded-2xl border border-borderLight dark:border-border bg-transparent py-4 pl-6 pr-20 text-base/6  ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none dark:focus:ring-neutral-200/5 focus:ring-neutral-950/5 "
-            />
-            <div className="absolute inset-y-1 right-1 flex justify-end">
-              <button
-                type="submit"
-                aria-label="Submit"
-                className="flex aspect-square h-full items-center bg-dark hover:bg-dark/70 justify-center rounded-xl dark:bg-light text-light transition dark:hover:bg-light/90"
-              >
-                <svg viewBox="0 0 16 6" aria-hidden="true" className="w-4">
-                  <path
-                    className="fill-light dark:fill-dark"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M16 3 10 .5v2H0v1h10v2L16 3Z"
-                  ></path>
-                </svg>
-              </button>
+        <div className="sm:max-w-screen-md max-w-screen-sm w-full relative">
+          <SearchBox query={query} setQuery={setQuery} />
+          {/* <Button
+            type="submit"
+            className="rounded-none bg-[#f97316] hover:bg-[#f97316] hidden sm:block absolute top-0 right-0 h-10"
+          >
+            Search
+          </Button> */}
+          <p className="w-10 bg-[#f97316] absolute top-0 right-0">
+            <IoSearchOutline className=" h-10 bg-[#f97316] text-light w-5 m-auto" />
+          </p>
+          <div className="relative">
+            <div className="absolute bottom-full bg-white w-full">
+              {results.map((item) => (
+                <Link href={`/study/uni/${item.slug}`}>
+                  <p key={item.id}>{item.title}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
       </div>
+
+      <Image
+        src="https://admin.onlyeducation.co.in/uploads/iit_madras_0c402d7404.webp"
+        alt=""
+        fill={true}
+        className="object-cover object-bottom -z-10"
+      />
+      <span className="w-full h-full rotate-180  absolute top-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 z-10"></span>
     </section>
   );
 };

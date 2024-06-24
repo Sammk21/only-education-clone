@@ -67,19 +67,36 @@ const Footer = ({ navigation }: NavbarProps) => {
           <div className="h-[5rem] left-0 bottom-0  w-full  text-light bg-greenDark flex justify-around sm:px-24 items-center flex-col z-20">
             <ul className="flex gap-x-2 text-lg">
               <li>
-                <FaInstagram />
+                <Link
+                  href="https://www.instagram.com/onlyeducationofficial/"
+                  target="_blank"
+                >
+                  <FaInstagram />
+                </Link>
               </li>
               <li>
-                <FaFacebook />
+                <Link
+                  href="https://www.facebook.com/onlyedu.co.in"
+                  target="_blank"
+                >
+                  <FaFacebook />
+                </Link>
               </li>
               <li>
-                <FaLinkedin />
+                <Link
+                  href="https://www.linkedin.com/company/onlyeducation/"
+                  target="_blank"
+                >
+                  <FaLinkedin />
+                </Link>
               </li>
               <li>
-                <FaPinterest />
-              </li>
-              <li>
-                <FaTwitter />
+                <Link
+                  href="https://twitter.com/onlyeducation17"
+                  target="_blank"
+                >
+                  <FaTwitter />
+                </Link>
               </li>
             </ul>
             <ul className="flex text-xs gap-x-6">
