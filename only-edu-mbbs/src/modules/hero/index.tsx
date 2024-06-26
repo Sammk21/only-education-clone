@@ -69,8 +69,8 @@ const Hero = ({ data }: HeroProps) => {
         <div className="sm:max-w-screen-md max-w-screen-sm w-full relative">
           <SearchBox query={query} setQuery={setQuery} />
 
-          <p className="w-10 bg-[#f97316] absolute top-0 right-0">
-            <IoSearchOutline className=" h-10 bg-[#f97316] text-light w-5 m-auto" />
+          <p className="w-10  absolute top-0 right-0">
+            <IoSearchOutline className=" h-10  text-[#f97316] w-5 m-auto" />
           </p>
           <div className="relative">
             <div className="absolute bottom-full bg-white w-full -top-6 h-fit px-2 rounded-sm">
