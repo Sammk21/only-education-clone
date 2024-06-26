@@ -7,6 +7,7 @@ import { Universitylist } from "@/types/types";
 import MeiliSearch from "meilisearch";
 import SearchBox from "@/app/searchbox";
 import Link from "next/link";
+
 interface HeaderProps {
   id: number;
   title: string;
@@ -67,20 +68,17 @@ const Hero = ({ data }: HeroProps) => {
         </h1>
         <div className="sm:max-w-screen-md max-w-screen-sm w-full relative">
           <SearchBox query={query} setQuery={setQuery} />
-          {/* <Button
-            type="submit"
-            className="rounded-none bg-[#f97316] hover:bg-[#f97316] hidden sm:block absolute top-0 right-0 h-10"
-          >
-            Search
-          </Button> */}
+
           <p className="w-10 bg-[#f97316] absolute top-0 right-0">
             <IoSearchOutline className=" h-10 bg-[#f97316] text-light w-5 m-auto" />
           </p>
           <div className="relative">
-            <div className="absolute bottom-full bg-white w-full">
+            <div className="absolute bottom-full bg-white w-full -top-6 h-fit px-2 rounded-sm">
               {results.map((item) => (
                 <Link href={`/study/uni/${item.slug}`}>
-                  <p key={item.id}>{item.title}</p>
+                  <p key={item.id} className="py-1 text-sm text-dark">
+                    {item.title}
+                  </p>
                 </Link>
               ))}
             </div>
