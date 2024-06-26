@@ -7,7 +7,6 @@ import { ProfileAndAcc } from "../profile-&-notification-navbar";
 
 const LoginButton = async () => {
   const userInfo = await getUserMeLoader();
-
   return (
     <div className="px-1 flex items-center">
       {userInfo?.ok ? (

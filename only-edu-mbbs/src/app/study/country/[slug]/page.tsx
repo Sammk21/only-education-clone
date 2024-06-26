@@ -1,5 +1,6 @@
 import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
 import WhyAbroad from "@/modules/aborad-page-content/why-aborad";
+import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import InfoTableLayout from "@/modules/table-layout";
 import { MetaProps } from "@/types/types";

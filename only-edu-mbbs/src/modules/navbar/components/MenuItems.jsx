@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -19,5 +20,3 @@ export const MenuItems = ({ items }) => {
     </li>
   );
 };
-
-

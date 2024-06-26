@@ -69,7 +69,7 @@ const CollegeFilter = ({
         <div className="flex justify-end items-center gap-x-2">
           <Button type="submit">Apply filters</Button>
         </div>
-        <div className="min-h-20 w-full rounded-lg bg-accent/10 m-0 text-xs p-2 mt-3">
+        <div className="min-h-20  w-full rounded-lg bg-accent/10 m-0 text-xs p-2 mt-3">
           <span className="mt-3">Selected filters:</span>
           <Separator className="mt-1" orientation="horizontal" />
           <div className="flex flex-wrap gap-2 ">
@@ -100,7 +100,7 @@ const CollegeFilter = ({
           </div>
         </div>
 
-        <div>
+        <div className="max-h-[66vh] border-b overflow-y-scroll">
           <AccordionCustom
             name={"Location"}
             data={indianStates.data}

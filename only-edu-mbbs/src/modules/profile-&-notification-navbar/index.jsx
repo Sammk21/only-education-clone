@@ -4,11 +4,11 @@ import { LogoutButton } from "../account/components/logout/logout";
 import Image from "next/image";
 import { getUserMeLoader } from "@/app/data/services/get-user-me-loader";
 
-// const user = {
-//   name: "Tom Cook",
-//   email: "tom@example.com",
-//   imageUrl: "",
-// };
+const user = {
+  name: "Tom Cook",
+  email: "tom@example.com",
+  imageUrl: "",
+};
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -18,9 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const ProfileAndAcc = async () => {
-  const user = await getUserMeLoader();
-
+export const ProfileAndAcc = () => {
   return (
     <div className="hidden md:block">
       <div className="ml-4 flex items-center md:ml-6">

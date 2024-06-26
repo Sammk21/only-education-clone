@@ -1,3 +1,4 @@
+"use client";
 import { subMenuLinks } from "@/types/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
