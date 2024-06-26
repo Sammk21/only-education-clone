@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -18,22 +18,40 @@ import Link from "next/link";
 import { Navigation, Dropdown, Links } from "@/types/types";
 import { DropDownItems } from "./components/Dropdown";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { EnquiryDialog } from "../enquiry-dialog";
+import { Button } from "@/components/ui/button";
+import { BottomGradient } from "../account/components/register";
+import { getUserMeLoader } from "@/app/data/services/get-user-me-loader";
+import { LogoutButton } from "../account/components/logout/logout";
+import { ProfileAndAcc } from "../profile-&-notification-navbar";
 
 export interface NavbarProps {
   navigation: Navigation;
   dropdown: Dropdown[];
 }
 
-const Navbar = ({ navigation, dropdown }: NavbarProps) => {
+export const Navbar = ({ navigation, dropdown }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
-    //used useMotionValueEvent from framer motion to avoid unnecessary re-rendering of whole component caused by events
     setIsScrolled(latest >= 80);
   });
+
+  useEffect(() => {
+    getUser();
+  }, []);
+  const getUser = async () => {
+    try {
+      const user = await getUserMeLoader();
+      setUserInfo(user);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -118,13 +136,25 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
             </ul>
           </div>
 
-          <div className="px-1">
-            {/* <Link href={"/auth"} className="relative z-20">
-              <span className="px-8 py-2 rounded-full relative bg-custom-gradient text-white text-sm hover:shadow-2xl hover:shadow-dark/30 transition duration-200 border border-dark/20">
-                login
-              </span>
-            </Link> */}
-            <EnquiryDialog />
+          <div className="px-1 flex items-center">
+            {loading ? (
+              <AuthLoader />
+            ) : userInfo?.ok ? (
+              <div className="flex gap-x-2 items-center font-medium font-sm">
+                <ProfileAndAcc />
+                <span>{userInfo.data?.firstName}</span>
+              </div>
+            ) : (
+              <Link href={"/auth"}>
+                <Button
+                  className="relative group/btn hover:bg-light"
+                  variant={"outline"}
+                >
+                  <span>Login</span>
+                  <BottomGradient />
+                </Button>
+              </Link>
+            )}
           </div>
           <AnimatePresence mode="wait">
             {isScrolled && (
@@ -146,3 +176,12 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
 };
 
 export default Navbar;
+
+export const AuthLoader = () => {
+  return (
+    <div className="relative">
+      <div className="w-5 h-5 border-orange-200 border-2 rounded-full"></div>
+      <div className="w-5 h-5 border-orange-500 border-t-2 animate-spin rounded-full absolute left-0 top-0"></div>
+    </div>
+  );
+};

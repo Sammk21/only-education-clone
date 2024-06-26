@@ -1,5 +1,4 @@
 import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
-import FlowDiagram from "@/modules/aborad-page-content/flow-diagram";
 import AdmissionProcessFlow from "@/modules/admission-process-flowchart";
 import CampusHighlight from "@/modules/campus-highlight";
 import DocumentRquired from "@/modules/deocuments-required";
@@ -60,6 +59,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage = data.data[0].universityProfile.profileImage.url;
 
+  const title = data.data[0].title;
+
   return (
     <div className=" mb-16">
       <GlobalProfileLayout
@@ -77,7 +78,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overview.description}
           </p>
         </div>
-        <CallToAction data={cta} />
+        <CallToAction title={title} data={cta} />
         <UniHighlights data={highlights} />
         <WhyThisUni data={whythisUniversity} />
         <UniRanking data={rankComparison} />

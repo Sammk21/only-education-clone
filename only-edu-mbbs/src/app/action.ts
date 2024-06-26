@@ -1,5 +1,4 @@
 'use server'
-
 import { flattenAttributes } from "@/utils/utils";
 import { redirect } from "next/navigation";
 
@@ -16,6 +15,7 @@ export async function getData(path: string) {
   } catch (error) {
   }
 }
+
 
 export const updatedFilters = async (formData: FormData) => {
   const locations = formData.getAll('Location');

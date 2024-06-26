@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { Roboto, Ubuntu } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/normalize.css";
-// import "../styles/swiper-pagination/pagination.css";
 import Navbar from "@/modules/navbar";
 import Footer from "@/modules/footer";
-import { flattenAttributes, getStrapiData } from "@/utils/utils";
+import { getStrapiData } from "@/utils/utils";
 import MySideBar from "@/modules/navbar/components/Sidebar";
 import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
-import Head from "next/head";
 import { Toaster } from "@/components/ui/sonner";
+
 
 const inter = Roboto({
   subsets: ["cyrillic"],
@@ -40,6 +39,7 @@ export default async function RootLayout({
       <body className={`bg-light dark:bg-dark  ${inter.className}`}>
         <div className="relative w-full h-full text-gray-400 ">
           <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
+
           <NextBreadcrumb
             homeElement={"Home"}
             separator={

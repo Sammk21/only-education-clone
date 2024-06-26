@@ -1,17 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import LoginTemplate from "./login-template";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
 interface AccountLayoutProps {
-  customer: any | null;
   children: React.ReactNode;
 }
 
-const AccountLayout: React.FC<AccountLayoutProps> = ({
-  customer,
-  children,
-}) => {
+const AccountLayout: React.FC<AccountLayoutProps> = ({ children }) => {
   return (
     <div className="flex-1  text-dark dark:text-light  ">
       <div className="flex-1  h-full  mx-auto   flex flex-col">
