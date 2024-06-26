@@ -1,14 +1,11 @@
 import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
 import WhyAbroad from "@/modules/aborad-page-content/why-aborad";
 import GlobalProfileLayout from "@/modules/global-profile-layout";
-import CountryProfile from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import InfoTableLayout from "@/modules/table-layout";
-import TopUniRail from "@/modules/top-uni-rail";
-import { ImageAttributes, MetaProps } from "@/types/types";
-import { getCachedData, getMetaData, getStrapiData } from "@/utils/utils";
+import { MetaProps } from "@/types/types";
+import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
-import Image from "next/image";
 import React from "react";
 ``;
 
@@ -50,11 +47,12 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         profileImage={profileImage}
         backgroundImage={backgroundImage}
         data={data.data[0]}
-      /> */}
+      />
+*/}
       <WhyAbroad data={whyThisCountry} />
       <ElegibilityCriteria data={eligibilityCriteria} />
       <InfoTableLayout data={feesStructure} />
-      {/* <TopUniRail /> */}
+      {/* <TopUniRail />  */}
       <QuestionDropdown data={faq} />
     </div>
   );

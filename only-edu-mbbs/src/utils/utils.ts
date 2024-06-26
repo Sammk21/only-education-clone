@@ -44,7 +44,6 @@ export function flattenAttributes(data:any):any {
   return flattened;
 }
 
-import { headers } from 'next/headers'
 
 const token = "7f7bbcd327ab5f52019fa52ef88b5ba700afeb751ca328e81758b7639d47ae0fc504b3cad6699083c824d5e3d35c6ccd5b2f6162ae8b64dbf48f40c7fcb4b955bc1c5bbcca0d5eb154d0f0957d7a1ca6aafe5d718550d89209b70263ad5836fdc7d2feb20b8aaa436626bc521b4334032957b357ffe6b3371b44929be394e7ea";
 

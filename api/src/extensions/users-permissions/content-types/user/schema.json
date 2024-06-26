@@ -12,7 +12,13 @@
     "draftAndPublish": false
   },
   "attributes": {
-   
+    "username": {
+      "type": "string",
+      "unique": false,
+      "configurable": false,
+      "required": false
+    },
+
     "email": {
       "type": "email",
       "minLength": 6,

@@ -248,3 +248,28 @@ export interface SearchParamsProps {
   };
 
 }
+
+export interface UserType{
+  ok?: boolean,
+  data?: null, 
+  error?: any,
+  // data?: {
+  //   id: number
+  //   email: string
+  //   provider: string
+  //   confirmed: boolean
+  //   blocked: boolean
+  //   job: null | string
+  //   createdAt: string
+  //   updatedAt: string
+  //   firstName: string
+  //   lastName: string
+  //   username: string
+  // },
+  // error?:{
+  //   status:number
+  //   name: string
+  //   message:string
+  //   details: object
+  // }
+}

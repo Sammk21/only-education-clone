@@ -1,7 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import { Universitylist } from "@/types/types";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent } from "react";
 
 interface SearchBoxProps {
   query: string;

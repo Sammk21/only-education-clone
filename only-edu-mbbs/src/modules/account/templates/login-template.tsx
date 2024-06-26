@@ -9,9 +9,7 @@ export enum LOGIN_VIEW {
 }
 
 const LoginTemplate = () => {
-  const [currentView, setCurrentView] = useState("sign-in");
-
-  console.log(currentView);
+ const [currentView, setCurrentView] = useState("sign-in");
 
   return (
     <div className="w-full flex justify-start px-8 ">
