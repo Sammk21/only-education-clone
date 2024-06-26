@@ -47,8 +47,8 @@ const ElegibilityCriteria = ({ data }: Props) => {
   };
 
   return (
-    <div className="text-dark dark:text-light py-6 my-6 max-w-6xl mx-auto ">
-      <h4 className="leading-none text-4xl mb-6 text-center text-dark dark:text-light">
+    <div className="text-dark dark:text-light  my-6 max-w-6xl mx-auto ">
+      <h4 className="leading-none text-4xl mb-4 text-center text-dark dark:text-light font-medium">
         {title}
       </h4>
       <p className="text-center text-accent mb-6">{description}</p>

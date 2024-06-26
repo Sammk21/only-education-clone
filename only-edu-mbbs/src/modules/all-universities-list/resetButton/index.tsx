@@ -5,9 +5,9 @@ import React from "react";
 
 const ResetButton = () => {
   return (
-    <form onSubmit={() => deleteFilters} className="">
+    <form onSubmit={() => deleteFilters} className="relative">
       <Button
-        className="hover:border-red-500 transition-colors hover:bg-light absolute top-0 left-0"
+        className="hover:border-red-500 transition-colors hover:bg-light absolute top-0 left-0 "
         variant={"outline"}
         type="submit"
       >

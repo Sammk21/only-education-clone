@@ -5,50 +5,29 @@ import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { ImageAttributes, Universitylist } from "@/types/types";
+import {
+  ArticleAttributes,
+  ImageAttributes,
+  Universitylist,
+} from "@/types/types";
 import "@/styles/swiper-pagination/pagination.css";
 import { Link, University } from "lucide-react";
-
-// interface Props {
-//   data: {
-//     ImageAttributes: ImageAttributes;
-//     CountryProps: CountryProps;
-//   };
-// }
-
-interface UniversityProfile {
-  backgroundImage: ImageAttributes;
-}
-
-interface University {
-  id: number;
-  title: string;
-  noOfStudentsStudying: string;
-  slug: string;
-  universityProfile: UniversityProfile;
-}
-
-interface UniversitiesData {
-  universities: {
-    data: University[];
+import { Card } from "@/components/ui/card";
+interface BlogPageProps {
+  data: {
+    data: ArticleAttributes[];
   };
-  // UniversitiesData: UniversitiesData;
 }
-interface Props {
-  data: UniversitiesData;
-}
-const TopUniRail = ({ data }: Props) => {
+
+const ArticleRail = ({ data }: BlogPageProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
-  console.dir(University);
+  console.dir(data.data[0].title);
 
   return (
     <>
       <div className="px-2 sm:px-12 mt-12 relative ">
         <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10  items-center flex sm:flex-row">
-          <span className="mb-2">Top universities </span>
-          <span className="sm:text-lg text-sm font-light text-accent hidden sm:block sm:ml-2">
-            to get admissons in
-          </span>
+          <span className="mb-2">Articles </span>
         </h4>
 
         <Swiper
@@ -78,35 +57,36 @@ const TopUniRail = ({ data }: Props) => {
               spaceBetween: 30,
             },
             1080: {
-              slidesPerView: 3.3,
+              slidesPerView: 4.3,
               spaceBetween: 40,
             },
           }}
           navigation={{ nextEl: ".back", prevEl: ".front" }}
           modules={[FreeMode, Pagination, Autoplay, Navigation]}
-          className="mySwiper"
+          className="mySwiper "
         >
-          {data.universities.data.map((university) => (
-            <SwiperSlide key={university.id}>
-              <div className="  rounded-lg aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer ">
+          {data.data.map((university) => (
+            <SwiperSlide key={university.id} className=" border rounded-md bg-">
+              <div className=" aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative  group overflow-hidden cursor-pointer ">
                 <Image
-                  src={
-                    baseUrl + university.universityProfile.backgroundImage.url
-                  }
+                  src={baseUrl + university.image.url}
                   alt={university.title}
                   fill={true}
-                  className="object-center object-cover rounded-md group-hover:scale-105 transition-transform ease-out duration-300 "
+                  className="object-center object-cover  group-hover:scale-105 transition-transform ease-out duration-300 "
                 />
-                <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center">
-                  {university.title}
-                </span>
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 h-6 -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden">
-                  <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full text-light justify-center">
-                    {university.noOfStudentsStudying} students studying here.
-                  </p>
-                </span>
+
                 <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                 <span className="w-full h-[50%] absolute bottom-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 ease-out"></span>
+              </div>
+
+              <div className=" px-5 capitalize">
+                <p className="font-semibold text-[16px] line-clamp-1  z-10 text-dark my-2">
+                  {university.title}
+                </p>
+
+                <p className="   text-sm font-normal text-accent z-10 my-2 line-clamp-2 ">
+                  {university.description}
+                </p>
               </div>
             </SwiperSlide>
           ))}
@@ -129,4 +109,4 @@ const TopUniRail = ({ data }: Props) => {
   );
 };
 
-export default TopUniRail;
+export default ArticleRail;

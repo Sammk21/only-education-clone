@@ -46,23 +46,40 @@ const Navbar = ({ navigation, dropdown }: NavbarProps) => {
           <div className="flex gap-5 items-center h-full justify-between sm:px-16 px-4  ">
             <ul className="w-full flex justify-between  text-xs  sm:text-sm">
               <li>info@onlyeducation.in</li>
-              <li>+91 9898989898</li>
+              <li>+91 6262929248</li>
             </ul>
             <ul className=" gap-x-2 text-lg hidden sm:flex">
               <li>
-                <FaInstagram />
+                <Link
+                  href="https://www.instagram.com/onlyeducationofficial/"
+                  target="_blank"
+                >
+                  <FaInstagram />
+                </Link>
               </li>
               <li>
-                <FaFacebook />
+                <Link
+                  href="https://www.facebook.com/onlyedu.co.in"
+                  target="_blank"
+                >
+                  <FaFacebook />
+                </Link>
               </li>
               <li>
-                <FaLinkedin />
+                <Link
+                  href="https://www.linkedin.com/company/onlyeducation/"
+                  target="_blank"
+                >
+                  <FaLinkedin />
+                </Link>
               </li>
               <li>
-                <FaPinterest />
-              </li>
-              <li>
-                <FaTwitter />
+                <Link
+                  href="https://twitter.com/onlyeducation17"
+                  target="_blank"
+                >
+                  <FaTwitter />
+                </Link>
               </li>
             </ul>
           </div>

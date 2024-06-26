@@ -1,5 +1,6 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
+import MobileFilter from "@/modules/all-universities-list/responsive-filter";
 
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
 import { SearchParamsProps } from "@/types/types";
@@ -53,7 +54,7 @@ export default async function UniversitiesList({
   return (
     <>
       <div className="bg-white rounded-[30px] my-4">
-        <div className="flex flex-col relative lg:flex-row justify-center">
+        <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
             exams={exams}
             ownership={ownership}
@@ -69,6 +70,12 @@ export default async function UniversitiesList({
               </span>
             </div>
           )}
+          <MobileFilter
+            exams={exams}
+            ownership={ownership}
+            indianStates={indianStates}
+            filterParams={filterParams}
+          />
         </div>
         <PaginationComponent pageCount={pagination.pageCount} />
       </div>

@@ -49,7 +49,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
   const data = await getStrapiData(blogQuery);
 
   const { title, description, ckeditor_content, createdAt } = data.data[0];
-
+  console.dir(data);
   return (
     <div className=" w-full ">
       <main
@@ -65,24 +65,22 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                 {title}
               </h1>
               <div className=" flex  items-center mr-3 text-sm text-dark dark:text-light mb-2">
-                <Image
+                {/* <Image
                   className="mr-4 w-12 h-12 rounded-full my-auto object-cover"
                   src={
                     "http://localhost:1337/uploads/Screenshot_2024_06_03_at_6_48_36_PM_ccdfa1f40f.png"
                   }
                   alt="Jese Leos"
-                ></Image>
+                ></Image> */}
                 <div className="flex flex-col">
                   <p
                     rel="author"
                     className="text-lg mb-1 font-bold text-dark dark:text-light"
                   >
-                    Omkar Bhor
+                    Only Eucation
                   </p>
                   <div className="text-gray-500 dark:text-gray-800">
-                    <p className=" my-0">
-                      Graphic Designer, educator , marketing @ Only Education
-                    </p>
+                    <p className=" my-0">Author</p>
                     <p className="my-0">
                       6 min read
                       <span className="mx-1">·</span>
@@ -160,7 +158,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           </article>
         </div>
       </main>
-      <section className="bg-accent/10 py-12  px-3 sm:px-6 rounded-3xl shadow-sm mb-12">
+      {/*  <section className="bg-accent/10 py-12  px-3 sm:px-6 rounded-3xl shadow-sm mb-12">
         <div className="max-w-2xl mx-auto">
           <div className="flex justify-between items-center mb-6 mx-auto ">
             <h2 className="text-lg lg:text-2xl font-bold text-dark dark:text-light">
@@ -657,7 +655,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
           </div>
         </div>
-      </aside>
+      </aside> */}
       <NewsLetter />
     </div>
   );

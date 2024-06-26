@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UniversitiesData, Universitylist } from "@/types/types";
 import { FaDownload, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
@@ -9,6 +9,7 @@ import SearchBox from "@/app/searchbox";
 import MeiliSearch from "meilisearch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { json } from "stream/consumers";
 
 interface Props {
   data: UniversitiesData;
@@ -84,6 +85,7 @@ export default CollegeList;
 
 const FilteredUniversityItem = ({ university }: FilteredProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
+
   return (
     <>
       <div
@@ -92,7 +94,7 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
       >
         <Link href={`study/uni/${university?.slug}`}>
           <div className="flex mb-2 flex-col sm:flex-row justify-between">
-            <div className="sm:grid-cols-8 sm:grid-rows-1 w-full h-full grid grid-rows-5">
+            <div className="sm:grid-cols-8 sm:grid-rows-1 w-full h-full grid grid-rows-4">
               <div className="row-span-3 sm:col-span-2 relative aspect-video overflow-hidden h-full w-full">
                 <Image
                   className="rounded-lg w-full object-cover object-center h-full "
@@ -130,7 +132,7 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
                 Broucher
               </Button>
               <Button
-                className="text-accent bg-accent/10 hover:bg-transparent w-full"
+                className="text-accent bg-accent/10 hover:bg-transparent"
                 variant="outline"
               >
                 <FaRegPaperPlane className="mr-1" />
@@ -150,14 +152,14 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
             </p>
           </div>
         </Link>
-        <div className="flex h-5 items-center space-x-4 text-sm">
+        <div className="flex h-5 items-center space-x-4 text-sm overflow-x-scroll md:overflow-x-hidden">
           <Link href={`/study/uni/${university.slug}`}>
             <div className="hover:text-orange-500 cursor-pointer">
               Admission
             </div>
           </Link>
           <Separator orientation="vertical" />
-          <Link href={`/study/uni/${university.slug}#placement `} scroll={true}>
+          <Link href={`/study/uni/${university.slug}`} scroll={false}>
             <div className="hover:text-orange-500 cursor-pointer">
               Placements
             </div>

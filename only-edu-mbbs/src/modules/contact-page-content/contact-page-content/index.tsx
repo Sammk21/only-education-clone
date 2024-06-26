@@ -18,7 +18,7 @@ const ContactUsPageContent = () => {
           </li>
           <li className="flex gap-x-3 items-center">
             <GoDeviceMobile className="h-7 w-8" />
-            <p className="text-accent">+91 9191919191</p>
+            <p className="text-accent">+91 6262929248</p>
           </li>
         </div>
         <div>

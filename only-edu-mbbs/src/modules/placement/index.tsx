@@ -20,10 +20,10 @@ interface Props {
 }
 const PlacementInfo = ({ data }: Props) => {
   return (
-    <section className="container" id="placement">
-      <h2 className="text-4xl font-medium  mb-6 text-dark">
+    <section className="container my-8" id="placement">
+      <h4 className="text-4xl font-medium  mb-4 text-dark">
         Placement Facility
-      </h2>
+      </h4>
       <ul className=" space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
         {data.list.map((item) => (
           <li key={item.id} className="flex items-center">

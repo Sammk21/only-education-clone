@@ -15,7 +15,7 @@ interface ExperienceRailProps {
 
 const ExperienceRail = ({ data }: ExperienceRailProps) => {
   return (
-    <div className="lg:h-[10rem]  text-dark/50 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 dark:text-light/50 border-borderLight dark:border-border">
+    <div className="lg:h-[10rem]  text-dark/50 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 dark:text-light/50 border-borderLight dark:border-border text-center ">
       {data.expBlock.map((item) => (
         <div
           key={item.id}

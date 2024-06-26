@@ -7,7 +7,7 @@ import Testimonial from "./testimonial";
 const AboutUsContent = () => {
   return (
     <div>
-      <BannerImage />
+      {/* <BannerImage /> */}
       <WhoWeAre />
       <Vision />
       <Testimonial />

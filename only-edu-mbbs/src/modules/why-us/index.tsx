@@ -12,7 +12,7 @@ const WhyUs = ({ data }: Props) => {
     <section className=" dark:text-light  text-dark mb-12 px-3 my-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-semibold">{title}</h1>
-        <p>{description}</p>
+        {/* <p>{description}</p> */}
         <div className="md:grid md:grid-cols-2">
           <div className="h-full items-center justify-center flex">
             <svg
@@ -51,7 +51,7 @@ const WhyUs = ({ data }: Props) => {
             <ol className="flex flex-col gap-y-10">
               {data.qna.map((item) => (
                 <li key={item.id}>
-                  <h4 className="leading-8 text-3xl  mb-3">{item.Question}</h4>
+                  <h4 className="leading-8 text-2xl  mb-3">{item.Question}</h4>
                   <p className="text-sm text-accent">{item.Answer}</p>
                 </li>
               ))}

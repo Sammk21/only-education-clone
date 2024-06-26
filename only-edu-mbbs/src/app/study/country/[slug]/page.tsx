@@ -46,11 +46,11 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className=" pb-12 text-dark dark:text-light">
-      <GlobalProfileLayout
+      {/* <GlobalProfileLayout
         profileImage={profileImage}
         backgroundImage={backgroundImage}
         data={data.data[0]}
-      />
+      /> */}
       <WhyAbroad data={whyThisCountry} />
       <ElegibilityCriteria data={eligibilityCriteria} />
       <InfoTableLayout data={feesStructure} />

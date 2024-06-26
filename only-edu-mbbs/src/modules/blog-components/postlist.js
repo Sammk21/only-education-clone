@@ -20,7 +20,7 @@ export default function PostList({ post }) {
   return (
     <section>
       <div className="border-b border-b-borderLight dark:border-b-border mt-5">
-        <div className="mt-3 flex items-center space-x-3 text-gray-500 dark:text-gray-400">
+        {/* <div className="mt-3 flex items-center space-x-3 text-gray-500 dark:text-gray-400">
           <Link href="#">
             <div className="flex items-center gap-3">
               <div className="relative h-5 w-5 flex-shrink-0">
@@ -35,7 +35,7 @@ export default function PostList({ post }) {
               <span className="truncate text-sm">author</span>
             </div>
           </Link>
-        </div>
+        </div> */}
 
         <div className={cx("group cursor-pointer grid gap-1")}>
           <div className="flex mt-3 gap-1 sm:gap-10 justify-between">
@@ -54,7 +54,7 @@ export default function PostList({ post }) {
             </Link>
             <Link
               href={`/articles/post/${post.slug}`}
-              className="relative hidden sm:block aspect-square h-20 w-[100px]  sm:h-28 sm:w-28"
+              className="relative aspect-square h-20 w-[100px]  sm:h-28 sm:w-28"
             >
               <Image
                 src={imageUrl + image}

@@ -13,10 +13,13 @@ const WhyThisUni = ({ data }: Props) => {
   const { title, description } = data.header;
 
   return (
-    <section className=" dark:text-light  text-dark py-12 ">
-      <div className="px-6 container mx-auto">
-        <h1 className="text-5xl font-semibold">{title}</h1>
-        <p>{description}</p>
+    <section className=" dark:text-light  text-dark my-8 ">
+      <div className=" container ">
+        {/* <h1 className="text-5xl font-semibold">{title}</h1> */}
+        <h4 className="   text-4xl font-medium mb-4 dark:text-light text-dark">
+          {title}
+        </h4>
+        <p className="text-accent mb-6">{description}</p>
         <div className="md:grid md:grid-cols-2">
           <div className="h-full items-center justify-center flex">
             <svg
@@ -41,10 +44,10 @@ const WhyThisUni = ({ data }: Props) => {
             </svg>
           </div>
           <div className=" w-full h-full">
-            <ol className="flex flex-col gap-y-10">
+            <ol className="flex flex-col gap-y-8">
               {data.qna.map((item) => (
                 <li key={item.id}>
-                  <h4 className="leading-8 text-3xl  mb-3">{item.Question}</h4>
+                  <h4 className="leading-8 text-2xl  mb-3">{item.Question}</h4>
                   <p className="text-sm text-accent">{item.Answer}</p>
                 </li>
               ))}
