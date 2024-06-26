@@ -7,7 +7,7 @@ import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import React from "react";
-
+``;
 
 export async function generateMetadata({
   params,
@@ -47,11 +47,12 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         profileImage={profileImage}
         backgroundImage={backgroundImage}
         data={data.data[0]}
-      /> */}
+      />
+*/}
       <WhyAbroad data={whyThisCountry} />
       <ElegibilityCriteria data={eligibilityCriteria} />
       <InfoTableLayout data={feesStructure} />
-      {/* <TopUniRail /> */}
+      {/* <TopUniRail />  */}
       <QuestionDropdown data={faq} />
     </div>
   );
