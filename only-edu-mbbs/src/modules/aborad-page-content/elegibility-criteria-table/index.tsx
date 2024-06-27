@@ -11,12 +11,12 @@ interface Props {
 }
 const ElegibilityCriteriaTable = ({ data }: Props) => {
   return (
-    <section className="py-6 my-6 ">
+    <section className="py-6 my-6 container">
       <h4 className="text-4xl text-center text-dark  dark:text-light ">
         {data[0].header.title}
       </h4>
       <p className="text-center">{data[0].header.description}</p>
-      <div className="flex prose  prose-table:text-sm pt-6 max-w-7xl mx-auto w-full justify-center items-center text-sm  text-dark dark:text-accent ">
+      <div className="overflow-x-scroll sm:overflow-x-hidden rounded-lg prose-tr:border-b prose-td:divide-y prose-td:divide-gray-200 prose-td:dark:divide-neutral-700     w-full prose-td:py-3 px prose-td:px-6  text-dark prose-tr: prose-table:w-full prose-figure:w-full prose-figure:mx-0 prose-table:border prose-figure:rounded-lg  prose-th:py-4 prose-th:bg-gray-50 prose-th:text-start prose-th:px-4">
         {/* <table className=" w-full max-w-5xl text-sm text-left rtl:text-right text-dark dark:text-accent  t">
           <thead className="text-xs text-dark uppercase bg-accent dark:bg-foreground borber-b border-b-dark dark:text-light">
             <tr>

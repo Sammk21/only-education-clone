@@ -25,10 +25,11 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const data: MetaProps = await getMetaData("articles", params.slug);
+  const data: MetaProps = await getMetaData("news", params.slug);
   const baseUrl = process.env.API_URL || "http://localhost:1337";
 
   const { seo } = data.data[0];
+
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
@@ -46,24 +47,15 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true`;
+  const blogQuery = `/api/news?filters[slug][$eq]=${params.slug}&populate[image]=true`;
+  console.dir("seo", blogQuery);
   const baseUrl = process.env.API_URL || "http://localhost:1337";
-
   const data = await getStrapiData(blogQuery);
 
-  const {
-    title,
-    description,
-    ckeditor_content,
-    createdAt,
-    image,
-    recommendedArticle,
-  } = data.data[0];
-  console.dir("articleseo", recommendedArticle);
+  const { title, description, ckeditor_content, createdAt, routes, image } =
+    data.data[0];
 
-  console.dir(recommendedArticle);
-
-  const recommendedQuery = `/api/articles?filters[recommendedArticle][$eq]=true&populate[image]=true`;
+  const recommendedQuery = `/api/news?filters[recommendedArticle][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
   const recommended =
     recommendedData.data.length > 0 ? recommendedData.data[0] : null;
@@ -75,7 +67,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           className={`${mosterrat.className} lg:w-[60%] w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light  pt-8 pb-16 lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
         >
           <div className="flex leading-relaxed  justify-between px-4 mx-auto max-w-full ">
-            <article className="mx-auto w-full max-w-full  ">
+            <article
+              className="mx-auto w-full max-w-full 
+          
+          "
+            >
               <header className="mb-4 lg:mb-6 not-format">
                 <address className="flex items-center mb-6 not-italic"></address>
                 <h1
@@ -91,7 +87,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     alt=""
                     width={100}
                     height={100}
-                    className=" w-full object-cover object-center h-full  "
+                    className="w-full aspect-video  "
                   />
                 </div>
               </header>
@@ -99,6 +95,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
           </div>
         </main>
+
         <div className="sticky top-0 h-32  py-16 w-[24%] mb-80 hidden lg:block">
           <div className="border mt-6 rounded-sm px-2 py-3">
             <h4 className="text-dark text-center border-b pb-3 mb-3 text-xl font-semibold">

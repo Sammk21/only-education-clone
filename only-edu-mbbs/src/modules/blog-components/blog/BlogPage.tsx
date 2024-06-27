@@ -7,6 +7,7 @@ interface BlogPageProps {
 }
 
 const BlogPage: React.FC<BlogPageProps> = ({ data }: BlogPageProps) => {
+  console.dir(data);
   return (
     <section className="container px-4">
       <h1 className="font-medium text-dark text-3xl">

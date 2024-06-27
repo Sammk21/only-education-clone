@@ -16,14 +16,14 @@ interface BlogPageProps {
   };
 }
 
-const ArticleRail = ({ data }: BlogPageProps) => {
+const NotificationRail = ({ data }: BlogPageProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
   console.dir(data.data[0]?.title);
 
   return (
     <div className="px-2 sm:px-12 mt-12 relative">
       <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 items-center flex sm:flex-row">
-        <span className="mb-2">Articles </span>
+        <span className="mb-2">Latest Notification</span>
       </h4>
 
       <Swiper
@@ -62,7 +62,7 @@ const ArticleRail = ({ data }: BlogPageProps) => {
       >
         {data.data.map((university) => (
           <SwiperSlide key={university.id} className="border rounded-md bg-">
-            <Link href={`articles/post/${university.slug}`}>
+            <Link href={`news/post/${university.slug}`}>
               <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative group overflow-hidden cursor-pointer">
                 <Image
                   src={baseUrl + university.image.url}
@@ -75,7 +75,12 @@ const ArticleRail = ({ data }: BlogPageProps) => {
               </div>
               <div className="px-5 capitalize">
                 <p className="font-semibold text-[16px] line-clamp-1 z-10 text-dark my-2">
-                  {university.title}
+                  {university.live && (
+                    <span className="text-red-600 text-xs animate-pulse">
+                      Live
+                    </span>
+                  )}
+                  <span> {university.title}</span>
                 </p>
                 <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
                   {university.description}
@@ -101,4 +106,4 @@ const ArticleRail = ({ data }: BlogPageProps) => {
   );
 };
 
-export default ArticleRail;
+export default NotificationRail;

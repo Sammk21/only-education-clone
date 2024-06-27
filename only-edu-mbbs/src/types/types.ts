@@ -115,9 +115,11 @@ export interface ArticleAttributes {
   id: number;
   title: string;
   slug: string;
+  live:string|null;
   description: string | null;
   image: ImageAttributes;
   category: CategoryAttributes;
+  recommendedArticle:string|null
 }
 
 interface MetaData {

@@ -7,7 +7,8 @@ import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { ImageAttributes, Universitylist } from "@/types/types";
 import "@/styles/swiper-pagination/pagination.css";
-import { Link, University } from "lucide-react";
+import { University } from "lucide-react";
+import Link from "next/link";
 
 // interface Props {
 //   data: {
@@ -88,26 +89,28 @@ const TopUniRail = ({ data }: Props) => {
         >
           {data.universities.data.map((university) => (
             <SwiperSlide key={university.id}>
-              <div className="  rounded-lg aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer ">
-                <Image
-                  src={
-                    baseUrl + university.universityProfile.backgroundImage.url
-                  }
-                  alt={university.title}
-                  fill={true}
-                  className="object-center object-cover rounded-md group-hover:scale-105 transition-transform ease-out duration-300 "
-                />
-                <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center">
-                  {university.title}
-                </span>
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 h-6 -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden">
-                  <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full text-light justify-center">
-                    {university.noOfStudentsStudying} students studying here.
-                  </p>
-                </span>
-                <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
-                <span className="w-full h-[50%] absolute bottom-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 ease-out"></span>
-              </div>
+              <Link href={`study/uni/${university.slug}`}>
+                <div className="  rounded-lg aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer ">
+                  <Image
+                    src={
+                      baseUrl + university.universityProfile.backgroundImage.url
+                    }
+                    alt={university.title}
+                    fill={true}
+                    className="object-center object-cover rounded-md group-hover:scale-105 transition-transform ease-out duration-300 "
+                  />
+                  <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center">
+                    {university.title}
+                  </span>
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 h-6 -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden">
+                    <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full text-light justify-center">
+                      {university.noOfStudentsStudying} students studying here.
+                    </p>
+                  </span>
+                  <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+                  <span className="w-full h-[50%] absolute bottom-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 ease-out"></span>
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

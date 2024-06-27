@@ -12,7 +12,7 @@ import axios from "axios";
 import { enquiryFormSchema } from "@/utils/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-  import { toast } from "sonner";
+import { toast } from "sonner";
 import { Combobox } from "../combo-box";
 
 type EnquiryFormInput = z.infer<typeof enquiryFormSchema>;
@@ -93,17 +93,17 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
   };
 
   return (
-    <div className="min-w-2xl relative grid grid-cols-2 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border border-border border-borderLight">
-      <div className="w-full h-full overflow-hidden relative ">
+    <div className="min-w-2xl relative grid md:grid-cols-1 grid-cols-1 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border border-border border-borderLight">
+      {/* <div className="w-full h-full overflow-hidden relative ">
         <span className="w-full h-full absolute left-0 top-0 bg-black/40 z-10"></span>
         <Image
           alt="graducation hat"
           fill={true}
-          className="object-cover object-top "
+          className="object-cover object-top hidden md:block  "
           src="https://admin.onlyeducation.co.in/uploads/photo_1624727828618_ee42ef2ec5cf_43ba67ca11.avif"
         />
-      </div>
-      <form className="my-8 p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
+      </div> */}
+      <form className=" p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstName">First name</Label>
@@ -173,7 +173,7 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
           />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer className="mb-4 w-full">
           <Label htmlFor="query">Query</Label>
           <Combobox />
         </LabelInputContainer>
@@ -209,7 +209,7 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
           {loading ? <div className="spinner"></div> : "Enquire now →"}
           <BottomGradient />
         </button>
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent md:my-4 h-[1px] w-full" />
       </form>
     </div>
   );

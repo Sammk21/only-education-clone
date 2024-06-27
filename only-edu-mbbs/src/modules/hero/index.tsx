@@ -62,7 +62,7 @@ const Hero = ({ data }: HeroProps) => {
   }, [query, data]);
   return (
     <section className=" relative h-[250px] sm:h-[450px]">
-      <div className="z-20 absolute w-full top-10 sm:top-24 flex flex-col items-center px-2">
+      <div className="z-20 absolute w-full top-10 sm:top-36 flex flex-col items-center px-2">
         <h1 className="mb-8 mt-0 sm:text-5xl text-2xl text-center font-extrabold tracking-tight leading-none   text-light">
           Right Guidance, Bright Future
         </h1>

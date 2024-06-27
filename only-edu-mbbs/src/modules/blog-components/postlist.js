@@ -15,8 +15,6 @@ export default function PostList({ post }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
 
-  // const label = post.label;
-
   return (
     <section>
       <div className="border-b border-b-borderLight dark:border-b-border mt-5">
@@ -43,7 +41,7 @@ export default function PostList({ post }) {
               href={`/articles/post/${post.slug}`}
               className="sm:w-[70%] w-[70%]"
             >
-              <h2 className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
+              <h2 className="font-semibold sm:text-xl text-sm mb-2 line-clamp-1 text-dark">
                 {post.title}
               </h2>
               <p

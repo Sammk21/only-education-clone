@@ -6,9 +6,10 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 import ArticleRail from "@/modules/article-rail";
+import NotificationRail from "@/modules/notification-rail";
 
 const HomePageQuery =
-  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image";
+  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image";
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
@@ -16,10 +17,12 @@ export default async function Home() {
   //  throw new Error("Test error");
 
   return (
-    <div className="pt-28 w-full overflow-hidden">
+    <div className="pt-16 w-full overflow-hidden">
       <div className="relative">
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />
+          <NotificationRail data={data.news} />
+
           <ExperienceRail data={data.experienceRail} />
           <TopUniRail data={data.topUniversities} />
           {/* <CircleFilled className="absolute lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  sm:w-[300px] sm:h-[300px] w-[250px] h-[250px] top-56 -right-[20%] opacity-25  -z-10" />
