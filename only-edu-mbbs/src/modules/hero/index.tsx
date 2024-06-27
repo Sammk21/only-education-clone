@@ -90,7 +90,7 @@ const Hero = ({ data }: HeroProps) => {
         src="https://admin.onlyeducation.co.in/uploads/iit_madras_0c402d7404.webp"
         alt=""
         fill={true}
-        className="object-cover object-bottom -z-10"
+        className="object-cover object-center -z-10"
       />
       <span className="w-full h-full rotate-180  absolute top-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 z-10"></span>
     </section>
