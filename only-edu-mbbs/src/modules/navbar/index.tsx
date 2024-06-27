@@ -50,9 +50,9 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             </ul>
           </div>
           {user.ok ? (
-            <span>hello, {user.data.firstName}</span>
+            <span>Hello, {user.data.firstName}</span>
           ) : (
-            <Link href={"/auth"}>
+            <Link href={"/auth/login"}>
               <Button
                 className="relative group/btn hover:bg-light"
                 variant={"outline"}

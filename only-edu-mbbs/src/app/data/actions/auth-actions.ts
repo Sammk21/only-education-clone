@@ -1,8 +1,8 @@
 "use server"
-import { IFormInput, Register } from "@/modules/account/components/register"
+import { IFormInput, IOtpInput, Register } from "@/modules/account/components/register"
 import { cookies } from "next/headers"
 import {z} from "zod"
-import { loginUserService, registerUserService } from "../services/auth-service"
+import { loginUserService, registerUserService, sendOtp, sendOtpService, updateVerifiedUserService, verifyOtpService} from "../services/auth-service"
 import { redirect } from "next/navigation"
 import { ILoginFormInput } from "@/modules/account/components/login"
 
@@ -31,11 +31,35 @@ identifier :z.string().email({
 })
 
 
+const InitialvalidateSchema = z.object({
+  firstName:z.string().min(3,{
+message:"first name is required"
+}) ,   
+lastName:z.string(),  
+phone:z.string().min(9,{
+  message:"enter 10 digit phone number"
+}),
+username:z.string() || z.undefined() ,
+email :z.string().email({
+    message:"email is required"
+}),
+password: z.string().min(8,{
+    message:"password is required"
+}),
+confirmPassword: z.string().min(8,{
+    message:"password doesn't match"
+}),
+
+})
+
 const RegisterSchema = z.object( {
 firstName:z.string().min(3,{
 message:"first name is required"
 }) ,   
 lastName:z.string(),  
+phone:z.string().min(9,{
+  message:"enter 10 digit phone number"
+}),
 username:z.string() || z.undefined() ,
 email :z.string().email({
     message:"email is required"
@@ -48,18 +72,65 @@ confirmPassword: z.string().min(8,{
 })
 })
 
-export async function registerUserAction(prevState:any,formData:IFormInput){
 
-   
-const validatedFields = RegisterSchema.safeParse({
+const OtpSchema = z.object({
+  otp :z.string().min(4,{
+    message:"Enter 4 digit otp"
+  })
+})
+
+
+export async function validateUserAction(prevState:any, formData:IFormInput){
+  const validatedFields =InitialvalidateSchema.safeParse({
     firstName: formData.firstName,
     lastName: formData.lastName,
+    phone: formData.phone,
     password: formData.password,
     confirmPassword: formData.confirmPassword,
     email: formData.email,
     username:formData.email
   });
- 
+
+   if (!validatedFields.success) {
+    return {
+        ...prevState,
+      zodErrors: validatedFields.error.flatten().fieldErrors,
+      strapiErrors: null,
+      message: "Missing Fields. Failed to Register.",
+    };
+  }
+  return validatedFields
+}
+
+
+export async function validateOtpAction(formData:IOtpInput){
+  const validatedOtp = OtpSchema.safeParse({
+    otp: formData.otp
+  });
+   if (!validatedOtp.success) {
+    return {
+      zodErrors: validatedOtp.error.flatten().fieldErrors,
+      strapiErrors: null,
+      message: "Missing Fields. Failed to Register.",
+    };
+  }
+ return validatedOtp
+}
+
+export async function registerUserAction(prevState:any,formData:IFormInput){
+
+ console.dir(formData)
+
+const validatedFields = RegisterSchema.safeParse({
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    phone: formData.phone,
+    password: formData.password,
+    confirmPassword: formData.confirmPassword,
+    email: formData.email,
+    username:formData.email
+  });
+
   if (!validatedFields.success) {
     return {
         ...prevState,
@@ -68,43 +139,77 @@ const validatedFields = RegisterSchema.safeParse({
       message: "Missing Fields. Failed to Register.",
     };
   }
+  
+  const responseData = await registerUserService(validatedFields.data);
 
+   if (responseData.error) {
+    return {
+      ...prevState,
+      strapiErrors: responseData.error,
+      zodErrors: null,
+      message: "Failed to Login.",
+    };
+  }
 
-const responseData = await registerUserService(validatedFields.data);
-
-
-if (!responseData) {
-  return {
-    ...prevState,
-    strapiErrors: null,
-    zodErrors: null,
-    message: "Ops! Something went wrong. Please try again.",
-  };
-}
-if (responseData.error) {
-  return {
-    ...prevState,
-    strapiErrors: responseData.error,
-    zodErrors: null,
-    message: "Failed to Register.",
-  };
-}
-cookies().set("jwt", responseData.jwt, config);
-redirect("/")
+  cookies().set("_jwt", responseData.jwt, config); //save jwt token before verification
+  const userId = responseData.user.id
+  const phone = validatedFields.data.phone
+  const success = true
+  return {success,userId, phone}
 }
 
+export const getOtp = async (phone: string) => {
+    //  const responseData = await sendOtpService(phone)
+   const responseData ={
+    Status:"success",
+    Details:"58f7e814-3479-11ef-8b60-0200cd936042"
+   }
+     if(responseData.Status === 'success'){
+      console.log("triggered")
+      return responseData
+     }
+  
+}
+export const verifyOtpAction = async (otpSessionId: string, formData:IOtpInput, userId:string ) => { 
+
+const validatedFields = OtpSchema.safeParse({
+   otp: formData.otp
+})
+ if (!validatedFields.success) {
+    return {
+      zodErrors: validatedFields.error.flatten().fieldErrors,
+      strapiErrors: null,
+      message: "Missing Fields. Failed to Register.",
+    };
+  }
+  // const responseData = await verifyOtpService(otpSessionId, validatedFields.data.otp)
+const responseData ={
+    Status:"success",
+    Details:"Otp Matched"
+   }
+  
+
+  if(responseData.Status === 'success'){
+    console.log("verification triggered")
+  const updatedUser = await updateVerifiedUserService(userId)
+  if(updatedUser.success){
+      // const authToken = cookies().get("_jwt_no_confirmed")?.value || "";
+      // cookies().set("jwt", authToken, config);
+    return {
+      success : true,
+      message: responseData.Details
+    } 
+  }
+  }
+  
+}
 
 export async function loginUserAction(prevState: any, formData: ILoginFormInput) {
-
-
 
   const validatedFields = LoginSchema.safeParse({
     identifier: formData.email,
     password: formData.password,
   });
-
-
-
   if (!validatedFields.success) {
     return {
       ...prevState,
@@ -123,10 +228,6 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
     };
   }
 
-  console.log(responseData)
-
-
-
   if (responseData.error) {
     return {
       ...prevState,
@@ -135,8 +236,6 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
       message: "Failed to Login.",
     };
   }
-  cookies().set("jwt", responseData.jwt, config);
-  redirect("/");
 }
 
 export async function logoutAction() {

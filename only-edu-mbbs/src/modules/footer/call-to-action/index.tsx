@@ -10,8 +10,8 @@ interface Props {
 const CallToAction = ({ data, title }: Props) => {
   return (
     <section className="my-12 sm:px-4">
-      <div className="py-4 bg-green-500 mx-auto w-full max-w-5xl rounded-2xl">
-        <div className="flex sm:flex-row flex-col items-center justify-around gap-x-5  text-dark">
+      <div className="py-4 bg-accent mx-auto w-full max-w-5xl rounded-2xl">
+        <div className="flex sm:flex-row flex-col items-center justify-around gap-x-5  text-light">
           <h1 className="lg:text-2xl text-sm">{data.title}</h1>
           <EnquiryDialog title={title} />
         </div>

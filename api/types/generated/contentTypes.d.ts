@@ -707,6 +707,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
+    username: Attribute.String;
     email: Attribute.Email &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
