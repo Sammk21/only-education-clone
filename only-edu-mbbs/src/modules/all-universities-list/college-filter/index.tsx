@@ -9,7 +9,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { updatedFilters } from "@/app/action";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { redirect } from "next/navigation";
 import ResetButton from "../resetButton";
 
 interface Option {

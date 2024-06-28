@@ -1,10 +1,11 @@
 "use server"
-import { IFormInput, IOtpInput, Register } from "@/modules/account/components/register"
 import { cookies } from "next/headers"
 import {z} from "zod"
 import { loginUserService, registerUserService, sendOtp, sendOtpService, updateVerifiedUserService, verifyOtpService} from "../services/auth-service"
 import { redirect } from "next/navigation"
 import { ILoginFormInput } from "@/modules/account/components/login"
+import { IFormInput } from "@/modules/account/components/register"
+import { IOtpInput } from "@/modules/account/components/otp"
 
 
 const config = {
@@ -31,28 +32,8 @@ identifier :z.string().email({
 })
 
 
-const InitialvalidateSchema = z.object({
-  firstName:z.string().min(3,{
-message:"first name is required"
-}) ,   
-lastName:z.string(),  
-phone:z.string().min(9,{
-  message:"enter 10 digit phone number"
-}),
-username:z.string() || z.undefined() ,
-email :z.string().email({
-    message:"email is required"
-}),
-password: z.string().min(8,{
-    message:"password is required"
-}),
-confirmPassword: z.string().min(8,{
-    message:"password doesn't match"
-}),
 
-})
-
-const RegisterSchema = z.object( {
+ const registerSchema = z.object( {
 firstName:z.string().min(3,{
 message:"first name is required"
 }) ,   
@@ -60,7 +41,7 @@ lastName:z.string(),
 phone:z.string().min(9,{
   message:"enter 10 digit phone number"
 }),
-username:z.string() || z.undefined() ,
+username:z.string() ,
 email :z.string().email({
     message:"email is required"
 }),
@@ -71,7 +52,6 @@ confirmPassword: z.string().min(8,{
     message:"password doesn't match"
 })
 })
-
 
 const OtpSchema = z.object({
   otp :z.string().min(4,{
@@ -80,48 +60,49 @@ const OtpSchema = z.object({
 })
 
 
-export async function validateUserAction(prevState:any, formData:IFormInput){
-  const validatedFields =InitialvalidateSchema.safeParse({
-    firstName: formData.firstName,
-    lastName: formData.lastName,
-    phone: formData.phone,
-    password: formData.password,
-    confirmPassword: formData.confirmPassword,
-    email: formData.email,
-    username:formData.email
-  });
+// export async function validateUserAction(prevState:any, formData:IFormInput){
+//   const validatedFields =InitialvalidateSchema.safeParse({
+//     firstName: formData.firstName,
+//     lastName: formData.lastName,
+//     phone: formData.phone,
+//     password: formData.password,
+//     confirmPassword: formData.confirmPassword,
+//     email: formData.email,
+//     username:formData.email
+//   });
 
-   if (!validatedFields.success) {
-    return {
-        ...prevState,
-      zodErrors: validatedFields.error.flatten().fieldErrors,
-      strapiErrors: null,
-      message: "Missing Fields. Failed to Register.",
-    };
-  }
-  return validatedFields
-}
+//    if (!validatedFields.success) {
+//     return {
+//         ...prevState,
+//       zodErrors: validatedFields.error.flatten().fieldErrors,
+//       strapiErrors: null,
+//       message: "Missing Fields. Failed to Register.",
+//     };
+//   }
+//   return validatedFields
+// }
 
 
-export async function validateOtpAction(formData:IOtpInput){
-  const validatedOtp = OtpSchema.safeParse({
-    otp: formData.otp
-  });
-   if (!validatedOtp.success) {
-    return {
-      zodErrors: validatedOtp.error.flatten().fieldErrors,
-      strapiErrors: null,
-      message: "Missing Fields. Failed to Register.",
-    };
-  }
- return validatedOtp
-}
+// export async function validateOtpAction(formData:IOtpInput){
+//   const validatedOtp = OtpSchema.safeParse({
+//     otp: formData.otp
+//   });
+//    if (!validatedOtp.success) {
+//     return {
+//       zodErrors: validatedOtp.error.flatten().fieldErrors,
+//       strapiErrors: null,
+//       message: "Missing Fields. Failed to Register.",
+//     };
+//   }
+//  return validatedOtp
+// }
 
 export async function registerUserAction(prevState:any,formData:IFormInput){
 
- console.dir(formData)
 
-const validatedFields = RegisterSchema.safeParse({
+  console.log(formData)
+
+const validatedFields = registerSchema.safeParse({
     firstName: formData.firstName,
     lastName: formData.lastName,
     phone: formData.phone,
@@ -139,10 +120,10 @@ const validatedFields = RegisterSchema.safeParse({
       message: "Missing Fields. Failed to Register.",
     };
   }
-  
+
   const responseData = await registerUserService(validatedFields.data);
 
-   if (responseData.error) {
+  if (responseData.error) {
     return {
       ...prevState,
       strapiErrors: responseData.error,
@@ -150,28 +131,34 @@ const validatedFields = RegisterSchema.safeParse({
       message: "Failed to Login.",
     };
   }
-
-  cookies().set("_jwt", responseData.jwt, config); //save jwt token before verification
+  const params = new URLSearchParams();
   const userId = responseData.user.id
-  const phone = validatedFields.data.phone
-  const success = true
-  return {success,userId, phone}
-}
-
-export const getOtp = async (phone: string) => {
-    //  const responseData = await sendOtpService(phone)
-   const responseData ={
-    Status:"success",
-    Details:"58f7e814-3479-11ef-8b60-0200cd936042"
+   if (userId){
+  params.append('verify', userId)
    }
-     if(responseData.Status === 'success'){
-      console.log("triggered")
-      return responseData
-     }
-  
-}
-export const verifyOtpAction = async (otpSessionId: string, formData:IOtpInput, userId:string ) => { 
+  cookies().set("_jwt", responseData.jwt, config);
+  const otpResponseData = await sendOtpService(validatedFields.data.phone)
+    if(otpResponseData.Status === "Success") {
+        cookies().set("otp_session",otpResponseData.Details , config);
+        const lastFourDigits = responseData.user.phone;
+      return {
+        phone:lastFourDigits,
+        userId: responseData.user.id,
+        success:true,
+        details:otpResponseData.Details
+      }
+    }
 
+  // console.log(otpResponseData)
+
+
+}
+
+
+export const verifyOtpAction = async (otpSession: string | undefined, formData:IOtpInput, userId:string ) =>{
+
+  if(!otpSession) return
+  
 const validatedFields = OtpSchema.safeParse({
    otp: formData.otp
 })
@@ -182,24 +169,25 @@ const validatedFields = OtpSchema.safeParse({
       message: "Missing Fields. Failed to Register.",
     };
   }
-  // const responseData = await verifyOtpService(otpSessionId, validatedFields.data.otp)
-const responseData ={
-    Status:"success",
-    Details:"Otp Matched"
-   }
-  
+  const responseData = await verifyOtpService(otpSession, validatedFields.data.otp)
 
-  if(responseData.Status === 'success'){
+  if(responseData.Status === 'Success'){
     console.log("verification triggered")
   const updatedUser = await updateVerifiedUserService(userId)
   if(updatedUser.success){
-      // const authToken = cookies().get("_jwt_no_confirmed")?.value || "";
-      // cookies().set("jwt", authToken, config);
+      cookies().set("otp_session", "", config);
+    console.log(updatedUser)
     return {
       success : true,
       message: responseData.Details
     } 
   }
+  }else{
+    return{
+    success : false,
+   message: responseData.Details
+    }
+     
   }
   
 }
@@ -241,4 +229,10 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
 export async function logoutAction() {
   cookies().set("jwt", "", { ...config, maxAge: 0 });
   redirect("/auth");
+}
+
+
+
+function getLastFourLetters(str:string) {
+  return str.slice(-4);
 }

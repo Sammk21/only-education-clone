@@ -42,6 +42,9 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
+
+  console.log(phone)
+
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
@@ -55,11 +58,10 @@ export async function sendOtpService(phone: string) {
 }
 
 // Verify OTP Service
-export async function verifyOtpService(otpSessionId: string, otpEnteredByUser: string) {
+export async function verifyOtpService(otpSession: string, otpEnteredByUser: string) {
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
-    const response = await axios.get(`https://2factor.in/API/V1/${apiKey}/SMS/VERIFY/${otpSessionId}/${otpEnteredByUser}`);
-
+    const response = await axios.get(`https://2factor.in/API/V1/${apiKey}/SMS/VERIFY/${otpSession}/${otpEnteredByUser}`);
     return response.data;
   } catch (error) {
     console.error("Verify OTP Service Error:", error);
@@ -69,15 +71,22 @@ export async function verifyOtpService(otpSessionId: string, otpEnteredByUser: s
 
 // Update Verified User Service
 export async function updateVerifiedUserService(userId: string) {
-  try {
-    const response = await axios.put(`${baseUrl}/api/users/${userId}`, {
-      confirmed: true,
-    });
 
-    return { success: true };
+  try {
+    const response = await axios.put(`${baseUrl}/api/users/${userId}?populate=true`,{
+      "confirmed": true,
+    });
+    return{
+      success:true,
+      error:false,
+      userId:userId
+    }
   } catch (error) {
-    console.error("Update Verified User Service Error:", error);
-    throw new Error("Failed to update user verification. Please try again later.");
+    return{
+      success:true,
+      error:false,
+      userId:userId
+    }
   }
 }
 

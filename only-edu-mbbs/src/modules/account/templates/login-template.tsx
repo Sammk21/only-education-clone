@@ -10,6 +10,11 @@ export enum LOGIN_VIEW {
   OTP = "otp",
 }
 
+interface response {
+  success: boolean;
+  details: string;
+}
+
 const LoginTemplate = () => {
   const [currentView, setCurrentView] = useState("sign-in");
 
@@ -20,7 +25,8 @@ const LoginTemplate = () => {
       ) : currentView === LOGIN_VIEW.REGISTER ? (
         <Register setCurrentView={setCurrentView} />
       ) : (
-        <Otp setCurrentView={setCurrentView} />
+        <></>
+        // <Otp setCurrentView={setCurrentView} />
       )}
     </div>
   );

@@ -134,7 +134,7 @@ const Dropdown = ({
         }
         return null;
       })}
-      <Link href="universities-list" className="">
+      <Link href="/universities-list" className="">
         <span className="text-blue-500 underline text-sm"> view all</span>
       </Link>
       {subMenuLinks.map((submenu) => {

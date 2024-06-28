@@ -2,20 +2,25 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { cn } from "@/util/cn";
-import { SubmitHandler, useForm } from "react-hook-form";
 import {
-  getOtp,
   registerUserAction,
-  verifyOtpAction,
+  // verifyOtpAction,
 } from "@/app/data/actions/auth-actions";
-import { StrapiErrors, StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
-import { useState } from "react";
-import { toast } from "sonner";
-import Link from "next/link";
 import { LOGIN_VIEW } from "../../templates/login-template";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const INITIAL_STATE = {
   data: null,
+};
+
+interface response {
+  success: boolean;
+  details: string;
+}
+
+type Props = {
+  setCurrentView: (view: LOGIN_VIEW) => void;
 };
 
 export interface IFormInput {
@@ -27,67 +32,19 @@ export interface IFormInput {
   confirmPassword?: string;
 }
 
-export interface IOtpInput {
-  otp: string;
-}
-
-type Props = {
-  setCurrentView: (view: LOGIN_VIEW) => void;
-};
-
-//using react hook forms for frontend validation
-
 export function Register({ setCurrentView }: Props) {
-  const [strapiError, setStrapiError] = useState<StrapiErrorsProps | null>(
-    null
-  );
-  const [otpSessionId, setOtpSessionId] = useState<string>("");
-  const [userId, setUserId] = useState<string>("");
-
   const {
     register,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm<IFormInput>();
 
-  const {
-    register: registerOtp,
-    formState: { errors: otpErrors },
-    handleSubmit: handleOtpSubmit,
-  } = useForm<IOtpInput>();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    try {
-      const response = await registerUserAction(INITIAL_STATE, data);
-      if (response.success) {
-        setCurrentView(LOGIN_VIEW.OTP);
-        setUserId(response.userId);
-        const otpResponse = await getOtp(response.phone);
-        if (otpResponse?.Status === "success") {
-          setOtpSessionId(otpResponse.Details);
-          toast.success("OTP has been sent successfully");
-        }
-      } else {
-        setStrapiError(response.error);
-      }
-    } catch (error) {
-      console.error("Error occurred:", error);
-    }
-  };
-
-  const onOtpSubmit: SubmitHandler<IOtpInput> = async (data) => {
-    const otpVerificationResponse = await verifyOtpAction(
-      otpSessionId,
-      data,
-      userId
-    );
-    if (otpVerificationResponse?.success) {
-      toast.success("OTP verified successfully");
-      // router.push("/");
-    } else {
-      // Handle OTP verification errors here
-      toast.error("OTP verification failed");
+    const response = await registerUserAction(INITIAL_STATE, data);
+    if (response.success === true) {
+      router.push(`/verify?dh=${response.userId}`);
     }
   };
 
@@ -110,25 +67,9 @@ export function Register({ setCurrentView }: Props) {
               id="firstName"
               placeholder="Tyler"
               type="text"
-              className={`border ${errors.firstName ? "border-error" : ""}`}
-              {...register("firstName", {
-                required: true,
-                maxLength: 15,
-                minLength: 2,
-                pattern: /^[A-Za-z]+$/i,
-              })}
-              aria-invalid={errors.firstName ? "true" : "false"}
+              {...register("firstName")}
+              // aria-invalid={firstName ? "true" : "false"}
             />
-            {errors.firstName?.type === "pattern" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                Enter a valid name
-              </p>
-            )}
-            {errors.firstName?.type === "required" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                First name is required
-              </p>
-            )}
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastName">Last name</Label>
@@ -136,24 +77,9 @@ export function Register({ setCurrentView }: Props) {
               id="lastName"
               placeholder="Durden"
               type="text"
-              className={`border ${errors.lastName ? "border-error" : ""}`}
-              {...register("lastName", {
-                maxLength: 15,
-                minLength: 2,
-                pattern: /^[A-Za-z]+$/i,
-              })}
-              aria-invalid={errors.lastName ? "true" : "false"}
+              {...register("lastName")}
+              // aria-invalid={lastName ? "true" : "false"}
             />
-            {errors.lastName?.type === "pattern" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                Enter a valid name
-              </p>
-            )}
-            {errors.lastName?.type === "required" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                Last name is required
-              </p>
-            )}
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
@@ -164,30 +90,13 @@ export function Register({ setCurrentView }: Props) {
             <Input
               id="phone"
               type="tel"
-              className={`border relative pl-14 ${
-                errors.phone ? "border-error" : ""
-              }`}
-              {...register("phone", {
-                required: true,
-                minLength: 2,
-                maxLength: 10,
-              })}
-              aria-invalid={errors.phone ? "true" : "false"}
+              {...register("phone")}
+              // aria-invalid={phone ? "true" : "false"}
             />
             <span className="h-full flex pt-px justify-center text-accent items-center absolute top-0 left-0 text-sm px-1">
               <IndianFlagSvg /> +91
             </span>
           </div>
-          {errors.phone?.type === "pattern" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Enter a valid phone
-            </p>
-          )}
-          {errors.phone?.type === "required" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Phone no. is required
-            </p>
-          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">
@@ -197,23 +106,10 @@ export function Register({ setCurrentView }: Props) {
             id="email"
             placeholder="projectmayhem@fc.com"
             type="email"
-            className={`border ${errors.email ? "border-error" : ""}`}
-            {...register("email", {
-              required: true,
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
-            })}
-            aria-invalid={errors.email ? "true" : "false"}
+            {...register("email")}
+
+            // aria-invalid={email ? "true" : "false"}
           />
-          {errors.email?.type === "pattern" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Enter a valid email address
-            </p>
-          )}
-          {errors.email?.type === "required" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Email is required
-            </p>
-          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">
@@ -223,23 +119,9 @@ export function Register({ setCurrentView }: Props) {
             id="password"
             placeholder="••••••••"
             type="password"
-            className={`border ${errors.password ? "border-error" : ""}`}
-            {...register("password", {
-              required: true,
-              minLength: 8,
-            })}
-            aria-invalid={errors.password ? "true" : "false"}
+            {...register("password")}
+            // aria-invalid={password ? "true" : "false"}
           />
-          {errors.password?.type === "required" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Password is required
-            </p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Password must be at least 8 characters
-            </p>
-          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-8">
           <Label htmlFor="confirmPassword">
@@ -249,18 +131,10 @@ export function Register({ setCurrentView }: Props) {
             id="confirmPassword"
             placeholder="••••••••"
             type="password"
-            className={`border ${errors.confirmPassword ? "border-error" : ""}`}
-            {...register("confirmPassword", {
-              required: true,
-              validate: (value) => value === watch("password"),
-            })}
-            aria-invalid={errors.confirmPassword ? "true" : "false"}
+            {...register("confirmPassword")}
+
+            // aria-invalid={confirmPassword ? "true" : "false"}
           />
-          {errors.confirmPassword?.type === "validate" && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Passwords do not match
-            </p>
-          )}
         </LabelInputContainer>
         <button
           className="bg-gradient-to-br disabled:bg-dark/50 relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium"
@@ -281,42 +155,9 @@ export function Register({ setCurrentView }: Props) {
             </span>
             <BottomGradient />
           </button> */}
-          <StrapiErrors error={strapiError} />
+          {/* <Strapierror={strapiError} /> */}
         </div>
       </form>
-
-      {/* <form className="my-8" onSubmit={handleOtpSubmit(onOtpSubmit)}>
-          <LabelInputContainer className="mb-4">
-            <Label htmlFor="otp">
-              Enter OTP <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="otp"
-              placeholder="Enter the OTP sent to your phone"
-              type="text"
-              className={`border ${otpErrors.otp ? "border-error" : ""}`}
-              {...registerOtp("otp", {
-                required: true,
-                minLength: 4,
-                maxLength: 4,
-              })}
-              aria-invalid={otpErrors.otp ? "true" : "false"}
-            />
-            {otpErrors.otp?.type === "required" && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                OTP is required
-              </p>
-            )}
-          </LabelInputContainer>
-          <button
-            className="bg-gradient-to-br relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium"
-            type="submit"
-          >
-            Verify OTP &rarr;
-            <BottomGradient />
-          </button>
-        </form> */}
-
       <span className="w-full flex justify-center items-center gap-x-2 text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
         <span> Already a member? </span>
         <span

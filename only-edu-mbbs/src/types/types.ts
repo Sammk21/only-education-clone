@@ -249,6 +249,12 @@ export interface SearchParamsProps {
 
 }
 
+export interface searchParamUserId{
+  searchParams:{
+    dh:string
+  }
+}
+
 export interface UserType{
   ok?: boolean,
   data?: null, 

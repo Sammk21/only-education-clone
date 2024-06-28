@@ -9,7 +9,7 @@ import MySideBar from "@/modules/navbar/components/Sidebar";
 import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
-
+import { getUserMeLoader } from "./data/services/get-user-loader";
 
 const inter = Roboto({
   subsets: ["cyrillic"],
@@ -30,7 +30,6 @@ export default async function RootLayout({
   const navData = await getStrapiData(
     "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][country]=true&[populate][dropdown][populate][subMenuLinks][populate][university]=*&[populate][footer][populate][footerColumns][populate][links][populate]=true"
   );
-
   return (
     <html lang="en">
       <head>

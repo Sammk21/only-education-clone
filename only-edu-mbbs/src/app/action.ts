@@ -1,6 +1,7 @@
 'use server'
 import { flattenAttributes } from "@/utils/utils";
 import { redirect } from "next/navigation";
+import AES from 'crypto-js/aes';
 
 
  
@@ -37,3 +38,4 @@ export const deleteFilters = async (event: React.FormEvent) => {
    event.preventDefault();
    redirect(`/universities-list`)
 }
+
