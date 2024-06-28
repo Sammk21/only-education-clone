@@ -9,6 +9,9 @@ import {
 import { LOGIN_VIEW } from "../../templates/login-template";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "@/app/data/zod/zod-schema";
+import { toast } from "sonner";
 
 const INITIAL_STATE = {
   data: null,
@@ -43,7 +46,9 @@ export function Register({ setCurrentView }: Props) {
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const response = await registerUserAction(INITIAL_STATE, data);
+
     if (response.success === true) {
+      toast.success("otp has been sent successfully");
       router.push(`/verify?dh=${response.userId}`);
     }
   };
@@ -88,6 +93,7 @@ export function Register({ setCurrentView }: Props) {
           </Label>
           <div className="relative">
             <Input
+              className="pl-14"
               id="phone"
               type="tel"
               {...register("phone")}

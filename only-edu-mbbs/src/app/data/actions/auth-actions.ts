@@ -6,6 +6,7 @@ import { redirect } from "next/navigation"
 import { ILoginFormInput } from "@/modules/account/components/login"
 import { IFormInput } from "@/modules/account/components/register"
 import { IOtpInput } from "@/modules/account/components/otp"
+import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema"
 
 
 const config = {
@@ -17,90 +18,7 @@ const config = {
 };
 
 
- const LoginSchema = z.object( {
-identifier :z.string().email({
-    message:"email is required"
-}),
- password: z
-    .string()
-    .min(6, {
-      message: "Password must have at least 6 or more characters",
-    })
-    .max(100, {
-      message: "Password must be between 6 and 100 characters",
-    }),
-})
-
-
-
- const registerSchema = z.object( {
-firstName:z.string().min(3,{
-message:"first name is required"
-}) ,   
-lastName:z.string(),  
-phone:z.string().min(9,{
-  message:"enter 10 digit phone number"
-}),
-username:z.string() ,
-email :z.string().email({
-    message:"email is required"
-}),
-password: z.string().min(8,{
-    message:"password is required"
-}),
-confirmPassword: z.string().min(8,{
-    message:"password doesn't match"
-})
-})
-
-const OtpSchema = z.object({
-  otp :z.string().min(4,{
-    message:"Enter 4 digit otp"
-  })
-})
-
-
-// export async function validateUserAction(prevState:any, formData:IFormInput){
-//   const validatedFields =InitialvalidateSchema.safeParse({
-//     firstName: formData.firstName,
-//     lastName: formData.lastName,
-//     phone: formData.phone,
-//     password: formData.password,
-//     confirmPassword: formData.confirmPassword,
-//     email: formData.email,
-//     username:formData.email
-//   });
-
-//    if (!validatedFields.success) {
-//     return {
-//         ...prevState,
-//       zodErrors: validatedFields.error.flatten().fieldErrors,
-//       strapiErrors: null,
-//       message: "Missing Fields. Failed to Register.",
-//     };
-//   }
-//   return validatedFields
-// }
-
-
-// export async function validateOtpAction(formData:IOtpInput){
-//   const validatedOtp = OtpSchema.safeParse({
-//     otp: formData.otp
-//   });
-//    if (!validatedOtp.success) {
-//     return {
-//       zodErrors: validatedOtp.error.flatten().fieldErrors,
-//       strapiErrors: null,
-//       message: "Missing Fields. Failed to Register.",
-//     };
-//   }
-//  return validatedOtp
-// }
-
 export async function registerUserAction(prevState:any,formData:IFormInput){
-
-
-  console.log(formData)
 
 const validatedFields = registerSchema.safeParse({
     firstName: formData.firstName,
@@ -112,6 +30,8 @@ const validatedFields = registerSchema.safeParse({
     username:formData.email
   });
 
+  console.log(validatedFields)
+
   if (!validatedFields.success) {
     return {
         ...prevState,
@@ -122,6 +42,8 @@ const validatedFields = registerSchema.safeParse({
   }
 
   const responseData = await registerUserService(validatedFields.data);
+
+  console.log(responseData)
 
   if (responseData.error) {
     return {
@@ -148,10 +70,6 @@ const validatedFields = registerSchema.safeParse({
         details:otpResponseData.Details
       }
     }
-
-  // console.log(otpResponseData)
-
-
 }
 
 
@@ -172,11 +90,9 @@ const validatedFields = OtpSchema.safeParse({
   const responseData = await verifyOtpService(otpSession, validatedFields.data.otp)
 
   if(responseData.Status === 'Success'){
-    console.log("verification triggered")
   const updatedUser = await updateVerifiedUserService(userId)
   if(updatedUser.success){
-      cookies().set("otp_session", "", config);
-    console.log(updatedUser)
+      cookies().set("otp_session", "", {...config, maxAge: 0});
     return {
       success : true,
       message: responseData.Details
@@ -216,6 +132,7 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
     };
   }
 
+
   if (responseData.error) {
     return {
       ...prevState,
@@ -224,10 +141,11 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
       message: "Failed to Login.",
     };
   }
+   cookies().set("_jwt", responseData.jwt, config);
 }
 
 export async function logoutAction() {
-  cookies().set("jwt", "", { ...config, maxAge: 0 });
+  cookies().set("_jwt", "", { ...config, maxAge: 0 });
   redirect("/auth");
 }
 
