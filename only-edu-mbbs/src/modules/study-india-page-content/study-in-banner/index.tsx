@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const StudyInBanner = () => {
@@ -18,9 +19,12 @@ const StudyInBanner = () => {
             academic dreams by providing expert guidance and admission
             assistance to top-notch Indian institutions.
           </h4>
-          <button className="w-fit mt-4 px-4  py-2   bg-blue-500 text-light rounded-full text-sm">
+          <Link
+            href="/contact-us"
+            className="w-fit mt-4 px-4  py-2   bg-blue-500 text-light rounded-full text-sm"
+          >
             Contact now
-          </button>
+          </Link>
         </div>
       </div>
       <div className="py-6 flex justify-center col-span-3">

@@ -45,7 +45,7 @@ const WhyAbroad = ({ data }: Props) => {
               <ul className="flex flex-col gap-y-10">
                 {data.qna.map((item) => (
                   <li key={item.id}>
-                    <h4 className="leading-8 text-3xl  mb-3">
+                    <h4 className="leading-8 text-2xl  mb-3">
                       {item.Question}
                     </h4>
                     <p className="text-sm text-accent">{item.Answer}</p>

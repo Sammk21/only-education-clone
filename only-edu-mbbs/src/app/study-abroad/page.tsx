@@ -28,6 +28,7 @@ const StudyMbbsAbroad = async () => {
       <section className="pt-2 text-dark  mx-auto overflow-hidden ">
         <CountrySelect />
         {/* <VideoPlayer /> */}
+
         <WhyAbroad data={whyAbroad} />
         <ElegibilityCriteriaTable data={eligibilityTable} />
       </section>

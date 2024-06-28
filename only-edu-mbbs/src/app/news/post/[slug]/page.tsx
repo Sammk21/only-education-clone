@@ -57,8 +57,8 @@ export default async function Blog({ params }: { params: { slug: string } }) {
 
   const recommendedQuery = `/api/news?filters[recommendedArticle][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
-  const recommended =
-    recommendedData.data.length > 0 ? recommendedData.data[0] : null;
+  // const recommended =
+  //   recommendedData.data.length > 0 ? recommendedData.data[0] : null;
 
   return (
     <div className=" w-full ">
@@ -74,21 +74,23 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             >
               <header className="mb-4 lg:mb-6 not-format">
                 <address className="flex items-center mb-6 not-italic"></address>
-                <h1
-                  className={`${merriweather.className} text-3xl font-extrabold leading-tight text-dark lg:mb-6 lg:text-4xl dark:text-light mb-8`}
-                >
-                  {title}
-                </h1>
-                <div className=" flex  items-center mr-3 text-sm text-dark dark:text-light mb-2"></div>
+                <div className="relative mb-16">
+                  <div>
+                    <h1
+                      className={`${merriweather.className} text-3xl font-extrabold leading-tight text-dark lg:mb-6 lg:text-4xl dark:text-light mb-8`}
+                    >
+                      {title}
+                    </h1>
+                  </div>
 
-                <div>
-                  <Image
-                    src={baseUrl + image.url}
-                    alt=""
-                    width={100}
-                    height={100}
-                    className="w-full aspect-video  "
-                  />
+                  <div className="aspect-video relative">
+                    <Image
+                      src={baseUrl + image.url}
+                      alt=""
+                      fill={true}
+                      className="object-cover object-center  "
+                    />
+                  </div>
                 </div>
               </header>
               {parse(ckeditor_content)}

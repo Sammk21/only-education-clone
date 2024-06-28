@@ -87,37 +87,13 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                           </Link>
                         </li>
                       ))}
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
-                        <Link
-                          className="pl-3"
-                          href=""
-                          onClick={handleLinkClick}
-                        >
-                          IIT Mumbai
-                        </Link>
-                      </li>
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
-                        <Link
-                          href="#"
-                          className="pl-3"
-                          onClick={handleLinkClick}
-                        >
-                          Harvard university
-                        </Link>
-                      </li>
-                      <li className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2">
-                        <Link
-                          href="#"
-                          className="pl-3"
-                          onClick={handleLinkClick}
-                        >
-                          IIT Madras
-                        </Link>
-                      </li>
                     </ul>
-                    <p className="mt-1 ml-6 text-blue-500 underline mb-3 flex items-center gap-x-1">
+                    <Link
+                      href="universities-list"
+                      className="mt-1 ml-6 text-blue-500 underline mb-3 flex items-center gap-x-1"
+                    >
                       view all <GoArrowRight className="-rotate-45" />
-                    </p>
+                    </Link>
                   </div>
                 ))}
               </div>
