@@ -39,3 +39,10 @@ export const OtpSchema = z.object({
     message: "Enter 4 digit otp",
   }),
 });
+
+export const EnquirySchema = z.object({
+  id: z.number(),
+  slug: z.string(),
+  level: z.string(),
+  specialization: z.string(),
+});
