@@ -11,12 +11,17 @@ export async function enquiryService(
   specicalization: string
 ) {
   try {
-    const response = await axios.post(
-      `${baseUrl}/api/enquiry/${userId}?populate=true`,
-      {
-        confirmed: true,
-      }
-    );
+
+    const response = await axios.post(`${baseUrl}/api/enquiries/`, {
+      data: {
+        users_permissions_user: [userId],
+        enquires: {
+          university: [uniSlug],
+          level: level,
+          specicalization: specicalization,
+        },
+      },
+    });
     return {
       success: true,
       error: false,

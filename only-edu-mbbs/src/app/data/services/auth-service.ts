@@ -44,8 +44,6 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
-  console.log(phone);
-
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
