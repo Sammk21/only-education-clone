@@ -6,7 +6,10 @@ export async function getAuthToken() {
   return authToken;
 }
 
-export async function getOtpSession(){
+export async function getOtpSessionAndUserId(){
 const otpSession = cookies().get("otp_session")?.value;
-return otpSession;
+const userId = cookies().get("_usr_id_")?.value
+return {
+  otpSession,userId
+};
 }

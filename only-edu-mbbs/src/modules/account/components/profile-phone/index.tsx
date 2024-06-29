@@ -1,57 +1,53 @@
-"use client"
-
-import { Customer } from "@medusajs/medusa"
-import React, { useEffect } from "react"
-import { useFormState } from "react-dom"
-
-import Input from "@modules/common/components/input"
-
-import AccountInfo from "../account-info"
-import { updateCustomerPhone } from "@modules/account/actions"
+"use client";
+import React from "react";
+import { Input } from "@/components/ui/input";
+import AccountInfo from "../account-info";
+import { UserType } from "@/types/types";
+import { Label } from "@/components/ui/label";
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">
-}
+  user: Omit<UserType, "password_hash">;
+};
 
-const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
-  const [successState, setSuccessState] = React.useState(false)
+const ProfilePhone: React.FC<MyInformationProps> = ({ user }) => {
+  const [successState, setSuccessState] = React.useState(false);
 
-  const [state, formAction] = useFormState(updateCustomerPhone, {
-    error: false,
-    success: false,
-  })
+  // const [state, formAction] = useFormState(updateCustomerPhone, {
+  //   error: false,
+  //   success: false,
+  // })
 
   const clearState = () => {
-    setSuccessState(false)
-  }
+    setSuccessState(false);
+  };
 
-  useEffect(() => {
-    setSuccessState(state.success)
-  }, [state])
+  // useEffect(() => {
+  //   setSuccessState(state.success)
+  // }, [state])
 
   return (
-    <form action={formAction} className="w-full">
+    <form className="w-full">
       <AccountInfo
         label="Phone"
-        currentInfo={`${customer.phone}`}
-        isSuccess={successState}
-        isError={!!state.error}
-        errorMessage={state.error}
+        currentInfo={`${user.data?.username}`}
+        isSuccess={false}
+        isError={true}
+        errorMessage={user.error}
         clearState={clearState}
       >
-        <div className="grid grid-cols-1 gap-y-2">
+        <div className="grid grid-cols-1 gap-y-2 -z-10">
+          <Label>Phone</Label>
           <Input
-            label="Phone"
             name="phone"
             type="phone"
             autoComplete="phone"
             required
-            defaultValue={customer.phone}
+            defaultValue={user.data?.username}
           />
         </div>
       </AccountInfo>
     </form>
-  )
-}
+  );
+};
 
-export default ProfileEmail
+export default ProfilePhone;

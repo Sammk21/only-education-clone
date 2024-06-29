@@ -12,5 +12,7 @@ export default async function AccountPageLayout({
 }) {
   const user = await getUserMeLoader();
 
-  return <AccountLayout>{user.ok ? dashboard : login}</AccountLayout>;
+  return (
+    <AccountLayout user={user}>{user.ok ? dashboard : login}</AccountLayout>
+  );
 }

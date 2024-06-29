@@ -9,9 +9,10 @@ import {
 import { LOGIN_VIEW } from "../../templates/login-template";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "@/app/data/zod/zod-schema";
 import { toast } from "sonner";
+import { IconBrandGoogle } from "@tabler/icons-react";
+import { signIn, getSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 const INITIAL_STATE = {
   data: null,
@@ -47,6 +48,7 @@ export function Register({ setCurrentView }: Props) {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const response = await registerUserAction(INITIAL_STATE, data);
 
+    console.log(response);
     if (response.success === true) {
       toast.success("otp has been sent successfully");
       router.push(`/verify?dh=${response.userId}`);
@@ -151,16 +153,21 @@ export function Register({ setCurrentView }: Props) {
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         <div className="flex flex-col space-y-4">
-          {/* <button
+          <Link
+            href="/api/auth/signin"
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-accent/20 dark:bg-foreground dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
           >
             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
               Google
             </span>
             <BottomGradient />
-          </button> */}
+          </Link>
           {/* <Strapierror={strapiError} /> */}
         </div>
       </form>
@@ -173,6 +180,9 @@ export function Register({ setCurrentView }: Props) {
           Sign in here
         </span>
       </span>
+      {/* {status === "authenticated" && session.user && (
+        <p>Signed in as {session?.user.email}</p>
+      )} */}
     </div>
   );
 }

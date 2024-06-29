@@ -1,60 +1,65 @@
-"use client"
+"use client";
+import React, { useEffect } from "react";
+import { useFormState } from "react-dom";
 
-import { Customer } from "@medusajs/medusa"
-import React, { useEffect } from "react"
-import { useFormState } from "react-dom"
+import { Input } from "@/components/ui/input";
+// import { updateCustomerName } from "@modules/account/actions"
 
-import Input from "@modules/common/components/input"
-import { updateCustomerName } from "@modules/account/actions"
-
-import AccountInfo from "../account-info"
+import AccountInfo from "../account-info";
+import { UserType } from "@/types/types";
+import { Label } from "@/components/ui/label";
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">
-}
+  user: Omit<UserType, "password_hash">;
+};
 
-const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
-  const [successState, setSuccessState] = React.useState(false)
+const ProfileName: React.FC<MyInformationProps> = ({ user }) => {
+  const [successState, setSuccessState] = React.useState(false);
 
-  const [state, formAction] = useFormState(updateCustomerName, {
-    error: false,
-    success: false,
-  })
+  // const [state, formAction] = useFormState(updateCustomerName, {
+  //   error: false,
+  //   success: false,
+  // })
 
   const clearState = () => {
-    setSuccessState(false)
-  }
+    setSuccessState(false);
+  };
 
-  useEffect(() => {
-    setSuccessState(state.success)
-  }, [state])
+  // useEffect(() => {
+  //   setSuccessState(state.success)
+  // }, [state])
 
   return (
-    <form action={formAction} className="w-full overflow-visible">
+    <form className="w-full overflow-visible ">
       <AccountInfo
         label="Name"
-        currentInfo={`${customer.first_name} ${customer.last_name}`}
-        isSuccess={successState}
-        isError={!!state?.error}
+        currentInfo={`${user.data?.firstName} ${user.data?.lastName}`}
+        isSuccess={false}
+        isError={true}
+        errorMessage={user.error}
         clearState={clearState}
       >
-        <div className="grid grid-cols-2 gap-x-4">
-          <Input
-            label="First name"
-            name="first_name"
-            required
-            defaultValue={customer.first_name}
-          />
-          <Input
-            label="Last name"
-            name="last_name"
-            required
-            defaultValue={customer.last_name}
-          />
+        <div className="grid grid-cols-2 gap-x-4 -z-10">
+          <div>
+            <Label>First name</Label>
+            <Input
+              name="firstName"
+              required
+              defaultValue={user.data?.firstName}
+            />
+          </div>
+          <div>
+            <Label>Last name</Label>
+            <Input
+              name="lastName"
+              required
+              defaultValue={user.data?.lastName}
+            />
+          </div>
         </div>
       </AccountInfo>
     </form>
-  )
-}
+  );
+};
 
-export default ProfileName
+export default ProfileName;

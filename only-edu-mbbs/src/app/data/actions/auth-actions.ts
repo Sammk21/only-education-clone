@@ -1,13 +1,17 @@
 "use server"
 import { cookies } from "next/headers"
-import {z} from "zod"
-import { loginUserService, registerUserService, sendOtp, sendOtpService, updateVerifiedUserService, verifyOtpService} from "../services/auth-service"
-import { redirect } from "next/navigation"
-import { ILoginFormInput } from "@/modules/account/components/login"
-import { IFormInput } from "@/modules/account/components/register"
-import { IOtpInput } from "@/modules/account/components/otp"
-import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema"
-
+import {
+  loginUserService,
+  registerUserService,
+  sendOtpService,
+  updateVerifiedUserService,
+  verifyOtpService,
+} from "../services/auth-service";
+import { redirect } from "next/navigation";
+import { ILoginFormInput } from "@/modules/account/components/login";
+import { IFormInput } from "@/modules/account/components/register";
+import { IOtpInput } from "@/modules/account/components/otp";
+import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -17,24 +21,20 @@ const config = {
   secure: process.env.NODE_ENV === "production",
 };
 
-
-export async function registerUserAction(prevState:any,formData:IFormInput){
-
-const validatedFields = registerSchema.safeParse({
+export async function registerUserAction(prevState: any, formData: IFormInput) {
+  const validatedFields = registerSchema.safeParse({
     firstName: formData.firstName,
     lastName: formData.lastName,
     phone: formData.phone,
     password: formData.password,
     confirmPassword: formData.confirmPassword,
     email: formData.email,
-    username:formData.email
+    username: formData.phone,
   });
-
-  console.log(validatedFields)
 
   if (!validatedFields.success) {
     return {
-        ...prevState,
+      ...prevState,
       zodErrors: validatedFields.error.flatten().fieldErrors,
       strapiErrors: null,
       message: "Missing Fields. Failed to Register.",
@@ -42,8 +42,6 @@ const validatedFields = registerSchema.safeParse({
   }
 
   const responseData = await registerUserService(validatedFields.data);
-
-  console.log(responseData)
 
   if (responseData.error) {
     return {
@@ -53,67 +51,82 @@ const validatedFields = registerSchema.safeParse({
       message: "Failed to Login.",
     };
   }
-  const params = new URLSearchParams();
-  const userId = responseData.user.id
-   if (userId){
-  params.append('verify', userId)
-   }
+
+  const userId = responseData.user.id;
+
+  if (userId) {
+    cookies().set("_usr_id_", responseData.jwt, config);
+    cookies().set("_phn_", responseData.phone, config);
+  }
   cookies().set("_jwt", responseData.jwt, config);
-  const otpResponseData = await sendOtpService(validatedFields.data.phone)
-    if(otpResponseData.Status === "Success") {
-        cookies().set("otp_session",otpResponseData.Details , config);
-        const lastFourDigits = responseData.user.phone;
-      return {
-        phone:lastFourDigits,
-        userId: responseData.user.id,
-        success:true,
-        details:otpResponseData.Details
-      }
-    }
+
+  const otpResponseData = await sendOtpService(validatedFields.data.phone);
+  if (otpResponseData.Status === "Success") {
+    cookies().set("otp_session", otpResponseData.Details, config);
+    const lastFourDigits = responseData.user.phone;
+    return {
+      phone: lastFourDigits,
+      userId: responseData.user.id,
+      success: true,
+      details: otpResponseData.Details,
+    };
+  }
 }
 
+export const resendOtp = () => {};
 
-export const verifyOtpAction = async (otpSession: string | undefined, formData:IOtpInput, userId:string ) =>{
+export const verifyOtpAction = async (
+  otpSession: string | undefined,
+  formData: IOtpInput,
+  userId: string | undefined
+) => {
+  if (!otpSession || !userId) return;
 
-  if(!otpSession) return
-  
-const validatedFields = OtpSchema.safeParse({
-   otp: formData.otp
-})
- if (!validatedFields.success) {
+  const validatedFields = OtpSchema.safeParse({
+    otp: formData.pin,
+  });
+  if (!validatedFields.success) {
     return {
       zodErrors: validatedFields.error.flatten().fieldErrors,
       strapiErrors: null,
-      message: "Missing Fields. Failed to Register.",
+      message: "Missing Fields. Failed to verify otp.",
     };
   }
-  const responseData = await verifyOtpService(otpSession, validatedFields.data.otp)
+  const responseData = await verifyOtpService(
+    otpSession,
+    validatedFields.data.otp
+  );
 
-  if(responseData.Status === 'Success'){
-  const updatedUser = await updateVerifiedUserService(userId)
-  if(updatedUser.success){
-      cookies().set("otp_session", "", {...config, maxAge: 0});
-    return {
-      success : true,
-      message: responseData.Details
-    } 
-  }
-  }else{
-    return{
-    success : false,
-   message: responseData.Details
+  if (responseData.Status === "Success") {
+    const updatedUser = await updateVerifiedUserService(userId);
+    if (updatedUser.success) {
+      cookies().set("otp_session", "", { ...config, maxAge: 0 });
+      cookies().set("_usr_id", "", { ...config, maxAge: 0 });
+      cookies().set("_phn_", "", { ...config, maxAge: 0 });
+      return {
+        success: true,
+        message: responseData.Details,
+      };
     }
-     
+  } else {
+    return {
+      success: false,
+      message: responseData.Details,
+    };
   }
-  
-}
+};
 
-export async function loginUserAction(prevState: any, formData: ILoginFormInput) {
-
+export async function loginUserAction(
+  prevState: any,
+  formData: ILoginFormInput
+) {
   const validatedFields = LoginSchema.safeParse({
-    identifier: formData.email,
+    identifier: formData.phone,
     password: formData.password,
   });
+
+  console.log(validatedFields);
+
   if (!validatedFields.success) {
     return {
       ...prevState,
@@ -123,6 +136,7 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
   }
 
   const responseData = await loginUserService(validatedFields.data);
+
   if (!responseData) {
     return {
       ...prevState,
@@ -132,7 +146,6 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
     };
   }
 
-
   if (responseData.error) {
     return {
       ...prevState,
@@ -141,13 +154,15 @@ export async function loginUserAction(prevState: any, formData: ILoginFormInput)
       message: "Failed to Login.",
     };
   }
-   cookies().set("_jwt", responseData.jwt, config);
+  cookies().set("_jwt", responseData.jwt, config);
 }
 
 export async function logoutAction() {
   cookies().set("_jwt", "", { ...config, maxAge: 0 });
   redirect("/auth");
 }
+
+export async function googleLoginAction() {}
 
 
 

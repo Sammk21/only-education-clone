@@ -1,14 +1,20 @@
 import { Metadata } from "next";
-
-// import ProfilePhone from "@modules/account//components/profile-phone";
-// import ProfileBillingAddress from "@modules/account/components/profile-billing-address";
-// import ProfileEmail from "@modules/account/components/profile-email";
-// import ProfileName from "@modules/account/components/profile-name";
-// import ProfilePassword from "@modules/account/components/profile-password";
-
-// import { getCustomer, listRegions } from "@lib/data";
 import { notFound } from "next/navigation";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
+import ProfileEmail from "@/modules/account/components/profile-email";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import ProfileName from "@/modules/account/components/profile-name";
+import ProfilePassword from "@/modules/account/components/profile-password";
+import ProfilePhone from "@/modules/account/components/profile-phone";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -23,30 +29,24 @@ export default async function Profile() {
   }
 
   return (
-    <div className="w-full text-black">
-      <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">Profile</h1>
-        <p className="text-base-regular">
+    <Card x-chunk="dashboard-04-chunk-1">
+      <CardHeader>
+        <CardTitle>Profile</CardTitle>
+        <CardDescription>
           View and update your profile information, including your name, email,
           and phone number. You can also update your billing address, or change
           your password.
-        </p>
-      </div>
-      <div className="flex flex-col gap-y-8 w-full">
-        {/* <ProfileName customer={customer} />
-        <Divider />
-        <ProfileEmail customer={customer} />
-        <Divider />
-        <ProfilePhone customer={customer} />
-        <Divider />
-        <ProfilePassword customer={customer} />
-        <Divider />
-        <ProfileBillingAddress customer={customer} regions={regions} /> */}
-      </div>
-    </div>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="gap-y-4 flex flex-col">
+        <ProfileEmail user={user} />
+        <ProfileName user={user} />
+        <ProfilePassword user={user} />
+        <ProfilePhone user={user} />
+      </CardContent>
+      <CardFooter className="border-t px-6 py-4">
+        <Button>Save</Button>
+      </CardFooter>
+    </Card>
   );
 }
-
-const Divider = () => {
-  return <div className="w-full h-px bg-gray-200" />;
-};

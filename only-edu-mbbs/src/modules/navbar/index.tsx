@@ -8,6 +8,19 @@ import LoginButton from "../custom/LoginButton";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { ProfileAndAcc } from "../profile-&-notification-navbar";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BottomGradient } from "../account/components/register";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LogOut, Settings, User } from "lucide-react";
 
 export interface NavbarProps {
   navigation: Navigation;
@@ -50,7 +63,9 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             </ul>
           </div>
           {user.ok ? (
-            <span>Hello, {user.data.firstName}</span>
+            <>
+              <UserProfileButton />
+            </>
           ) : (
             <Link href={"/auth"}>
               <Button
@@ -58,7 +73,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
                 variant={"outline"}
               >
                 <span>Login</span>
-                {/* <BottomGradient /> */}
+                <BottomGradient />
               </Button>
             </Link>
           )}
@@ -75,6 +90,45 @@ export const AuthLoader = () => {
     <div className="relative">
       <div className="w-5 h-5 border-orange-200 border-2 rounded-full"></div>
       <div className="w-5 h-5 border-orange-500 border-t-2 animate-spin rounded-full absolute left-0 top-0"></div>
+    </div>
+  );
+};
+
+const UserProfileButton = () => {
+  return (
+    <div className="flex items-center gap-x-2 text-dark text-sm">
+      <Avatar>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button className="hover:bg-accent/10" variant="outline">
+            Profile
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <Link href={"/auth"}>
+              <DropdownMenuItem className="hover:bg-accent/10">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
+            </Link>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Log out</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

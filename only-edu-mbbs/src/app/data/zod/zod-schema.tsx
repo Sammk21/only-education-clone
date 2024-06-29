@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const LoginSchema = z.object({
-  identifier: z.string().email({
-    message: "email is required",
+  identifier: z.string().min(9, {
+    message: "enter 10 digit phone number",
   }),
   password: z
     .string()
