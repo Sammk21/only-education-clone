@@ -14,15 +14,13 @@ import { StrapiErrors, StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
 import { Button } from "@headlessui/react";
 import { toast } from "sonner";
 import { useState } from "react";
-import { redirect } from "next/navigation";
-import Link from "next/link";
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;
 };
 
 export interface ILoginFormInput {
-  email: string;
+  phone: string;
   password: string;
 }
 
@@ -65,21 +63,20 @@ const Login = ({ setCurrentView }: Props) => {
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="my-8">
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
+          <Label htmlFor="phone">Phone</Label>
           <Input
-            id="email"
+            id="phone"
             placeholder="projectmayhem@fc.com"
-            type="email"
-            className={`border ${errors.email ? "border-error" : ""}`}
-            {...register("email", {
+            type="tel"
+            className={`border ${errors.phone ? "border-error" : ""}`}
+            {...register("phone", {
               required: true,
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/,
             })}
-            aria-invalid={errors.email ? "true" : "false"}
+            aria-invalid={errors.phone ? "true" : "false"}
           />
-          {errors.email?.type === "pattern" && (
+          {errors.phone && (
             <p role="alert" className="text-error text-[10px] font-medium">
-              Enter a valid email address
+              Enter a valid phone number
             </p>
           )}
         </LabelInputContainer>

@@ -13,7 +13,7 @@ import { enquiryFormSchema } from "@/utils/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { SelectDemo } from "../combo-box";
+import { SelectDemo, SelectDemolevel } from "../combo-box";
 import { UserType } from "@/types/types";
 
 type EnquiryFormInput = z.infer<typeof enquiryFormSchema>;
@@ -31,8 +31,9 @@ export function EnquiryFrom({
   title,
   user,
 }: EnquiryFromProps) {
-  const maskPhoneNumber = (phone: string): string => {
-    return phone.replace(/\d{6}(\d{4})/, "******$1");
+  const maskPhoneNumber = (username: string | undefined) => {
+    if (!username) return;
+    return username.replace(/\d{6}(\d{4})/, "******$1");
   };
 
   const {
@@ -133,7 +134,7 @@ export function EnquiryFrom({
             <Input
               id="lastName"
               placeholder="Durden"
-              value={user.data.lastName}
+              defaultValue={user.data?.lastName}
               disabled={true}
               type="text"
               className={`dark:border ${
@@ -153,7 +154,7 @@ export function EnquiryFrom({
           <Label htmlFor="email">Email Address</Label>
           <Input
             id="email"
-            value={user.data.email}
+            value={user.data?.email}
             disabled={true}
             placeholder="youremail@host.com"
             type="email"
@@ -181,9 +182,11 @@ export function EnquiryFrom({
             disabled={true}
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
           />
+          <LabelInputContainer className="mb-4 w-full">
+            <SelectDemolevel />
+          </LabelInputContainer>
         </LabelInputContainer>
         <LabelInputContainer className="mb-4 w-full">
-          {/* <Label htmlFor="query">Query</Label> */}
           <SelectDemo />
         </LabelInputContainer>
 
@@ -192,7 +195,7 @@ export function EnquiryFrom({
           <Input
             id="phone"
             placeholder="+91"
-            value={maskPhoneNumber("1234567890")}
+            value={maskPhoneNumber(user.data?.username)}
             disabled={true}
             type="tel" // Use type="tel" for phone input
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}

@@ -259,7 +259,9 @@ export interface searchParamUserId{
 
 
 export interface UserType{
-  ok: boolean,
+
+  ok?: boolean,
+
   data?: {
     id: number
     email: string
@@ -272,6 +274,7 @@ export interface UserType{
     firstName: string
     lastName: string
     username: string
+    phone:string
   }| null,
   error?:{
     status:number

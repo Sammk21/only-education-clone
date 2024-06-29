@@ -58,7 +58,7 @@ export default async function RootLayout({
             navigation={navData.navigation}
             dropdown={navData.dropdown}
           />
-          <Toaster />
+          <Toaster richColors position="top-center" />
         </div>
       </body>
     </html>
