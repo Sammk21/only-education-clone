@@ -15,6 +15,7 @@ import { Button } from "@headlessui/react";
 import { toast } from "sonner";
 import { useState } from "react";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;

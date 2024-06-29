@@ -6,7 +6,7 @@ import { getArticles } from "@/utils/utils";
 import { Metadata } from "next";
 
 const blogListQuery =
-  "/api/news?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category&fields[5]=live&fields[6]=value";
+  "/api/news?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category&fields[5]=live";
 console.dir("check", blogListQuery);
 export const metadata: Metadata = {
   title: "News | Only education",
@@ -18,10 +18,12 @@ async function BlogIndexPage({ searchParams }: Readonly<SearchParamsProps>) {
   const data = await getArticles(blogListQuery, currentPage);
 
   const { pagination } = data.meta;
+  const href = "/news/post";
+  const heading = "News";
 
   return (
     <>
-      <BlogPage data={data.data} />;
+      <BlogPage data={data.data} href={href} heading={heading} />;
       <PaginationComponent pageCount={pagination.pageCount} />
       <NewsLetter />
     </>

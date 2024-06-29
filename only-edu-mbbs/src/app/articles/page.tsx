@@ -19,10 +19,11 @@ async function BlogIndexPage({ searchParams }: Readonly<SearchParamsProps>) {
   const data = await getArticles(blogListQuery, currentPage);
 
   const { pagination } = data.meta;
-
+  const href = "/articles/post";
+  const heading = "Articles";
   return (
     <>
-      <BlogPage data={data.data} />;
+      <BlogPage data={data.data} href={href} heading={heading} />;
       <PaginationComponent pageCount={pagination.pageCount} />
       <NewsLetter />
     </>

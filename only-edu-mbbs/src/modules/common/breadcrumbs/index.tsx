@@ -28,7 +28,7 @@ const NextBreadcrumb = ({
   const pathNames = paths.split("/").filter((path) => path);
 
   const disableLink = (link: string) => {
-    return ["study", "country", "uni"].includes(link.toLowerCase());
+    return ["study", "country", "uni", "post"].includes(link.toLowerCase());
   };
 
   return (

@@ -5,7 +5,7 @@ import { Navigation, Dropdown, Links } from "@/types/types";
 import { DropDownItems } from "./components/Dropdown";
 import Image from "next/image";
 import LoginButton from "../custom/LoginButton";
-import { getUserMeLoader } from "@/app/data/services/get-user-me-loader";
+import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { ProfileAndAcc } from "../profile-&-notification-navbar";
 import { Button } from "@/components/ui/button";
 
@@ -50,7 +50,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             </ul>
           </div>
           {user.ok ? (
-            <span>hello, {user.data.firstName}</span>
+            <span>Hello, {user.data.firstName}</span>
           ) : (
             <Link href={"/auth"}>
               <Button

@@ -1,7 +1,7 @@
 // import { getCustomer } from "@lib/data";
 import AccountLayout from "@/modules/account/templates/account-layout";
 import React from "react";
-import { getUserMeLoader } from "../data/services/get-user-me-loader";
+import { getUserMeLoader } from "../data/services/get-user-loader";
 
 export default async function AccountPageLayout({
   dashboard,
@@ -11,5 +11,6 @@ export default async function AccountPageLayout({
   login?: React.ReactNode;
 }) {
   const user = await getUserMeLoader();
+
   return <AccountLayout>{user.ok ? dashboard : login}</AccountLayout>;
 }

@@ -139,6 +139,7 @@ const Dropdown = ({
         }
         return null;
       })}
+
       {/* Conditionally render the "view all" link */}
       {hasUniversityLinks && (
         <li>
@@ -147,6 +148,7 @@ const Dropdown = ({
           </Link>
         </li>
       )}
+
       {subMenuLinks.map((submenu) => {
         if (submenu.country && submenu.country.title) {
           return (

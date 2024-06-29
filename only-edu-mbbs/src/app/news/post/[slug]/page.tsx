@@ -81,6 +81,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     >
                       {title}
                     </h1>
+                    <p className="italic">{description}</p>
                   </div>
 
                   <div className="aspect-video relative">
@@ -101,7 +102,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
         <div className="sticky top-0 h-32  py-16 w-[24%] mb-80 hidden lg:block">
           <div className="border mt-6 rounded-sm px-2 py-3">
             <h4 className="text-dark text-center border-b pb-3 mb-3 text-xl font-semibold">
-              Other Trending Articles
+              Other Trending News
             </h4>
 
             {recommendedData.data.length > 0 &&

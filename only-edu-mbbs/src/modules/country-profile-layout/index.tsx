@@ -13,7 +13,7 @@ interface Listprops {
 interface Props {
   profileImage: string;
   backgroundImage: string;
-  universityInfo: Listprops;
+
   data: {
     id: number;
     name: string;
@@ -29,7 +29,6 @@ const CountryProfileLayout = async ({
   data,
   backgroundImage,
   profileImage,
-  universityInfo,
 }: Props) => {
   const { name, description } = data;
   console.dir(data);

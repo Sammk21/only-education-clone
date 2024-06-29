@@ -11,7 +11,8 @@ const merriweather = Merriweather({
   display: "swap",
 });
 
-export default function PostList({ post }) {
+export default function PostList({ post, href }) {
+  console.dir(post.live);
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
 
@@ -37,13 +38,15 @@ export default function PostList({ post }) {
 
         <div className={cx("group cursor-pointer grid gap-1")}>
           <div className="flex mt-3 gap-1 sm:gap-10 justify-between">
-            <Link
-              href={`/articles/post/${post.slug}`}
-              className="sm:w-[70%] w-[70%]"
-            >
-              <h2 className="font-semibold sm:text-xl text-sm mb-2 line-clamp-1 text-dark">
-                {post.title}
-              </h2>
+            <Link href={`${href}//${post.slug}`} className="sm:w-[70%] w-[70%]">
+              <div className="flex">
+                <span className="text-red-600 text-xs font-semibold animate-pulse mr-2">
+                  {post.live}Live
+                </span>
+                <span className="font-semibold sm:text-xl text-sm mb-2 line-clamp-1 text-dark">
+                  {post.title}
+                </span>
+              </div>
               <p
                 className={`text-sm line-clamp-1 sm:line-clamp-3 ${merriweather.className}`}
               >
@@ -51,7 +54,7 @@ export default function PostList({ post }) {
               </p>
             </Link>
             <Link
-              href={`/articles/post/${post.slug}`}
+              href={`${href}/${post.slug}`}
               className="relative aspect-square h-20 w-[100px]  sm:h-28 sm:w-28"
             >
               <Image

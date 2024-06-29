@@ -85,6 +85,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     >
                       {title}
                     </h1>
+                    <p className="italic">{description}</p>
                   </div>
 
                   <div className="aspect-video relative">

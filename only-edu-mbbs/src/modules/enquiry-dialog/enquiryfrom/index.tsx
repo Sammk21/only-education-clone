@@ -13,7 +13,8 @@ import { enquiryFormSchema } from "@/utils/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Combobox } from "../combo-box";
+import { SelectDemo } from "../combo-box";
+import { UserType } from "@/types/types";
 
 type EnquiryFormInput = z.infer<typeof enquiryFormSchema>;
 
@@ -21,9 +22,19 @@ interface EnquiryFromProps {
   onClose: () => void;
   setStatus: React.Dispatch<React.SetStateAction<null | "success" | "error">>;
   title?: string;
+  user: UserType;
 }
 
-export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
+export function EnquiryFrom({
+  onClose,
+  setStatus,
+  title,
+  user,
+}: EnquiryFromProps) {
+  const maskPhoneNumber = (phone: string): string => {
+    return phone.replace(/\d{6}(\d{4})/, "******$1");
+  };
+
   const {
     register,
     formState: { errors },
@@ -92,17 +103,9 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
     e.target.value = value; // Set the input value
   };
 
+  console.log("last", user);
   return (
     <div className="min-w-2xl relative grid md:grid-cols-1 grid-cols-1 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border border-border border-borderLight">
-      {/* <div className="w-full h-full overflow-hidden relative ">
-        <span className="w-full h-full absolute left-0 top-0 bg-black/40 z-10"></span>
-        <Image
-          alt="graducation hat"
-          fill={true}
-          className="object-cover object-top hidden md:block  "
-          src="https://admin.onlyeducation.co.in/uploads/photo_1624727828618_ee42ef2ec5cf_43ba67ca11.avif"
-        />
-      </div> */}
       <form className=" p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
@@ -111,6 +114,8 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
               id="firstName"
               placeholder="Tyler"
               type="text"
+              value={user.data?.firstName}
+              disabled={true}
               className={`dark:border ${
                 errors.firstName ? "dark:border-error" : ""
               }`}
@@ -128,6 +133,8 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
             <Input
               id="lastName"
               placeholder="Durden"
+              value={user.data.lastName}
+              disabled={true}
               type="text"
               className={`dark:border ${
                 errors.lastName ? "dark:ring-error" : ""
@@ -146,6 +153,8 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
           <Label htmlFor="email">Email Address</Label>
           <Input
             id="email"
+            value={user.data.email}
+            disabled={true}
             placeholder="youremail@host.com"
             type="email"
             className={`dark:border ${errors.email ? "dark:ring-error" : ""}`}
@@ -174,8 +183,8 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4 w-full">
-          <Label htmlFor="query">Query</Label>
-          <Combobox />
+          {/* <Label htmlFor="query">Query</Label> */}
+          <SelectDemo />
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-4">
@@ -183,6 +192,8 @@ export function EnquiryFrom({ onClose, setStatus, title }: EnquiryFromProps) {
           <Input
             id="phone"
             placeholder="+91"
+            value={maskPhoneNumber("1234567890")}
+            disabled={true}
             type="tel" // Use type="tel" for phone input
             className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
             {...register("phone")}
