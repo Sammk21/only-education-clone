@@ -17,7 +17,7 @@ export default async function Home() {
   //  throw new Error("Test error");
 
   return (
-    <div className="pt-16 w-full overflow-hidden">
+    <div className=" w-full overflow-hidden">
       <div className="relative">
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />

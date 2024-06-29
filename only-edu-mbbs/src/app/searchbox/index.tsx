@@ -19,7 +19,9 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
         value={query}
         onChange={handleChange}
         placeholder="Search for universities..."
-        className="w-full p-2 border rounded-lg   mb-6 outline-none focus:outline-none "
+        className={`w-full p-2 border ${
+          query && "rounded-b-none"
+        }  rounded-lg  mb-6 outline-none focus:outline-none `}
       />
     </>
   );
