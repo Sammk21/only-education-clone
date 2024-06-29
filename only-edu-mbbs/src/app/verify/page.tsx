@@ -1,33 +1,11 @@
 import Otp from "@/modules/account/components/otp";
-import { searchParamUserId } from "@/types/types";
-import { getOtpSession } from "../data/services/get-token";
+import { getOtpSessionAndUserId } from "../data/services/get-token";
 
-const OtpPage = async ({ searchParams }: Readonly<searchParamUserId>) => {
-  //    const otpVerificationResponse = await verifyOtpAction(
-  //      otpSessionId,
-  //      data,
-  //      userId
-  //    );
-  //    if (otpVerificationResponse?.success) {
-  //      toast.success("OTP verified successfully");
-  //      // router.push("/");
-  //    } else {
-  //      // Handle OTP verification errors here
-  //      toast.error("OTP verification failed");
-  //    }
-
-  let { dh } = searchParams;
-
-  console.log("searchParams", searchParams);
-
-  const otpSession = await getOtpSession();
-
-  console.log("userId", dh);
-  console.log("otpSession", otpSession);
-
+const OtpPage = async () => {
+  const info = await getOtpSessionAndUserId();
   return (
-    <div className="max-w-xs mx-auto border p-3 rounded-xl mb-12">
-      <Otp userId={dh} otpSession={otpSession} />
+    <div className="max-w-md mx-auto border p-3 rounded-xl mb-12">
+      <Otp userId={info.userId} otpSession={info.otpSession} />
     </div>
   );
 };

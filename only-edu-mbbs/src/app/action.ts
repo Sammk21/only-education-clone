@@ -39,3 +39,23 @@ export const deleteFilters = async (event: React.FormEvent) => {
    redirect(`/universities-list`)
 }
 
+
+export async function updateCustomerEmail(
+  _currentState: Record<string, unknown>,
+  formData: FormData
+) {
+  const customer = {
+    email: formData.get("email"),
+  }
+
+  return  { success: false, error: "error" }
+
+  // try {
+  //   await updateCustomer(customer).then(() => {
+  //     revalidateTag("customer")
+  //   })
+  //   return { success: true, error: null }
+  // } catch (error: any) {
+  //   return { success: false, error: error.toString() }
+  // }
+}
