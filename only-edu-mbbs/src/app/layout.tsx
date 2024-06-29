@@ -38,7 +38,6 @@ export default async function RootLayout({
       <body className={`bg-light dark:bg-dark  ${inter.className}`}>
         <div className="relative w-full h-full text-gray-400 ">
           <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />
-
           <NextBreadcrumb
             homeElement={"Home"}
             separator={
