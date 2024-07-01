@@ -40,9 +40,12 @@ export default function PostList({ post, href }) {
           <div className="flex mt-3 gap-1 sm:gap-10 justify-between">
             <Link href={`${href}//${post.slug}`} className="sm:w-[70%] w-[70%]">
               <div className="flex">
-                <span className="text-red-600 text-xs font-semibold animate-pulse mr-2">
-                  {post.live}Live
-                </span>
+                {post.live && (
+                  <span className="text-red-600 text-xs font-semibold animate-pulse mr-2">
+                    Live
+                  </span>
+                )}
+
                 <span className="font-semibold sm:text-xl text-sm mb-2 line-clamp-1 text-dark">
                   {post.title}
                 </span>

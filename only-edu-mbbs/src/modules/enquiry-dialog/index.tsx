@@ -17,6 +17,10 @@ import { UserType } from "@/types/types";
 interface Props {
   title?: string;
   user: UserType;
+  ctaProps: {
+    title: string;
+    id: number;
+  };
 }
 
 export function EnquiryDialog({ title, user }: Props) {

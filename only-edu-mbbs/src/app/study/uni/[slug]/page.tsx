@@ -60,9 +60,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const profileImage = data.data[0].universityProfile.profileImage.url;
 
   const title = data.data[0].title;
-  const slug = data.data[0].slug;
-  // console.dir(data.data[0].slug);
-
+  const id = data.data[0].id;
+  const ctaProps = {
+    title,
+    id,
+  };
   return (
     <div className=" mb-16">
       <GlobalProfileLayout
@@ -80,7 +82,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overview.description}
           </p>
         </div>
-        <CallToAction title={title} data={cta} slug={slug} />
+        <CallToAction ctaProps={ctaProps} data={cta} />
         <UniHighlights data={highlights} />
         <WhyThisUni data={whythisUniversity} />
         <UniRanking data={rankComparison} />

@@ -12,7 +12,7 @@ export async function enquiryService(
 ) {
   try {
     const response = await axios.post(
-      `${baseUrl}/api/enquiry/${userId}?populate=true`,
+      `${baseUrl}/api/enquiries/${userId}?populate=true`,
       {
         confirmed: true,
       }
