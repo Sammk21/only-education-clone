@@ -61,6 +61,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const title = data.data[0].title;
   const id = data.data[0].id;
 
+  const ctaProps = {
+    title,
+    id,
+  };
+
   return (
     <div className=" mb-16">
       <GlobalProfileLayout
@@ -78,6 +83,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             <ReadMoreParagraph text={overview.description} />
           </p>
         </div>
+
+        {/* <CallToAction ctaProps={ctaProps} data={cta} /> */}
+
         <CallToAction id={id} data={cta} title={title} />
         <UniHighlights data={highlights} />
         <WhyThisUni data={whythisUniversity} />

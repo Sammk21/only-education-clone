@@ -12,7 +12,7 @@ interface Props {
 const ElegibilityCriteriaTable = ({ data }: Props) => {
   return (
     <section className="py-6 my-6 container">
-      <h4 className="text-4xl text-center text-dark  dark:text-light ">
+      <h4 className="text-center text-4xl pt-6 mb-6  ">
         {data[0].header.title}
       </h4>
       <p className="text-center">{data[0].header.description}</p>
