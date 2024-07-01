@@ -14,6 +14,7 @@ import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import PlacementInfo from "@/modules/placement";
+import ReadMoreParagraph from "@/modules/common/readMorePara";
 
 export async function generateMetadata({
   params,
@@ -38,9 +39,7 @@ export async function generateMetadata({
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true`;
-
   const data = await getStrapiData(getUniQuery);
-
   const {
     universityProfile,
     overview,
@@ -61,10 +60,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const title = data.data[0].title;
   const id = data.data[0].id;
+
   const ctaProps = {
     title,
     id,
   };
+
   return (
     <div className=" mb-16">
       <GlobalProfileLayout
@@ -79,10 +80,13 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overview.title}
           </h2>
           <p className=" max-w-6xl w-full mx-auto dark:text-accent">
-            {overview.description}
+            <ReadMoreParagraph text={overview.description} />
           </p>
         </div>
-        <CallToAction ctaProps={ctaProps} data={cta} />
+
+        {/* <CallToAction ctaProps={ctaProps} data={cta} /> */}
+
+        <CallToAction id={id} data={cta} title={title} />
         <UniHighlights data={highlights} />
         <WhyThisUni data={whythisUniversity} />
         <UniRanking data={rankComparison} />

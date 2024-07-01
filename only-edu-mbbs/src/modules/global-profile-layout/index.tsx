@@ -66,7 +66,7 @@ const GlobalProfileLayout = async ({
             {/* <p className="mt-2 text-accent text-sm">{description}</p> */}
           </div>
 
-          <ul className="flex justify-center gap-4 sm:gap-6 mt-2 w-full overflow-x-scroll md:overflow-x-hidden flex-wrap">
+          <ul className="flex justify-center text-xs font-medium sm:text-sm text-foreground/80 gap-4 sm:gap-6 mt-2 overflow-x-scroll md:overflow-x-hidden ">
             <li className="flex items-center gap-1">
               <FaLocationDot className="text-[#fc7318]" />
 

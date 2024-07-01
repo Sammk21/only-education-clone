@@ -17,13 +17,11 @@ import { UserType } from "@/types/types";
 interface Props {
   title?: string;
   user: UserType;
-  ctaProps: {
-    title: string;
-    id: number;
-  };
+
+  id: number;
 }
 
-export function EnquiryDialog({ title, user }: Props) {
+export function EnquiryDialog({ title, user, id }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
@@ -38,7 +36,7 @@ export function EnquiryDialog({ title, user }: Props) {
           <BottomGradient />
         </Button>
       </DialogTrigger>
-      <DialogContent className="   bg-white rounded-xl" status={status}>
+      <DialogContent className="bg-white rounded-xl" status={status}>
         <DialogHeader>
           <DialogTitle>Send Enquiry</DialogTitle>
           <DialogDescription>
@@ -50,6 +48,7 @@ export function EnquiryDialog({ title, user }: Props) {
           onClose={() => setIsOpen(false)}
           setStatus={setStatus}
           user={user}
+          id={id}
         />
       </DialogContent>
     </Dialog>

@@ -13,7 +13,7 @@ interface AccountLayoutProps {
 const AccountLayout: React.FC<AccountLayoutProps> = ({ children, user }) => {
   return (
     <div className="flex-1 text-dark dark:text-light  ">
-      <div className="flex-1 min-h-screen   max-w-6xl  mx-auto   flex flex-col">
+      <div className="flex-1 min-[50vh]   max-w-6xl  mx-auto   flex flex-col">
         <div className="sm:flex-row flex  flex-col gap-x-3">
           <div>{user?.data && <AccountNav user={user} />}</div>
           <div className="flex-1">{children}</div>

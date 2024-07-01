@@ -11,8 +11,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { IconBrandGoogle } from "@tabler/icons-react";
-import { signIn, getSession, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import * as zod from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { handlePhoneInput } from "@/utils/utils";
 
 const INITIAL_STATE = {
   data: null,
@@ -28,29 +31,49 @@ type Props = {
 };
 
 export interface IFormInput {
-  firstName?: string;
-  lastName?: string;
-  phone?: number;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
+
+const schema = zod
+  .object({
+    firstName: zod.string().nonempty("First name is required"),
+    lastName: zod.string(),
+    phone: zod
+      .string()
+      .nonempty("Phone number is required")
+      .regex(/^[0-9]{10}$/, "Phone number must be 10 digits"),
+    email: zod
+      .string()
+      .nonempty("Email is required")
+      .email("Invalid email address"),
+    password: zod.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: zod.string().nonempty("Confirm Password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 export function Register({ setCurrentView }: Props) {
   const {
     register,
-    formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>();
+    formState: { errors },
+  } = useForm<IFormInput>({
+    resolver: zodResolver(schema),
+  });
 
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const response = await registerUserAction(INITIAL_STATE, data);
-
-    console.log(response);
     if (response.success === true) {
-      toast.success("otp has been sent successfully");
+      toast.success("OTP has been sent successfully");
       router.push(`/verify?dh=${response.userId}`);
     }
   };
@@ -61,7 +84,7 @@ export function Register({ setCurrentView }: Props) {
         Welcome to Only Educations
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to Only education if you can because we don&apos;t have a login
+        Login to Only Education if you can because we don&apos;t have a login
         flow yet
       </p>
       <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
@@ -75,8 +98,13 @@ export function Register({ setCurrentView }: Props) {
               placeholder="Tyler"
               type="text"
               {...register("firstName")}
-              // aria-invalid={firstName ? "true" : "false"}
+              className={errors.firstName ? "border-red-500" : ""}
             />
+            {errors.firstName && (
+              <p className="text-red-500 text-xs font-medium">
+                {errors.firstName.message}
+              </p>
+            )}
           </LabelInputContainer>
           <LabelInputContainer>
             <Label htmlFor="lastName">Last name</Label>
@@ -85,8 +113,13 @@ export function Register({ setCurrentView }: Props) {
               placeholder="Durden"
               type="text"
               {...register("lastName")}
-              // aria-invalid={lastName ? "true" : "false"}
+              className={errors.lastName ? "border-red-500" : ""}
             />
+            {errors.lastName && (
+              <p className="text-red-500 text-xs font-medium">
+                {errors.lastName.message}
+              </p>
+            )}
           </LabelInputContainer>
         </div>
         <LabelInputContainer className="mb-4">
@@ -95,16 +128,24 @@ export function Register({ setCurrentView }: Props) {
           </Label>
           <div className="relative">
             <Input
-              className="pl-14"
               id="phone"
+              placeholder="Enter your 10 digits phone number"
               type="tel"
+              className={`border pl-14 ${errors.phone ? "border-red-500" : ""}`}
               {...register("phone")}
-              // aria-invalid={phone ? "true" : "false"}
+              aria-invalid={errors.phone ? "true" : "false"}
+              onChange={handlePhoneInput} // Added onChange handler
             />
+
             <span className="h-full flex pt-px justify-center text-accent items-center absolute top-0 left-0 text-sm px-1">
               <IndianFlagSvg /> +91
             </span>
           </div>
+          {errors.phone && (
+            <p className="text-red-500 text-xs font-medium">
+              {errors.phone.message}
+            </p>
+          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">
@@ -115,9 +156,13 @@ export function Register({ setCurrentView }: Props) {
             placeholder="projectmayhem@fc.com"
             type="email"
             {...register("email")}
-
-            // aria-invalid={email ? "true" : "false"}
+            className={errors.email ? "border-red-500" : ""}
           />
+          {errors.email && (
+            <p className="text-red-500 text-xs font-medium">
+              {errors.email.message}
+            </p>
+          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">
@@ -128,8 +173,13 @@ export function Register({ setCurrentView }: Props) {
             placeholder="••••••••"
             type="password"
             {...register("password")}
-            // aria-invalid={password ? "true" : "false"}
+            className={errors.password ? "border-red-500" : ""}
           />
+          {errors.password && (
+            <p className="text-red-500 text-xs font-medium">
+              {errors.password.message}
+            </p>
+          )}
         </LabelInputContainer>
         <LabelInputContainer className="mb-8">
           <Label htmlFor="confirmPassword">
@@ -140,9 +190,13 @@ export function Register({ setCurrentView }: Props) {
             placeholder="••••••••"
             type="password"
             {...register("confirmPassword")}
-
-            // aria-invalid={confirmPassword ? "true" : "false"}
+            className={errors.confirmPassword ? "border-red-500" : ""}
           />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-xs font-medium">
+              {errors.confirmPassword.message}
+            </p>
+          )}
         </LabelInputContainer>
         <button
           className="bg-gradient-to-br disabled:bg-dark/50 relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium"
@@ -154,7 +208,7 @@ export function Register({ setCurrentView }: Props) {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         <div className="flex flex-col space-y-4">
           <Link
-            href="/api/auth/signin"
+            href="#"
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-accent/20 dark:bg-foreground dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="button"
             onClick={(e) => {
@@ -168,6 +222,7 @@ export function Register({ setCurrentView }: Props) {
             </span>
             <BottomGradient />
           </Link>
+          <p>coming soon</p>
           {/* <Strapierror={strapiError} /> */}
         </div>
       </form>
@@ -180,9 +235,6 @@ export function Register({ setCurrentView }: Props) {
           Sign in here
         </span>
       </span>
-      {/* {status === "authenticated" && session.user && (
-        <p>Signed in as {session?.user.email}</p>
-      )} */}
     </div>
   );
 }

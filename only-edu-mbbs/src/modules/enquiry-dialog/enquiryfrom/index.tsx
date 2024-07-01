@@ -13,218 +13,192 @@ import { enquiryFormSchema } from "@/utils/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { SelectDemo, SelectDemolevel } from "../combo-box";
+import { Selectlevel, SelectSpecialization } from "../combo-box";
 import { UserType } from "@/types/types";
+import { enquiryAction } from "@/app/data/actions/enquiry-action";
 
-type EnquiryFormInput = z.infer<typeof enquiryFormSchema>;
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface EnquiryFromProps {
   onClose: () => void;
   setStatus: React.Dispatch<React.SetStateAction<null | "success" | "error">>;
   title?: string;
   user: UserType;
+  id: number;
 }
 
-export function EnquiryFrom({
-  onClose,
-  setStatus,
-  title,
-  user,
-}: EnquiryFromProps) {
+const INITIAL_STATE = {
+  data: null,
+};
+
+export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
   const maskPhoneNumber = (username: string | undefined) => {
     if (!username) return;
     return username.replace(/\d{6}(\d{4})/, "******$1");
   };
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm<EnquiryFormInput>({
+  const form = useForm<z.infer<typeof enquiryFormSchema>>({
     resolver: zodResolver(enquiryFormSchema),
   });
-  const [serverErrors, setServerErrors] = useState({ email: "", phone: "" });
-  const [loading, setLoading] = useState(false);
 
-  const onSubmit: SubmitHandler<EnquiryFormInput> = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "https://admin.onlyeducation.co.in/api/enquiries",
-        {
-          data: {
-            firstname: data.firstName,
-            lastname: data.lastName,
-            email: data.email,
-            phone: data.phone,
-          },
-        }
-      );
-
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Enquiry has been made.");
-        reset();
-        setStatus("success");
-        setTimeout(() => {
-          setStatus(null);
-          onClose();
-        }, 1000);
-      } else {
-        window.alert(
-          "There was a problem with your submission. Please try again."
-        );
-        setStatus("error");
-      }
-    } catch (error: any) {
-      if (error.response?.data?.error?.status === 400) {
-        const validationErrors = error.response.data.error.details.errors;
-        const errorMessages = { email: "", phone: "" };
-        validationErrors.forEach((err: any) => {
-          if (err.path.includes("email")) {
-            errorMessages.email = err.message;
-          }
-          if (err.path.includes("phone")) {
-            errorMessages.phone = err.message;
-          }
-        });
-        setServerErrors(errorMessages);
-        setStatus("error");
-      } else {
-        window.alert("Error submitting form: " + error.message);
-        setStatus("error");
-      }
-    } finally {
-      setLoading(false);
+  async function onSubmit(data: z.infer<typeof enquiryFormSchema>) {
+    const userId = user.data?.id;
+    const response = await enquiryAction(INITIAL_STATE, data, userId, id);
+    if (response.success) {
+      toast.info("Enquiry has been sent");
+    } else {
+      toast.error("internal server error");
     }
-  };
+  }
 
-  const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
-    e.target.value = value; // Set the input value
-  };
-
-  console.log("last", user);
   return (
-    <div className="min-w-2xl relative grid md:grid-cols-1 grid-cols-1 w-full mx-auto rounded-none md:rounded-2xl overflow-hidden  shadow-input  mb-6 dark:bg-black border border-border border-borderLight">
-      <form className=" p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-          <LabelInputContainer>
-            <Label htmlFor="firstName">First name</Label>
-            <Input
-              id="firstName"
-              placeholder="Tyler"
-              type="text"
-              value={user.data?.firstName}
-              disabled={true}
-              className={`dark:border ${
-                errors.firstName ? "dark:border-error" : ""
-              }`}
-              {...register("firstName")}
-              aria-invalid={errors.firstName ? "true" : "false"}
-            />
-            {errors.firstName && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                {errors.firstName.message}
-              </p>
+    <div>
+      <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+        <LabelInputContainer>
+          <Label className="text-accent" htmlFor="firstName">
+            First name
+          </Label>
+          <Input
+            id="firstName"
+            placeholder="Tyler"
+            type="text"
+            value={user.data?.firstName}
+            disabled={true}
+          />
+        </LabelInputContainer>
+        <LabelInputContainer>
+          <Label className="text-accent" htmlFor="lastName">
+            Last name
+          </Label>
+          <Input
+            id="lastName"
+            placeholder="Durden"
+            defaultValue={user.data?.lastName}
+            disabled={true}
+            type="text"
+          />
+        </LabelInputContainer>
+      </div>
+      <LabelInputContainer className="mb-4">
+        <Label className="text-accent" htmlFor="email">
+          Email Address
+        </Label>
+        <Input
+          id="email"
+          value={user.data?.email}
+          disabled={true}
+          placeholder="youremail@host.com"
+          type="email"
+        />
+      </LabelInputContainer>
+      <LabelInputContainer className="mb-4">
+        <Label className="text-accent" htmlFor="phone">
+          For
+        </Label>
+        <Input
+          id="for"
+          placeholder=""
+          value={title || "college"}
+          disabled={true}
+        />
+      </LabelInputContainer>
+      <LabelInputContainer className="mb-4">
+        <Label className="text-accent" htmlFor="phone">
+          Phone
+        </Label>
+        <Input
+          id="phone"
+          placeholder="+91"
+          value={maskPhoneNumber(user.data?.username)}
+          disabled={true}
+          type="tel"
+        />
+      </LabelInputContainer>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+          <FormField
+            control={form.control}
+            name="level"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>level</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select Level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="UG">UG</SelectItem>
+                      <SelectItem value="PG">PG</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Select the level you want to study in
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
             )}
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastName">Last name</Label>
-            <Input
-              id="lastName"
-              placeholder="Durden"
-              defaultValue={user.data?.lastName}
-              disabled={true}
-              type="text"
-              className={`dark:border ${
-                errors.lastName ? "dark:ring-error" : ""
-              }`}
-              {...register("lastName")}
-              aria-invalid={errors.lastName ? "true" : "false"}
-            />
-            {errors.lastName && (
-              <p role="alert" className="text-error text-[10px] font-medium">
-                {errors.lastName.message}
-              </p>
+          />
+          <FormField
+            control={form.control}
+            name="specialization"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>specialization</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select Level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Engineering">Engineering</SelectItem>
+                      <SelectItem value="Management">Management</SelectItem>
+                      <SelectItem value="Medical">Medical</SelectItem>
+                      <SelectItem value="Pharmacy">Pharmacy</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Select the specialization you want to study in
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
             )}
-          </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input
-            id="email"
-            value={user.data?.email}
-            disabled={true}
-            placeholder="youremail@host.com"
-            type="email"
-            className={`dark:border ${errors.email ? "dark:ring-error" : ""}`}
-            {...register("email")}
-            aria-invalid={errors.email ? "true" : "false"}
           />
-          {errors.email && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              {errors.email.message}
-            </p>
-          )}
-          {serverErrors.email && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              email already exists!
-            </p>
-          )}
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="phone">For</Label>
-          <Input
-            id="for"
-            placeholder=""
-            value={title || "college"}
-            disabled={true}
-            className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
-          />
-          <LabelInputContainer className="mb-4 w-full">
-            <SelectDemolevel />
-          </LabelInputContainer>
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4 w-full">
-          <SelectDemo />
-        </LabelInputContainer>
-
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="phone">Phone</Label>
-          <Input
-            id="phone"
-            placeholder="+91"
-            value={maskPhoneNumber(user.data?.username)}
-            disabled={true}
-            type="tel" // Use type="tel" for phone input
-            className={`dark:border ${errors.phone ? "dark:ring-error" : ""}`}
-            {...register("phone")}
-            onInput={handlePhoneInput} // Handle numeric input only
-            aria-invalid={errors.phone ? "true" : "false"}
-          />
-          {errors.phone && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Invalid phone no!
-            </p>
-          )}
-          {serverErrors.phone && (
-            <p role="alert" className="text-error text-[10px] font-medium">
-              Phone already exists
-            </p>
-          )}
-        </LabelInputContainer>
-
-        <button
-          className="bg-gradient-to-br relative group/btn bg-dark dark:bg-foreground w-full text-white rounded-md h-10 font-medium flex justify-center items-center"
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? <div className="spinner"></div> : "Enquire now →"}
-          <BottomGradient />
-        </button>
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent md:my-4 h-[1px] w-full" />
-      </form>
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </div>
   );
 }

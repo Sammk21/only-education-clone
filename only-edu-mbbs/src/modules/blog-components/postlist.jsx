@@ -12,64 +12,50 @@ const merriweather = Merriweather({
 });
 
 export default function PostList({ post, href }) {
-  console.dir(post.live);
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
 
   return (
     <section>
       <div className="border-b border-b-borderLight dark:border-b-border mt-5">
-        {/* <div className="mt-3 flex items-center space-x-3 text-gray-500 dark:text-gray-400">
-          <Link href="#">
-            <div className="flex items-center gap-3">
-              <div className="relative h-5 w-5 flex-shrink-0">
-                <Image
-                  src={imageUrl + image}
-                  alt="Thumbnail"
-                  className="rounded-full object-cover"
-                  fill
-                  sizes="20px"
-                />
-              </div>
-              <span className="truncate text-sm">author</span>
-            </div>
-          </Link>
-        </div> */}
-
-        <div className={cx("group cursor-pointer grid gap-1")}>
-          <div className="flex mt-3 gap-1 sm:gap-10 justify-between">
-            <Link href={`${href}//${post.slug}`} className="sm:w-[70%] w-[70%]">
-              <div className="flex">
-                {post.live && (
-                  <span className="text-red-600 text-xs font-semibold animate-pulse mr-2">
-                    Live
+        <div className={cx("group cursor-pointer grid grid-cols-6 gap-4")}>
+          <Link
+            href={`${href}//${post.slug}`}
+            className="col-span-4 flex flex-col justify-between"
+          >
+            <div className="flex items-center">
+              <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
+                <h5 className="">
+                  <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs mr-2">
+                    <span className="livenow absolute left-0">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <p>LIVE</p>
                   </span>
-                )}
-
-                <span className="font-semibold sm:text-xl text-sm mb-2 line-clamp-1 text-dark">
                   {post.title}
-                </span>
+                </h5>
               </div>
-              <p
-                className={`text-sm line-clamp-1 sm:line-clamp-3 ${merriweather.className}`}
-              >
-                {post.description}
-              </p>
-            </Link>
-            <Link
-              href={`${href}/${post.slug}`}
-              className="relative aspect-square h-20 w-[100px]  sm:h-28 sm:w-28"
+            </div>
+            <p
+              className={`text-sm line-clamp-2 sm:line-clamp-3 ${merriweather.className}`}
             >
-              <Image
-                src={imageUrl + image}
-                alt="Thumbnail"
-                className="object-cover transition-all"
-                fill
-              />
-            </Link>
-          </div>
-
-          <div className="sm:py-8 py-4 flex justify-between items-center">
+              {post.description}
+            </p>
+          </Link>
+          <Link
+            href={`${href}/${post.slug}`}
+            className="relative col-span-2 h-20 w-20 sm:h-28 sm:w-28"
+          >
+            <Image
+              src={imageUrl + image}
+              alt="Thumbnail"
+              className="object-cover transition-all"
+              fill={true}
+            />
+          </Link>
+          <div className="col-span-6 sm:py-3 pb-2 flex justify-between items-center">
             <Link
               href="#"
               className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"

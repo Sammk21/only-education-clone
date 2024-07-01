@@ -19,8 +19,8 @@ interface Props {
 const ExploreOptions = ({ data }: Props) => {
   const { title, description } = data.header;
   return (
-    <section className="sm:px-12 py-6 my-6 px-2">
-      <h4 className="text-center text-4xl py-6 mb-6 ">{title}</h4>
+    <section className="sm:px-12 pb-6 mb-6 px-2">
+      <h4 className="text-center text-4xl pt-6 mb-6 ">{title}</h4>
       <p className="text-center">{description}</p>
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center">
         <svg

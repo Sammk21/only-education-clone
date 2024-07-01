@@ -13,12 +13,14 @@ import { json } from "stream/consumers";
 
 interface Props {
   data: UniversitiesData;
+  user: boolean;
 }
 interface FilteredProps {
   university: Universitylist;
+  user: boolean;
 }
 
-const CollegeList = ({ data }: Props) => {
+const CollegeList = ({ data, user }: Props) => {
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -74,7 +76,11 @@ const CollegeList = ({ data }: Props) => {
       )}
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
-          <FilteredUniversityItem key={university.id} university={university} />
+          <FilteredUniversityItem
+            user={user}
+            key={university.id}
+            university={university}
+          />
         )
       )}
     </section>
@@ -83,7 +89,7 @@ const CollegeList = ({ data }: Props) => {
 
 export default CollegeList;
 
-const FilteredUniversityItem = ({ university }: FilteredProps) => {
+const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
 
   return (
@@ -92,8 +98,8 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
         key={university?.id}
         className="justify-between m-auto mb-4 sm:p-4 p-2 flex flex-col border shadow-sm rounded-xl  hover:bg-accent/10 "
       >
-        <Link href={`study/uni/${university?.slug}`}>
-          <div className="flex mb-2 flex-col sm:flex-row justify-between">
+        <div className="flex mb-2 flex-col sm:flex-row justify-between">
+          <Link href={`study/uni/${university?.slug}`}>
             <div className="sm:grid-cols-8 sm:grid-rows-1 w-full h-full grid grid-rows-4">
               <div className="row-span-3 sm:col-span-2 relative aspect-video overflow-hidden h-full w-full">
                 <Image
@@ -126,32 +132,41 @@ const FilteredUniversityItem = ({ university }: FilteredProps) => {
                 </p>
               </div>
             </div>
-            <div className="flex sm:flex-col flex-row space-x-3 sm:space-x-0 sm:space-y-3">
-              <Button className="bg-orange-500 hover:bg-orange-400">
+          </Link>
+          <div className="flex z-20 sm:flex-col flex-row space-x-3 sm:space-x-0 sm:space-y-3">
+            <Button className="bg-orange-500">
+              <a className="flex items-center"
+                href={
+                  user
+                    ? "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
+                    : "/auth"
+                }
+              >
                 <FaDownload className="mr-1" />
                 Broucher
-              </Button>
-              <Button
-                className="text-accent bg-accent/10 hover:bg-transparent"
-                variant="outline"
-              >
-                <FaRegPaperPlane className="mr-1" />
-                Apply
-              </Button>
-            </div>
+              </a>
+            </Button>
+            <Button
+              className="text-accent bg-accent/10 hover:bg-transparent"
+              variant="outline"
+            >
+              <FaRegPaperPlane className="mr-1" />
+              Apply
+            </Button>
           </div>
-          <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm  text-dark/60">
-            <p className="mr-5">
-              Fees: <span>{university?.universityProfile?.fees}</span>
-            </p>
-            <p>
-              Avg Package:{" "}
-              <span className="">
-                {university?.universityProfile?.avgPackage}
-              </span>
-            </p>
-          </div>
-        </Link>
+        </div>
+        <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm  text-dark/60">
+          <p className="mr-5">
+            Fees: <span>{university?.universityProfile?.fees}</span>
+          </p>
+          <p>
+            Avg Package:{" "}
+            <span className="">
+              {university?.universityProfile?.avgPackage}
+            </span>
+          </p>
+        </div>
+
         <div className="flex h-5 items-center space-x-4 text-sm overflow-x-scroll md:overflow-x-hidden">
           <Link href={`/study/uni/${university.slug}`}>
             <div className="hover:text-orange-500 cursor-pointer">

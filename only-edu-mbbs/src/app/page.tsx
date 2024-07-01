@@ -14,7 +14,6 @@ const HomePageQuery =
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
 
-  //  throw new Error("Test error");
 
   return (
     <div className=" w-full overflow-hidden">
@@ -22,7 +21,6 @@ export default async function Home() {
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />
           <NotificationRail data={data.news} />
-
           <ExperienceRail data={data.experienceRail} />
           <TopUniRail data={data.topUniversities} />
           {/* <CircleFilled className="absolute lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  sm:w-[300px] sm:h-[300px] w-[250px] h-[250px] top-56 -right-[20%] opacity-25  -z-10" />

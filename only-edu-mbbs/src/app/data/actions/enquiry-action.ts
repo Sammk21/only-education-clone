@@ -2,18 +2,30 @@ import { enquiryService } from "../services/enquiry-service";
 import { EnquirySchema } from "../zod/zod-schema";
 
 interface IEnquiryInput {
-  id: number;
-  slug: string;
   level: string;
-  specicalization: string;
+  specialization: string;
 }
 
-const enquiryAction = async (prevState: any, formData: IEnquiryInput) => {
+export const enquiryAction = async (
+  prevState: any,
+  formData: IEnquiryInput,
+  userId: number | undefined,
+  uniId: number
+) => {
+  console.log(formData);
+
+  if (!userId)
+    return {
+      ...prevState,
+      zodErrors: null,
+      message: "Internal server error please try again later",
+    };
+
   const validatedFields = EnquirySchema.safeParse({
-    id: formData.id,
-    slug: formData.id,
+    userId: userId,
+    uniId: uniId,
     level: formData.level,
-    specicalization: formData.specicalization,
+    specialization: formData.specialization,
   });
   if (!validatedFields.success) {
     return {
@@ -23,13 +35,17 @@ const enquiryAction = async (prevState: any, formData: IEnquiryInput) => {
     };
   }
 
-  const { id, slug, level, specialization } = validatedFields.data;
-
-  const responseData = await enquiryService(id, slug, level, specialization);
+  const responseData = await enquiryService(
+    validatedFields.data.userId,
+    validatedFields.data.uniId,
+    validatedFields.data.level,
+    validatedFields.data.specialization
+  );
 
   if (!responseData) {
     return {
       ...prevState,
+      success: false,
       strapiErrors: responseData || "",
       zodErrors: null,
       message: "Ops! Something went wrong. Please try again.",
@@ -39,9 +55,19 @@ const enquiryAction = async (prevState: any, formData: IEnquiryInput) => {
   if (responseData.error) {
     return {
       ...prevState,
+      success: false,
       strapiErrors: responseData.error,
       zodErrors: null,
       message: "Failed to Login.",
+    };
+  }
+
+  if (responseData.success) {
+    return {
+      success: true,
+      strapiErrors: responseData.error,
+      zodErrors: null,
+      message: "success.",
     };
   }
 };

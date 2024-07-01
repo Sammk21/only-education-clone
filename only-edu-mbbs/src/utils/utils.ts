@@ -130,19 +130,15 @@ export function getStrapiMedia(url: string | null) {
 }
 
 export const enquiryFormSchema = z.object({
-  firstName: z
-    .string()
-    .min(2, "First name must be at least 2 characters")
-    .max(15, "First name must be at most 15 characters")
-    .regex(/^[A-Za-z]+$/, "Enter a valid first name"),
-  lastName: z
-    .string()
-    .min(2, "Last name must be at least 2 characters")
-    .max(15, "Last name must be at most 15 characters")
-    .regex(/^[A-Za-z]+$/, "Enter a valid last name"),
-  email: z.string().email("Enter a valid email address"),
-  phone: z
-    .string()
-    .min(10, "Phone number must be at least 10 characters")
-    .max(10, "Phone number must be at most 10 characters"),
+  level: z.string({
+    required_error: "please select the level",
+  }),
+  specialization: z.string({
+    required_error: "please select the specialization",
+  }),
 });
+
+export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+  e.target.value = value; // Set the input value
+};

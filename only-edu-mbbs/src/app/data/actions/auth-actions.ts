@@ -23,7 +23,6 @@ const config = {
 
 export async function registerUserAction(prevState: any, formData: IFormInput) {
   const validatedFields = registerSchema.safeParse({
-
     firstName: formData.firstName,
     lastName: formData.lastName,
     phone: formData.phone,
@@ -32,8 +31,6 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
     email: formData.email,
     username: formData.phone,
   });
-
-  console.log("formdata", validatedFields)
 
   if (!validatedFields.success) {
     return {
@@ -127,8 +124,6 @@ export async function loginUserAction(
     identifier: formData.phone,
     password: formData.password,
   });
-
-  console.log(validatedFields);
 
   if (!validatedFields.success) {
     return {
