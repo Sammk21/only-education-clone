@@ -23,7 +23,10 @@ const CallToAction = async ({ data, title, id }: Props) => {
         <div className="flex sm:flex-row flex-col items-center justify-around gap-x-5  text-dark">
           <h1 className="lg:text-2xl text-sm">{data.title}</h1>
           {user.ok ? (
+
+
             <EnquiryDialog title={title} user={user} id={id} />
+
           ) : (
             <Link
               href="/auth"
