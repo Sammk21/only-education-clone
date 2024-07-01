@@ -118,7 +118,7 @@ const TopUniRail = ({ data }: Props) => {
         <div className=" w-full absolute bottom-16">
           <div className="swiper-pagination"></div>
         </div>
-        <span className="flex flex-row-reverse mt-12 gap-x-1">
+        <span className="flex-row-reverse mt-12 gap-x-1  hidden sm:flex ">
           <span className="back transition ease-in-out cursor-pointer z-20 sm:p-3  border rounded-full  text-3xl text-black  textglobal drop-shadow-lg hover:translate-x-1 hover:bg-dark/10 top-1/2 -translate-y-1/2  right-0">
             <MdOutlineArrowRightAlt />
           </span>

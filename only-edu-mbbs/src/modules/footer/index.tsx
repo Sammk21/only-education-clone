@@ -19,20 +19,21 @@ export interface NavbarProps {
 
 const Footer = ({ navigation }: NavbarProps) => {
   return (
-    <footer className=" w-full rounded-t-[28px]  z-10  mt-1">
-      <div className="h-full w-full flex justify-center items-center border-t bg-light border-t-borderLight pt-12 rounded-3xl">
+    <footer className=" w-full  z-10  mt-1">
+      <div className="h-full w-full flex justify-center items-center border-t bg-light border-t-borderLight pt-3 ">
         <section className="w-full bottom-0  mx-auto flex flex-col rounded-3xl  bg-light z-0">
           <div className="sm:px-14 px-4 py-1 ">
-            <div className="row h-full flex-col gap-y-9 sm:flex-row flex justify-between">
-              <Link className=" w-48 h-28 md:w-60 md:h-36 relative" href="/">
-                <Image
-                  src={"/onlyedu.svg"}
-                  alt="logo"
-                  fill={true}
-                  className="object-cover object-center"
-                />
-              </Link>
-
+            <div className="row h-full w-full flex-col gap-y-9 sm:flex-row flex justify-between">
+              <div className="w-full flex justify-center items-center">
+                <Link className=" w-48 h-28 md:w-60 md:h-36 relative" href="/">
+                  <Image
+                    src={"/onlyedu.svg"}
+                    alt="logo"
+                    fill={true}
+                    className="object-cover object-center"
+                  />
+                </Link>
+              </div>
               <div className="flex-col flex text-sm text-dark mb-8">
                 <h2 className="mb-3 text-[16px]">Useful Link</h2>
                 <ul>
@@ -48,7 +49,7 @@ const Footer = ({ navigation }: NavbarProps) => {
                 </ul>
               </div>
 
-              <div className="flex-col h-full w-[250px] flex gap-y-5 text-sm">
+              <div className="flex-col h-full w-[250px] flex gap-y-5 text-sm mb-4">
                 <li className="flex gap-x-3 justify-center items-center">
                   <GoLocation className="text-2xl text-accent" />
                   <p>Satra Plaza, 909, Sector 19D Navi Mumbai 400709</p>
