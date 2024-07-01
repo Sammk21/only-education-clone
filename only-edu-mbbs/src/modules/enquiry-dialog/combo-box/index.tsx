@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectDemo() {
+export function SelectSpecialization() {
   return (
     <Select>
       <SelectTrigger className="w-full focus-visible:outline-none outline-none focus:outline-none">
@@ -33,7 +33,7 @@ export function SelectDemo() {
   );
 }
 
-export function SelectDemolevel() {
+export function Selectlevel() {
   return (
     <Select>
       <SelectTrigger className="w-full focus-visible:outline-none outline-none focus:outline-none">

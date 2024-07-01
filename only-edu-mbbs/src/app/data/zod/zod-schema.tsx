@@ -41,8 +41,8 @@ export const OtpSchema = z.object({
 });
 
 export const EnquirySchema = z.object({
-  id: z.number(),
-  slug: z.string(),
+  userId: z.number(),
+  uniId: z.number(),
   level: z.string(),
   specialization: z.string(),
 });

@@ -13,7 +13,6 @@ const BlogPage: React.FC<BlogPageProps> = ({
   href,
   heading,
 }: BlogPageProps) => {
-  console.dir(data);
   return (
     <section className="container px-4">
       <h1 className="font-medium text-dark text-3xl">

@@ -49,7 +49,6 @@ export default async function RootLayout({
             containerClasses="flex items-center py-5 gap-3 mx-3 sm:mx-12 lg:mx-16 text-sm"
             listClasses="text-accent hover:text-dark line-clamp-1"
             capitalizeLinks
-            disabledClasses="cursor-not-allowed "
           />
           {children}
           <Footer navigation={navData.navigation} />

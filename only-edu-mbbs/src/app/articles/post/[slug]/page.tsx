@@ -69,10 +69,10 @@ export default async function Blog({ params }: { params: { slug: string } }) {
   //   recommendedData.data.length > 0 ? recommendedData.data[0] : null;
 
   return (
-    <div className=" w-full ">
+    <div className="w-full ">
       <div className="flex justify-around">
         <main
-          className={`${mosterrat.className} lg:w-[60%] w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light  pt-8 pb-16 lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
+          className={`${mosterrat.className} lg:w-[60%] w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light   lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
         >
           <div className="flex leading-relaxed  justify-between px-4 mx-auto max-w-full ">
             <article className="mx-auto w-full max-w-full  ">
@@ -81,11 +81,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                 <div className="relative mb-16">
                   <div>
                     <h1
-                      className={`${merriweather.className} text-3xl font-extrabold leading-tight text-dark lg:mb-6 lg:text-4xl dark:text-light mb-8`}
+                      className={`${merriweather.className} text-lg  mb-3 sm:text-2xl md:text-3xl  font-extrabold leading-tight text-dark lg:mb-6 lg:text-4xl dark:text-light`}
                     >
                       {title}
                     </h1>
-                    <p className="italic">{description}</p>
+                    <p className="italic text-xs my-0">{description}</p>
                   </div>
 
                   <div className="aspect-video relative">
