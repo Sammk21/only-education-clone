@@ -96,101 +96,109 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
     <>
       <div
         key={university?.id}
-        className="justify-between m-auto mb-4 sm:p-4 p-2 flex flex-col border shadow-sm rounded-xl  hover:bg-accent/10 "
+        className="m-auto mb-4 p-4 flex flex-col border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <div className="flex mb-2 flex-col sm:flex-row justify-between">
-          <Link href={`study/uni/${university?.slug}`}>
-            <div className="sm:grid-cols-8 sm:grid-rows-1 w-full h-full grid grid-rows-4">
-              <div className="row-span-3 sm:col-span-2 relative aspect-video overflow-hidden h-full w-full">
-                <Image
-                  className="rounded-lg w-full object-cover object-center h-full "
-                  src={baseUrl + university?.searchableImage?.url}
-                  alt="Image Description"
-                  fill={true}
-                />
-              </div>
-              <div className="sm:pl-6 sm:col-span-5 sm:pr-2 my-4 sm:my-0 row-span-2 ">
-                <h3 className="text-lg font-bold text-gray-800 dark:text-white line-clamp-1">
-                  {university?.title}
-                </h3>
-                <div className="flex my-1 text-xs sm:text-sm">
-                  <p className="flex items-center mr-2">
-                    <FaLocationDot className="text-orange-500" />
-                    <span className="line-clamp-1 font-semibold text-accent">
-                      {university?.indian_state?.title}
-                    </span>
-                  </p>
-                  <p className="flex items-center">
-                    <FaBuilding className="text-orange-500" />
-                    <span className="line-clamp-1 font-semibold text-accent">
-                      {university?.ownership?.title}
-                    </span>
+        <Link href={`study/uni/${university?.slug}`}>
+          <div className="flex flex-col sm:flex-row">
+            {/* Image Section */}
+            <div className="relative aspect-video w-full sm:w-1/4 rounded-md  overflow-hidden">
+              <Image
+                className="object-cover w-full h-full"
+                src={baseUrl + university?.searchableImage?.url}
+                alt="University Image"
+                fill
+              />
+            </div>
+
+            {/* Text Information Section */}
+            <div className="flex-1 sm:pl-4 py-4 sm:py-0">
+              <div className="flex flex-col sm:flex-row justify-between items-start">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-800 dark:text-white">
+                    {university?.title}
+                  </h3>
+                  <div className="flex my-1 text-xs sm:text-sm">
+                    <p className="flex items-center mr-2">
+                      <FaLocationDot className="text-orange-500" />
+                      <span className="font-semibold text-accent">
+                        {university?.indian_state?.title}
+                      </span>
+                    </p>
+                    <p className="flex items-center">
+                      <FaBuilding className="text-orange-500" />
+                      <span className="font-semibold text-accent">
+                        {university?.ownership?.title}
+                      </span>
+                    </p>
+                  </div>
+                  <p className="line-clamp-2 mt-2 text-dark/70 text-sm">
+                    {university?.universityProfile?.description}
                   </p>
                 </div>
-                <p className="line-clamp-2 mt-2 text-dark/70 text-sm">
-                  {university?.universityProfile?.description}
+
+                {/* Buttons Section */}
+                <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
+                  <Button className="bg-orange-500 text-white w-full">
+                    <a
+                      className="flex items-center"
+                      href={
+                        user
+                          ? "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
+                          : "/auth"
+                      }
+                    >
+                      <FaDownload className="mr-1" />
+                      Broucher
+                    </a>
+                  </Button>
+                  <Button
+                    className="text-accent bg-accent/10 hover:bg-transparent w-full"
+                    variant="outline"
+                  >
+                    <FaRegPaperPlane className="mr-1" />
+                    Apply
+                  </Button>
+                </div>
+              </div>
+
+              <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60">
+                <p className="mr-5">
+                  Fees: <span>{university?.universityProfile?.fees}</span>
+                </p>
+                <p>
+                  Avg Package:{" "}
+                  <span>{university?.universityProfile?.avgPackage}</span>
                 </p>
               </div>
+
+              <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm overflow-x-scroll md:overflow-x-hidden mt-4">
+                <Link href={`/study/uni/${university.slug}`}>
+                  <div className="hover:text-orange-500 cursor-pointer">
+                    Admission
+                  </div>
+                </Link>
+                <Separator className="ml-1 sm:ml-2" orientation="vertical" />
+                <Link href={`/study/uni/${university.slug}`} scroll={false}>
+                  <div className="hover:text-orange-500 cursor-pointer">
+                    Placements
+                  </div>
+                </Link>
+                <Separator orientation="vertical" />
+                <Link href={`/study/uni/${university.slug}`}>
+                  <div className="hover:text-orange-500 cursor-pointer">
+                    Courses
+                  </div>
+                </Link>
+                <Separator orientation="vertical" />
+                <Link href={`/study/uni/${university.slug}`}>
+                  <div className="hover:text-orange-500 cursor-pointer">
+                    Facilities
+                  </div>
+                </Link>
+              </div>
             </div>
-          </Link>
-          <div className="flex z-20 sm:flex-col flex-row space-x-3 sm:space-x-0 sm:space-y-3">
-            <Button className="bg-orange-500">
-              <a className="flex items-center"
-                href={
-                  user
-                    ? "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
-                    : "/auth"
-                }
-              >
-                <FaDownload className="mr-1" />
-                Broucher
-              </a>
-            </Button>
-            <Button
-              className="text-accent bg-accent/10 hover:bg-transparent"
-              variant="outline"
-            >
-              <FaRegPaperPlane className="mr-1" />
-              Apply
-            </Button>
           </div>
-        </div>
-        <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm  text-dark/60">
-          <p className="mr-5">
-            Fees: <span>{university?.universityProfile?.fees}</span>
-          </p>
-          <p>
-            Avg Package:{" "}
-            <span className="">
-              {university?.universityProfile?.avgPackage}
-            </span>
-          </p>
-        </div>
-
-        <div className="flex h-5 items-center space-x-4 text-sm overflow-x-scroll md:overflow-x-hidden">
-          <Link href={`/study/uni/${university.slug}`}>
-            <div className="hover:text-orange-500 cursor-pointer">
-              Admission
-            </div>
-          </Link>
-          <Separator orientation="vertical" />
-          <Link href={`/study/uni/${university.slug}`} scroll={false}>
-            <div className="hover:text-orange-500 cursor-pointer">
-              Placements
-            </div>
-          </Link>
-          <Separator orientation="vertical" />
-          <Link href={`/study/uni/${university.slug}`}>
-            <div className="hover:text-orange-500 cursor-pointer">Courses</div>
-          </Link>
-
-          <Separator orientation="vertical" />
-          <Link href={`/study/uni/${university.slug}`}>
-            <div className="hover:text-orange-500 cursor-pointer">
-              Facilities
-            </div>
-          </Link>
-        </div>
+        </Link>
       </div>
     </>
   );
