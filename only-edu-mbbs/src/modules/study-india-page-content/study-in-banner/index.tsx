@@ -8,12 +8,12 @@ const StudyInBanner = () => {
         <h1 className="lg:text-6xl tracking-tight text-4xl mb-2">
           study India
         </h1>
-        <h2 className="lg:text-3xl tracking-tight text-3xl mb-6">
+        <h2 className="lg:text-2xl tracking-tight text-2xl mb-6">
           Your Gateway to World-Class Education{" "}
         </h2>
         <div className="flex justify-start flex-col w-full">
           <h4>
-            Welcome to Affinity Education's Study in India program, your trusted
+            Welcome to Only Education's Study in India program, your trusted
             partner in pursuing engineering, management, and medical courses in
             India. Our mission is to empower students like you to achieve their
             academic dreams by providing expert guidance and admission
