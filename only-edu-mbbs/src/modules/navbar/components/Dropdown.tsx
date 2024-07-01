@@ -111,6 +111,11 @@ const Dropdown = ({
   const path = usePathname();
   const isActive = (href: string) => path === href;
 
+  // Check if there are any university links
+  const hasUniversityLinks = subMenuLinks.some(
+    (submenu) => submenu.university && submenu.university.title
+  );
+
   return (
     <ul
       className={`dropdown border-borderLight text-dark border dark:border-border bg-light dark:bg-dark ${dropdownClass} ${
@@ -134,9 +139,16 @@ const Dropdown = ({
         }
         return null;
       })}
-      <Link href="/universities-list" className="">
-        <span className="text-blue-500 underline text-sm"> view all</span>
-      </Link>
+
+      {/* Conditionally render the "view all" link */}
+      {hasUniversityLinks && (
+        <li>
+          <Link href="/universities-list" className="">
+            <span className="text-blue-500 underline text-sm"> view all</span>
+          </Link>
+        </li>
+      )}
+
       {subMenuLinks.map((submenu) => {
         if (submenu.country && submenu.country.title) {
           return (

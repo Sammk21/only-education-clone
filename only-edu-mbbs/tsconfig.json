@@ -21,6 +21,20 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.js", "**/*.tsx", ".next/types/**/*.ts", "src/modules/footer/index.jsx", "src/modules/navbar/components/MenuItems.jsx", "src/modules/navbar/components/Dropdown.jsx", "src/app/articles/post/[slug]/page.jsx", "src/modules/navbar/components/Sidebar.tsx", "src/modules/enquiry-dialog/combo-box/index.tsx", "src/modules/profile-&-notification-navbar/index.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/modules/footer/index.jsx",
+    "src/modules/navbar/components/MenuItems.jsx",
+    "src/modules/navbar/components/Dropdown.jsx",
+    "src/app/articles/post/[slug]/page.jsx",
+    "src/modules/navbar/components/Sidebar.tsx",
+    "src/modules/enquiry-dialog/combo-box/index.tsx",
+    "src/modules/profile-&-notification-navbar/index.jsx",
+    "src/modules/blog-components/postlist.tsx"
+  ],
   "exclude": ["node_modules"]
 }

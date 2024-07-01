@@ -16,6 +16,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { BookUser, User } from "lucide-react";
+import { toast } from "sonner";
 
 const AccountNav = ({
   user,
@@ -25,6 +26,7 @@ const AccountNav = ({
   const route = usePathname();
 
   const handleLogout = async () => {
+    toast.error("you are logged out");
     await logoutAction();
   };
 

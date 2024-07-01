@@ -16,14 +16,14 @@ interface BlogPageProps {
   };
 }
 
-const ArticleRail = ({ data }: BlogPageProps) => {
+const NotificationRail = ({ data }: BlogPageProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
   console.dir(data.data[0]?.title);
 
   return (
-    <div className="px-2 sm:px-12 mt-12 relative">
+    <div className="px-2 sm:px-12 mt-4 sm:mt-8 lg:mt-10 relative">
       <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 items-center flex sm:flex-row">
-        <span className="mb-2">Articles </span>
+        <span className="mb-2">Latest Notification</span>
       </h4>
 
       <Swiper
@@ -62,7 +62,7 @@ const ArticleRail = ({ data }: BlogPageProps) => {
       >
         {data.data.map((university) => (
           <SwiperSlide key={university.id} className="border rounded-md bg-">
-            <Link href={`articles/post/${university.slug}`}>
+            <Link href={`news/post/${university.slug}`}>
               <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative group overflow-hidden cursor-pointer">
                 <Image
                   src={baseUrl + university.image.url}
@@ -73,10 +73,18 @@ const ArticleRail = ({ data }: BlogPageProps) => {
                 <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                 <span className="w-full h-[50%] absolute bottom-0 left-0 bg-gradient-to-t from-dark/80 to-transparent transition-opacity duration-300 ease-out"></span>
               </div>
-              <div className="px-5 capitalize">
-                <p className="font-semibold text-[16px] line-clamp-1 z-10 text-dark my-2">
+              <div className="px-5 capitalize mt-3">
+                <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
+                  <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
+                    <span className="livenow absolute  left-0">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <p>LIVE</p>
+                  </span>
                   {university.title}
-                </p>
+                </div>
                 <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
                   {university.description}
                 </p>
@@ -101,4 +109,4 @@ const ArticleRail = ({ data }: BlogPageProps) => {
   );
 };
 
-export default ArticleRail;
+export default NotificationRail;

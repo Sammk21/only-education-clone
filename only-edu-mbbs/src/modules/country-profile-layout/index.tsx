@@ -13,7 +13,7 @@ interface Listprops {
 interface Props {
   profileImage: string;
   backgroundImage: string;
-  universityInfo: Listprops;
+
   data: {
     id: number;
     name: string;
@@ -25,14 +25,13 @@ interface Props {
   };
 }
 
-const GlobalProfileLayout = async ({
+const CountryProfileLayout = async ({
   data,
   backgroundImage,
   profileImage,
-  universityInfo,
 }: Props) => {
   const { name, description } = data;
-  console.dir(universityInfo, { depth: null });
+  console.dir(data);
 
   const baseUrl = "https://admin.onlyeducation.co.in";
 
@@ -65,21 +64,7 @@ const GlobalProfileLayout = async ({
 
             {/* <p className="mt-2 text-accent text-sm">{description}</p> */}
           </div>
-          <ul className="flex justify-center text-xs font-medium sm:text-sm text-foreground/80 gap-4 sm:gap-6 mt-2 overflow-x-scroll md:overflow-x-hidden ">
-            <li className="flex items-center gap-1">
-              <FaLocationDot className="text-[#fc7318]" />
 
-              {data.location}
-            </li>
-            <li className="flex items-center gap-1">
-              <FaTrophy className="text-[#fc7318]" />
-              Approved by : {data.Approvedby}
-            </li>
-            <li className="flex items-center gap-1">
-              <FaGraduationCap className="text-[#fc7318]" />
-              Estd : {data.establishment}
-            </li>
-          </ul>
           <hr className="mt-6" />
         </div>
       </div>
@@ -87,4 +72,4 @@ const GlobalProfileLayout = async ({
   );
 };
 
-export default GlobalProfileLayout;
+export default CountryProfileLayout;

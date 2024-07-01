@@ -4,17 +4,23 @@ import { ArticleAttributes } from "@/types/types";
 
 interface BlogPageProps {
   data: ArticleAttributes[];
+  href: string;
+  heading: string;
 }
 
-const BlogPage: React.FC<BlogPageProps> = ({ data }: BlogPageProps) => {
+const BlogPage: React.FC<BlogPageProps> = ({
+  data,
+  href,
+  heading,
+}: BlogPageProps) => {
   return (
     <section className="container px-4">
       <h1 className="font-medium text-dark text-3xl">
-        Only Education Articles
+        Only Education {heading}
       </h1>
       <div className="grid gap-4 md:grid-cols-2 lg:gap-10">
         {data.map((item) => (
-          <PostList key={item.id} post={item} />
+          <PostList key={item.id} post={item} href={href} />
         ))}
       </div>
     </section>

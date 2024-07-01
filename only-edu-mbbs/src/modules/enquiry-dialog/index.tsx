@@ -12,12 +12,15 @@ import { EnquiryFrom } from "./enquiryfrom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BottomGradient } from "../account/components/register";
+import { UserType } from "@/types/types";
 
 interface Props {
   title?: string;
+  user: UserType;
+  id: number;
 }
 
-export function EnquiryDialog({ title }: Props) {
+export function EnquiryDialog({ title, user, id }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
@@ -32,7 +35,7 @@ export function EnquiryDialog({ title }: Props) {
           <BottomGradient />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-6xl bg-white rounded-xl" status={status}>
+      <DialogContent className="bg-white rounded-xl" status={status}>
         <DialogHeader>
           <DialogTitle>Send Enquiry</DialogTitle>
           <DialogDescription>
@@ -43,6 +46,8 @@ export function EnquiryDialog({ title }: Props) {
           title={title}
           onClose={() => setIsOpen(false)}
           setStatus={setStatus}
+          user={user}
+          id={id}
         />
       </DialogContent>
     </Dialog>

@@ -7,6 +7,7 @@ import { SearchParamsProps } from "@/types/types";
 import { getStrapiData, getUniversities } from "@/utils/utils";
 
 import React from "react";
+import { getUserMeLoader } from "../data/services/get-user-loader";
 
 const ownershipQuery = "/api/ownerships?populate=true";
 const indianStatesQuery =
@@ -48,6 +49,9 @@ export default async function UniversitiesList({
   }
 
   const data = await getUniversities(universityListQuery, currentPage);
+  const user = await getUserMeLoader();
+
+  const userok = user.ok;
 
   const { pagination } = data.meta;
 
@@ -62,7 +66,7 @@ export default async function UniversitiesList({
             filterParams={filterParams}
           />
           {data.data.length > 0 ? (
-            <CollegeList data={data} />
+            <CollegeList user={userok} data={data} />
           ) : (
             <div className=" w-[70%] flex justify-center ">
               <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">

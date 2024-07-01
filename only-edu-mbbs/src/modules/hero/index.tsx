@@ -71,9 +71,9 @@ const Hero = ({ data }: HeroProps) => {
     search();
   }, [query, data]);
   return (
-    <section className="relative h-[800px]">
-      <div className="z-20 absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col items-center px-2">
-        <h1 className="mb-8 mt-0 sm:text-5xl text-2xl text-center font-extrabold tracking-tight leading-none   text-light">
+    <section className="relative h-[400px] md:h-[600px] ">
+      <div className="z-20 absolute w-full top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col items-center px-2">
+        <h1 className="mb-8 mt-0 sm:text-5xl text-3xl text-center font-extrabold tracking-tight leading-none   text-light">
           Right Guidance, Bright Future
         </h1>
         <div className="sm:max-w-screen-md max-w-screen-sm w-full relative">
@@ -86,11 +86,13 @@ const Hero = ({ data }: HeroProps) => {
               {results && query && (
                 <Card className="w-full">
                   <CardContent>
-                    <Table className="w-full">
+                    <Table className="text-xs sm:text-sm">
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="w-1/4">Image</TableHead>
-                          <TableHead className="w-1/2">Name</TableHead>
+                          <TableHead className="w-1/2 sm:w-1/4">
+                            Image
+                          </TableHead>
+                          <TableHead className="w-1/4 sm:w-1/2">Name</TableHead>
                           <TableHead className="w-1/4">Location</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -98,24 +100,25 @@ const Hero = ({ data }: HeroProps) => {
                         {results &&
                           results.map((item) => (
                             <TableRow className="w-full" key={item.id}>
-                              <TableCell className="w-1/4">
-                                <Link
-                                  href={`/study/uni/${item.slug}`}
-                                  className=""
-                                >
-                                  <Image
-                                    alt="Product image"
-                                    className="rounded-md object-cover"
-                                    width={60}
-                                    height={60}
-                                    src={
-                                      baseUrl + item.searchableImage?.url ||
-                                      "https://admin.onlyeducation.co.in/uploads/Placeholder_view_vector_svg_1ab35cbc35.png"
-                                    }
-                                  />
-                                </Link>
+                              <TableCell className="sm:1/2 sm:w-1/4">
+                                <div className="aspect-video rounded-sm shadow-sm overflow-hidden relative">
+                                  <Link
+                                    href={`/study/uni/${item.slug}`}
+                                    className=""
+                                  >
+                                    <Image
+                                      alt="Product image"
+                                      className=" object-cover object-center"
+                                      fill={true}
+                                      src={
+                                        baseUrl + item.searchableImage?.url ||
+                                        "https://admin.onlyeducation.co.in/uploads/Placeholder_view_vector_svg_1ab35cbc35.png"
+                                      }
+                                    />
+                                  </Link>
+                                </div>
                               </TableCell>
-                              <TableCell className="w-1/2 font-medium">
+                              <TableCell className="w-1/4 sm:w-1/2  font-medium">
                                 {item.title}
                               </TableCell>
                               <TableCell className="w-1/4">
@@ -136,7 +139,7 @@ const Hero = ({ data }: HeroProps) => {
         src="https://admin.onlyeducation.co.in/uploads/iit_madras_0c402d7404.webp"
         alt=""
         fill={true}
-        className="object-cover object-bottom -z-10"
+        className="object-cover object-center -z-10"
       />
       <span className="w-full h-full rotate-180  absolute top-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 z-10"></span>
     </section>

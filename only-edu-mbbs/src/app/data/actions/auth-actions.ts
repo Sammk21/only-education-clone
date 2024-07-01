@@ -125,8 +125,6 @@ export async function loginUserAction(
     password: formData.password,
   });
 
-  console.log(validatedFields);
-
   if (!validatedFields.success) {
     return {
       ...prevState,

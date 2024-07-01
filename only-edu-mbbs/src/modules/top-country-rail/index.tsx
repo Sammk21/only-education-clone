@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { HeaderProps, ImageAttributes } from "@/types/types";
+import Link from "next/link";
 
 // interface Props {
 //   data: {
@@ -27,6 +28,7 @@ interface University {
   title: string;
   noOfStudentsStudying: string;
   universityProfile: UniversityProfile;
+  slug: string;
 }
 
 interface CountryCard {
@@ -88,23 +90,23 @@ const TopCountryRail = ({ data }: Props) => {
       >
         {data.CountryCard.universities.data.map((university) => (
           <SwiperSlide key={university.id}>
-            <div className="rounded-lg aspect-video flex flex-col p-4  relative  group overflow-hidden cursor-pointer border  border-borderLight dark:border-border">
-              <Image
-                src={
-                  baseUrl + university.universityProfile.backgroundImage.url
+            <Link href={`study/uni/${university.slug}`}>
+              <div className="rounded-lg aspect-video flex flex-col p-4  relative  group overflow-hidden cursor-pointer border  border-borderLight dark:border-border">
+                <Image
+                  src={
+                    baseUrl + university.universityProfile.backgroundImage.url
+                  }
+                  alt="mumbai uni"
+                  fill={true}
+                  className="object-center object-cover rounded-md  group-hover:scale-105 transition-transform ease-out duration-300"
+                />
 
-                  // "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=3299&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                }
-                alt="mumbai uni"
-                fill={true}
-                className="object-center object-cover rounded-md  group-hover:scale-105 transition-transform ease-out duration-300"
-              />
-
-              <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2  items-center -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center gap-x-4">
-                <p className=" text-lg font-medium"> {university.title}</p>
-              </span>
-              <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-dark via-dark/20 to-dark/0"></span>
-            </div>
+                <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2  items-center -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center gap-x-4">
+                  <p className=" text-lg font-medium"> {university.title}</p>
+                </span>
+                <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-dark via-dark/20 to-dark/0"></span>
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
