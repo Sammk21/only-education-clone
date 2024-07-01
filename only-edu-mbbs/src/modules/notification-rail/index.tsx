@@ -52,7 +52,7 @@ const NotificationRail = ({ data }: BlogPageProps) => {
             spaceBetween: 30,
           },
           1080: {
-            slidesPerView: 4.3,
+            slidesPerView: 4,
             spaceBetween: 40,
           },
         }}
