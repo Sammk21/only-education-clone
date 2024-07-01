@@ -96,8 +96,11 @@ const UserProfileButton = () => {
   return (
     <div className="flex items-center gap-x-2 text-dark text-sm">
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage
+          src="https://admin.onlyeducation.co.in/uploads/depositphotos_137014128_stock_illustration_user_profile_icon_852499f6e7.jpg"
+          alt="@shadcn"
+        />
+        <AvatarFallback>SA</AvatarFallback>
       </Avatar>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
