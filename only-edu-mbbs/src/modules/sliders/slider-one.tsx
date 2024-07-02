@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import React, { Suspense } from "react";
 import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,22 +7,24 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { ArticleAttributes } from "@/types/types";
 import "@/styles/swiper-pagination/pagination.css";
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
 
 interface BlogPageProps {
   data: {
     data: ArticleAttributes[];
   };
+  href: string;
 }
 
-const NotificationRail = ({ data }: BlogPageProps) => {
+const InformationSlider = ({ data, href }: BlogPageProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
-  console.dir(data.data[0]?.title);
+  if (!data || !data.data || data.data.length === 0) {
+    return null;
+  }
 
   return (
     <div className="px-2 sm:px-12 mt-4 sm:mt-8 lg:mt-10 relative">
       <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 items-center flex sm:flex-row">
-        <span className="mb-2">Latest Notification</span>
+        <span className="mb-2 capitalize">Latest {href}</span>
       </h4>
 
       <Swiper
@@ -62,7 +63,7 @@ const NotificationRail = ({ data }: BlogPageProps) => {
       >
         {data.data.map((university) => (
           <SwiperSlide key={university.id} className="border rounded-md bg-">
-            <Link href={`news/post/${university.slug}`}>
+            <Link href={`/${href}/post/${university.slug}`}>
               <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative group overflow-hidden cursor-pointer">
                 <Image
                   src={baseUrl + university.image.url}
@@ -75,14 +76,16 @@ const NotificationRail = ({ data }: BlogPageProps) => {
               </div>
               <div className="px-5 capitalize mt-3">
                 <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
-                  <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
-                    <span className="livenow absolute  left-0">
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                  {university.live && (
+                    <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
+                      <span className="livenow absolute left-0">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </span>
+                      <p>LIVE</p>
                     </span>
-                    <p>LIVE</p>
-                  </span>
+                  )}
                   {university.title}
                 </div>
                 <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
@@ -103,4 +106,4 @@ const NotificationRail = ({ data }: BlogPageProps) => {
   );
 };
 
-export default NotificationRail;
+export default InformationSlider;

@@ -4,12 +4,11 @@ import NewsLetter from "@/modules/newsletter";
 import { ArticleAttributes, MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
-import RelatedRail from "@/modules/blog-components/relatedRail";
 
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
-import RelatedNewsRail from "@/modules/blog-components/relatedNewsRail";
+import InformationSlider from "@/modules/sliders/slider-one";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -49,8 +48,7 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const blogQuery = `/api/news?filters[slug][$eq]=${params.slug}&populate[image]=true&populate[relatedNews][populate][news][populate]=image&populate[relatedNews][populate][news][populate]=true`;
-  console.dir("seo", blogQuery);
+  const blogQuery = `/api/news?filters[slug][$eq]=${params.slug}&populate[image]=true&populate[news][populate][2]=image&populate[news][populate]=true`;
   const baseUrl = process.env.API_URL || "http://localhost:1337";
   const data = await getStrapiData(blogQuery);
 
@@ -61,13 +59,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     createdAt,
     routes,
     image,
-    relatedNews,
+    news,
   } = data.data[0];
 
   const recommendedQuery = `/api/news?filters[recommendedNews][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
-
-  console.log(recommendedData.data.length);
 
   const recommended =
     recommendedData.data.length > 0 ? recommendedData.data[0] : null;
@@ -140,7 +136,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-      {relatedNews && <RelatedNewsRail relatedNews={relatedNews} />}
+      <InformationSlider data={news} href="news" />
       <NewsLetter />
     </div>
   );

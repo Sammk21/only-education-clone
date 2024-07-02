@@ -19,7 +19,6 @@ interface Props {
   };
 }
 const WhyInida = ({ data }: Props) => {
-  console.dir(data);
   return (
     <section className="sm:px-12  my-6 px-2 ">
       <h4 className="text-center text-4xl pt-6 mb-6 ">{data.header.title}</h4>

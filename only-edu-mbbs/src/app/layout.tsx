@@ -52,6 +52,7 @@ export default async function RootLayout({
           />
           {children}
           <Footer navigation={navData.navigation} />
+
           <MySideBar
             navigation={navData.navigation}
             dropdown={navData.dropdown}
