@@ -83,7 +83,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
           <TabsTrigger value="placement">Placement</TabsTrigger>
-          <TabsTrigger value="infrastructure">Infrastructure</TabsTrigger>
+
           <TabsTrigger value="gallary">Gallary</TabsTrigger>
         </TabsList>
         <TabsContent
