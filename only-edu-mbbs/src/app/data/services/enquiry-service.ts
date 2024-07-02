@@ -11,6 +11,7 @@ export async function enquiryService(
   specicalization: string
 ) {
   try {
+
     const response = await axios.post(`${baseUrl}/api/enquiries`, {
       data: {
         users_permissions_user: {
@@ -27,7 +28,8 @@ export async function enquiryService(
         ],
       },
     });
-    console.log(response);
+   
+
     return {
       success: true,
       error: false,

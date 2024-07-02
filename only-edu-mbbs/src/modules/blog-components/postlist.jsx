@@ -20,7 +20,7 @@ export default function PostList({ post, href }) {
       <div className="border-b border-b-borderLight dark:border-b-border mt-5">
         <div className={cx("group cursor-pointer grid grid-cols-6 gap-4")}>
           <Link
-            href={`${href}//${post.slug}`}
+            href={`${href}/${post.slug}`}
             className="col-span-4 flex flex-col justify-between"
           >
             <div className="flex items-center">

@@ -17,6 +17,7 @@ import { UserType } from "@/types/types";
 interface Props {
   title?: string;
   user: UserType;
+
   id: number;
 }
 

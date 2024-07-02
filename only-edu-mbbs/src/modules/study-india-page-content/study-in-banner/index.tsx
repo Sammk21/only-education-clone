@@ -3,17 +3,17 @@ import React from "react";
 
 const StudyInBanner = () => {
   return (
-    <section className="text-dark dark:text-light  max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-0 mt-5 sm:grid sm:grid-cols-8 px-2">
+    <section className="text-dark dark:text-light  max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-0 mt-5 sm:grid sm:grid-cols-8 px-1">
       <div className="sm:col-span-5 h-full w-full flex  flex-col">
         <h1 className="lg:text-6xl tracking-tight text-4xl mb-2">
           Study India
-        </h1>
-        <h2 className=" tracking-tight text-lg text-accent mb-4">
+        </h3>
+        <p className=" tracking-tight text-lg text-accent mb-4">
           Your Gateway to World-Class Education{" "}
         </h2>
         <div className="flex justify-start flex-col w-full">
           <h4>
-            Welcome to Affinity Education's Study in India program, your trusted
+            Welcome to Only Education's Study in India program, your trusted
             partner in pursuing engineering, management, and medical courses in
             India. Our mission is to empower students like you to achieve their
             academic dreams by providing expert guidance and admission

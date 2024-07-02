@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
-import RelatedRail from "@/modules/blog-components/relatedRails";
+import RelatedRail from "@/modules/blog-components/relatedRails";  //check this import
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],

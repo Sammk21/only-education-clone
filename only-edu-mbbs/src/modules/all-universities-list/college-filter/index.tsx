@@ -99,7 +99,7 @@ const CollegeFilter = ({
           </div>
         </div>
 
-        <div className="max-h-[66vh] border-b overflow-y-scroll">
+        <div className=" border-b sticky top-20 w-full h-fit">
           <AccordionCustom
             name={"Location"}
             data={indianStates.data}

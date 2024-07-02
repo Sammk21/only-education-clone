@@ -4,6 +4,7 @@ import NewsLetter from "@/modules/newsletter";
 import { ArticleAttributes, MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
+import RelatedRail from "@/modules/blog-components/relatedRail";
 
 import parse from "html-react-parser";
 import Image from "next/image";
@@ -63,7 +64,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     relatedNews,
   } = data.data[0];
 
-  const recommendedQuery = `/api/news?filters[recommendedArticle][$eq]=true&populate[image]=true`;
+  const recommendedQuery = `/api/news?filters[recommendedNews][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
 
   console.log(recommendedData.data.length);
@@ -75,7 +76,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     <div className=" w-full ">
       <div className="flex justify-around">
         <main
-          className={`${mosterrat.className} lg:w-[60%] w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light  pt-8 pb-16 lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
+          className={`${mosterrat.className} lg:w-[60%] py-1 w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light   bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
         >
           <div className="flex leading-relaxed  justify-between px-4 mx-auto max-w-full ">
             <article
@@ -88,7 +89,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                 <div className="relative mb-16">
                   <div>
                     <h1
-                      className={`${merriweather.className} text-3xl font-extrabold leading-tight text-dark lg:mb-6 lg:text-4xl dark:text-light mb-8`}
+                      className={`${merriweather.className} text-2xl font-extrabold leading-tight text-dark lg:mb-6 lg:text-2xl dark:text-light mb-8`}
                     >
                       {title}
                     </h1>
@@ -110,7 +111,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           </div>
         </main>
 
-        <div className="sticky top-0 h-32  py-16 w-[24%] mb-80 hidden lg:block">
+        <div className="sticky top-12 h-32  py-16 w-[24%] mb-80 hidden lg:block">
           <div className="border mt-6 rounded-sm px-2 py-3">
             <h4 className="text-dark text-center border-b pb-3 mb-3 text-xl font-semibold">
               Other Trending News
