@@ -120,6 +120,7 @@ export interface ArticleAttributes {
   image: ImageAttributes;
   category: CategoryAttributes;
   recommendedArticle:string|null
+
 }
 
 interface MetaData {

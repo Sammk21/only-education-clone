@@ -12,7 +12,6 @@ export default function CategoryLabel({ nomargin = false, category }) {
         // key={index}
       >
         <Label nomargin={nomargin} color={"blue"}>
-          {/* {category.title} */}
           {category.name}
         </Label>
       </Link>

@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
-import RelatedRail from "@/modules/blog-components/relatedRail";
+import InformationSlider from "@/modules/sliders/slider-one";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -47,7 +47,7 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true&populate[relatedArticles][populate][articles][populate]=true&populate[relatedArticles][populate][header][populate]=true&populate[relatedArticles][populate][articles][populate]=image`;
+  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true&populate[articles][populate]=true&populate[articles][populate]=image`;
   const baseUrl = process.env.API_URL || "http://localhost:1337";
 
   const data = await getStrapiData(blogQuery);
@@ -59,7 +59,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     createdAt,
     image,
     relatedArticles,
-    recommendedArticle,
+    articles,
   } = data.data[0];
 
   const recommendedQuery = `/api/articles?filters[recommendedArticle][$eq]=true&populate[image]=true`;
@@ -130,8 +130,8 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-      {relatedArticles && <RelatedRail relatedArticles={relatedArticles} />}
-
+      {/* {relatedArticles && <RelatedRail relatedArticles={relatedArticles} />} */}
+      <InformationSlider data={articles} href="articles" />
       <NewsLetter />
     </div>
   );

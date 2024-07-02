@@ -3,7 +3,7 @@ import React from "react";
 
 const StudyInBanner = () => {
   return (
-    <section className="text-dark dark:text-light  max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-0 mt-5 sm:grid sm:grid-cols-8 px-1">
+    <section className="text-dark dark:text-light  max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-6 mt-5 sm:grid sm:grid-cols-8 px-6">
       <div className="sm:col-span-5 h-full w-full flex  flex-col">
         <h1 className="lg:text-6xl tracking-tight text-4xl mb-2">
           study India

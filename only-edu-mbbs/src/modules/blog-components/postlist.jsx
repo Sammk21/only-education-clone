@@ -14,6 +14,7 @@ const merriweather = Merriweather({
 export default function PostList({ post, href }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
+  console.dir(image);
 
   return (
     <section>

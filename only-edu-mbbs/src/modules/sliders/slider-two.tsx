@@ -10,13 +10,6 @@ import "@/styles/swiper-pagination/pagination.css";
 import { University } from "lucide-react";
 import Link from "next/link";
 
-// interface Props {
-//   data: {
-//     ImageAttributes: ImageAttributes;
-//     CountryProps: CountryProps;
-//   };
-// }
-
 interface UniversityProfile {
   backgroundImage: ImageAttributes;
 }
@@ -24,7 +17,6 @@ interface UniversityProfile {
 interface University {
   id: number;
   title: string;
-  noOfStudentsStudying: string;
   slug: string;
   universityProfile: UniversityProfile;
 }
@@ -33,15 +25,13 @@ interface UniversitiesData {
   universities: {
     data: University[];
   };
-  // UniversitiesData: UniversitiesData;
 }
 interface Props {
   data: UniversitiesData;
 }
-const TopUniRail = ({ data }: Props) => {
-  const baseUrl = "https://admin.onlyeducation.co.in";
-  console.dir(University);
 
+const UniversitiesRail = ({ data }: Props) => {
+  const baseUrl = "https://admin.onlyeducation.co.in";
   return (
     <>
       <div className="px-2 sm:px-12 mt-12 relative ">
@@ -102,11 +92,7 @@ const TopUniRail = ({ data }: Props) => {
                   <span className="font-bold text-sm sm:text-lg md:text-xl absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-6 z-10 text-light w-full flex justify-center">
                     {university.title}
                   </span>
-                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 h-6 -translate-y-1/2 z-10 w-full text-sm font-normal text-light overflow-hidden">
-                    <p className="translate-y-[100%] group-hover:translate-y-0 transition-transform duration-[380ms] ease-in-out flex items-center w-full text-light justify-center">
-                      {university.noOfStudentsStudying} students studying here.
-                    </p>
-                  </span>
+
                   <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                   <span className="w-full h-[50%] absolute bottom-0 left-0   bg-gradient-to-t from-dark/80 to-transparent  transition-opacity duration-300 ease-out"></span>
                 </div>
@@ -127,9 +113,8 @@ const TopUniRail = ({ data }: Props) => {
           </span>
         </span>
       </div>
-      <div className="h-4"></div>
     </>
   );
 };
 
-export default TopUniRail;
+export default UniversitiesRail;

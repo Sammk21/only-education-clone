@@ -1,33 +1,31 @@
 import Hero from "@/modules/hero";
 import ExperienceRail from "@/modules/experience-rail/index";
-import TopUniRail from "@/modules/top-uni-rail";
 import OurServices from "@/modules/services";
 import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
-import ArticleRail from "@/modules/article-rail";
-import NotificationRail from "@/modules/notification-rail";
-
+import InformationSlider from "@/modules/sliders/slider-one";
+import UniversitiesRail from "@/modules/sliders/slider-two";
 const HomePageQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image";
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
 
-
   return (
     <div className=" w-full overflow-hidden">
       <div className="relative">
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />
-          <NotificationRail data={data.news} />
+
+          <InformationSlider data={data.news} href="news" />
+
           <ExperienceRail data={data.experienceRail} />
-          <TopUniRail data={data.topUniversities} />
-          {/* <CircleFilled className="absolute lg:w-[600px] lg:h-[600px] md:w-[400px] md:h-[400px]  sm:w-[300px] sm:h-[300px] w-[250px] h-[250px] top-56 -right-[20%] opacity-25  -z-10" />
-          <CircleFilled className="absolute lg:w-[800px] lg:h-[800px] md:w-[600px] md:h-[600px]  sm:w-[400px] sm:h-[400px] w-[300px] h-[300px]  top-0 -left-[20%] opacity-35  -z-10" /> */}
+          <UniversitiesRail data={data.topUniversities} />
         </div>
         <OurServices data={data.services} />
-        <ArticleRail data={data.articles} />
+
+        <InformationSlider href="articles" data={data.articles} />
         <WhyUs data={data.whyOnlyEducation} />
         <NewsLetter />
         <CircleFilled className="absolute lg:w-[900px] lg:h-[900px] md:w-[700px] md:h-[700px]  sm:w-[600px] sm:h-[600px] w-[450px] h-[450px] top-3/4 -left-[20%] opacity-50  -z-10" />
