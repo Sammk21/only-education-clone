@@ -93,7 +93,6 @@ const NotificationRail = ({ data }: BlogPageProps) => {
           </SwiperSlide>
         ))}
       </Swiper>
-
       <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1   -translate-y-1/2 right-3">
         <MdOutlineArrowRightAlt />
       </span>

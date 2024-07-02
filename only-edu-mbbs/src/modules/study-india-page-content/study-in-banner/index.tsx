@@ -6,9 +6,9 @@ const StudyInBanner = () => {
     <section className="text-dark dark:text-light  max-w-full lg:max-w-7xl lg:mx-auto lg:px-6 sm:px-0 mt-5 sm:grid sm:grid-cols-8 px-1">
       <div className="sm:col-span-5 h-full w-full flex  flex-col">
         <h1 className="lg:text-6xl tracking-tight text-4xl mb-2">
-          study India
-        </h1>
-        <h2 className="lg:text-2xl tracking-tight text-2xl mb-6">
+          Study India
+        </h3>
+        <p className=" tracking-tight text-lg text-accent mb-4">
           Your Gateway to World-Class Education{" "}
         </h2>
         <div className="flex justify-start flex-col w-full">
