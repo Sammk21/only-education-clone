@@ -65,6 +65,9 @@ export default async function Blog({ params }: { params: { slug: string } }) {
   const recommendedQuery = `/api/news?filters[recommendedNews][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
 
+  const recommended =
+    recommendedData.data.length > 0 ? recommendedData.data[0] : null;
+
   return (
     <div className=" w-full ">
       <div className="flex justify-around">
@@ -110,7 +113,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
               Other Trending News
             </h4>
 
-            {recommendedData.data.length > 0 &&
+            {/* {recommendedData.data.length > 0 &&
               recommendedData.data.map((article: ArticleAttributes) => (
                 <div key={article.id} className="mb-4 px-2">
                   <Link
@@ -129,7 +132,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     />
                   </Link>
                 </div>
-              ))}
+              ))} */}
           </div>
         </div>
       </div>

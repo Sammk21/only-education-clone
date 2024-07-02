@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
+
 import InformationSlider from "@/modules/sliders/slider-one";
 
 const mosterrat = Montserrat({
@@ -86,7 +87,6 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     </h1>
                     <p className="italic text-xs my-0">{description}</p>
                   </div>
-
                   <div className="aspect-video relative">
                     <Image
                       src={baseUrl + image.url}

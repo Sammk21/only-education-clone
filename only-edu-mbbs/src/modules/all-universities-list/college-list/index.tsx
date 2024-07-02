@@ -92,16 +92,20 @@ export default CollegeList;
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
 
+
   return (
     <>
       <div
         key={university?.id}
-        className="m-auto mb-4 p-4 flex flex-col border shadow-sm rounded-xl hover:bg-accent/10"
+        className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <Link href={`study/uni/${university?.slug}`}>
-          <div className="flex flex-col sm:flex-row">
+        <div className="flex flex-col w-full sm:flex-row">
+          <Link
+            className=" w-full sm:w-1/4"
+            href={`study/uni/${university?.slug}`}
+          >
             {/* Image Section */}
-            <div className="relative aspect-video w-full sm:w-1/4 rounded-md  overflow-hidden">
+            <div className="relative aspect-video w-full  rounded-md overflow-hidden">
               <Image
                 className="object-cover w-full h-full"
                 src={baseUrl + university?.searchableImage?.url}
@@ -109,10 +113,11 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                 fill
               />
             </div>
-
-            {/* Text Information Section */}
-            <div className="flex-1 sm:pl-4 py-4 sm:py-0">
-              <div className="flex flex-col sm:flex-row justify-between items-start">
+          </Link>
+          {/* Text Information Section */}
+          <div className="flex-1 sm:pl-4 py-4 sm:py-0">
+            <div className="flex flex-col sm:flex-row justify-between items-start">
+              <Link href={`study/uni/${university?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                     {university?.title}
@@ -135,70 +140,70 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                     {university?.universityProfile?.description}
                   </p>
                 </div>
+              </Link>
 
-                {/* Buttons Section */}
-                <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
-                  <Button className="bg-orange-500 text-white w-full">
-                    <a
-                      className="flex items-center"
-                      href={
-                        user
-                          ? "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
-                          : "/auth"
-                      }
-                    >
-                      <FaDownload className="mr-1" />
-                      Broucher
-                    </a>
-                  </Button>
-                  <Button
-                    className="text-accent bg-accent/10 hover:bg-transparent w-full"
-                    variant="outline"
+              {/* Buttons Section */}
+              <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
+                <Button className="bg-orange-500 text-white w-full">
+                  <a
+                    className="flex items-center"
+                    href={
+                      user
+                        ? "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
+                        : "/auth"
+                    }
                   >
-                    <FaRegPaperPlane className="mr-1" />
-                    Apply
-                  </Button>
-                </div>
-              </div>
-
-              <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60">
-                <p className="mr-5">
-                  Fees: <span>{university?.universityProfile?.fees}</span>
-                </p>
-                <p>
-                  Avg Package:{" "}
-                  <span>{university?.universityProfile?.avgPackage}</span>
-                </p>
-              </div>
-
-              <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm overflow-x-scroll md:overflow-x-hidden mt-4">
-                <Link href={`/study/uni/${university.slug}`}>
-                  <div className="hover:text-orange-500 cursor-pointer">
-                    Admission
-                  </div>
-                </Link>
-                <Separator className="ml-1 sm:ml-2" orientation="vertical" />
-                <Link href={`/study/uni/${university.slug}`} scroll={false}>
-                  <div className="hover:text-orange-500 cursor-pointer">
-                    Placements
-                  </div>
-                </Link>
-                <Separator orientation="vertical" />
-                <Link href={`/study/uni/${university.slug}`}>
-                  <div className="hover:text-orange-500 cursor-pointer">
-                    Courses
-                  </div>
-                </Link>
-                <Separator orientation="vertical" />
-                <Link href={`/study/uni/${university.slug}`}>
-                  <div className="hover:text-orange-500 cursor-pointer">
-                    Facilities
-                  </div>
-                </Link>
+                    <FaDownload className="mr-1" />
+                    Broucher
+                  </a>
+                </Button>
+                <Button
+                  className="text-accent bg-accent/10 hover:bg-transparent w-full"
+                  variant="outline"
+                >
+                  <FaRegPaperPlane className="mr-1" />
+                  Apply
+                </Button>
               </div>
             </div>
+
+            <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60">
+              <p className="mr-5">
+                Fees: <span>{university?.universityProfile?.fees}</span>
+              </p>
+              <p>
+                Avg Package:{" "}
+                <span>{university?.universityProfile?.avgPackage}</span>
+              </p>
+            </div>
+
+            <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm overflow-x-scroll md:overflow-x-hidden mt-4">
+              <Link href={`/study/uni/${university.slug}`}>
+                <div className="hover:text-orange-500 cursor-pointer">
+                  Admission
+                </div>
+              </Link>
+              <Separator className="ml-1 sm:ml-2" orientation="vertical" />
+              <Link href={`/study/uni/${university.slug}`} scroll={false}>
+                <div className="hover:text-orange-500 cursor-pointer">
+                  Placements
+                </div>
+              </Link>
+              <Separator orientation="vertical" />
+              <Link href={`/study/uni/${university.slug}`}>
+                <div className="hover:text-orange-500 cursor-pointer">
+                  Courses
+                </div>
+              </Link>
+              <Separator orientation="vertical" />
+              <Link href={`/study/uni/${university.slug}`}>
+                <div className="hover:text-orange-500 cursor-pointer">
+                  Facilities
+                </div>
+              </Link>
+            </div>
           </div>
-        </Link>
+        </div>
       </div>
     </>
   );
