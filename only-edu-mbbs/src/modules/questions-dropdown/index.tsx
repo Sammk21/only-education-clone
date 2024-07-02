@@ -7,6 +7,7 @@ import {
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import parse from "html-react-parser";
+import Title from "../common/title";
 
 interface Props {
   data: {
@@ -22,9 +23,7 @@ const QuestionDropdown = ({ data }: Props) => {
   return (
     <>
       <section className=" py-6 my-6  px-2 sm:px-6">
-        <h4 className="sm:text-center text-2xl text-dark dark:text-light">
-          {title}
-        </h4>
+        <Title>Commanly asked questions</Title>
         <div className=" pt-6 w-full ">
           <div className="mx-auto w-full max-w-5xl divide-y divide-dark/5 dark:divide-border divide-borderLight  rounded-xl dark:bg-foreground bg-dark/5">
             {faq.map((item) => (

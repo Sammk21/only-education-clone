@@ -27,30 +27,32 @@ export function EnquiryDialog({ title, user, id }: Props) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          className="hover:border-green-500 bg-orange-500 hover:bg-orange-400 text-light "
-          variant={"outline"}
-        >
-          Enquire now
-          <BottomGradient />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="bg-white rounded-xl" status={status}>
-        <DialogHeader>
-          <DialogTitle>Send Enquiry</DialogTitle>
-          <DialogDescription>
-            Our experts will contact you as soon as possible
-          </DialogDescription>
-        </DialogHeader>
-        <EnquiryFrom
-          title={title}
-          onClose={() => setIsOpen(false)}
-          setStatus={setStatus}
-          user={user}
-          id={id}
-        />
-      </DialogContent>
+      <div className="flex flex-col">
+        <DialogTrigger asChild>
+          <Button
+            className="hover:border-green-500 bg-orange-500 hover:bg-orange-400 text-light "
+            variant={"outline"}
+          >
+            Enquire now
+            <BottomGradient />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="bg-white rounded-xl" status={status}>
+          <DialogHeader>
+            <DialogTitle>Send Enquiry</DialogTitle>
+            <DialogDescription>
+              Our experts will contact you as soon as possible
+            </DialogDescription>
+          </DialogHeader>
+          <EnquiryFrom
+            title={title}
+            onClose={() => setIsOpen(false)}
+            setStatus={setStatus}
+            user={user}
+            id={id}
+          />
+        </DialogContent>
+      </div>
     </Dialog>
   );
 }

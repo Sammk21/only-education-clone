@@ -9,16 +9,10 @@ export default function Sidebar(props) {
   return (
     <div className="mt-5 font-sans">
       <Searchbar />
-
       {props.related && (
-        <RelatedPosts
-          related={props.related}
-          pathPrefix={props.pathPrefix}
-        />
+        <RelatedPosts related={props.related} pathPrefix={props.pathPrefix} />
       )}
-      {props.categories && (
-        <Categories categories={props.categories} />
-      )}
+      {props.categories && <Categories categories={props.categories} />}
     </div>
   );
 }

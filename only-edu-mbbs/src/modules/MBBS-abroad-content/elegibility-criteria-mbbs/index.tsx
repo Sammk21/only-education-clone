@@ -1,6 +1,8 @@
 import { HeaderProps } from "@/types/types";
 import React from "react";
 import parse from "html-react-parser";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Title from "@/modules/common/title";
 
 interface CriteriaListProps {
   id: number;
@@ -47,24 +49,25 @@ const ElegibilityCriteria = ({ data }: Props) => {
   };
 
   return (
-    <div className="text-dark dark:text-light  my-6 max-w-6xl mx-auto ">
-      <h4 className="leading-none text-4xl mb-4 text-center text-dark dark:text-light font-medium">
-        {title}
-      </h4>
-      <p className="text-center text-accent mb-6">{description}</p>
-      {data.criteriaTable && (
-        <div className="prose pt-6 max-w-4xl mx-auto w-full justify-center overflow-x-auto">
-          {parse(data.criteriaTable)}
+    <Card className="text-dark dark:text-light mt-6 mx-auto ">
+      <CardHeader>
+        <Title>{title}</Title>
+      </CardHeader>
+      <CardContent>
+        {data.criteriaTable && (
+          <div className="prose pt-6 max-w-6xl  mx-auto w-full justify-center overflow-x-auto">
+            {parse(data.criteriaTable)}
+          </div>
+        )}
+        <div className="flex justify-center w-full">
+          <div className="prose pt-6 max-w-6xl mx-auto grid sm:grid-cols-2 gap-7">
+            {data.criteriaList &&
+              data.criteriaList.length > 0 &&
+              renderCriteriaList()}
+          </div>
         </div>
-      )}
-      <div className="flex justify-center w-full">
-        <div className="prose pt-6 max-w-4xl mx-auto grid sm:grid-cols-2 gap-7">
-          {data.criteriaList &&
-            data.criteriaList.length > 0 &&
-            renderCriteriaList()}
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

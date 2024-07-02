@@ -71,7 +71,7 @@ const Hero = ({ data }: HeroProps) => {
     search();
   }, [query, data]);
   return (
-    <section className="relative h-[400px] md:h-[600px] ">
+    <section className="relative h-screen ">
       <div className="z-20 absolute w-full top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col items-center px-2">
         <h1 className="mb-8 mt-0 sm:text-5xl text-3xl text-center font-extrabold tracking-tight leading-none   text-light">
           Right Guidance, Bright Future
@@ -82,7 +82,7 @@ const Hero = ({ data }: HeroProps) => {
             <IoSearchOutline className=" h-10  text-[#f97316] w-5 m-auto" />
           </p>
           <div className="relative">
-            <div className="absolute bottom-full w-full -top-6 h-fit rounded-sm">
+            <div className="absolute w-full h-[400px] overflow-y-scroll top-0 rounded-sm">
               {results && query && (
                 <Card className="w-full">
                   <CardContent>

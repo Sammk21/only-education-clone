@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import { HeaderProps } from "@/types/types";
 import React from "react";
 import { FaChartBar } from "react-icons/fa";
@@ -22,9 +23,8 @@ const UniRanking = ({ data }: Props) => {
   const { objectRank, worldRank } = data.ranks;
 
   return (
-    <section className="py-12 my-12 bg-greenDark rounded-2xl text-light  mx-auto">
+    <Card className="py-12 mt-6 bg-white rounded-lg text-black  mx-auto">
       <h4 className="text-center text-3xl font-medium mb-4">{title}</h4>
-      <p className="text-center max-w-5xl mx-auto mb-5">{description}</p>
       <div className="w-full h-full flex  justify-around ">
         <div className="flex justify-center items-center flex-col ">
           <FaChartBar className="md:text-8xl text-6xl sm:text-7xl mb-3" />
@@ -35,7 +35,7 @@ const UniRanking = ({ data }: Props) => {
           <p className="font-medium text-sm sm:text-xl">{worldRank}</p>
         </div>
       </div>
-    </section>
+    </Card>
   );
 };
 

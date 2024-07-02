@@ -66,7 +66,7 @@ const config = {
         transparent: "transparent",
         light: "#fff",
         dark: "#09090b",
-        accent: "#a1a1aa",
+        accent: "#c9c9c9",
         foreground: "#27272a",
         secondary: "#A1A1A1",
         bluelink: "#2463eb",
@@ -83,6 +83,20 @@ const config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "#fff",
+
+        "flush-orange": {
+          "50": "#fff8ed",
+          "100": "#fff0d4",
+          "200": "#ffdea8",
+          "300": "#ffc570",
+          "400": "#ffa037",
+          "500": "#ff810a",
+          "600": "#f06806",
+          "700": "#c74e07",
+          "800": "#9e3d0e",
+          "900": "#7f350f",
+          "950": "#451805",
+        },
 
         primary: {
           DEFAULT: "hsl(var(--primary))",

@@ -8,13 +8,16 @@ import InfoTableLayout from "@/modules/table-layout";
 import UniHighlights from "@/modules/uni-highlights";
 import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CallToAction from "@/modules/footer/call-to-action";
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import PlacementInfo from "@/modules/placement";
 import ReadMoreParagraph from "@/modules/common/readMorePara";
+import UniversityTabs from "@/modules/Tabs";
+import Title from "@/modules/common/title";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export async function generateMetadata({
   params,
@@ -67,37 +70,53 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   };
 
   return (
-    <div className=" mb-16">
+    <div className="mb-16">
       <GlobalProfileLayout
         profileImage={profileImage}
         backgroundImage={backgroundImage}
         data={universityProfile}
         universityInfo={universityInfo}
       />
-      <div className="mt-6 px-3 ">
-        <div className="my-8 container">
-          <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
-            {overview.title}
-          </h2>
-          <p className=" max-w-6xl w-full mx-auto dark:text-accent">
-            <ReadMoreParagraph text={overview.description} />
-          </p>
-        </div>
-
-        {/* <CallToAction ctaProps={ctaProps} data={cta} /> */}
-
-        <CallToAction id={id} data={cta} title={title} />
-        <UniHighlights data={highlights} />
-        <WhyThisUni data={whythisUniversity} />
-        <UniRanking data={rankComparison} />
-        <ElegibilityCriteria data={eligibilityCriteria} />
-        <AdmissionProcessFlow />
-        <DocumentRquired data={documentRequired} />
-        <InfoTableLayout data={feesStructure} />
-        <PlacementInfo data={placement} />
-        <CampusHighlight />
-        <QuestionDropdown data={faq} />
-      </div>
+      <Tabs defaultValue="overview">
+        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
+          <TabsTrigger value="admission">Admission</TabsTrigger>
+          <TabsTrigger value="placement">Placement</TabsTrigger>
+          <TabsTrigger value="infrastructure">Infrastructure</TabsTrigger>
+          <TabsTrigger value="gallary">Gallary</TabsTrigger>
+        </TabsList>
+        <TabsContent
+          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          value="overview"
+        >
+          <div className="mt-3 px-3 col-span-8">
+            <Card>
+              <CardHeader>
+                <Title>{`${title} Latest updates`}</Title>
+              </CardHeader>
+              <CardContent>Ck editor content</CardContent>
+            </Card>
+            <div className=" bg-white p-3 mt-3 rounded-lg border">
+              <Title>{overview.title}</Title>
+              <ReadMoreParagraph text={overview.description} />
+            </div>
+            <CallToAction id={id} data={cta} title={title} />
+            <UniHighlights data={highlights} />
+            <WhyThisUni data={whythisUniversity} />
+            <UniRanking data={rankComparison} />
+            <ElegibilityCriteria data={eligibilityCriteria} />
+            <AdmissionProcessFlow />
+            <DocumentRquired data={documentRequired} />
+            <InfoTableLayout data={feesStructure} />
+            <PlacementInfo data={placement} />
+            <CampusHighlight />
+            <QuestionDropdown data={faq} />
+          </div>
+          <div className="col-span-4"></div>
+        </TabsContent>
+        <TabsContent value="password">Change your password here.</TabsContent>
+      </Tabs>
     </div>
   );
 };

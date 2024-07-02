@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import React, { ChangeEvent } from "react";
 
 interface SearchBoxProps {
@@ -12,16 +13,24 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
     setQuery(e.target.value);
   };
 
+  const placeholders = [
+    "Search for your favourite university",
+    "IIT madras?",
+    "Mumbai university?",
+    "Kalinga university?",
+  ];
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("submitted");
+  };
+
   return (
     <>
-      <Input
-        type="text"
-        value={query}
+      <PlaceholdersAndVanishInput
         onChange={handleChange}
-        placeholder="Search for universities..."
-        className={`w-full p-2 border ${
-          query && "rounded-b-none"
-        }  rounded-lg  mb-6 outline-none focus:outline-none `}
+        onSubmit={onSubmit}
+        placeholders={placeholders}
       />
     </>
   );
