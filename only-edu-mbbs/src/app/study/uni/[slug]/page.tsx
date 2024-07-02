@@ -78,13 +78,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         universityInfo={universityInfo}
       />
       <Tabs defaultValue="overview">
-        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll">
+        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll sm:overflow-x-hidden">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
           <TabsTrigger value="placement">Placement</TabsTrigger>
-
-          <TabsTrigger value="gallary">Gallary</TabsTrigger>
+          <TabsTrigger value="gallary">Gallery</TabsTrigger>
         </TabsList>
         <TabsContent
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
