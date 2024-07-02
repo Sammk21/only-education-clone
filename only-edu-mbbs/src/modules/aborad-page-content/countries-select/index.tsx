@@ -3,7 +3,7 @@ import React from "react";
 const CountrySelect = () => {
   return (
     <section>
-      <h1 className="font-semibold text-dark  dark:text-light text-3xl sm:text-4xl md:text-5xl mb-10 flex-col items-center flex sm:flex-row">
+      <h1 className="font-semibold text-dark  dark:text-light text-3xl sm:text-4xl md:text-5xl mb-10 flex-col items-center flex sm:flex-row px-3">
         Study MBBS in abroad
       </h1>
       <div className="w-full flex flex-wrap justify-around gap-6">
@@ -243,42 +243,7 @@ const CountrySelect = () => {
           </svg>
           <p className="text-center">Ireland</p>
         </div>
-        <div className="h-[96px] w-[128px] md:w-[160px] md:h-[120px]  mb-9">
-          <svg
-            className="w-full h-full object-contain rounded-2xl"
-            viewBox="0 0 32 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g clip-path="url(#clip0_270_67438)">
-              <rect width="32" height="24" fill="white" />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M22 0H32V24H22V0Z"
-                fill="#FF8C1A"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M0 0H12V24H0V0Z"
-                fill="#5EAA22"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M10 0H22V24H10V0Z"
-                fill="#F7FCFF"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_270_67438">
-                <rect width="32" height="24" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-          <p className="text-center">Ireland</p>
-        </div>
+
         <div className="h-[96px] w-[128px] md:w-[160px] md:h-[120px]  mb-9">
           <svg
             className="w-full h-full object-contain rounded-2xl"

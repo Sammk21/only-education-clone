@@ -24,7 +24,7 @@ const Footer = ({ navigation }: NavbarProps) => {
         <section className="w-full bottom-0  mx-auto flex flex-col rounded-3xl  bg-light z-0">
           <div className="sm:px-14 px-4 py-1 ">
             <div className="row h-full w-full flex-col gap-y-9 sm:flex-row flex justify-between">
-              <div className="w-full flex justify-center items-center">
+              <div className=" sm:max-w-96  w-full flex justify-center items-center">
                 <Link className=" w-48 h-28 md:w-60 md:h-36 relative" href="/">
                   <Image
                     src={"/onlyedu.svg"}

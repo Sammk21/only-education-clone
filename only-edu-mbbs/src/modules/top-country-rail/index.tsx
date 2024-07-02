@@ -52,9 +52,9 @@ const TopCountryRail = ({ data }: Props) => {
     <div className="sm:px-12 py-6 my-6 px-2">
       <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-10 flex-col items-center flex sm:flex-row">
         <span className="mb-2">{data.Header.title}</span>
-        <span className="sm:text-lg text-sm font-light text-accent sm:ml-2">
+        {/* <span className="sm:text-lg text-sm font-light text-accent sm:ml-2">
           {data.Header.description}
-        </span>
+        </span> */}
       </h4>
       <Swiper
         speed={600}

@@ -26,14 +26,16 @@ export default function PostList({ post, href }) {
             <div className="flex items-center">
               <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
                 <h5 className="">
-                  <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs mr-2">
-                    <span className="livenow absolute left-0">
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                  {post.live && (
+                    <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs mr-2">
+                      <span className="livenow absolute left-0">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </span>
+                      <p>LIVE</p>
                     </span>
-                    <p>LIVE</p>
-                  </span>
+                  )}
                   {post.title}
                 </h5>
               </div>

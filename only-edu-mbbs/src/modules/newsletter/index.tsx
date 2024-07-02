@@ -2,6 +2,7 @@
 import { HandIcon } from "lucide-react";
 import React, { useState } from "react";
 import { BsCalendar } from "react-icons/bs";
+import { toast } from "sonner";
 
 const handleUserSubscribe = async (email: string) => {
   try {
@@ -20,10 +21,10 @@ const handleUserSubscribe = async (email: string) => {
       throw new Error("Network response was not ok");
     }
 
+    toast.success("you are now subscribed to our newsletter");
     const data = await response.json();
-    alert("Subscription successful!");
   } catch (error) {
-    alert("Subscription failed. Please try again.");
+    toast.error("Subscription failed. Please try again.");
   }
 };
 

@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
+import RelatedRail from "@/modules/blog-components/relatedRails";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -46,7 +47,7 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true`;
+  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true&populate[relatedArticles][populate][articles][populate]=true&populate[relatedArticles][populate][header][populate]=true&populate[relatedArticles][populate][articles][populate]=image`;
   const baseUrl = process.env.API_URL || "http://localhost:1337";
 
   const data = await getStrapiData(blogQuery);
@@ -57,11 +58,9 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     ckeditor_content,
     createdAt,
     image,
+    relatedArticles,
     recommendedArticle,
   } = data.data[0];
-  console.dir("articleseo", recommendedArticle);
-
-  console.dir(recommendedArticle);
 
   const recommendedQuery = `/api/articles?filters[recommendedArticle][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
@@ -72,7 +71,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     <div className="w-full ">
       <div className="flex justify-around">
         <main
-          className={`${mosterrat.className} lg:w-[60%] w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light   lg:pt-16 lg:pb-24 bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
+          className={`${mosterrat.className} lg:w-[60%] py-1 w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light   bg-light dark:bg-dark antialiased dark:prose-a:text-blue-500`}
         >
           <div className="flex leading-relaxed  justify-between px-4 mx-auto max-w-full ">
             <article className="mx-auto w-full max-w-full  ">
@@ -87,7 +86,6 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                     </h1>
                     <p className="italic text-xs my-0">{description}</p>
                   </div>
-
                   <div className="aspect-video relative">
                     <Image
                       src={baseUrl + image.url}
@@ -102,7 +100,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
             </article>
           </div>
         </main>
-        <div className="sticky top-0 h-32  py-16 w-[24%] mb-80 hidden lg:block">
+        <div className="sticky top-12 h-32  py-1 w-[24%] mb-80 hidden lg:block">
           <div className="border mt-6 rounded-sm px-2 py-3">
             <h4 className="text-dark text-center border-b pb-3 mb-3 text-xl font-semibold">
               Other Trending Articles
@@ -131,6 +129,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
+      {relatedArticles && <RelatedRail relatedArticles={relatedArticles} />}
 
       <NewsLetter />
     </div>
