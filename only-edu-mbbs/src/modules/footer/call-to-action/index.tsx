@@ -20,8 +20,7 @@ const CallToAction = async ({ data, title, id }: Props) => {
   }
 
   return (
-
-    <section className="mt-3  w-full">
+    <section className="mt-6  w-full">
       <Card className="  bg-[#ffe9a5] rounded-lg flex ">
         <div className="flex sm:flex-row flex-col p-5 justify-between w-full items-center sm:items-end gap-x-5  text-dark">
           <div className="flex flex-col text-center sm:text-start">
