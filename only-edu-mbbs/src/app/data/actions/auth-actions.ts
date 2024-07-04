@@ -27,7 +27,6 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
     lastName: formData.lastName,
     phone: formData.phone,
     password: formData.password,
-    confirmPassword: formData.confirmPassword,
     email: formData.email,
     username: formData.phone,
   });
@@ -41,6 +40,8 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
     };
   }
 
+  cookies().set("_phn_", validatedFields.data.phone, config);
+
   const responseData = await registerUserService(validatedFields.data);
 
   if (responseData.error) {
@@ -48,32 +49,72 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
       ...prevState,
       strapiErrors: responseData.error,
       zodErrors: null,
-      message: "Failed to Login.",
+      message: "Failed to Register.",
     };
   }
 
   const userId = responseData.user.id;
 
   if (userId) {
-    cookies().set("_usr_id_", responseData.jwt, config);
-    cookies().set("_phn_", responseData.phone, config);
+    cookies().set("_usr_id_", userId, config);
   }
   cookies().set("_jwt", responseData.jwt, config);
-
-  const otpResponseData = await sendOtpService(validatedFields.data.phone);
+  // const otpResponseData = await sendOtpService(validatedFields.data.phone);
+  const otpResponseData = {
+    Status: "Success",
+    Details: "id",
+  };
   if (otpResponseData.Status === "Success") {
-    cookies().set("otp_session", otpResponseData.Details, config);
-    const lastFourDigits = responseData.user.phone;
+    cookies().set("otp_session", otpResponseData.Details, {
+      expires: 1 / 1440,
+    });
+    const lastFourDigits = validatedFields.data.phone.slice(-4);
     return {
       phone: lastFourDigits,
       userId: responseData.user.id,
       success: true,
       details: otpResponseData.Details,
     };
+  } else {
+    return {
+      ...prevState,
+      message: "Failed to send OTP.",
+    };
   }
 }
 
-export const resendOtp = () => {};
+export async function resendOtp(phone: string | undefined) {
+  if (!phone)
+    return {
+      success: false,
+      message: "couldnt get phone no",
+    };
+
+  try {
+    // const otpResponseData = await sendOtpService(phone);
+    const otpResponseData = {
+      Status: "Success",
+      Details: "id",
+    };
+    if (otpResponseData.Status === "Success") {
+      cookies().set("otp_session", otpResponseData.Details, {
+        expires: 1 / 1440,
+      }); // 1 minute
+      return {
+        success: true,
+        details: otpResponseData.Details,
+      };
+    } else {
+      throw new Error("Failed to resend OTP.");
+    }
+  } catch (error) {
+    console.error("Resend OTP Error:", error);
+    return {
+      success: false,
+      message: "couldnt send otp now please try again later",
+    };
+  }
+}
 
 export const verifyOtpAction = async (
   otpSession: string | undefined,
@@ -92,10 +133,15 @@ export const verifyOtpAction = async (
       message: "Missing Fields. Failed to verify otp.",
     };
   }
-  const responseData = await verifyOtpService(
-    otpSession,
-    validatedFields.data.otp
-  );
+  // const responseData = await verifyOtpService(
+  //   otpSession,
+  //   validatedFields.data.otp
+  // );
+
+  const responseData = {
+    Status: "Success",
+    Details: "id",
+  };
 
   if (responseData.Status === "Success") {
     const updatedUser = await updateVerifiedUserService(userId);
@@ -160,10 +206,8 @@ export async function logoutAction() {
   redirect("/auth");
 }
 
-export async function googleLoginAction() {}
-
-
-
-function getLastFourLetters(str:string) {
-  return str.slice(-4);
+export async function getLastFourLetters() {
+  const phone = cookies().get("_phn_")?.value;
+  if (phone) return phone.slice(-4);
+  else return null;
 }

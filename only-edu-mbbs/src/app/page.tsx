@@ -1,4 +1,4 @@
-import Hero from "@/modules/hero";
+import Hero from "@/modules/hero/index";
 import ExperienceRail from "@/modules/experience-rail/index";
 import OurServices from "@/modules/services";
 import WhyUs from "@/modules/why-us";
@@ -17,14 +17,10 @@ export default async function Home() {
       <div className="relative">
         <div className="rounded-t-3xl relative">
           <Hero data={data.hero} />
-
           <InformationSlider data={data.news} href="news" />
-
-          <ExperienceRail data={data.experienceRail} />
           <UniversitiesRail data={data.topUniversities} />
         </div>
         <OurServices data={data.services} />
-
         <InformationSlider href="articles" data={data.articles} />
         <WhyUs data={data.whyOnlyEducation} />
         <NewsLetter />

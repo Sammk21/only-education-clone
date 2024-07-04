@@ -19,6 +19,8 @@ const baseUrl = "https://admin.onlyeducation.co.in";
 
 // Register User Service
 export async function registerUserService(userData: RegisterUserProps) {
+  console.log(userData);
+
   const url = new URL("/api/auth/local/register", baseUrl);
   try {
     const response = await fetch(url.toString(), {
@@ -32,7 +34,6 @@ export async function registerUserService(userData: RegisterUserProps) {
 
     if (!response.ok) {
       return response.json();
-      throw new Error(`Error: ${response.statusText}`);
     }
 
     return response.json();
@@ -70,8 +71,7 @@ export async function verifyOtpService(
     );
     return response.data;
   } catch (error) {
-    console.error("Verify OTP Service Error:", error);
-    throw new Error("Failed to verify OTP. Please try again later.");
+    return { Status: "fail" };
   }
 }
 
@@ -91,8 +91,8 @@ export async function updateVerifiedUserService(userId: string) {
     };
   } catch (error) {
     return {
-      success: true,
-      error: false,
+      success: false,
+      error: true,
       userId: userId,
     };
   }

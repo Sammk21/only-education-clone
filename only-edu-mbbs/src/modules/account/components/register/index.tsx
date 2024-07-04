@@ -16,6 +16,7 @@ import Link from "next/link";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handlePhoneInput } from "@/utils/utils";
+import { GoogleButton } from "../providers-button";
 
 const INITIAL_STATE = {
   data: null,
@@ -74,7 +75,7 @@ export function Register({ setCurrentView }: Props) {
     const response = await registerUserAction(INITIAL_STATE, data);
     if (response.success === true) {
       toast.success("OTP has been sent successfully");
-      router.push(`/verify?dh=${response.userId}`);
+      router.push(`/verify`);
     }
   };
 
@@ -206,25 +207,8 @@ export function Register({ setCurrentView }: Props) {
           <BottomGradient />
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-        <div className="flex flex-col space-y-4">
-          <Link
-            href="#"
-            className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-accent/20 dark:bg-foreground dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Google
-            </span>
-            <BottomGradient />
-          </Link>
-          <p>coming soon</p>
-          {/* <Strapierror={strapiError} /> */}
-        </div>
+        <GoogleButton />
+        {/* <Strapierror={strapiError} /> */}
       </form>
       <span className="w-full flex justify-center items-center gap-x-2 text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
         <span> Already a member? </span>
@@ -402,3 +386,5 @@ const IndianFlagSvg = () => {
     </svg>
   );
 };
+
+

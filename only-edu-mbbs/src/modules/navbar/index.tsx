@@ -32,19 +32,19 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
 
   return (
     <>
-      <header className="mb-9 w-screen top-0 fixed bg-light dark:bg-only-green-950 z-30">
+      <header className="mb-9 w-screen top-0 border-t-0 fixed text-white backdrop-blur-xl bg-transparent z-30">
         <nav className="flex justify-between items-center px-6 py-2 border-b">
           <Link className=" h-12 w-24 sm:h-14 sm:w-36 relative" href="/">
             <Image
               src={"/onlyedu.svg"}
               alt="logo"
               fill={true}
-              className="object-cover object-center"
+              className="object-cover object-center top-4"
             />
           </Link>
 
           <div className=" hidden 2lg:flex  text-sm font-normal">
-            <ul className="flex justify-center items-cente text-dark">
+            <ul className="flex justify-center items-cente ">
               {navigation.links.map((link: Links) => {
                 return <MenuItems items={link} key={link.id} />;
               })}
@@ -94,7 +94,7 @@ export const AuthLoader = () => {
 
 const UserProfileButton = () => {
   return (
-    <div className="flex items-center gap-x-2 text-dark text-sm">
+    <div className="flex items-center gap-x-2  text-sm">
       <Avatar>
         <AvatarImage
           src="https://admin.onlyeducation.co.in/uploads/depositphotos_137014128_stock_illustration_user_profile_icon_852499f6e7.jpg"

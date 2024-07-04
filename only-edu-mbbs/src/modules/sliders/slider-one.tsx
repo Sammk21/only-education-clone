@@ -26,82 +26,83 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
       <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 items-center flex sm:flex-row">
         <span className="mb-2 capitalize">Latest {href}</span>
       </h4>
-
-      <Swiper
-        speed={600}
-        spaceBetween={40}
-        pagination={{
-          el: ".swiper-pagination",
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: true,
-          pauseOnMouseEnter: true,
-        }}
-        breakpoints={{
-          0: {
-            slidesPerView: 1.2,
-            spaceBetween: 10,
-          },
-          530: {
-            slidesPerView: 2.2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 2.2,
-            spaceBetween: 30,
-          },
-          1080: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-        }}
-        navigation={{ nextEl: ".back", prevEl: ".front" }}
-        modules={[FreeMode, Pagination, Autoplay, Navigation]}
-        className="mySwiper"
-      >
-        {data.data.map((university) => (
-          <SwiperSlide key={university.id} className="border rounded-md bg-">
-            <Link href={`/${href}/post/${university.slug}`}>
-              <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative group overflow-hidden cursor-pointer">
-                <Image
-                  src={baseUrl + university.image.url}
-                  alt={university.title}
-                  fill={true}
-                  className="object-center object-cover group-hover:scale-105 transition-transform ease-out duration-300"
-                />
-                <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
-                <span className="w-full h-[50%] absolute bottom-0 left-0 bg-gradient-to-t from-dark/80 to-transparent transition-opacity duration-300 ease-out"></span>
-              </div>
-              <div className="px-5 capitalize mt-3">
-                <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
-                  {university.live && (
-                    <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
-                      <span className="livenow absolute left-0">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </span>
-                      <p>LIVE</p>
-                    </span>
-                  )}
-                  {university.title}
+      <div className="w-full h-full relative">
+        <Swiper
+          speed={600}
+          spaceBetween={40}
+          pagination={{
+            el: ".swiper-pagination",
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+          }}
+          breakpoints={{
+            0: {
+              slidesPerView: 1.2,
+              spaceBetween: 10,
+            },
+            530: {
+              slidesPerView: 2.2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2.2,
+              spaceBetween: 30,
+            },
+            1080: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          }}
+          navigation={{ nextEl: ".back", prevEl: ".front" }}
+          modules={[FreeMode, Pagination, Autoplay, Navigation]}
+          className="mySwiper"
+        >
+          {data.data.map((university) => (
+            <SwiperSlide key={university.id} className="border rounded-md bg-">
+              <Link href={`/${href}/post/${university.slug}`}>
+                <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative group overflow-hidden cursor-pointer">
+                  <Image
+                    src={baseUrl + university.image.url}
+                    alt={university.title}
+                    fill={true}
+                    className="object-center object-cover group-hover:scale-105 transition-transform ease-out duration-300"
+                  />
+                  <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
+                  <span className="w-full h-[50%] absolute bottom-0 left-0 bg-gradient-to-t from-dark/80 to-transparent transition-opacity duration-300 ease-out"></span>
                 </div>
-                <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
-                  {university.description}
-                </p>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1   -translate-y-1/2 right-3">
-        <MdOutlineArrowRightAlt />
-      </span>
-      <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2  -translate-y-1/2 left-3">
-        <MdOutlineArrowRightAlt />
-      </span>
+                <div className="px-5 capitalize mt-3">
+                  <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
+                    {university.live && (
+                      <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
+                        <span className="livenow absolute left-0">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </span>
+                        <p>LIVE</p>
+                      </span>
+                    )}
+                    {university.title}
+                  </div>
+                  <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
+                    {university.description}
+                  </p>
+                </div>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1  -translate-y-1/2 -right-7">
+          <MdOutlineArrowRightAlt />
+        </span>
+        <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2  -translate-y-1/2 -left-7">
+          <MdOutlineArrowRightAlt />
+        </span>
+      </div>
     </div>
   );
 };
