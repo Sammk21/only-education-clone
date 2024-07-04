@@ -19,8 +19,8 @@ const CampusHighlight = () => {
           <p>
             The campus is also home to a modern library, a museum, an
             auditorium, and lecture halls, as well as other amenities to make
-            studying easier. The library's facilities allow students to study
-            uninterrupted, while the museum's facilities allow students to
+            studying easier. The librarys facilities allow students to study
+            uninterrupted, while the museums facilities allow students to
             explore historical monuments, take in the beauty of the landscape,
             and learn about the past. Classrooms are also equipped with
             sound-visual aids to improve the learning experience.

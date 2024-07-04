@@ -4,7 +4,7 @@ const TermsCondition = () => {
   return (
     <section className="py-12 prose lg:max-w-[85%] lg:m-auto px-6 lg:px-0">
       <h1>Terms and Conditions</h1>
-      <p className="text-accent">
+      {/* <p className="text-accent">
         The following terminology applies to these Terms and Conditions, Privacy
         Statement and Disclaimer Notice and all Agreements: "Client", "You" and
         "Your" refers to you, the person log on this website and compliant to
@@ -93,7 +93,7 @@ const TermsCondition = () => {
         As long as the website and the information and services on the website
         are provided free of charge, we will not be liable for any loss or
         damage of any nature.
-      </p>
+      </p> */}
     </section>
   );
 };

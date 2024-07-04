@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,11 +16,14 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
+  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { resendOtp, verifyOtpAction } from "@/app/data/actions/auth-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import DateTime from "@/modules/blog-components/ui/time";
+import { getResendOtpSession } from "@/app/data/services/get-token";
 
 export interface IOtpInput {
   pin: string;
@@ -67,63 +70,71 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
     }
   }
 
-  const startTimer = (duration: number) => {
-    let remainingTime = duration;
-    setTimer(remainingTime);
-    setIsResendDisabled(true);
-
-    timerRef.current = setInterval(() => {
-      remainingTime -= 1;
-      setTimer(remainingTime);
-      if (remainingTime <= 0) {
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-        setIsResendDisabled(false);
-      }
-    }, 1000);
-  };
-
-  const handleResendOtp = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const response = await resendOtp(phone); // Pass the phone number as an argument
-    if (response.success) {
-      toast.success("OTP resent successfully.");
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-      startTimer(60); // 1 minute timer
+  const handleResendOtp = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Call your OTP resend API
+    const resendResponse = await resendOtp(phone);
+    if (resendResponse?.success) {
+      toast.success("OTP resent successfully");
+      startTimer();
     } else {
-      toast.error(`Failed to resend OTP: ${response.message}`);
+      resendResponse.error?.noPhoneError &&
+        setOtpErrorMessage("no phone number found please try again later");
+      resendResponse.error?.resendError &&
+        setOtpErrorMessage("cannot resend otp until countdown persist");
     }
   };
+
+  const startTimer = () => {
+    setIsResendDisabled(true);
+    setTimer(30); // Set your timer duration here
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined;
+    if (isResendDisabled) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => {
+          if (prevTimer <= 1) {
+            clearInterval(interval);
+            setIsResendDisabled(false);
+            return 0;
+          }
+          return prevTimer - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isResendDisabled]);
 
   return (
     <div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
+          className="space-y-6 flex justify-center items-center flex-col"
         >
           <FormField
             control={form.control}
             name="pin"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-dark">One-Time Password</FormLabel>
+              <FormItem className="text-center text-dark">
+                <FormLabel className="pb-4">
+                  Please enter your 4 digit code
+                </FormLabel>
                 <FormControl>
                   <InputOTP maxLength={4} {...field}>
                     <InputOTPGroup>
                       <InputOTPSlot index={0} />
                       <InputOTPSlot index={1} />
+                    </InputOTPGroup>
+                    <InputOTPSeparator />
+                    <InputOTPGroup>
                       <InputOTPSlot index={2} />
                       <InputOTPSlot index={3} />
                     </InputOTPGroup>
                   </InputOTP>
                 </FormControl>
-                <FormDescription>
-                  Please enter the one-time password sent to your phone.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -136,12 +147,12 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
         <p className="text-red-500 font-medium text-xs">{otpErrorMessage}</p>
       )}
       <form
-        className="my-2 w-full flex justify-center items-center"
+        className="my-2 w-full flex justify-center items-center text-xs flex-col"
         onSubmit={handleResendOtp}
       >
         <button
           type="submit"
-          className="text-blue-500"
+          className={`text-blue-500 disabled:text-gray-500 `}
           disabled={isResendDisabled}
         >
           Resend OTP

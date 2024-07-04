@@ -32,14 +32,16 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
 
   return (
     <>
-      <header className="mb-9 w-screen top-0 border-t-0 fixed text-white backdrop-blur-xl bg-transparent z-30">
-        <nav className="flex justify-between items-center px-6 py-2 border-b">
+      <header className="mb-9 w-screen top-0 fixed text-black  bg-clip-padding bg-white backdrop-filter backdrop-blur-md    z-30">
+        <nav className="flex justify-between items-center px-6 py-2  border-b">
           <Link className=" h-12 w-24 sm:h-14 sm:w-36 relative" href="/">
             <Image
-              src={"/onlyedu.svg"}
+              src={
+                "https://admin.onlyeducation.co.in/uploads/Only_Education_Main_Logo_f64b45b88c.svg"
+              }
               alt="logo"
               fill={true}
-              className="object-cover object-center top-4"
+              className="object-cover object-center top-4 drop-shadow-lg"
             />
           </Link>
 

@@ -4,7 +4,7 @@ const PrivacyPolicyContent = () => {
   return (
     <section className="lg:my-12 prose lg:max-w-[85%] lg:m-auto px-6 lg:px-0">
       <h1>Privacy Policy</h1>
-      <p className="text-accent">
+      {/* <p className="text-accent">
         At onlyeducation.in, accessible from https://onlyeducation.in/, one of
         our main priorities is the privacy of our visitors. This Privacy Policy
         document contains types of information that is collected and recorded by
@@ -83,7 +83,7 @@ const PrivacyPolicyContent = () => {
         options. To know more detailed information about cookie management with
         specific web browsers, it can be found at the browsers' respective
         websites.
-      </p>
+      </p> */}
     </section>
   );
 };

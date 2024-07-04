@@ -19,8 +19,6 @@ const baseUrl = "https://admin.onlyeducation.co.in";
 
 // Register User Service
 export async function registerUserService(userData: RegisterUserProps) {
-  console.log(userData);
-
   const url = new URL("/api/auth/local/register", baseUrl);
   try {
     const response = await fetch(url.toString(), {
@@ -45,6 +43,8 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
+  console.log(phone);
+
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
@@ -52,7 +52,10 @@ export async function sendOtpService(phone: string) {
     const response = await axios.get(
       `https://2factor.in/API/V1${pathVariables}`
     );
-    return response.data;
+    return {
+      Status: true,
+      Details: response.data.Details,
+    };
   } catch (error) {
     console.error("Send OTP Service Error:", error);
     throw new Error("Failed to send OTP. Please try again later.");
@@ -100,8 +103,6 @@ export async function updateVerifiedUserService(userId: string) {
 
 // Login User Service
 export async function loginUserService(userData: LoginUserProps) {
-  console.log(userData);
-
   const url = new URL("/api/auth/local", baseUrl);
 
   const response = await fetch(url.toString(), {

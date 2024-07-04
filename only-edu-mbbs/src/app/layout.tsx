@@ -9,7 +9,7 @@ import MySideBar from "@/modules/navbar/components/Sidebar";
 import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
-import CookieConsent from "@/components/ui/cookie-consent";
+
 
 const inter = Roboto({
   subsets: ["cyrillic"],
@@ -33,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/onlyEducation.png" sizes="any"></link>
+        <link rel="icon" href="/images/onlyEducation.svg" sizes="any"></link>
       </head>
       <body className={`bg-light dark:bg-dark  ${inter.className}`}>
         <div className="relative w-full h-full text-gray-400 ">

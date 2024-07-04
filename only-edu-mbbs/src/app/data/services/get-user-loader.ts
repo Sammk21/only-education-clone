@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAuthToken, getOtpSessionAndUserId } from "./get-token";
+import { getAuthToken, getOtpSession } from "./get-token";
 import qs from "qs";
 
 export async function getUserMeLoader() {
@@ -24,10 +24,11 @@ export async function getUserMeLoader() {
     return { ok: false, data: null, error: error };
   }
 }
-export async function getUserOtpSession() {
+
+export async function getConfirmationToken() {
   const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
 
-  const otpSession = await getOtpSessionAndUserId();
+  const otpSession = await getOtpSession();
 
   if (!otpSession.otpSession) return { ok: false, data: null, error: null };
 

@@ -12,13 +12,21 @@ import { ILoginFormInput } from "@/modules/account/components/login";
 import { IFormInput } from "@/modules/account/components/register";
 import { IOtpInput } from "@/modules/account/components/otp";
 import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema";
+import { getResendOtpSession } from "../services/get-token";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
   path: "/",
   domain: process.env.HOST ?? "localhost",
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
+  // secure: process.env.NODE_ENV === "production",
+};
+const otpConfig = {
+  maxAge: 60 * 2, // 1 week
+  path: "/",
+  domain: process.env.HOST ?? "localhost",
+  httpOnly: true,
+  // secure: process.env.NODE_ENV === "production",
 };
 
 export async function registerUserAction(prevState: any, formData: IFormInput) {
@@ -40,8 +48,6 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
     };
   }
 
-  cookies().set("_phn_", validatedFields.data.phone, config);
-
   const responseData = await registerUserService(validatedFields.data);
 
   if (responseData.error) {
@@ -52,23 +58,18 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
       message: "Failed to Register.",
     };
   }
-
-  const userId = responseData.user.id;
-
-  if (userId) {
-    cookies().set("_usr_id_", userId, config);
-  }
   cookies().set("_jwt", responseData.jwt, config);
   // const otpResponseData = await sendOtpService(validatedFields.data.phone);
+
   const otpResponseData = {
-    Status: "Success",
-    Details: "id",
+    Status: "true",
+    Details: "djnsjnsdnsd",
   };
-  if (otpResponseData.Status === "Success") {
-    cookies().set("otp_session", otpResponseData.Details, {
-      expires: 1 / 1440,
-    });
+  if (otpResponseData.Status) {
+    console.log("troggered");
+    cookies().set("otp_session", otpResponseData.Details, otpConfig);
     const lastFourDigits = validatedFields.data.phone.slice(-4);
+
     return {
       phone: lastFourDigits,
       userId: responseData.user.id,
@@ -84,22 +85,42 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
 }
 
 export async function resendOtp(phone: string | undefined) {
+  const resendOtpSessionResponse = await getResendOtpSession();
+
+  if (resendOtpSessionResponse.resendOtpSession === undefined) {
+    console.log("triggered");
+    let r = (Math.random() + 1).toString(36).substring(7);
+    cookies().set("ROS", r, { expires: Date.now() + 60 * 1000 });
+  } else {
+    return {
+      error: {
+        resendError: true,
+        noPhoneError: false,
+      },
+      success: false,
+      message: "please wait till the timer's over",
+    };
+  }
+
   if (!phone)
     return {
+      error: {
+        resendError: false,
+        noPhoneError: true,
+      },
       success: false,
-      message: "couldnt get phone no",
     };
 
   try {
     // const otpResponseData = await sendOtpService(phone);
+
     const otpResponseData = {
-      Status: "Success",
-      Details: "id",
+      Status: "true",
+      Details: "djnsjnsdnsd",
     };
-    if (otpResponseData.Status === "Success") {
-      cookies().set("otp_session", otpResponseData.Details, {
-        expires: 1 / 1440,
-      }); // 1 minute
+
+    if (otpResponseData.Status) {
+      cookies().set("otp_session", otpResponseData.Details, otpConfig); // 1 minute
       return {
         success: true,
         details: otpResponseData.Details,
@@ -133,15 +154,10 @@ export const verifyOtpAction = async (
       message: "Missing Fields. Failed to verify otp.",
     };
   }
-  // const responseData = await verifyOtpService(
-  //   otpSession,
-  //   validatedFields.data.otp
-  // );
-
-  const responseData = {
-    Status: "Success",
-    Details: "id",
-  };
+  const responseData = await verifyOtpService(
+    otpSession,
+    validatedFields.data.otp
+  );
 
   if (responseData.Status === "Success") {
     const updatedUser = await updateVerifiedUserService(userId);

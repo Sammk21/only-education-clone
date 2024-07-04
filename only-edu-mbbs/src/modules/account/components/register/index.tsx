@@ -17,6 +17,8 @@ import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handlePhoneInput } from "@/utils/utils";
 import { GoogleButton } from "../providers-button";
+import { StrapiErrors } from "@/modules/custom/StrapiErrors";
+import { useState } from "react";
 
 const INITIAL_STATE = {
   data: null,
@@ -69,13 +71,20 @@ export function Register({ setCurrentView }: Props) {
     resolver: zodResolver(schema),
   });
 
+  const [strapiError, setStrapiError] = useState(null);
+  const [otpDialogtrigger, setOtpDialogTrigger] = useState(false);
+
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const response = await registerUserAction(INITIAL_STATE, data);
+
+    if (response.strapiErrors) {
+      setStrapiError(response.strapiErrors);
+    }
     if (response.success === true) {
-      toast.success("OTP has been sent successfully");
       router.push(`/verify`);
+      toast.success("OTP has been sent successfully");
     }
   };
 
@@ -208,7 +217,7 @@ export function Register({ setCurrentView }: Props) {
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         <GoogleButton />
-        {/* <Strapierror={strapiError} /> */}
+        <StrapiErrors error={strapiError} />
       </form>
       <span className="w-full flex justify-center items-center gap-x-2 text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
         <span> Already a member? </span>
