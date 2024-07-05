@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "indian_colleges",
+  "info": {
+    "singularName": "indian-college",
+    "pluralName": "indian-colleges",
+    "displayName": "Indian College"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "globalProfiles": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.profiles"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "indian_states",
+  "info": {
+    "singularName": "indian-state",
+    "pluralName": "indian-states",
+    "displayName": "Indian States",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "universities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::university.university",
+      "mappedBy": "indian_state"
+    }
+  }
+}

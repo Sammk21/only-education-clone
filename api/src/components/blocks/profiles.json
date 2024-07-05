@@ -37,7 +37,22 @@
     "description": {
       "type": "string",
       "required": true,
-      "minLength": 2
+      "minLength": 100
+    },
+    "avgPackage": {
+      "type": "string"
+    },
+    "fees": {
+      "type": "integer"
+    },
+    "location": {
+      "type": "string"
+    },
+    "Approvedby": {
+      "type": "string"
+    },
+    "establishment": {
+      "type": "string"
     }
   }
 }

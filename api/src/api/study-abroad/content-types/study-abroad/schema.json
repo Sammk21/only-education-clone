@@ -23,11 +23,6 @@
       "repeatable": true,
       "component": "blocks.eligibility-table"
     },
-    "topCountries": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.top-countries-data"
-    },
     "whyAbroad": {
       "type": "component",
       "repeatable": false,
@@ -42,6 +37,11 @@
       "type": "component",
       "repeatable": false,
       "component": "blocks.faq"
+    },
+    "topUniversities": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.features-with-images"
     }
   }
 }

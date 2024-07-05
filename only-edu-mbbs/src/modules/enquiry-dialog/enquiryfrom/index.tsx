@@ -128,7 +128,7 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
         <Input
           id="phone"
           placeholder="+91"
-          value={maskPhoneNumber(user.data?.username)}
+          value={maskPhoneNumber(user.data?.phone)}
           disabled={true}
           type="tel"
         />

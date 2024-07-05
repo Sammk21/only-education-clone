@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import React, { Suspense } from "react";
+import React from "react";
 import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { ImageAttributes, Universitylist } from "@/types/types";
-import "@/styles/swiper-pagination/pagination.css";
+import { ImageAttributes } from "@/types/types";
 import { University } from "lucide-react";
 import Link from "next/link";
 
@@ -73,14 +72,14 @@ const UniversitiesRail = ({ data }: Props) => {
                 spaceBetween: 40,
               },
             }}
-            navigation={{ nextEl: ".back", prevEl: ".front" }}
+            navigation={{ nextEl: ".back1", prevEl: ".front1" }}
             modules={[FreeMode, Pagination, Autoplay, Navigation]}
-            className="mySwiper"
+            className="swiper"
           >
             {data.universities.data.map((university) => (
               <SwiperSlide key={university.id}>
                 <Link href={`study/uni/${university.slug}`}>
-                  <div className="  rounded-lg aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer ">
+                  <div className="  rounded-md aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl relative shadow-md group overflow-hidden cursor-pointer ">
                     <Image
                       src={
                         baseUrl +
@@ -101,14 +100,16 @@ const UniversitiesRail = ({ data }: Props) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1  -translate-y-1/2 -right-7">
+
+          <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1 back1  -translate-y-1/2 -right-7">
             <MdOutlineArrowRightAlt />
           </span>
-          <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2  -translate-y-1/2 -left-7">
+          <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2 front1  -translate-y-1/2 -left-7">
             <MdOutlineArrowRightAlt />
           </span>
         </div>
       </div>
+      <div className="h-6 w-full"></div>
     </>
   );
 };

@@ -4,9 +4,7 @@ import qs from "qs";
 
 export async function getUserMeLoader() {
   const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
-
   const authToken = await getAuthToken();
-
   if (!authToken) return { ok: false, data: null, error: null };
 
   try {
@@ -49,4 +47,8 @@ export async function getConfirmationToken() {
     return { ok: false, data: null, error: error };
   }
 }
+
+
+
+//resend otp
 

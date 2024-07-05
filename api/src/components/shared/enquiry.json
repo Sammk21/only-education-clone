@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_enquiries",
+  "info": {
+    "displayName": "Enquiry",
+    "icon": "layout",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "specialization": {
+      "type": "string"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::university.university"
+    },
+    "level": {
+      "type": "string"
+    }
+  }
+}

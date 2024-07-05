@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_university_placements",
+  "info": {
+    "displayName": "placements"
+  },
+  "options": {},
+  "attributes": {
+    "placementInfo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "packagesInfo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

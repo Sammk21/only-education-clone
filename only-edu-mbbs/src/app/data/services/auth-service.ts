@@ -43,8 +43,6 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
-  console.log(phone);
-
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
@@ -59,6 +57,27 @@ export async function sendOtpService(phone: string) {
   } catch (error) {
     console.error("Send OTP Service Error:", error);
     throw new Error("Failed to send OTP. Please try again later.");
+  }
+}
+
+export async function putOtpSession(otpS: string, id: number) {
+  try {
+    const response = await axios.put(
+      `${baseUrl}/api/users/${id}?populate=true`,
+      {
+        otp_session: otpS,
+      }
+    );
+    return {
+      success: true,
+      error: false,
+      userId: id,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: true,
+    };
   }
 }
 
@@ -81,12 +100,10 @@ export async function verifyOtpService(
 // Update Verified User Service
 export async function updateVerifiedUserService(userId: string) {
   try {
-    const response = await axios.put(
-      `${baseUrl}/api/users/${userId}?populate=true`,
-      {
-        confirmed: true,
-      }
-    );
+     axios.put(`${baseUrl}/api/users/${userId}?populate=true`, {
+       verified: true,
+       otp_session: "",
+     });
     return {
       success: true,
       error: false,

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_placements",
+  "info": {
+    "displayName": "Placement",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "list": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list"
+    },
+    "placementTable": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

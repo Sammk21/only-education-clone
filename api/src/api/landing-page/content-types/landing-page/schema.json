@@ -42,6 +42,16 @@
       "type": "component",
       "repeatable": false,
       "component": "blocks.why-us"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "news": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::new.new"
     }
   }
 }

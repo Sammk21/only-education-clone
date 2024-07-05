@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_university_scholarships_infos",
+  "info": {
+    "displayName": "scholarshipsInfo"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

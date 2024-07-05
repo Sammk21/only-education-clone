@@ -11,11 +11,10 @@ const OtpPage = async () => {
   if (!user.ok) {
     redirect("/");
   }
-  const { id, phone } = user.data;
 
   return (
     <div className="max-w-md mx-auto border p-3 rounded-xl mb-12">
-      <Otp userId={id} otpSession={info.otpSession} phone={phone} />
+      <Otp user={user} otpSession={info.otpSession} />
     </div>
   );
 };
