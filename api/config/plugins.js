@@ -1,15 +1,12 @@
 module.exports = ({ env }) => ({
- 'strapi-regenerator': {
-      enabled: true
-    },
-  'strapi-blurhash-plugin': {
-        enabled: true,
-        config: {
-            regenerateOnUpdate: true
-        }
-    },
-"strapi-google-auth": {
+  "strapi-regenerator": {
     enabled: true,
+  },
+  "strapi-blurhash-plugin": {
+    enabled: true,
+    config: {
+      regenerateOnUpdate: true,
+    },
   },
   meilisearch: {
     config: {
@@ -20,14 +17,16 @@ module.exports = ({ env }) => ({
   "users-permissions": {
     config: {
       register: {
-        allowedFields: ["firstName", "lastName","phone", "verified"],
+        allowedFields: [
+          "firstName",
+          "lastName",
+          "phone",
+          "verified",
+          "last_otp_request",
+          "resend_attempts",
+          "otp_session",
+        ],
       },
-    },
-  },
-  scheduler: {
-    enabled: true,
-    config: {
-      model: 'scheduler',
     },
   },
 });
