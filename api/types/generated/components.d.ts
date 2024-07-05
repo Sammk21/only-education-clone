@@ -63,10 +63,13 @@ export interface BlocksEligibilityCard extends Schema.Component {
       >;
     criteriaList: Attribute.Component<'shared.criteria-list', true> &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 3;
-        max: 4;
-      }>;
+      Attribute.SetMinMax<
+        {
+          min: 3;
+          max: 4;
+        },
+        number
+      >;
   };
 }
 
@@ -99,9 +102,12 @@ export interface BlocksExpBlock extends Schema.Component {
   };
   attributes: {
     expBlock: Attribute.Component<'shared.exp-block', true> &
-      Attribute.SetMinMax<{
-        max: 6;
-      }>;
+      Attribute.SetMinMax<
+        {
+          max: 6;
+        },
+        number
+      >;
   };
 }
 
@@ -158,7 +164,7 @@ export interface BlocksHero extends Schema.Component {
     icon: 'pizza-slice';
   };
   attributes: {
-    images: Attribute.Media;
+    images: Attribute.Media<'images' | 'files' | 'videos', true>;
     header: Attribute.Component<'shared.header'>;
     text: Attribute.String;
     buttons: Attribute.Component<'shared.button', true>;
@@ -209,8 +215,10 @@ export interface BlocksProfiles extends Schema.Component {
     description: '';
   };
   attributes: {
-    backgroundImage: Attribute.Media & Attribute.Required;
-    profileImage: Attribute.Media & Attribute.Required;
+    backgroundImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
+    profileImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
     name: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
@@ -274,9 +282,12 @@ export interface BlocksServices extends Schema.Component {
   attributes: {
     header: Attribute.Component<'shared.header'>;
     ourServiceInfo: Attribute.Component<'shared.our-service-summary', true> &
-      Attribute.SetMinMax<{
-        max: 5;
-      }>;
+      Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
   };
 }
 
@@ -538,7 +549,7 @@ export interface SharedCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     text: Attribute.String;
-    image: Attribute.Media;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
   };
 }
 
@@ -721,7 +732,7 @@ export interface SharedMetaSocial extends Schema.Component {
       Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
   };
 }
 
@@ -801,7 +812,8 @@ export interface SharedSeo extends Schema.Component {
         minLength: 50;
         maxLength: 160;
       }>;
-    metaImage: Attribute.Media & Attribute.Required;
+    metaImage: Attribute.Media<'images' | 'files' | 'videos'> &
+      Attribute.Required;
     metaSocial: Attribute.Component<'shared.meta-social', true>;
     keywords: Attribute.Text;
     metaRobots: Attribute.String;
@@ -887,7 +899,7 @@ export interface SharedVideoPlayer extends Schema.Component {
     description: '';
   };
   attributes: {
-    Video: Attribute.Media;
+    Video: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 

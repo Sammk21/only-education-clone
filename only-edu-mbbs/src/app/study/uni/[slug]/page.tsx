@@ -23,6 +23,7 @@ import OverviewTab from "@/modules/universities-tabs/overview-tabs";
 import GalleryTabs from "@/modules/universities-tabs/gallery";
 import FacultyList from "@/modules/universities-tabs/faculty-list";
 import UniversitiesNews from "@/modules/universities-tabs/universities-news";
+import Ranking from "@/modules/universities-tabs/ranking";
 
 export async function generateMetadata({
   params,
@@ -46,13 +47,12 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][apllicationDates][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][apllicationDates][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
   const data = await getStrapiData(getUniQuery);
 
-  // const getUniNewsQuery = `/api/news?filters[slug][$eq]=${params.slug}&populate[relatedUniversities][populate]=true`;
-  const getUniNewsQuery = `/api/news?populate[relatedUniversities][populate]=true`;
+  const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[relatedUniversities][populate]=true`;
+  // const getUniNewsQuery = `/api/news?populate[relatedUniversities][populate]=true`;
   const newsData = await getStrapiData(getUniNewsQuery);
-  console.dir("check", newsData);
 
   const {
     universityProfile,
@@ -76,6 +76,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     hostel,
     scholarships,
     notification,
+    ranking,
   } = data.data[0];
 
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
@@ -103,11 +104,13 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
           <TabsTrigger value="placement">Placement</TabsTrigger>
+
           <TabsTrigger value="scholarships">scholarships</TabsTrigger>
           <TabsTrigger value="gallery">Gallery</TabsTrigger>
           <TabsTrigger value="faculty">Faculty</TabsTrigger>
           <TabsTrigger value="hostel">Hostel</TabsTrigger>
           <TabsTrigger value="news">News</TabsTrigger>
+          <TabsTrigger value="ranking">Ranking</TabsTrigger>
         </TabsList>
 
         <TabsContent
@@ -128,11 +131,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -148,11 +155,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             <OverviewTab data={coursesFees.paymentGuidelines} />
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -168,11 +179,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             <OverviewTab data={admission.cutoff} />
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -189,11 +204,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             <OverviewTab data={placements.packagesInfo} />
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -207,11 +226,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -230,7 +253,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             />
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
           </div>
         </TabsContent>
@@ -245,7 +268,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             <FacultyList data={faculty} />
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
@@ -266,7 +289,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
@@ -280,16 +303,50 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="news"
         >
           <div className="mt-3 px-3 col-span-8">
-            <UniversitiesNews newsData={news} />
+            <OverviewTab data={notification} />
+
+            <UniversitiesNews
+              data={newsData.data}
+              className="grid grid-cols-2 gap-4 font-semibold"
+            />
             <CallToAction id={id} data={cta} title={title} />
 
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-3 mt-3">
             <CallToAction id={id} data={cta} title={title} />
             <GalleryTabs
               data={gallery.events}
               className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
+            />
+          </div>
+        </TabsContent>
+
+        <TabsContent
+          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          value="ranking"
+        >
+          <div className="mt-3 px-3 col-span-8">
+            <OverviewTab data={notification} />
+            <Ranking data={ranking} />
+
+            <CallToAction id={id} data={cta} title={title} />
+
+            <QuestionDropdown data={faq} />
+          </div>
+          <div className="col-span-4 mt-3 ">
+            <CallToAction id={id} data={cta} title={title} />
+            <GalleryTabs
+              data={gallery.events}
+              className="grid grid-cols-3 gap-4 "
+            />
+            <UniversitiesNews
+              data={newsData.data}
+              classname="grid grid-cols-1"
             />
           </div>
         </TabsContent>

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "lucide-react";
 import React from "react";
 import { BottomGradient } from "../account/components/register";
-import { getUserMeLoader } from "@/app/data/services/get-user-me-loader";
+import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { ProfileAndAcc } from "../profile-&-notification-navbar";
 
 const LoginButton = async () => {

@@ -18,7 +18,7 @@ const CountrySelect = () => {
               x="0px"
               y="0px"
               viewBox="0 0 55.32 38.52"
-              style={{ enableBackground: "new 0 0 55.32 38.52" }}
+
               xmlSpace="preserve"
             >
               <style type="text/css">

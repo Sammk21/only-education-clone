@@ -32,7 +32,6 @@ export async function registerUserService(userData: RegisterUserProps) {
 
     if (!response.ok) {
       return response.json();
-      throw new Error(`Error: ${response.statusText}`);
     }
 
     return response.json();
@@ -44,6 +43,8 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
+  console.log(phone);
+
   try {
     const apiKey = process.env.TWOFACTOR_API_KEY;
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
@@ -51,7 +52,10 @@ export async function sendOtpService(phone: string) {
     const response = await axios.get(
       `https://2factor.in/API/V1${pathVariables}`
     );
-    return response.data;
+    return {
+      Status: true,
+      Details: response.data.Details,
+    };
   } catch (error) {
     console.error("Send OTP Service Error:", error);
     throw new Error("Failed to send OTP. Please try again later.");
@@ -70,8 +74,7 @@ export async function verifyOtpService(
     );
     return response.data;
   } catch (error) {
-    console.error("Verify OTP Service Error:", error);
-    throw new Error("Failed to verify OTP. Please try again later.");
+    return { Status: "fail" };
   }
 }
 
@@ -91,8 +94,8 @@ export async function updateVerifiedUserService(userId: string) {
     };
   } catch (error) {
     return {
-      success: true,
-      error: false,
+      success: false,
+      error: true,
       userId: userId,
     };
   }
@@ -100,8 +103,6 @@ export async function updateVerifiedUserService(userId: string) {
 
 // Login User Service
 export async function loginUserService(userData: LoginUserProps) {
-  console.log(userData);
-
   const url = new URL("/api/auth/local", baseUrl);
 
   const response = await fetch(url.toString(), {

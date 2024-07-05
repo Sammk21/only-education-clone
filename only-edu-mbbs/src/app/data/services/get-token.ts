@@ -1,4 +1,5 @@
 "use server"
+import axios from "axios";
 import { cookies } from "next/headers";
 
 export async function getAuthToken() {
@@ -6,10 +7,16 @@ export async function getAuthToken() {
   return authToken;
 }
 
-export async function getOtpSessionAndUserId(){
-const otpSession = cookies().get("otp_session")?.value;
-const userId = cookies().get("_usr_id_")?.value
-return {
-  otpSession,userId
-};
+export async function getOtpSession() {
+  const otpSession = cookies().get("otp_session")?.value;
+  return {
+    otpSession,
+  };
+}
+
+export async function getResendOtpSession() {
+  const resendOtpSession = cookies().get("ROS")?.value;
+  return {
+    resendOtpSession,
+  };
 }

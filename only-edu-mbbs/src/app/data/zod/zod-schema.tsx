@@ -29,9 +29,7 @@ export const registerSchema = z.object({
   password: z.string().min(8, {
     message: "password is required",
   }),
-  confirmPassword: z.string().min(8, {
-    message: "password doesn't match",
-  }),
+
 });
 
 export const OtpSchema = z.object({

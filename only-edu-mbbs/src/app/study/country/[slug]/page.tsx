@@ -68,7 +68,6 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
             {overview.description}
           </p>
         </div>
-        <CallToAction title={title} data={cta} />
 
         <WhyAbroad data={whyThisCountry} />
         <ElegibilityCriteria data={eligibilityCriteria} />

@@ -7,17 +7,21 @@ const StudyInBanner = () => {
       <div className="sm:col-span-5 h-full w-full flex  flex-col">
         <h1 className="lg:text-6xl tracking-tight text-4xl mb-2">
           Study India
-        </h3>
+        </h1>
         <p className=" tracking-tight text-lg text-accent mb-4">
           Your Gateway to World-Class Education{" "}
-        </h2>
+        </p>
         <div className="flex justify-start flex-col w-full">
           <h4>
-            Welcome to Only Education's Study in India program, your trusted
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti
+            aspernatur recusandae ipsum nesciunt, quisquam cumque tempore
+            aliquid veritatis, atque explicabo quam ex distinctio soluta porro
+            tenetur maiores numquam aliquam magnam pariatur! Rem, alias beatae.
+            {/* Welcome to Only Education's Study in India program, your trusted
             partner in pursuing engineering, management, and medical courses in
             India. Our mission is to empower students like you to achieve their
             academic dreams by providing expert guidance and admission
-            assistance to top-notch Indian institutions.
+            assistance to top-notch Indian institutions. */}
           </h4>
           <Link
             href="/contact-us"

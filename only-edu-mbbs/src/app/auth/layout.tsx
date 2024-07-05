@@ -7,8 +7,8 @@ export default async function AccountPageLayout({
   dashboard,
   login,
 }: {
-  dashboard?: React.ReactNode;
-  login?: React.ReactNode;
+  dashboard: React.ReactNode;
+  login: React.ReactNode;
 }) {
   const user = await getUserMeLoader();
 

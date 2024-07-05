@@ -17,6 +17,7 @@ import customisations from "../../src/admin/app.js";
 
 renderAdmin(document.getElementById("strapi"), {
   customisations,
+
   plugins: {
     ckeditor: ckeditor,
     calendar: calendar,

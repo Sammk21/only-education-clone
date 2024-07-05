@@ -1,5 +1,5 @@
-import { ChevronUpDown } from "@medusajs/icons"
-import { clx } from "@medusajs/ui"
+import { cn } from "@/utils/cn";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import {
   SelectHTMLAttributes,
   forwardRef,
@@ -7,41 +7,41 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-} from "react"
+} from "react";
 
 export type NativeSelectProps = {
-  placeholder?: string
-  errors?: Record<string, unknown>
-  touched?: Record<string, unknown>
-} & SelectHTMLAttributes<HTMLSelectElement>
+  placeholder?: string;
+  errors?: Record<string, unknown>;
+  touched?: Record<string, unknown>;
+} & SelectHTMLAttributes<HTMLSelectElement>;
 
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
     { placeholder = "Select...", defaultValue, className, children, ...props },
     ref
   ) => {
-    const innerRef = useRef<HTMLSelectElement>(null)
-    const [isPlaceholder, setIsPlaceholder] = useState(false)
+    const innerRef = useRef<HTMLSelectElement>(null);
+    const [isPlaceholder, setIsPlaceholder] = useState(false);
 
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
       () => innerRef.current
-    )
+    );
 
     useEffect(() => {
       if (innerRef.current && innerRef.current.value === "") {
-        setIsPlaceholder(true)
+        setIsPlaceholder(true);
       } else {
-        setIsPlaceholder(false)
+        setIsPlaceholder(false);
       }
-    }, [innerRef.current?.value])
+    }, [innerRef.current?.value]);
 
     return (
       <div>
         <div
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
-          className={clx(
+          className={cn(
             "relative flex items-center text-base-regular border border-ui-border-base bg-transparent rounded-md ",
             className,
             {
@@ -61,14 +61,14 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             {children}
           </select>
           <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none ">
-            <ChevronUpDown />
+            <ChevronUpDownIcon />
           </span>
         </div>
       </div>
-    )
+    );
   }
-)
+);
 
-NativeSelect.displayName = "NativeSelect"
+NativeSelect.displayName = "NativeSelect";
 
-export default NativeSelect
+export default NativeSelect;

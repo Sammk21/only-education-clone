@@ -77,8 +77,9 @@ interface ImageFormat {
   size: number;
   width: number;
   height: number;
+  blurhash:string
 }
-
+``
 export interface ImageAttributes {   // To Do reduce incomming objects (query optimization)  
   id: number;
   name: string;
@@ -96,6 +97,7 @@ export interface ImageAttributes {   // To Do reduce incomming objects (query op
   mime: string;
   size: number;
   url: string;
+  blurhash:string
   previewUrl: string | null;
   provider: string;
   provider_metadata: any | null;

@@ -12,8 +12,6 @@ export const enquiryAction = async (
   userId: number | undefined,
   uniId: number
 ) => {
-  console.log(formData);
-
   if (!userId)
     return {
       ...prevState,

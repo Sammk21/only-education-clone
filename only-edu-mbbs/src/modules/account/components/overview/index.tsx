@@ -64,7 +64,9 @@ const Overview = ({ user }: userProp) => {
   );
 };
 
-const getProfileCompletion = (user: Omit<UserType, "password_hash"> | null) => {
+const getProfileCompletion = (
+  user: Omit<UserType, "password_hash"> | null
+): number => {
   let count = 0;
 
   if (!user?.data) {
@@ -83,7 +85,8 @@ const getProfileCompletion = (user: Omit<UserType, "password_hash"> | null) => {
     count++;
   }
 
-  return (count / 3) * 100;
+  const completion = (count / 3) * 100;
+  return Math.round(completion);
 };
 
 export default Overview;
