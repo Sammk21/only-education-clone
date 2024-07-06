@@ -19,10 +19,9 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { resendOtp, verifyOtpAction } from "@/app/data/actions/auth-actions";
+import { resendOtp } from "@/app/data/actions/auth-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { getResendOtpSession } from "@/app/data/services/get-token";
 import { UserType } from "@/types/types";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { maskPhoneNumber } from "@/utils/utils";
