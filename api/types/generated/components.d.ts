@@ -62,13 +62,10 @@ export interface BlocksEligibilityCard extends Schema.Component {
       >;
     criteriaList: Attribute.Component<'shared.criteria-list', true> &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 4;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 4;
+      }>;
   };
 }
 
@@ -101,12 +98,9 @@ export interface BlocksExpBlock extends Schema.Component {
   };
   attributes: {
     expBlock: Attribute.Component<'shared.exp-block', true> &
-      Attribute.SetMinMax<
-        {
-          max: 6;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        max: 6;
+      }>;
   };
 }
 
@@ -163,7 +157,7 @@ export interface BlocksHero extends Schema.Component {
     icon: 'pizza-slice';
   };
   attributes: {
-    images: Attribute.Media<'images' | 'files' | 'videos', true>;
+    images: Attribute.Media;
     header: Attribute.Component<'shared.header'>;
     text: Attribute.String;
     buttons: Attribute.Component<'shared.button', true>;
@@ -214,10 +208,8 @@ export interface BlocksProfiles extends Schema.Component {
     description: '';
   };
   attributes: {
-    backgroundImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    profileImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
+    backgroundImage: Attribute.Media & Attribute.Required;
+    profileImage: Attribute.Media & Attribute.Required;
     name: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
@@ -286,12 +278,9 @@ export interface BlocksServices extends Schema.Component {
   attributes: {
     header: Attribute.Component<'shared.header'>;
     ourServiceInfo: Attribute.Component<'shared.our-service-summary', true> &
-      Attribute.SetMinMax<
-        {
-          max: 5;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        max: 5;
+      }>;
   };
 }
 
@@ -553,7 +542,7 @@ export interface SharedCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     text: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Attribute.Media;
   };
 }
 
@@ -758,7 +747,7 @@ export interface SharedMetaSocial extends Schema.Component {
       Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Attribute.Media;
   };
 }
 
@@ -891,8 +880,7 @@ export interface SharedSeo extends Schema.Component {
         minLength: 50;
         maxLength: 160;
       }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'> &
-      Attribute.Required;
+    metaImage: Attribute.Media & Attribute.Required;
     metaSocial: Attribute.Component<'shared.meta-social', true>;
     keywords: Attribute.Text;
     metaRobots: Attribute.String;
@@ -978,7 +966,7 @@ export interface SharedVideoPlayer extends Schema.Component {
     description: '';
   };
   attributes: {
-    Video: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Video: Attribute.Media;
   };
 }
 
@@ -1069,11 +1057,8 @@ export interface UniversityGallery extends Schema.Component {
     displayName: 'gallery';
   };
   attributes: {
-    events: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    infrastructure: Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    events: Attribute.Media;
+    infrastructure: Attribute.Media;
   };
 }
 
@@ -1204,7 +1189,7 @@ export interface UniversityScholarships extends Schema.Component {
   };
 }
 
-declare module '@strapi/types' {
+declare module '@strapi/strapi' {
   export module Shared {
     export interface Components {
       'blocks.cta-command-line': BlocksCtaCommandLine;

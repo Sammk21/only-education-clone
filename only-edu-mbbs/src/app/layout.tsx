@@ -9,7 +9,8 @@ import MySideBar from "@/modules/navbar/components/Sidebar";
 import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
-
+import { getUserMeLoader } from "./data/services/get-user-loader";
+import Banner from "@/components/ui/tailwind-banner";
 
 const inter = Roboto({
   subsets: ["cyrillic"],

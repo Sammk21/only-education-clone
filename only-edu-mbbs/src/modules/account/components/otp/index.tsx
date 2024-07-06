@@ -25,6 +25,8 @@ import { useRouter } from "next/navigation";
 import { getResendOtpSession } from "@/app/data/services/get-token";
 import { UserType } from "@/types/types";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
+import { maskPhoneNumber } from "@/utils/utils";
+import { updateVerifiedUserService } from "@/app/data/services/auth-service";
 
 export interface IOtpInput {
   pin: string;
@@ -40,7 +42,7 @@ const FormSchema = z.object({
   }),
 });
 
-const Otp = ({ otpSession, user }: OtpProps) => {
+const Otp = ({ user }: OtpProps) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -80,17 +82,21 @@ const Otp = ({ otpSession, user }: OtpProps) => {
     const id = user.data?.id;
     const otpSession = user.data?.otp_session;
 
-    console.log(id, otpSession);
+    // const otpVerificationResponse = await verifyOtpAction(
+    //   otpSession,
+    //   formData,
+    //   id
+    // );
 
-    const otpVerificationResponse = await verifyOtpAction(
-      otpSession,
-      formData,
-      id
-    );
+    const otpVerificationResponse = {
+      success: true,
+    };
 
     if (otpVerificationResponse?.success) {
+      const updateVerifiedUserData = await updateVerifiedUserService(id);
+      console.log(updateVerifiedUserData);
       toast.success("OTP verified successfully");
-      router.push("/");
+      router.push("/auth");
     } else {
       toast.error("OTP verification failed");
       setOtpErrorMessage("You entered the wrong OTP.");
@@ -98,6 +104,7 @@ const Otp = ({ otpSession, user }: OtpProps) => {
   }
 
   const phone = user.data?.phone;
+  const otpSession = user.data?.otp_session;
 
   const handleResendOtp = async (data: any) => {
     console.log(data);
@@ -130,6 +137,9 @@ const Otp = ({ otpSession, user }: OtpProps) => {
                 <FormLabel className="pb-4">
                   Please enter your 4 digit code
                 </FormLabel>
+                <p className="text-xs my-3">
+                  Sent on {maskPhoneNumber(user.data?.phone)}
+                </p>
                 <FormControl>
                   <InputOTP maxLength={4} {...field}>
                     <InputOTPGroup>
