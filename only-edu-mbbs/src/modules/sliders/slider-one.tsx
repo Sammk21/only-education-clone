@@ -83,7 +83,7 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
                         <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
                         <span className="w-full h-[50%] absolute bottom-0 left-0 bg-gradient-to-t from-dark/80 to-transparent transition-opacity duration-300 ease-out"></span>
                       </div>
-                      <div className="px-5 capitalize mt-3">
+                      <div className=" capitalize mt-3">
                         <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
                           {university.live && (
                             <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
