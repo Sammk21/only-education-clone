@@ -1,6 +1,6 @@
 import Otp from "@/modules/account/components/otp";
 import { getOtpSession } from "../data/services/get-token";
-import { getUserMeLoader } from "../data/services/get-user-loader";
+import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { redirect } from "next/navigation";
 
 const OtpPage = async () => {

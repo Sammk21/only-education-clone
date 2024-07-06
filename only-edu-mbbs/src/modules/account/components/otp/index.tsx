@@ -19,10 +19,9 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { resendOtp, verifyOtpAction } from "@/app/data/actions/auth-actions";
+import { resendOtp } from "@/app/data/actions/auth-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { getResendOtpSession } from "@/app/data/services/get-token";
 import { UserType } from "@/types/types";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import { maskPhoneNumber } from "@/utils/utils";
@@ -102,24 +101,10 @@ const Otp = ({ user }: OtpProps) => {
       setOtpErrorMessage("You entered the wrong OTP.");
     }
   }
-
-  const phone = user.data?.phone;
-  const otpSession = user.data?.otp_session;
-
-  const handleResendOtp = async (data: any) => {
-    console.log(data);
-    // if (isResendDisabled) return;
-    const resendResponse = await resendOtp(phone);
-    if (resendResponse?.success) {
-      toast.success("OTP resent successfully");
-      setTimer(60); // 1 minute in seconds
-      setIsResendDisabled(true);
-    } else {
-      resendResponse.error?.noPhoneError &&
-        setOtpErrorMessage("No phone number found, please try again later.");
-      resendResponse.error?.resendError &&
-        setOtpErrorMessage(resendResponse.message);
-    }
+  const handleResendOtp = async () => {
+    const response = await resendOtp();
+    console.log(response);
+    setOtpErrorMessage(response.message);
   };
 
   return (
@@ -166,17 +151,14 @@ const Otp = ({ user }: OtpProps) => {
           {otpErrorMessage}
         </p>
       )}
-      <form
-        className="my-2 w-full flex justify-center items-center text-xs flex-col"
-        onSubmit={handleResendOtp}
+
+      <button
+        onClick={handleResendOtp}
+        type="submit"
+        className={`text-blue-500 disabled:text-gray-500`}
       >
-        <button
-          type="submit"
-          className={`text-blue-500 disabled:text-gray-500`}
-        >
-          Resend OTP
-        </button>
-      </form>
+        Resend OTP
+      </button>
     </div>
   );
 };
