@@ -19,7 +19,7 @@ import UniversityTabs from "@/modules/Tabs";
 import Title from "@/modules/common/title";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import parse from "html-react-parser";
-import OverviewTab from "@/modules/universities-tabs/overview-tabs";
+import GlobalUniversitiesTabs from "@/modules/universities-tabs/global-universities-tabs";
 import GalleryTabs from "@/modules/universities-tabs/gallery";
 import FacultyList from "@/modules/universities-tabs/faculty-list";
 import UniversitiesNews from "@/modules/universities-tabs/universities-news";
@@ -47,7 +47,7 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[whythisUniversity][populate][header][populate]=true&populate[whythisUniversity][populate][qna][populate]=true&populate[rankComparison][populate][header][populate]=true&populate[rankComparison][populate][ranks][populate]=true&populate[eligibilityCriteria][populate][header][populate]=true&populate[eligibilityCriteria][populate][criteriaList][populate]=true&populate[documentRequired][populate][header][populate]=true&populate[documentRequired][populate][list][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[placement][populate][list][populate]=true&populate[placement][populate][placementTable][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][apllicationDates][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][apllicationDates][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
   const data = await getStrapiData(getUniQuery);
 
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[relatedUniversities][populate]=true`;
@@ -57,14 +57,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const {
     universityProfile,
     cta,
-    whythisUniversity,
-    rankComparison,
-    eligibilityCriteria,
-    documentRequired,
+
     feesStructure,
     faq,
     universityInfo,
-    placement,
     highlights,
     overview,
     overviewTabs,
@@ -84,6 +80,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const title = data.data[0].title;
   const id = data.data[0].id;
+  console.dir(gallery);
 
   const ctaProps = {
     title,
@@ -99,7 +96,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         universityInfo={universityInfo}
       />
       <Tabs defaultValue="overview">
-        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden">
+        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 z-50">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
@@ -112,34 +109,43 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="news">News</TabsTrigger>
           <TabsTrigger value="ranking">Ranking</TabsTrigger>
         </TabsList>
-
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="overview"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
 
-            <OverviewTab data={overviewTabs.latestUpdates} />
+            {overviewTabs?.latestUpdates && (
+              <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-            <OverviewTab data={overviewTabs.overview} />
-            <OverviewTab data={overviewTabs.highlights} />
-            <OverviewTab data={overviewTabs.ranking} />
+            {overviewTabs?.overview && (
+              <GlobalUniversitiesTabs data={overviewTabs.overview} />
+            )}
+            {overviewTabs?.highlights && (
+              <GlobalUniversitiesTabs data={overviewTabs.highlights} />
+            )}
+            {overviewTabs?.ranking && (
+              <GlobalUniversitiesTabs data={overviewTabs.ranking} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-            <OverviewTab data={overviewTabs.whyChoose} />
-            <OverviewTab data={overviewTabs.academicAdvantages} />
+            {overviewTabs?.whyChoose && (
+              <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
+            )}
+            {overviewTabs?.academicAdvantages && (
+              <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
+            )}
 
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -148,22 +154,26 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="courses&fees"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={coursesFees.feeDetails} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {coursesFees?.feeDetails && (
+              <GlobalUniversitiesTabs data={coursesFees.feeDetails} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-            <OverviewTab data={coursesFees.entranceExams} />
-            <OverviewTab data={coursesFees.paymentGuidelines} />
+            {coursesFees?.entranceExams && (
+              <GlobalUniversitiesTabs data={coursesFees.entranceExams} />
+            )}
+            {coursesFees?.paymentGuidelines && (
+              <GlobalUniversitiesTabs data={coursesFees.paymentGuidelines} />
+            )}
             <QuestionDropdown data={faq} />
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -172,22 +182,26 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="admission"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={admission.courseAdmission} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {admission?.courseAdmission && (
+              <GlobalUniversitiesTabs data={admission.courseAdmission} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-            <OverviewTab data={admission.apllicationDates} />
-            <OverviewTab data={admission.cutoff} />
-            <QuestionDropdown data={faq} />
+            {admission?.apllicationDates && (
+              <GlobalUniversitiesTabs data={admission.apllicationDates} />
+            )}
+            {admission?.cutoff && (
+              <GlobalUniversitiesTabs data={admission.cutoff} />
+            )}
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -196,23 +210,26 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="placement"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
 
-            <OverviewTab data={placements.placementInfo} />
+            {placements?.placementInfo && (
+              <GlobalUniversitiesTabs data={placements.placementInfo} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-            <OverviewTab data={placements.packagesInfo} />
-            <QuestionDropdown data={faq} />
+            {placements?.packagesInfo && (
+              <GlobalUniversitiesTabs data={placements.packagesInfo} />
+            )}
+
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
+              className="grid grid-cols-1"
             />
           </div>
         </TabsContent>
@@ -221,20 +238,20 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="scholarships"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={scholarships.scholarshipsInfo} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {scholarships?.scholarshipsInfo && (
+              <GlobalUniversitiesTabs data={scholarships.scholarshipsInfo} />
+            )}
 
-            <QuestionDropdown data={faq} />
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -243,18 +260,26 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="gallery"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
 
-            <GalleryTabs
-              data={gallery.events}
-              infra={gallery.infrastructure}
-              className="grid grid-cols-4 gap-4 border-b border-dashed pb-7 mb-5"
-            />
-            <QuestionDropdown data={faq} />
+            {gallery?.events && gallery?.infrastructure && (
+              <GalleryTabs
+                event={gallery.events}
+                infra={gallery.infrastructure}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-b border-dashed pb-7 mb-5"
+              />
+            )}
+
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
+            <UniversitiesNews
+              data={newsData.data}
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
+            />
           </div>
         </TabsContent>
 
@@ -262,17 +287,19 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="faculty"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
 
-            <FacultyList data={faculty} />
-            <QuestionDropdown data={faq} />
+            {faculty && <FacultyList data={faculty} />}
+
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
+            <UniversitiesNews
+              data={newsData.data}
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -281,19 +308,22 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="hostel"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={hostel.maleHostel} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {hostel?.maleHostel && (
+              <GlobalUniversitiesTabs data={hostel.maleHostel} />
+            )}
             <CallToAction id={id} data={cta} title={title} />
-
-            <OverviewTab data={hostel.femaleHostel} />
-
-            <QuestionDropdown data={faq} />
+            {hostel?.femaleHostel && (
+              <GlobalUniversitiesTabs data={hostel.femaleHostel} />
+            )}
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3">
+          <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
+            <UniversitiesNews
+              data={newsData.data}
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -302,26 +332,25 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="news"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
 
-            <UniversitiesNews
-              data={newsData.data}
-              className="grid grid-cols-2 gap-4 font-semibold"
-            />
-            <CallToAction id={id} data={cta} title={title} />
+            {newsData?.data && (
+              <UniversitiesNews
+                data={newsData.data}
+                className="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1"
+              />
+            )}
 
-            <QuestionDropdown data={faq} />
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3 mt-3">
+          <div className="col-span-4  hidden md:block mt-3">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>
@@ -330,23 +359,18 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="ranking"
         >
-          <div className="mt-3 px-3 col-span-8">
-            <OverviewTab data={notification} />
-            <Ranking data={ranking} />
-
-            <CallToAction id={id} data={cta} title={title} />
-
-            <QuestionDropdown data={faq} />
+          <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {ranking && <Ranking data={ranking} />}
+            {faq && <QuestionDropdown data={faq} />}
           </div>
-          <div className="col-span-4 mt-3 ">
+          <div className="col-span-4 mt-3 hidden md:block ">
             <CallToAction id={id} data={cta} title={title} />
-            <GalleryTabs
-              data={gallery.events}
-              className="grid grid-cols-3 gap-4 "
-            />
+
             <UniversitiesNews
               data={newsData.data}
-              classname="grid grid-cols-1"
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
             />
           </div>
         </TabsContent>

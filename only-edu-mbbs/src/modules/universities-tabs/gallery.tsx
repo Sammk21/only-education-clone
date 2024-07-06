@@ -5,26 +5,25 @@ import Image from "next/image";
 import React from "react";
 
 interface GalleryTabsProps {
-  data?: {
+  event: {
     data: ImageAttributes[];
   };
-  infra?: {
+  infra: {
     data: ImageAttributes[];
   };
   className?: string;
 }
-const GalleryTabs = ({ data, infra, className }: GalleryTabsProps) => {
+const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
-  //   console.dir(data.data[0].url);
 
   return (
     <Card className="px-5 py-5 mt-4">
-      {data?.data && (
+      {event?.data && (
         <div className="">
           <h2 className="text-dark font-semibold mb-4 text-xl">Events</h2>
           {/* <div className="grid grid-cols-4 gap-4 border-b border-dashed pb-8 mb-5"> */}
           <div className={` ${className} `}>
-            {data.data.map((item) => (
+            {event.data.map((item) => (
               <Image
                 key={item.id}
                 src={baseUrl + item.url}
@@ -37,26 +36,13 @@ const GalleryTabs = ({ data, infra, className }: GalleryTabsProps) => {
           </div>
         </div>
       )}
-      {/* <h2 className="text-dark font-semibold mb-4 text-xl">Infrastructure</h2>
-      <div className="grid grid-cols-4 gap-4">
-        {infra.data.map((item) => (
-          <Image
-            key={item.id}
-            src={baseUrl + item.url}
-            alt={item.alternativeText || ""}
-            width={item.width}
-            height={item.height}
-            className="rounded-lg"
-          />
-        ))}
-      </div> */}
 
       {infra?.data && (
         <>
           <h2 className="text-dark font-semibold mb-4 text-xl">
             Infrastructure
           </h2>
-          <div className="grid grid-cols-4 gap-4  pb-8 mb-5">
+          <div className="grid sm:grid-cols-4 grid-cols-2 gap-4  pb-8 mb-5">
             {infra.data.map((item) => (
               <Image
                 key={item.id}

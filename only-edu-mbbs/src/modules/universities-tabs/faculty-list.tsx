@@ -19,7 +19,6 @@ interface facultyProps {
 }
 
 const FacultyList = ({ data }: facultyProps) => {
-  //   console.dir(data.facInfo[0].number);
   return (
     <Card className=" p-5 mt-4">
       <h2 className="text-dark font-semibold mb-4 text-xl">Faculty Details</h2>
@@ -39,19 +38,22 @@ const FacultyList = ({ data }: facultyProps) => {
                 {item.professorName}
               </h2>
               <p className="text-sm mt-1">{item.designation}</p>
-              <p className="text-sm flex justify-center items-center gap-2 mt-1">
-                <span>
-                  {" "}
-                  <FaPhoneAlt />
-                </span>
-                <span> {item.number}</span>
-              </p>
-              <p className="text-sm flex justify-center items-center gap-1 mt-1">
-                <span>
-                  <IoEarthOutline />
-                </span>
-                <span>{item.email}</span>{" "}
-              </p>
+              {item.number && (
+                <p className="text-sm flex justify-center items-center gap-2 mt-1">
+                  <span>
+                    <FaPhoneAlt />
+                  </span>
+                  <span>{item.number}</span>
+                </p>
+              )}
+              {item.email && (
+                <p className="text-sm flex justify-center items-center gap-1 mt-1">
+                  <span>
+                    <IoEarthOutline />
+                  </span>
+                  <span>{item.email}</span>
+                </p>
+              )}
             </div>
           </div>
         ))}
