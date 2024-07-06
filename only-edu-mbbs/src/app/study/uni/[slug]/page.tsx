@@ -114,7 +114,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
 
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
@@ -155,6 +157,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
             {coursesFees?.feeDetails && (
               <GlobalUniversitiesTabs data={coursesFees.feeDetails} />
             )}
@@ -211,8 +216,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
-
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
             {placements?.placementInfo && (
               <GlobalUniversitiesTabs data={placements.placementInfo} />
             )}
@@ -261,7 +267,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
 
             {gallery?.events && gallery?.infrastructure && (
               <GalleryTabs
@@ -288,7 +296,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
 
             {faculty && <FacultyList data={faculty} />}
 
@@ -309,6 +319,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
             {hostel?.maleHostel && (
               <GlobalUniversitiesTabs data={hostel.maleHostel} />
             )}
@@ -333,7 +346,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
 
             {newsData?.data && (
               <UniversitiesNews
@@ -360,7 +375,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && <GlobalUniversitiesTabs data={notification} />}
+            {notification && (
+              <GlobalUniversitiesTabs data={notification} notification={true} />
+            )}
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>

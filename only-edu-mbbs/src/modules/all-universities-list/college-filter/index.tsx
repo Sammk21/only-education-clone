@@ -62,61 +62,63 @@ const CollegeFilter = ({
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
 
   return (
-    <div className="lg:w-[20%] hidden lg:block text-dark z-10 relative">
-      <ResetButton />
-      <form className="" action={updatedFilters}>
-        <div className="flex justify-end items-center gap-x-2">
-          <Button type="submit">Apply filters</Button>
-        </div>
-        <div className="min-h-20  w-full rounded-lg bg-accent/10 m-0 text-xs p-2 mt-3">
-          <span className="mt-3">Selected filters:</span>
-          <Separator className="mt-1" orientation="horizontal" />
-          <div className="flex flex-wrap gap-2 ">
-            {selectedLocations.map((location) => (
-              <div
-                key={location}
-                className="px-1 border border-dark inline-block mt-1 justify-center"
-              >
-                <span>{location}</span>
-              </div>
-            ))}
-            {selectedExams.map((exam) => (
-              <div
-                key={exam}
-                className="px-1 border border-dark inline-block mt-1 justify-center"
-              >
-                <span>{exam}</span>
-              </div>
-            ))}
-            {selectedOwnerships.map((ownership) => (
-              <div
-                key={ownership}
-                className="px-1 border border-dark inline-block mt-1 justify-center"
-              >
-                <span>{ownership}</span>
-              </div>
-            ))}
+    <div className="lg:w-[20%] hidden lg:block text-dark z-10 relative ">
+      <div className="sticky top-24">
+        <ResetButton />
+        <form className="" action={updatedFilters}>
+          <div className="flex justify-end items-center gap-x-2">
+            <Button type="submit">Apply filters</Button>
           </div>
-        </div>
+          <div className="min-h-20  w-full rounded-lg bg-accent/10 m-0 text-xs p-2 mt-3">
+            <span className="mt-3">Selected filters:</span>
+            <Separator className="mt-1" orientation="horizontal" />
+            <div className="flex flex-wrap gap-2 ">
+              {selectedLocations.map((location) => (
+                <div
+                  key={location}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{location}</span>
+                </div>
+              ))}
+              {selectedExams.map((exam) => (
+                <div
+                  key={exam}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{exam}</span>
+                </div>
+              ))}
+              {selectedOwnerships.map((ownership) => (
+                <div
+                  key={ownership}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{ownership}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className=" border-b sticky top-20 w-full h-fit">
-          <AccordionCustom
-            name={"Location"}
-            data={indianStates.data}
-            selectedItems={selectedLocations}
-          />
-          <AccordionCustom
-            name={"Exams"}
-            data={exams.data}
-            selectedItems={selectedExams}
-          />
-          <AccordionCustom
-            name={"Ownership"}
-            data={ownership.data}
-            selectedItems={selectedOwnerships}
-          />
-        </div>
-      </form>
+          <div className=" border-b sticky top-20 w-full h-fit">
+            <AccordionCustom
+              name={"Location"}
+              data={indianStates.data}
+              selectedItems={selectedLocations}
+            />
+            <AccordionCustom
+              name={"Exams"}
+              data={exams.data}
+              selectedItems={selectedExams}
+            />
+            <AccordionCustom
+              name={"Ownership"}
+              data={ownership.data}
+              selectedItems={selectedOwnerships}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
