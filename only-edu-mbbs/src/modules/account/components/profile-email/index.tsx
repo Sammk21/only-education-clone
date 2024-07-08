@@ -1,35 +1,17 @@
 "use client"
-
-import React, { useEffect } from "react";
-import { useFormState } from "react-dom";
-
+import React from "react";
 import { Input } from "@/components/ui/input";
-
 import AccountInfo from "../account-info";
-import { updateVerifiedUserService } from "@/app/data/services/auth-service";
 import { UserType } from "@/types/types";
-import { notFound } from "next/navigation";
-import { updateCustomerEmail } from "@/app/action";
-
 type MyInformationProps = {
   user: UserType;
 };
 
 const ProfileEmail = ({ user }: MyInformationProps) => {
   const [successState, setSuccessState] = React.useState(false);
-
-  // const [state, formAction] = useFormState(updateCustomerEmail, {
-  //   error: false,
-  //   success: false,
-  // })
-
   const clearState = () => {
     setSuccessState(false);
   };
-
-  // useEffect(() => {
-  //   setSuccessState(state.success)
-  // }, [state])
   return (
     <form className="w-full ">
       <AccountInfo

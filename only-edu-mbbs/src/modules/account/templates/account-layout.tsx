@@ -1,7 +1,5 @@
 import { UserType } from "@/types/types";
-import Link from "next/link";
 import React from "react";
-import { IoIosArrowRoundForward } from "react-icons/io";
 import AccountNav from "../components/account-nav";
 
 interface AccountLayoutProps {
