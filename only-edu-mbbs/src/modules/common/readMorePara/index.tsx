@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useState } from "react";
+import parse from "html-react-parser";
 
 interface ReadMoreParagraphProps {
   text: string;
@@ -18,7 +19,7 @@ const ReadMoreParagraph: React.FC<ReadMoreParagraphProps> = ({ text }) => {
   return (
     <div className="max-w-6xl w-full mx-auto dark:text-accent">
       <p>
-        {isExpanded ? text : `${text.substring(0, 280)}...`}
+        {parse(isExpanded ? text : text.substring(0, 280))}...
         <button
           onClick={toggleReadMore}
           className="text-blue-500 hover:underline ml-2"

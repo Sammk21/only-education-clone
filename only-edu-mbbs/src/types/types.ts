@@ -78,10 +78,13 @@ interface ImageFormat {
   size: number;
   width: number;
   height: number;
+
 }
+
 
 export interface ImageAttributes {
   // To Do reduce incomming objects (query optimization)
+
   id: number;
   name: string;
   alternativeText: string;
@@ -98,6 +101,7 @@ export interface ImageAttributes {
   mime: string;
   size: number;
   url: string;
+
   previewUrl: string | null;
   provider: string;
   provider_metadata: any | null;
