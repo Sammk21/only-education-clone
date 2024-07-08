@@ -32,7 +32,7 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ user }) => {
         currentInfo={`${user.data?.username}`}
         isSuccess={false}
         isError={true}
-        errorMessage={user.error}
+        // errorMessage={user.error}
         clearState={clearState}
       >
         <div className="grid grid-cols-1 gap-y-2 -z-10">

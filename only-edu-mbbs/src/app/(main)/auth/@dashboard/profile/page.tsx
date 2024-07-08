@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import ProfileName from "@/modules/account/components/profile-name";
 import ProfilePassword from "@/modules/account/components/profile-password";
 import ProfilePhone from "@/modules/account/components/profile-phone";
-import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "Profile",

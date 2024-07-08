@@ -8,7 +8,7 @@ export async function getAuthToken() {
 }
 
 export async function getOtpSession() {
-  const otpSession = cookies().get("otp_session")?.value;
+  const otpSession = cookies().get("OS")?.value;
   return {
     otpSession,
   };

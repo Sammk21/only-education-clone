@@ -1,3 +1,4 @@
+
 {
   "kind": "collectionType",
   "collectionName": "ownerships",
@@ -20,3 +21,4 @@
     }
   }
 }
+

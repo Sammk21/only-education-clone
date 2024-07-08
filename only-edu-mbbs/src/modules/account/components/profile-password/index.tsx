@@ -1,12 +1,7 @@
 "use client"
-
-import React, { useEffect } from "react";
-
+import React from "react";
 import { Input } from "@/components/ui/input";
-
 import AccountInfo from "../account-info";
-// import { updateCustomerPassword } from "@modules/account/actions"
-import { useFormState } from "react-dom";
 import { UserType } from "@/types/types";
 import { Label } from "@/components/ui/label";
 
@@ -38,7 +33,7 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ user }) => {
         currentInfo={`Password is not shown for security reason`}
         isSuccess={false}
         isError={true}
-        errorMessage={user.error}
+        // errorMessage={user.error}
         clearState={clearState}
       >
         <div className="grid grid-cols-2 gap-4 -z-10">

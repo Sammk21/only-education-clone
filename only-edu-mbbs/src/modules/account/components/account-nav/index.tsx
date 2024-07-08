@@ -1,22 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { UserType } from "@/types/types";
-
 import Link from "next/link";
-
 import { logoutAction } from "@/app/data/actions/auth-actions";
-import { cn } from "@/util/cn";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-
-import {
-  AccordionItem,
-  Accordion,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
 import { BookUser, User } from "lucide-react";
 import { toast } from "sonner";
+import { RiSettingsLine } from "react-icons/ri";
 
 const AccountNav = ({
   user,
@@ -31,41 +20,19 @@ const AccountNav = ({
   };
 
   return (
-    <div className="flex  w-full flex-col">
-      <main className="flex flex-1 flex-col gap-4 rounded-xl bg-muted/40 p-4 md:gap-8 md:p-10">
-        <Accordion
-          defaultValue="item-1"
-          type="single"
-          collapsible
-          className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]"
-        >
-          <AccordionItem className=" pb-3 w-full" value="item-1">
-            <AccordionTrigger className="text-2xl">Settings</AccordionTrigger>
-            <AccordionContent>
-              <AccountNavLink href="/auth" route={route!}>
-                <BookUser className="mr-2 h-4 w-4" />
-                Overview
-              </AccountNavLink>
-            </AccordionContent>
-            <AccordionContent>
-              <AccountNavLink href="/auth/profile" route={route!}>
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </AccountNavLink>
-            </AccordionContent>
-            <AccordionContent className="w-full">
-              <Button
-                className="w-full"
-                variant={"destructive"}
-                type="button"
-                onClick={handleLogout}
-              >
-                Log out
-              </Button>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </main>
+    <div className="flex  w-full flex-col my-2">
+      <AccountNavLink href="/auth" route={route!}>
+        <BookUser className="mr-2 h-4 w-4" />
+        Overview
+      </AccountNavLink>
+      <AccountNavLink href="/auth/profile" route={route!}>
+        <User className="mr-2 h-4 w-4" />
+        <span>Profile</span>
+      </AccountNavLink>
+      <AccountNavLink href="/auth/settings" route={route!}>
+        <RiSettingsLine className="mr-2 h-4 w-4" />
+        <span>Settings</span>
+      </AccountNavLink>
     </div>
   );
 };
@@ -81,8 +48,8 @@ const AccountNavLink = ({ href, route, children }: AccountNavLinkProps) => {
   return (
     <Link
       href={href}
-      className={` flex items-center ${
-        active ? "text-dark font-semibold" : " text-accent "
+      className={` py-2 flex items-center ${
+        active ? "text-dark" : " text-accent "
       }`}
     >
       {children}
