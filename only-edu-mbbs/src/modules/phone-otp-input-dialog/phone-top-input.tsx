@@ -10,14 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -68,7 +66,7 @@ const PhoneInputForm: React.FC<Props> = ({ userId, existingPhone }) => {
       <DialogTrigger asChild>
         <Button
           onClick={() => setIsDrawerOpen(true)}
-          className="flex-none px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+          className="flex-none px-3.5 py-1 text-sm font-semibold bg-orange-500 hover:bg-orange-300 text-white shadow-sm rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
           variant="default"
         >
           Verify phone
@@ -110,7 +108,10 @@ const PhoneInputForm: React.FC<Props> = ({ userId, existingPhone }) => {
                 </FormItem>
               )}
             />
-            <Button className="float-end" type="submit">
+            <Button
+              className="float-end bg-orange-500 hover:bg-orange-300"
+              type="submit"
+            >
               Send OTP
             </Button>
           </form>

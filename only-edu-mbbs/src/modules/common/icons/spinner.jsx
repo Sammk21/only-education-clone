@@ -1,4 +1,4 @@
-const Spinner = ({ size = "16", color = "currentColor", ...attributes }) => {
+const Spinner = ({ size, color = "currentColor", ...attributes }) => {
   return (
     <svg
       className="animate-spin"

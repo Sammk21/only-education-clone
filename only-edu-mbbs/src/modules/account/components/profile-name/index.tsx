@@ -36,7 +36,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ user }) => {
         currentInfo={`${user.data?.firstName} ${user.data?.lastName}`}
         isSuccess={false}
         isError={true}
-        errorMessage={user.error}
+        // errorMessage={user.error}
         clearState={clearState}
       >
         <div className="grid grid-cols-2 gap-x-4 -z-10">

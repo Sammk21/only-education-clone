@@ -50,43 +50,13 @@ const Otp = ({ user }: OtpProps) => {
   });
 
   const router = useRouter();
-  const [isResendDisabled, setIsResendDisabled] = useState(false);
-  const [timer, setTimer] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [otpErrorMessage, setOtpErrorMessage] = useState<
     string | undefined | null
   >(null);
 
-  useEffect(() => {
-    if (isResendDisabled) {
-      timerRef.current = setInterval(() => {
-        setTimer((prevTimer) => {
-          if (prevTimer <= 1) {
-            clearInterval(timerRef.current!);
-            setIsResendDisabled(false);
-            return 0;
-          }
-          return prevTimer - 1;
-        });
-      }, 1000);
-    }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isResendDisabled]);
-
   async function onSubmit(formData: z.infer<typeof FormSchema>) {
     const user = await getUserMeLoader();
-
     const id = user.data?.id;
-    const otpSession = user.data?.otp_session;
-
-    // const otpVerificationResponse = await verifyOtpAction(
-    //   otpSession,
-    //   formData,
-    //   id
-    // );
-
     const otpVerificationResponse = {
       success: true,
     };
@@ -101,14 +71,9 @@ const Otp = ({ user }: OtpProps) => {
       setOtpErrorMessage("You entered the wrong OTP.");
     }
   }
-  const handleResendOtp = async () => {
-    const response = await resendOtp();
-    console.log(response);
-    setOtpErrorMessage(response.message);
-  };
 
   return (
-    <div>
+    <div className="min-w-80 ">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -151,16 +116,50 @@ const Otp = ({ user }: OtpProps) => {
           {otpErrorMessage}
         </p>
       )}
-
-      <button
-        onClick={handleResendOtp}
-        type="submit"
-        className={`text-blue-500 disabled:text-gray-500`}
-      >
-        Resend OTP
-      </button>
+      <ExpirationTimer />
     </div>
   );
 };
 
 export default Otp;
+
+const ExpirationTimer = () => {
+  const handleResendOtp = async () => {
+    const response = await resendOtp();
+    setTimeLeft(expirationTime);
+    console.log(response);
+  };
+
+  const expirationTime = 60;
+  const [timeLeft, setTimeLeft] = useState(expirationTime);
+
+  let id: any = null;
+
+  useEffect(() => {
+    if (timeLeft > 0) {
+      id = setTimeout(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+    }
+    return () => {
+      clearTimeout(id);
+    };
+  }, [timeLeft]);
+
+  return (
+    <>
+      <div className="flex flex-col items-center mt-3">
+        <button
+          className="text-blue-500 text-sm underline disabled:text-blue-300  disabled:cursor-not-allowed"
+          onClick={handleResendOtp}
+          disabled={timeLeft > 0}
+        >
+          Resend OTP
+        </button>
+        <p className="text-sm mt-2 text-accent font-medium">
+          {timeLeft > 0 ? `Resend otp in ${timeLeft} seconds` : ""}
+        </p>
+      </div>
+    </>
+  );
+};

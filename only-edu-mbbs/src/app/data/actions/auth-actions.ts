@@ -15,24 +15,14 @@ import { ILoginFormInput } from "@/modules/account/components/login";
 import { IFormInput } from "@/modules/account/components/register";
 import { IOtpInput } from "@/modules/account/components/otp";
 import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema";
-import { getOtpSession, getResendOtpSession } from "../services/get-token";
 import { getUserMeLoader } from "../services/get-user-loader";
 
 const config = {
-  maxAge: 60 * 60 * 24 * 7, // 1 week
+  maxAge: 60 * 60 * 24 * 7,
   path: "/",
   domain: process.env.HOST ?? "localhost",
   httpOnly: true,
-  // secure: process.env.NODE_ENV === "production",
-};
-
-const OTP_RESEND_INTERVAL = 2 * 60 * 1000;
-const otpConfig = {
-  maxAge: OTP_RESEND_INTERVAL / 1000, // Match the same interval as OTP session cookie
-  path: "/",
-  domain: process.env.HOST ?? "localhost",
-  httpOnly: true,
-  // secure: process.env.NODE_ENV === "production",
+  secure: process.env.NODE_ENV === "production",
 };
 
 export async function registerUserAction(prevState: any, formData: IFormInput) {
@@ -96,60 +86,24 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
 }
 
 export async function resendOtp() {
-  try {
-    const user = await getUserMeLoader();
-    const { last_otp_request, resend_attempts, id, phone } = user.data;
-
-    console.log(user.data);
-    if (!last_otp_request || resend_attempts === undefined) {
-      // Send OTP if last_otp_request is null
-      await sendOtpService(phone);
-      const res = await verifyPhoneUserService(id, {
-        last_otp_request: new Date(),
-        resend_attempts: 2,
-      });
-      return res;
-    }
-
-    const lastRequestTime = new Date(last_otp_request);
-    const currentTime = new Date();
-    const timeDiff = (currentTime.getTime() - lastRequestTime.getTime()) / 1000; // Time difference in seconds
-
-    if (timeDiff < 90) {
-      // If less than 90 seconds since last OTP request
-      return {
-        message: `Please wait ${Math.ceil(
-          90 - timeDiff
-        )} seconds before requesting a new OTP.`,
-      };
-      return;
-    }
-
-    if (resend_attempts <= 0) {
-      // If no resend attempts left
-      console.log("Cannot verify, please contact support.");
-      redirect("/");
-      return;
-    }
-
-    // Send OTP if conditions are met
-    await sendOtpService(phone);
-    await verifyPhoneUserService(id, {
-      last_otp_request: new Date(),
-      resend_attempts: resend_attempts - 1,
-    });
-  } catch (error) {
-    console.error("Error in resendOtp function:", error);
-  }
+  const user = await getUserMeLoader();
+  await sendOtpService(user.data.phone);
+  return {
+    success: true,
+  };
 }
 
-export const sendAndVerifyOtpAction = async (userId: number, phone: string) => {
+export const sendAndVerifyOtpAction = async (
+  userId: number | undefined,
+  phone: string
+) => {
+  if (userId === undefined) return;
   const phoneUpdateResponse = await putPhoneUserService(userId, phone);
   const updatedPhone = phoneUpdateResponse?.data.phone;
   // const otpResponse = sendOtpService(updatedPhone);
   const otpResponseData = {
     Status: true,
-    Details: "ufhdujnfidnidnfni",
+    Details: "ufhdujnfidnidnfni" /**UNIT TESTING for otp responseData */,
   };
   const putOtpSessionResponse = await putOtpSession(
     otpResponseData.Details,

@@ -83,7 +83,7 @@ export async function verifyOtpService(
 }
 
 // Update Verified User Service
-export async function updateVerifiedUserService(userId: string) {
+export async function updateVerifiedUserService(userId: number | string) {
   try {
     const response = await axios.put(
       `${baseUrl}/api/users/${userId}?populate=true`,

@@ -41,7 +41,6 @@ const ProfileEmail = ({ user }: MyInformationProps) => {
         }
         isSuccess={false}
         isError={true}
-        errorMessage={user.error}
         clearState={clearState}
       >
         <div className="grid grid-cols-1 gap-y-2 ">
