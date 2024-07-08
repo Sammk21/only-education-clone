@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuItems } from "./components/MenuItems";
 import Link from "next/link";
-import { Navigation, Dropdown, Links } from "@/types/types";
+import { Navigation, Dropdown, Links, UserType } from "@/types/types";
 import { DropDownItems } from "./components/Dropdown";
 import Image from "next/image";
 import LoginButton from "../custom/LoginButton";
@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, Settings, User } from "lucide-react";
+import Banner from "@/components/ui/tailwind-banner";
 
 export interface NavbarProps {
   navigation: Navigation;
@@ -33,6 +34,9 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
   return (
     <>
       <header className="mb-9 w-screen top-0 fixed text-black  bg-clip-padding bg-white backdrop-filter backdrop-blur-md    z-30">
+        {user?.ok && !user?.data?.verified ? (
+          <Banner existingPhone={user.data.phone} userId={user.data.id} />
+        ) : null}
         <nav className="flex justify-between items-center px-6 py-2  border-b">
           <Link className=" h-12 w-24 sm:h-14 sm:w-36 relative" href="/">
             <Image

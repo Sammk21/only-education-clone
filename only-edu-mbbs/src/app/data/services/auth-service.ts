@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 interface RegisterUserProps {
   firstName: string;
   lastName: string;
@@ -43,22 +42,27 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
-  console.log(phone);
+  const apiKey = process.env.TWOFACTOR_API_KEY;
+  const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
+  const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
+  const response = await axios.get(`https://2factor.in/API/V1${pathVariables}`);
+  return response.data;
+}
 
+export async function putOtpSession(otpS: string, id: number) {
   try {
-    const apiKey = process.env.TWOFACTOR_API_KEY;
-    const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
-    const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
-    const response = await axios.get(
-      `https://2factor.in/API/V1${pathVariables}`
+    const response = await axios.put(
+      `${baseUrl}/api/users/${id}?populate=true`,
+      {
+        otp_session: otpS,
+      }
     );
-    return {
-      Status: true,
-      Details: response.data.Details,
-    };
+    return response.data;
   } catch (error) {
-    console.error("Send OTP Service Error:", error);
-    throw new Error("Failed to send OTP. Please try again later.");
+    return {
+      success: false,
+      error: true,
+    };
   }
 }
 
@@ -84,20 +88,33 @@ export async function updateVerifiedUserService(userId: string) {
     const response = await axios.put(
       `${baseUrl}/api/users/${userId}?populate=true`,
       {
-        confirmed: true,
+        verified: true,
+        otp_session: "",
       }
     );
-    return {
-      success: true,
-      error: false,
-      userId: userId,
-    };
+    return response.data;
   } catch (error) {
     return {
       success: false,
       error: true,
       userId: userId,
     };
+  }
+}
+
+// Update Phone User Service
+export async function putPhoneUserService(userId: number, phone: string) {
+  try {
+    const response = await axios.put(
+      `${baseUrl}/api/users/${userId}?populate=true`,
+      {
+        phone: phone,
+        username: phone,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -124,14 +141,33 @@ export async function loginUserService(userData: LoginUserProps) {
 // Additional Send OTP Service (if needed)
 export async function sendOtp(phone: string) {
   try {
-    const apiKey = process.env.TWOFACTOR_API_KEY ?? "15288276-dc54-11ee-8cbb-0200cd936042";
+    const apiKey =
+      process.env.TWOFACTOR_API_KEY ?? "15288276-dc54-11ee-8cbb-0200cd936042";
     const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
     const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
-    const response = await axios.get(`https://2factor.in/API/V1${pathVariables}`);
+    const response = await axios.get(
+      `https://2factor.in/API/V1${pathVariables}`
+    );
 
     return response.data;
   } catch (error) {
     console.error("Send OTP Service Error:", error);
     throw new Error("Failed to send OTP. Please try again later.");
+  }
+}
+
+export async function verifyPhoneUserService(
+  userId: number,
+  data: { last_otp_request: Date; resend_attempts: number }
+) {
+  try {
+    const response = await axios.put(
+      `${baseUrl}/api/users/${userId}?populate=true`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user data:", error);
+    throw error;
   }
 }

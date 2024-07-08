@@ -23,7 +23,6 @@ export interface AdminPermission extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 1;
       }>;
-    actionParameters: Attribute.JSON & Attribute.DefaultTo<{}>;
     subject: Attribute.String &
       Attribute.SetMinMaxLength<{
         minLength: 1;
@@ -403,12 +402,9 @@ export interface PluginUploadFile extends Schema.CollectionType {
     folderPath: Attribute.String &
       Attribute.Required &
       Attribute.Private &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -423,6 +419,7 @@ export interface PluginUploadFile extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    blurhash: Attribute.Text;
   };
 }
 
@@ -444,12 +441,9 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     pathId: Attribute.Integer & Attribute.Required & Attribute.Unique;
     parent: Attribute.Relation<
       'plugin::upload.folder',
@@ -468,12 +462,9 @@ export interface PluginUploadFolder extends Schema.CollectionType {
     >;
     path: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -484,223 +475,6 @@ export interface PluginUploadFolder extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::upload.folder',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginContentReleasesRelease extends Schema.CollectionType {
-  collectionName: 'strapi_releases';
-  info: {
-    singularName: 'release';
-    pluralName: 'releases';
-    displayName: 'Release';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    releasedAt: Attribute.DateTime;
-    scheduledAt: Attribute.DateTime;
-    timezone: Attribute.String;
-    status: Attribute.Enumeration<
-      ['ready', 'blocked', 'failed', 'done', 'empty']
-    > &
-      Attribute.Required;
-    actions: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToMany',
-      'plugin::content-releases.release-action'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginContentReleasesReleaseAction
-  extends Schema.CollectionType {
-  collectionName: 'strapi_release_actions';
-  info: {
-    singularName: 'release-action';
-    pluralName: 'release-actions';
-    displayName: 'Release Action';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required;
-    entry: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'morphToOne'
-    >;
-    contentType: Attribute.String & Attribute.Required;
-    locale: Attribute.String;
-    release: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'manyToOne',
-      'plugin::content-releases.release'
-    >;
-    isEntryValid: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::content-releases.release-action',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginSchedulerScheduler extends Schema.CollectionType {
-  collectionName: 'scheduler_scheduler';
-  info: {
-    collectionName: 'scheduler';
-    singularName: 'scheduler';
-    pluralName: 'scheduler';
-    displayName: 'scheduler';
-    description: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    scheduledDatetime: Attribute.DateTime;
-    uid: Attribute.String;
-    contentId: Attribute.BigInteger;
-    scheduleType: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::scheduler.scheduler',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::scheduler.scheduler',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginStrapiNewsletterNewsletter
-  extends Schema.CollectionType {
-  collectionName: 'newsletters';
-  info: {
-    singularName: 'newsletter';
-    pluralName: 'newsletters';
-    displayName: 'Newsletter';
-  };
-  options: {
-    draftAndPublish: false;
-    comment: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    subject: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::strapi-newsletter.newsletter',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::strapi-newsletter.newsletter',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface PluginStrapiNewsletterSubscribedUser
-  extends Schema.CollectionType {
-  collectionName: 'subscribed_user';
-  info: {
-    singularName: 'subscribed-user';
-    pluralName: 'subscribed-users';
-    displayName: 'Subscribed Users';
-  };
-  options: {
-    draftAndPublish: false;
-    comment: '';
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    email: Attribute.Email & Attribute.Required & Attribute.Unique;
-    provider: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::strapi-newsletter.subscribed-user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::strapi-newsletter.subscribed-user',
       'oneToOne',
       'admin::user'
     > &
@@ -846,14 +620,24 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::article.article'
     >;
-    picture: Attribute.Media<'images' | 'files' | 'videos'>;
-    job: Attribute.String & Attribute.Required;
-    firstname: Attribute.String &
+    picture: Attribute.Media;
+    job: Attribute.String;
+    firstName: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
-    lastname: Attribute.String;
+    lastName: Attribute.String;
+    enquiries: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::enquiry.enquiry'
+    >;
+    phone: Attribute.String & Attribute.Required;
+    verified: Attribute.Boolean & Attribute.DefaultTo<false>;
+    last_otp_request: Attribute.DateTime;
+    resend_attempts: Attribute.Integer;
+    otp_session: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -893,13 +677,10 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
     code: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -915,6 +696,89 @@ export interface PluginI18NLocale extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface PluginSchedulerScheduler extends Schema.CollectionType {
+  collectionName: 'scheduler_scheduler';
+  info: {
+    collectionName: 'scheduler';
+    singularName: 'scheduler';
+    pluralName: 'scheduler';
+    displayName: 'scheduler';
+    description: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    scheduledDatetime: Attribute.DateTime;
+    uid: Attribute.String;
+    contentId: Attribute.BigInteger;
+    scheduleType: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginStrapiGoogleAuthGoogleCredential
+  extends Schema.SingleType {
+  collectionName: 'strapi-google-auth_google-credential';
+  info: {
+    displayName: 'Google Credentials';
+    singularName: 'google-credential';
+    pluralName: 'google-credentials';
+    description: 'Stores google project credentials';
+    tableName: 'google_auth_creds';
+  };
+  options: {
+    privateAttributes: ['id', 'created_at'];
+    populateCreatorFields: true;
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    google_client_id: Attribute.String & Attribute.Required;
+    google_client_secret: Attribute.String & Attribute.Required;
+    google_redirect_url: Attribute.String & Attribute.Required;
+    google_scopes: Attribute.JSON & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::strapi-google-auth.google-credential',
+      'oneToOne',
+      'admin::user'
+    >;
+    updatedBy: Attribute.Relation<
+      'plugin::strapi-google-auth.google-credential',
+      'oneToOne',
+      'admin::user'
+    >;
   };
 }
 
@@ -995,19 +859,11 @@ export interface ApiArticleArticle extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'> &
+    image: Attribute.Media &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
-        };
-      }>;
-    blocks: Attribute.DynamicZone<
-      ['blocks.related-articles', 'blocks.faq', 'blocks.cta-command-line']
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
         };
       }>;
     seo: Attribute.Component<'shared.seo'> &
@@ -1066,6 +922,17 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::article.article',
       'manyToOne',
       'plugin::users-permissions.user'
+    >;
+    recommendedArticle: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    articles: Attribute.Relation<
+      'api::article.article',
+      'oneToMany',
+      'api::article.article'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1188,6 +1055,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'oneToMany',
       'api::article.article'
     >;
+    news: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::new.new'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1202,230 +1074,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-  };
-}
-
-export interface ApiCookieCookie extends Schema.CollectionType {
-  collectionName: 'cookies';
-  info: {
-    singularName: 'cookie';
-    pluralName: 'cookies';
-    displayName: 'Cookies';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-    'content-manager': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    host: Attribute.String & Attribute.Required;
-    category: Attribute.Relation<
-      'api::cookie.cookie',
-      'manyToOne',
-      'api::cookie-category.cookie-category'
-    >;
-    party: Attribute.Enumeration<
-      ['First-party', 'Second-party', 'Third-party']
-    > &
-      Attribute.Required;
-    isVisible: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
-      Attribute.DefaultTo<true>;
-    duration: Attribute.JSON;
-    key: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::cookie.cookie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::cookie.cookie',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::cookie.cookie',
-      'oneToMany',
-      'api::cookie.cookie'
-    >;
-    locale: Attribute.String;
-  };
-}
-
-export interface ApiCookieCategoryCookieCategory extends Schema.CollectionType {
-  collectionName: 'cookie_categories';
-  info: {
-    singularName: 'cookie-category';
-    pluralName: 'cookie-categories';
-    displayName: 'Cookie Categories';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-    'content-manager': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    isNecessary: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }> &
-      Attribute.DefaultTo<false>;
-    key: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
-    cookies: Attribute.Relation<
-      'api::cookie-category.cookie-category',
-      'oneToMany',
-      'api::cookie.cookie'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::cookie-category.cookie-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::cookie-category.cookie-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::cookie-category.cookie-category',
-      'oneToMany',
-      'api::cookie-category.cookie-category'
-    >;
-    locale: Attribute.String;
-  };
-}
-
-export interface ApiCookiePopupCookiePopup extends Schema.CollectionType {
-  collectionName: 'cookie_popups';
-  info: {
-    singularName: 'cookie-popup';
-    pluralName: 'cookie-popups';
-    displayName: 'Cookie Popups';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-    'content-manager': {
-      visible: false;
-    };
-  };
-  attributes: {
-    title: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.RichText &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    buttons: Attribute.Component<'shared.cookie-button', true> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    hasCustomizability: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::cookie-popup.cookie-popup',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::cookie-popup.cookie-popup',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::cookie-popup.cookie-popup',
-      'oneToMany',
-      'api::cookie-popup.cookie-popup'
-    >;
-    locale: Attribute.String;
   };
 }
 
@@ -1473,6 +1121,8 @@ export interface ApiCountryCountry extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    cta: Attribute.Component<'blocks.cta'>;
+    overview: Attribute.Component<'shared.header'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1487,6 +1137,103 @@ export interface ApiCountryCountry extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID<'api::course.course', 'title'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEnquiryEnquiry extends Schema.CollectionType {
+  collectionName: 'enquiries';
+  info: {
+    singularName: 'enquiry';
+    pluralName: 'enquiries';
+    displayName: 'Enquiry';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_user: Attribute.Relation<
+      'api::enquiry.enquiry',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    enquires: Attribute.Component<'shared.enquiry', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::enquiry.enquiry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::enquiry.enquiry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiExamExam extends Schema.CollectionType {
+  collectionName: 'exams';
+  info: {
+    singularName: 'exam';
+    pluralName: 'exams';
+    displayName: 'Exam';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID;
+    university: Attribute.Relation<
+      'api::exam.exam',
+      'manyToOne',
+      'api::university.university'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::exam.exam', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::exam.exam', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1553,6 +1300,73 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
 }
 
+export interface ApiIndianCollegeIndianCollege extends Schema.CollectionType {
+  collectionName: 'indian_colleges';
+  info: {
+    singularName: 'indian-college';
+    pluralName: 'indian-colleges';
+    displayName: 'Indian College';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    globalProfiles: Attribute.Component<'blocks.profiles', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::indian-college.indian-college',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::indian-college.indian-college',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiIndianStateIndianState extends Schema.CollectionType {
+  collectionName: 'indian_states';
+  info: {
+    singularName: 'indian-state';
+    pluralName: 'indian-states';
+    displayName: 'Indian States';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID;
+    universities: Attribute.Relation<
+      'api::indian-state.indian-state',
+      'oneToMany',
+      'api::university.university'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::indian-state.indian-state',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::indian-state.indian-state',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLandingPageLandingPage extends Schema.SingleType {
   collectionName: 'landing_pages';
   info: {
@@ -1572,6 +1386,16 @@ export interface ApiLandingPageLandingPage extends Schema.SingleType {
     topUniversities: Attribute.Component<'blocks.features-with-images'>;
     services: Attribute.Component<'blocks.services'>;
     whyOnlyEducation: Attribute.Component<'blocks.why-us'>;
+    articles: Attribute.Relation<
+      'api::landing-page.landing-page',
+      'oneToMany',
+      'api::article.article'
+    >;
+    news: Attribute.Relation<
+      'api::landing-page.landing-page',
+      'oneToMany',
+      'api::new.new'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1583,6 +1407,179 @@ export interface ApiLandingPageLandingPage extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::landing-page.landing-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNewNew extends Schema.CollectionType {
+  collectionName: 'news';
+  info: {
+    singularName: 'new';
+    pluralName: 'news';
+    displayName: 'News';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    live: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.UID<'api::new.new', 'title'>;
+    image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ckeditor_content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    authorName: Attribute.Enumeration<
+      [
+        'Omkar',
+        'Sam',
+        'Sarfraj',
+        'Adesh',
+        'Dhanashree',
+        'Afreen',
+        'Ketkki',
+        'Premita',
+        'Yogita',
+        'Zhankana',
+        'Parveen'
+      ]
+    > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    category: Attribute.Relation<
+      'api::new.new',
+      'manyToOne',
+      'api::category.category'
+    >;
+    recommendedNews: Attribute.Boolean &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    news: Attribute.Relation<'api::new.new', 'oneToMany', 'api::new.new'>;
+    relatedUniversities: Attribute.Relation<
+      'api::new.new',
+      'oneToMany',
+      'api::university.university'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::new.new',
+      'oneToMany',
+      'api::new.new'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiOwnershipOwnership extends Schema.CollectionType {
+  collectionName: 'ownerships';
+  info: {
+    singularName: 'ownership';
+    pluralName: 'ownerships';
+    displayName: 'Ownership';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ownership.ownership',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ownership.ownership',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRankingRanking extends Schema.CollectionType {
+  collectionName: 'rankings';
+  info: {
+    singularName: 'ranking';
+    pluralName: 'rankings';
+    displayName: 'Ranking';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    publisherName: Attribute.String;
+    publisherImage: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ranking.ranking',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ranking.ranking',
       'oneToOne',
       'admin::user'
     > &
@@ -1619,13 +1616,10 @@ export interface ApiReviewReview extends Schema.CollectionType {
           localized: false;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 5;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 5;
+      }>;
     author: Attribute.Relation<
       'api::review.review',
       'manyToOne',
@@ -1654,6 +1648,43 @@ export interface ApiReviewReview extends Schema.CollectionType {
   };
 }
 
+export interface ApiStreamStream extends Schema.CollectionType {
+  collectionName: 'streams';
+  info: {
+    singularName: 'stream';
+    pluralName: 'streams';
+    displayName: 'Stream';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID;
+    university: Attribute.Relation<
+      'api::stream.stream',
+      'manyToOne',
+      'api::university.university'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::stream.stream',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::stream.stream',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiStudyAbroadStudyAbroad extends Schema.SingleType {
   collectionName: 'study_abroads';
   info: {
@@ -1669,10 +1700,10 @@ export interface ApiStudyAbroadStudyAbroad extends Schema.SingleType {
     title: Attribute.String;
     description: Attribute.Text;
     eligibilityTable: Attribute.Component<'blocks.eligibility-table', true>;
-    topCountries: Attribute.Component<'blocks.top-countries-data'>;
     whyAbroad: Attribute.Component<'blocks.why-us'>;
     popularCourses: Attribute.Component<'blocks.popular-courses'>;
     faq: Attribute.Component<'blocks.faq'>;
+    topUniversities: Attribute.Component<'blocks.features-with-images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1711,7 +1742,7 @@ export interface ApiStudyIndiaStudyIndia extends Schema.SingleType {
     explore: Attribute.Component<'global.explore'>;
     eligibilityTable: Attribute.Component<'blocks.eligibility-table', true>;
     faq: Attribute.Component<'blocks.faq'>;
-    topCountries: Attribute.Component<'blocks.top-countries-data'>;
+    topUniversities: Attribute.Component<'blocks.features-with-images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1765,8 +1796,6 @@ export interface ApiUniversityUniversity extends Schema.CollectionType {
       'api::country.country'
     >;
     noOfStudentsStudying: Attribute.String & Attribute.Required;
-    benifits: Attribute.Component<'shared.university-list'> &
-      Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
     authorName: Attribute.Enumeration<
       [
@@ -1784,6 +1813,45 @@ export interface ApiUniversityUniversity extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    universityInfo: Attribute.Component<'shared.list', true>;
+    placement: Attribute.Component<'shared.placement'>;
+    streams: Attribute.Relation<
+      'api::university.university',
+      'oneToMany',
+      'api::stream.stream'
+    >;
+    ownership: Attribute.Relation<
+      'api::university.university',
+      'oneToOne',
+      'api::ownership.ownership'
+    >;
+    exams: Attribute.Relation<
+      'api::university.university',
+      'oneToMany',
+      'api::exam.exam'
+    >;
+    searchableImage: Attribute.Media;
+    indian_state: Attribute.Relation<
+      'api::university.university',
+      'manyToOne',
+      'api::indian-state.indian-state'
+    >;
+    highlights: Attribute.Component<'shared.highlights'>;
+    affiliated: Attribute.Relation<
+      'api::university.university',
+      'oneToOne',
+      'api::university.university'
+    >;
+    overviewTabs: Attribute.Component<'university.overview-tabs'>;
+    coursesFees: Attribute.Component<'university.courses-fees'>;
+    admission: Attribute.Component<'university.admission'>;
+    placements: Attribute.Component<'university.placements'>;
+    gallery: Attribute.Component<'university.gallery'>;
+    faculty: Attribute.Component<'university.faculty'>;
+    hostel: Attribute.Component<'university.hostel'>;
+    scholarships: Attribute.Component<'university.scholarships'>;
+    notification: Attribute.Component<'university.notification'>;
+    ranking: Attribute.Component<'university.ranking', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1802,7 +1870,7 @@ export interface ApiUniversityUniversity extends Schema.CollectionType {
   };
 }
 
-declare module '@strapi/types' {
+declare module '@strapi/strapi' {
   export module Shared {
     export interface ContentTypes {
       'admin::permission': AdminPermission;
@@ -1814,26 +1882,29 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
-      'plugin::content-releases.release': PluginContentReleasesRelease;
-      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
-      'plugin::scheduler.scheduler': PluginSchedulerScheduler;
-      'plugin::strapi-newsletter.newsletter': PluginStrapiNewsletterNewsletter;
-      'plugin::strapi-newsletter.subscribed-user': PluginStrapiNewsletterSubscribedUser;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'plugin::scheduler.scheduler': PluginSchedulerScheduler;
+      'plugin::strapi-google-auth.google-credential': PluginStrapiGoogleAuthGoogleCredential;
       'plugin::todo.task': PluginTodoTask;
       'api::article.article': ApiArticleArticle;
       'api::blog-page.blog-page': ApiBlogPageBlogPage;
       'api::category.category': ApiCategoryCategory;
-      'api::cookie.cookie': ApiCookieCookie;
-      'api::cookie-category.cookie-category': ApiCookieCategoryCookieCategory;
-      'api::cookie-popup.cookie-popup': ApiCookiePopupCookiePopup;
       'api::country.country': ApiCountryCountry;
+      'api::course.course': ApiCourseCourse;
+      'api::enquiry.enquiry': ApiEnquiryEnquiry;
+      'api::exam.exam': ApiExamExam;
       'api::global.global': ApiGlobalGlobal;
+      'api::indian-college.indian-college': ApiIndianCollegeIndianCollege;
+      'api::indian-state.indian-state': ApiIndianStateIndianState;
       'api::landing-page.landing-page': ApiLandingPageLandingPage;
+      'api::new.new': ApiNewNew;
+      'api::ownership.ownership': ApiOwnershipOwnership;
+      'api::ranking.ranking': ApiRankingRanking;
       'api::review.review': ApiReviewReview;
+      'api::stream.stream': ApiStreamStream;
       'api::study-abroad.study-abroad': ApiStudyAbroadStudyAbroad;
       'api::study-india.study-india': ApiStudyIndiaStudyIndia;
       'api::university.university': ApiUniversityUniversity;

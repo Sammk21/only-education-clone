@@ -53,7 +53,6 @@ export interface BlocksEligibilityCard extends Schema.Component {
   attributes: {
     header: Attribute.Component<'shared.header'> & Attribute.Required;
     criteriaTable: Attribute.RichText &
-      Attribute.Required &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
         {
@@ -63,13 +62,10 @@ export interface BlocksEligibilityCard extends Schema.Component {
       >;
     criteriaList: Attribute.Component<'shared.criteria-list', true> &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 3;
-          max: 4;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 4;
+      }>;
   };
 }
 
@@ -102,12 +98,9 @@ export interface BlocksExpBlock extends Schema.Component {
   };
   attributes: {
     expBlock: Attribute.Component<'shared.exp-block', true> &
-      Attribute.SetMinMax<
-        {
-          max: 6;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        max: 6;
+      }>;
   };
 }
 
@@ -164,7 +157,7 @@ export interface BlocksHero extends Schema.Component {
     icon: 'pizza-slice';
   };
   attributes: {
-    images: Attribute.Media<'images' | 'files' | 'videos', true>;
+    images: Attribute.Media;
     header: Attribute.Component<'shared.header'>;
     text: Attribute.String;
     buttons: Attribute.Component<'shared.button', true>;
@@ -191,7 +184,7 @@ export interface BlocksPopularCourses extends Schema.Component {
   };
   attributes: {
     header: Attribute.Component<'shared.header'>;
-    list: Attribute.Component<'shared.list', true>;
+    documents: Attribute.Component<'shared.header', true>;
   };
 }
 
@@ -215,10 +208,8 @@ export interface BlocksProfiles extends Schema.Component {
     description: '';
   };
   attributes: {
-    backgroundImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    profileImage: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
+    backgroundImage: Attribute.Media & Attribute.Required;
+    profileImage: Attribute.Media & Attribute.Required;
     name: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
@@ -227,8 +218,13 @@ export interface BlocksProfiles extends Schema.Component {
     description: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
-        minLength: 2;
+        minLength: 100;
       }>;
+    avgPackage: Attribute.String;
+    fees: Attribute.Integer;
+    location: Attribute.String;
+    Approvedby: Attribute.String;
+    establishment: Attribute.String;
   };
 }
 
@@ -282,12 +278,9 @@ export interface BlocksServices extends Schema.Component {
   attributes: {
     header: Attribute.Component<'shared.header'>;
     ourServiceInfo: Attribute.Component<'shared.our-service-summary', true> &
-      Attribute.SetMinMax<
-        {
-          max: 5;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        max: 5;
+      }>;
   };
 }
 
@@ -549,7 +542,7 @@ export interface SharedCard extends Schema.Component {
   attributes: {
     title: Attribute.String;
     text: Attribute.String;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Attribute.Media;
   };
 }
 
@@ -561,18 +554,6 @@ export interface SharedComment extends Schema.Component {
   };
   attributes: {
     content: Attribute.Text;
-  };
-}
-
-export interface SharedCookieButton extends Schema.Component {
-  collectionName: 'components_shared_cookie_buttons';
-  info: {
-    displayName: 'Cookie Button';
-    icon: 'mouse-pointer';
-  };
-  attributes: {
-    buttonType: Attribute.Enumeration<['Primary', 'Secondary', 'Text']>;
-    label: Attribute.String;
   };
 }
 
@@ -605,6 +586,24 @@ export interface SharedDropdown extends Schema.Component {
     label: Attribute.String;
     href: Attribute.String;
     subMenu: Attribute.Component<'shared.link', true>;
+  };
+}
+
+export interface SharedEnquiry extends Schema.Component {
+  collectionName: 'components_shared_enquiries';
+  info: {
+    displayName: 'Enquiry';
+    icon: 'layout';
+    description: '';
+  };
+  attributes: {
+    specialization: Attribute.String;
+    university: Attribute.Relation<
+      'shared.enquiry',
+      'oneToOne',
+      'api::university.university'
+    >;
+    level: Attribute.String;
   };
 }
 
@@ -650,10 +649,26 @@ export interface SharedHeader extends Schema.Component {
     description: '';
   };
   attributes: {
-    description: Attribute.Text &
-      Attribute.Required &
-      Attribute.DefaultTo<'get to know abow why this country is best for studiying anything dowen below. (not a required feild)'>;
+    description: Attribute.Text & Attribute.Required;
     title: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SharedHighlights extends Schema.Component {
+  collectionName: 'components_shared_highlights';
+  info: {
+    displayName: 'Highlights';
+    description: '';
+  };
+  attributes: {
+    highlights: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
   };
 }
 
@@ -709,7 +724,7 @@ export interface SharedList extends Schema.Component {
     description: '';
   };
   attributes: {
-    list: Attribute.Text;
+    list: Attribute.String;
   };
 }
 
@@ -732,7 +747,7 @@ export interface SharedMetaSocial extends Schema.Component {
       Attribute.SetMinMaxLength<{
         maxLength: 65;
       }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Attribute.Media;
   };
 }
 
@@ -746,6 +761,44 @@ export interface SharedOurServiceSummary extends Schema.Component {
     title: Attribute.String;
     subtitle: Attribute.String;
     description: Attribute.Text;
+  };
+}
+
+export interface SharedOverview extends Schema.Component {
+  collectionName: 'components_shared_overviews';
+  info: {
+    displayName: 'overview';
+    description: '';
+  };
+  attributes: {
+    header: Attribute.String;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface SharedPlacement extends Schema.Component {
+  collectionName: 'components_shared_placements';
+  info: {
+    displayName: 'Placement';
+    description: '';
+  };
+  attributes: {
+    list: Attribute.Component<'shared.list', true>;
+    placementTable: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
   };
 }
 
@@ -794,6 +847,21 @@ export interface SharedRanking extends Schema.Component {
   };
 }
 
+export interface SharedRelatedNews extends Schema.Component {
+  collectionName: 'components_shared_related_news';
+  info: {
+    displayName: 'RelatedNews';
+    description: '';
+  };
+  attributes: {
+    news: Attribute.Relation<
+      'shared.related-news',
+      'oneToMany',
+      'api::new.new'
+    >;
+  };
+}
+
 export interface SharedSeo extends Schema.Component {
   collectionName: 'components_shared_seos';
   info: {
@@ -812,8 +880,7 @@ export interface SharedSeo extends Schema.Component {
         minLength: 50;
         maxLength: 160;
       }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'> &
-      Attribute.Required;
+    metaImage: Attribute.Media & Attribute.Required;
     metaSocial: Attribute.Component<'shared.meta-social', true>;
     keywords: Attribute.Text;
     metaRobots: Attribute.String;
@@ -899,7 +966,7 @@ export interface SharedVideoPlayer extends Schema.Component {
     description: '';
   };
   attributes: {
-    Video: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Video: Attribute.Media;
   };
 }
 
@@ -915,7 +982,214 @@ export interface SharedWhyThisUniCountry extends Schema.Component {
   };
 }
 
-declare module '@strapi/types' {
+export interface UniversityAdmission extends Schema.Component {
+  collectionName: 'components_university_admissions';
+  info: {
+    displayName: 'admission';
+  };
+  attributes: {
+    courseAdmission: Attribute.Component<'shared.overview'>;
+    apllicationDates: Attribute.Component<'shared.overview'>;
+    cutoff: Attribute.Component<'shared.overview'>;
+  };
+}
+
+export interface UniversityCoursesFees extends Schema.Component {
+  collectionName: 'components_university_courses_fees';
+  info: {
+    displayName: 'coursesFees';
+    description: '';
+  };
+  attributes: {
+    feeDetails: Attribute.Component<'shared.overview'>;
+    entranceExams: Attribute.Component<'shared.overview'>;
+    paymentGuidelines: Attribute.Component<'shared.overview'>;
+  };
+}
+
+export interface UniversityFacultyInfo extends Schema.Component {
+  collectionName: 'components_university_faculty_infos';
+  info: {
+    displayName: 'facultyInfo';
+    description: '';
+  };
+  attributes: {
+    designation: Attribute.String;
+    professorName: Attribute.String;
+    email: Attribute.Email;
+    number: Attribute.String;
+  };
+}
+
+export interface UniversityFaculty extends Schema.Component {
+  collectionName: 'components_university_faculties';
+  info: {
+    displayName: 'faculty';
+    description: '';
+  };
+  attributes: {
+    facInfo: Attribute.Component<'university.faculty-info', true>;
+  };
+}
+
+export interface UniversityFemaleHostel extends Schema.Component {
+  collectionName: 'components_university_female_hostels';
+  info: {
+    displayName: 'femaleHostel';
+    description: '';
+  };
+  attributes: {
+    header: Attribute.String;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UniversityGallery extends Schema.Component {
+  collectionName: 'components_university_galleries';
+  info: {
+    displayName: 'gallery';
+  };
+  attributes: {
+    events: Attribute.Media;
+    infrastructure: Attribute.Media;
+  };
+}
+
+export interface UniversityHostel extends Schema.Component {
+  collectionName: 'components_university_hostels';
+  info: {
+    displayName: 'hostel';
+    description: '';
+  };
+  attributes: {
+    maleHostel: Attribute.Component<'university.male-hostel'>;
+    femaleHostel: Attribute.Component<'university.female-hostel'>;
+  };
+}
+
+export interface UniversityMaleHostel extends Schema.Component {
+  collectionName: 'components_university_male_hostels';
+  info: {
+    displayName: 'maleHostel';
+    description: '';
+  };
+  attributes: {
+    header: Attribute.String;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UniversityNotification extends Schema.Component {
+  collectionName: 'components_university_notifications';
+  info: {
+    displayName: 'notification';
+  };
+  attributes: {
+    header: Attribute.String;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UniversityOverviewTabs extends Schema.Component {
+  collectionName: 'components_university_overview_tabs';
+  info: {
+    displayName: 'Overview Tabs';
+    description: '';
+  };
+  attributes: {
+    latestUpdates: Attribute.Component<'shared.overview'>;
+    overview: Attribute.Component<'shared.overview'>;
+    highlights: Attribute.Component<'shared.overview'>;
+    ranking: Attribute.Component<'shared.overview'>;
+    whyChoose: Attribute.Component<'shared.overview'>;
+    academicAdvantages: Attribute.Component<'shared.overview'>;
+  };
+}
+
+export interface UniversityPlacements extends Schema.Component {
+  collectionName: 'components_university_placements';
+  info: {
+    displayName: 'placements';
+  };
+  attributes: {
+    placementInfo: Attribute.Component<'shared.overview'>;
+    packagesInfo: Attribute.Component<'shared.overview'>;
+  };
+}
+
+export interface UniversityRanking extends Schema.Component {
+  collectionName: 'components_university_rankings';
+  info: {
+    displayName: 'ranking';
+    description: '';
+  };
+  attributes: {
+    rankingYear: Attribute.String;
+    course: Attribute.Relation<
+      'university.ranking',
+      'oneToOne',
+      'api::course.course'
+    >;
+    description: Attribute.Text;
+    rankings: Attribute.Relation<
+      'university.ranking',
+      'oneToOne',
+      'api::ranking.ranking'
+    >;
+    rankingNumber: Attribute.Integer;
+  };
+}
+
+export interface UniversityScholarshipsInfo extends Schema.Component {
+  collectionName: 'components_university_scholarships_infos';
+  info: {
+    displayName: 'scholarshipsInfo';
+  };
+  attributes: {
+    header: Attribute.String;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UniversityScholarships extends Schema.Component {
+  collectionName: 'components_university_scholarships';
+  info: {
+    displayName: 'scholarships';
+  };
+  attributes: {
+    scholarshipsInfo: Attribute.Component<'university.scholarships-info'>;
+  };
+}
+
+declare module '@strapi/strapi' {
   export module Shared {
     export interface Components {
       'blocks.cta-command-line': BlocksCtaCommandLine;
@@ -957,21 +1231,25 @@ declare module '@strapi/types' {
       'shared.button': SharedButton;
       'shared.card': SharedCard;
       'shared.comment': SharedComment;
-      'shared.cookie-button': SharedCookieButton;
       'shared.criteria-list': SharedCriteriaList;
       'shared.dropdown': SharedDropdown;
+      'shared.enquiry': SharedEnquiry;
       'shared.exp-block': SharedExpBlock;
       'shared.features-check': SharedFeaturesCheck;
       'shared.footer-columns': SharedFooterColumns;
       'shared.header': SharedHeader;
+      'shared.highlights': SharedHighlights;
       'shared.link': SharedLink;
       'shared.list-with-heading': SharedListWithHeading;
       'shared.list': SharedList;
       'shared.meta-social': SharedMetaSocial;
       'shared.our-service-summary': SharedOurServiceSummary;
+      'shared.overview': SharedOverview;
+      'shared.placement': SharedPlacement;
       'shared.publication': SharedPublication;
       'shared.question-answer': SharedQuestionAnswer;
       'shared.ranking': SharedRanking;
+      'shared.related-news': SharedRelatedNews;
       'shared.seo': SharedSeo;
       'shared.social-networks': SharedSocialNetworks;
       'shared.team-card': SharedTeamCard;
@@ -980,6 +1258,20 @@ declare module '@strapi/types' {
       'shared.university-list': SharedUniversityList;
       'shared.video-player': SharedVideoPlayer;
       'shared.why-this-uni-country': SharedWhyThisUniCountry;
+      'university.admission': UniversityAdmission;
+      'university.courses-fees': UniversityCoursesFees;
+      'university.faculty-info': UniversityFacultyInfo;
+      'university.faculty': UniversityFaculty;
+      'university.female-hostel': UniversityFemaleHostel;
+      'university.gallery': UniversityGallery;
+      'university.hostel': UniversityHostel;
+      'university.male-hostel': UniversityMaleHostel;
+      'university.notification': UniversityNotification;
+      'university.overview-tabs': UniversityOverviewTabs;
+      'university.placements': UniversityPlacements;
+      'university.ranking': UniversityRanking;
+      'university.scholarships-info': UniversityScholarshipsInfo;
+      'university.scholarships': UniversityScholarships;
     }
   }
 }

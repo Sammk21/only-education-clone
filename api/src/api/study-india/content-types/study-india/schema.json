@@ -49,10 +49,10 @@
       "repeatable": false,
       "component": "blocks.faq"
     },
-    "topCountries": {
+    "topUniversities": {
       "type": "component",
       "repeatable": false,
-      "component": "blocks.top-countries-data"
+      "component": "blocks.features-with-images"
     }
   }
 }

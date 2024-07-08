@@ -72,15 +72,19 @@ interface ImageFormat {
   url: string;
   hash: string;
   mime: string;
+  blurhash: string;
   name: string;
   path: string | null;
   size: number;
   width: number;
   height: number;
-  blurhash:string
+
 }
-``
-export interface ImageAttributes {   // To Do reduce incomming objects (query optimization)  
+
+
+export interface ImageAttributes {
+  // To Do reduce incomming objects (query optimization)
+
   id: number;
   name: string;
   alternativeText: string;
@@ -91,13 +95,13 @@ export interface ImageAttributes {   // To Do reduce incomming objects (query op
     small: ImageFormat;
     thumbnail: ImageFormat;
   };
-
+  blurhash: string;
   hash: string;
   ext: string;
   mime: string;
   size: number;
   url: string;
-  blurhash:string
+
   previewUrl: string | null;
   provider: string;
   provider_metadata: any | null;
@@ -117,12 +121,11 @@ export interface ArticleAttributes {
   id: number;
   title: string;
   slug: string;
-  live:string|null;
+  live: string | null;
   description: string | null;
   image: ImageAttributes;
   category: CategoryAttributes;
-  recommendedArticle:string|null
-
+  recommendedArticle: string | null;
 }
 
 interface MetaData {
@@ -146,19 +149,17 @@ export interface MetaSocialsProps {
 }
 
 export interface SeoProps {
-    id: number;
-    metaTitle: string;
-    metaDescription: string;
-    keywords?: string | null;
-    metaRobots?: string | null;
-    structuredData?: object | null;
-    metaViewport?: string | null;
-    canonicalURL?: string | null;
-    metaImage:ImageAttributes | null
-    metaSocial: MetaSocialsProps[];
- 
+  id: number;
+  metaTitle: string;
+  metaDescription: string;
+  keywords?: string | null;
+  metaRobots?: string | null;
+  structuredData?: object | null;
+  metaViewport?: string | null;
+  canonicalURL?: string | null;
+  metaImage: ImageAttributes | null;
+  metaSocial: MetaSocialsProps[];
 }
-
 
 export interface CountryData {
   id: number;
@@ -233,7 +234,7 @@ export interface Universitylist {
   ownership?: ownership;
   indian_state?: indian_state;
   streams?: streams;
-  searchableImage?:ImageAttributes
+  searchableImage: ImageAttributes;
   exams?: {
     data: data[];
   };
@@ -251,38 +252,75 @@ export interface SearchParamsProps {
     query?: string;
     page?: number;
   };
-
 }
 
-export interface searchParamUserId{
-  searchParams:{
-    dh:string
-  }
+export interface searchParamUserId {
+  searchParams: {
+    dh: string;
+  };
 }
 
+export interface UserType {
+  ok: boolean;
+  data: {
+    id: number;
+    email: string;
+    provider: string;
+    confirmed: boolean;
+    blocked: boolean;
+    job: string | null;
+    createdAt: string;
+    updatedAt: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    phone: string;
+    verified: boolean;
+    last_otp_request: any | null;
+    resend_attempts: number | null;
+    otp_session: string | null;
+    error:
+      | {
+          status: number;
+          name: string;
+          message: string;
+          details: object;
+        }
+      | unknown;
+  } | null;
+  error: unknown;
+}
+//types for extended image
 
-export interface UserType{
+import {
+  OnLoadingComplete,
+  PlaceholderValue,
+} from "next/dist/shared/lib/get-img-props";
 
-  ok?: boolean,
-
-  data?: {
-    id: number
-    email: string
-    provider: string
-    confirmed: boolean
-    blocked: boolean
-    job: null | string
-    createdAt: string
-    updatedAt: string
-    firstName: string
-    lastName: string
-    username: string
-    phone:string
-  }| null,
-  error?:{
-    status:number
-    name: string
-    message:string
-    details: object
-  }|any
+export interface IImageExtended
+  extends Omit<
+      React.DetailedHTMLProps<
+        React.ImgHTMLAttributes<HTMLImageElement>,
+        HTMLImageElement
+      >,
+      "height" | "width" | "loading" | "ref" | "alt" | "src" | "srcSet"
+    >,
+    React.RefAttributes<HTMLImageElement | null> {
+  src: string;
+  alt: string;
+  width?: number | `${number}` | undefined;
+  height?: number | `${number}` | undefined;
+  fill?: boolean | undefined;
+  loader?: undefined;
+  quality?: number | `${number}` | undefined;
+  priority?: boolean | undefined;
+  loading?: "eager" | "lazy" | undefined;
+  placeholder?: PlaceholderValue | undefined;
+  blurDataURL?: string | undefined;
+  unoptimized?: boolean | undefined;
+  onLoadingComplete?: OnLoadingComplete | undefined;
+  layout?: string | undefined;
+  objectFit?: string | undefined;
+  objectPosition?: string | undefined;
+  lazyBoundary?: string | undefined;
 }

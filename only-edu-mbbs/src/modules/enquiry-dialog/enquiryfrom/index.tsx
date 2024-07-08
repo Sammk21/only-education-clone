@@ -5,15 +5,12 @@ import {
 } from "@/modules/account/components/register";
 import { Label } from "@/modules/account/components/ui/label";
 import { Input } from "@/modules/account/components/ui/input";
-import React, { ErrorInfo, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Image from "next/image";
-import axios from "axios";
-import { enquiryFormSchema } from "@/utils/utils";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { enquiryFormSchema, maskPhoneNumber } from "@/utils/utils";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Selectlevel, SelectSpecialization } from "../combo-box";
 import { UserType } from "@/types/types";
 import { enquiryAction } from "@/app/data/actions/enquiry-action";
 
@@ -22,7 +19,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -35,7 +31,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 interface EnquiryFromProps {
@@ -51,11 +46,6 @@ const INITIAL_STATE = {
 };
 
 export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
-  const maskPhoneNumber = (username: string | undefined) => {
-    if (!username) return;
-    return username.replace(/\d{6}(\d{4})/, "******$1");
-  };
-
   const form = useForm<z.infer<typeof enquiryFormSchema>>({
     resolver: zodResolver(enquiryFormSchema),
   });
@@ -128,7 +118,7 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
         <Input
           id="phone"
           placeholder="+91"
-          value={maskPhoneNumber(user.data?.username)}
+          value={maskPhoneNumber(user.data?.phone)}
           disabled={true}
           type="tel"
         />

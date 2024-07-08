@@ -72,7 +72,6 @@ export function Register({ setCurrentView }: Props) {
   });
 
   const [strapiError, setStrapiError] = useState(null);
-  const [otpDialogtrigger, setOtpDialogTrigger] = useState(false);
 
   const router = useRouter();
 

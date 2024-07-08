@@ -10,6 +10,7 @@ import MeiliSearch from "meilisearch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { json } from "stream/consumers";
+import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 
 interface Props {
   data: UniversitiesData;
@@ -90,9 +91,6 @@ const CollegeList = ({ data, user }: Props) => {
 export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
-  const baseUrl = "https://admin.onlyeducation.co.in";
-
-
   return (
     <>
       <div
@@ -106,10 +104,11 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
           >
             {/* Image Section */}
             <div className="relative aspect-video w-full  rounded-md overflow-hidden">
-              <Image
+              <ImageExtended
                 className="object-cover w-full h-full"
-                src={baseUrl + university?.searchableImage?.url}
+                src={university?.searchableImage?.url}
                 alt="University Image"
+                blurDataURL={university.searchableImage?.blurhash}
                 fill
               />
             </div>

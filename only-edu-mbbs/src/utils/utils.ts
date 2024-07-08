@@ -142,3 +142,8 @@ export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
   e.target.value = value; // Set the input value
 };
+
+ export const maskPhoneNumber = (username: string | undefined) => {
+   if (!username) return;
+   return username.replace(/\d{6}(\d{4})/, "******$1");
+ };

@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function MySideBar({ navigation, dropdown }: NavbarProps) {
   const path = usePathname();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control drawer open/close
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); 
 
   const isActive = (href: string) => path === href;
 

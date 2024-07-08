@@ -1,18 +1,22 @@
-"use server"
-import { cookies } from "next/headers"
+"use server";
+import { cookies } from "next/headers";
 import {
   loginUserService,
+  putOtpSession,
+  putPhoneUserService,
   registerUserService,
   sendOtpService,
   updateVerifiedUserService,
   verifyOtpService,
+  verifyPhoneUserService,
 } from "../services/auth-service";
 import { redirect } from "next/navigation";
 import { ILoginFormInput } from "@/modules/account/components/login";
 import { IFormInput } from "@/modules/account/components/register";
 import { IOtpInput } from "@/modules/account/components/otp";
 import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema";
-import { getResendOtpSession } from "../services/get-token";
+import { getOtpSession, getResendOtpSession } from "../services/get-token";
+import { getUserMeLoader } from "../services/get-user-loader";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -21,8 +25,10 @@ const config = {
   httpOnly: true,
   // secure: process.env.NODE_ENV === "production",
 };
+
+const OTP_RESEND_INTERVAL = 2 * 60 * 1000;
 const otpConfig = {
-  maxAge: 60 * 2, // 1 week
+  maxAge: OTP_RESEND_INTERVAL / 1000, // Match the same interval as OTP session cookie
   path: "/",
   domain: process.env.HOST ?? "localhost",
   httpOnly: true,
@@ -62,14 +68,19 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
   // const otpResponseData = await sendOtpService(validatedFields.data.phone);
 
   const otpResponseData = {
-    Status: "true",
-    Details: "djnsjnsdnsd",
+    Status: true,
+    Details: "ufhdujnfidnidnfni",
   };
-  if (otpResponseData.Status) {
-    console.log("troggered");
-    cookies().set("otp_session", otpResponseData.Details, otpConfig);
-    const lastFourDigits = validatedFields.data.phone.slice(-4);
 
+  const { Details } = otpResponseData;
+
+  if (otpResponseData.Status) {
+    const putOtpSessionResponse = await putOtpSession(
+      Details,
+      responseData.user.id
+    );
+    // cookies().set("otp_session", otpResponseData.Details, otpConfig);
+    const lastFourDigits = validatedFields.data.phone.slice(-4);
     return {
       phone: lastFourDigits,
       userId: responseData.user.id,
@@ -84,58 +95,68 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
   }
 }
 
-export async function resendOtp(phone: string | undefined) {
-  const resendOtpSessionResponse = await getResendOtpSession();
-
-  if (resendOtpSessionResponse.resendOtpSession === undefined) {
-    console.log("triggered");
-    let r = (Math.random() + 1).toString(36).substring(7);
-    cookies().set("ROS", r, { expires: Date.now() + 60 * 1000 });
-  } else {
-    return {
-      error: {
-        resendError: true,
-        noPhoneError: false,
-      },
-      success: false,
-      message: "please wait till the timer's over",
-    };
-  }
-
-  if (!phone)
-    return {
-      error: {
-        resendError: false,
-        noPhoneError: true,
-      },
-      success: false,
-    };
-
+export async function resendOtp() {
   try {
-    // const otpResponseData = await sendOtpService(phone);
+    const user = await getUserMeLoader();
+    const { last_otp_request, resend_attempts, id, phone } = user.data;
 
-    const otpResponseData = {
-      Status: "true",
-      Details: "djnsjnsdnsd",
-    };
-
-    if (otpResponseData.Status) {
-      cookies().set("otp_session", otpResponseData.Details, otpConfig); // 1 minute
-      return {
-        success: true,
-        details: otpResponseData.Details,
-      };
-    } else {
-      throw new Error("Failed to resend OTP.");
+    console.log(user.data);
+    if (!last_otp_request || resend_attempts === undefined) {
+      // Send OTP if last_otp_request is null
+      await sendOtpService(phone);
+      const res = await verifyPhoneUserService(id, {
+        last_otp_request: new Date(),
+        resend_attempts: 2,
+      });
+      return res;
     }
+
+    const lastRequestTime = new Date(last_otp_request);
+    const currentTime = new Date();
+    const timeDiff = (currentTime.getTime() - lastRequestTime.getTime()) / 1000; // Time difference in seconds
+
+    if (timeDiff < 90) {
+      // If less than 90 seconds since last OTP request
+      return {
+        message: `Please wait ${Math.ceil(
+          90 - timeDiff
+        )} seconds before requesting a new OTP.`,
+      };
+      return;
+    }
+
+    if (resend_attempts <= 0) {
+      // If no resend attempts left
+      console.log("Cannot verify, please contact support.");
+      redirect("/");
+      return;
+    }
+
+    // Send OTP if conditions are met
+    await sendOtpService(phone);
+    await verifyPhoneUserService(id, {
+      last_otp_request: new Date(),
+      resend_attempts: resend_attempts - 1,
+    });
   } catch (error) {
-    console.error("Resend OTP Error:", error);
-    return {
-      success: false,
-      message: "couldnt send otp now please try again later",
-    };
+    console.error("Error in resendOtp function:", error);
   }
 }
+
+export const sendAndVerifyOtpAction = async (userId: number, phone: string) => {
+  const phoneUpdateResponse = await putPhoneUserService(userId, phone);
+  const updatedPhone = phoneUpdateResponse?.data.phone;
+  // const otpResponse = sendOtpService(updatedPhone);
+  const otpResponseData = {
+    Status: true,
+    Details: "ufhdujnfidnidnfni",
+  };
+  const putOtpSessionResponse = await putOtpSession(
+    otpResponseData.Details,
+    userId
+  );
+  return putOtpSessionResponse;
+};
 
 export const verifyOtpAction = async (
   otpSession: string | undefined,
@@ -154,17 +175,18 @@ export const verifyOtpAction = async (
       message: "Missing Fields. Failed to verify otp.",
     };
   }
-  const responseData = await verifyOtpService(
-    otpSession,
-    validatedFields.data.otp
-  );
+  // const responseData = await verifyOtpService(
+  //   otpSession,
+  //   validatedFields.data.otp
+  // );
+  const responseData = {
+    Status: "Success",
+    Details: "ufhdujnfidnidnfni",
+  };
 
   if (responseData.Status === "Success") {
     const updatedUser = await updateVerifiedUserService(userId);
     if (updatedUser.success) {
-      cookies().set("otp_session", "", { ...config, maxAge: 0 });
-      cookies().set("_usr_id", "", { ...config, maxAge: 0 });
-      cookies().set("_phn_", "", { ...config, maxAge: 0 });
       return {
         success: true,
         message: responseData.Details,

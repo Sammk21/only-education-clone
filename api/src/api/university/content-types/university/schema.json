@@ -84,12 +84,6 @@
       "type": "string",
       "required": true
     },
-    "benifits": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.university-list",
-      "required": true
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
@@ -112,6 +106,119 @@
         "Parveen"
       ],
       "required": true
+    },
+    "universityInfo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.list"
+    },
+    "placement": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.placement"
+    },
+    "streams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stream.stream",
+      "mappedBy": "university"
+    },
+    "ownership": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ownership.ownership"
+    },
+    "exams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exam.exam",
+      "mappedBy": "university"
+    },
+    "searchableImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "indian_state": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::indian-state.indian-state",
+      "inversedBy": "universities"
+    },
+    "highlights": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.highlights"
+    },
+    "affiliated": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::university.university"
+    },
+    "overviewTabs": {
+      "displayName": "Overview Tabs",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.overview-tabs"
+    },
+    "coursesFees": {
+      "displayName": "coursesFees",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.courses-fees"
+    },
+    "admission": {
+      "displayName": "admission",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.admission"
+    },
+    "placements": {
+      "displayName": "placements",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.placements"
+    },
+    "gallery": {
+      "displayName": "gallery",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.gallery"
+    },
+    "faculty": {
+      "displayName": "faculty",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.faculty"
+    },
+    "hostel": {
+      "displayName": "hostel",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.hostel"
+    },
+    "scholarships": {
+      "displayName": "scholarships",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.scholarships"
+    },
+    "notification": {
+      "displayName": "notification",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.notification"
+    },
+    "ranking": {
+      "type": "component",
+      "repeatable": true,
+      "component": "university.ranking"
     }
   }
 }

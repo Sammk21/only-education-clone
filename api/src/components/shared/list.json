@@ -7,7 +7,7 @@
   "options": {},
   "attributes": {
     "list": {
-      "type": "text"
+      "type": "string"
     }
   }
 }

@@ -26,6 +26,7 @@ import MeiliSearch from "meilisearch";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ImageExtended } from "../common/extended-image/extended-image";
 
 interface HeaderProps {
   id: number;
@@ -89,9 +90,9 @@ export default function Hero({ data }: HeroProps) {
           <h4 className="font-medium text-xl">IIM MADRAS</h4>
           <p className="text-xs">Madras 500898</p>
         </div>
-        <Image
+        <ImageExtended
           alt="iim"
-          src={"https://admin.onlyeducation.co.in/uploads/FRI_fb24a736d4.jpg"}
+          src={"/uploads/FRI_fb24a736d4.jpg"}
           fill={true}
           className="w-full h-full object-cover object-center -z-20 rounded-b-xl"
         />

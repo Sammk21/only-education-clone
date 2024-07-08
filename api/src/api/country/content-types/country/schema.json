@@ -79,6 +79,16 @@
         "Parveen"
       ],
       "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.cta"
+    },
+    "overview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.header"
     }
   }
 }

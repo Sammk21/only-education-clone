@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_university_scholarships",
+  "info": {
+    "displayName": "scholarships"
+  },
+  "options": {},
+  "attributes": {
+    "scholarshipsInfo": {
+      "displayName": "scholarshipsInfo",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.scholarships-info"
+    }
+  }
+}

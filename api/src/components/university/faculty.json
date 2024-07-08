@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_university_faculties",
+  "info": {
+    "displayName": "faculty",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "facInfo": {
+      "displayName": "facultyInfo",
+      "type": "component",
+      "repeatable": true,
+      "component": "university.faculty-info"
+    }
+  }
+}

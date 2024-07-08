@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_highlights",
+  "info": {
+    "displayName": "Highlights",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "highlights": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

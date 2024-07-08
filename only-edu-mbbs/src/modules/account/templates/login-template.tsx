@@ -7,7 +7,6 @@ import Otp from "../components/otp";
 export enum LOGIN_VIEW {
   SIGN_IN = "sign-in",
   REGISTER = "register",
-  OTP = "otp",
 }
 
 interface response {
@@ -22,11 +21,8 @@ const LoginTemplate = () => {
     <div className="w-full flex justify-start px-8">
       {currentView === LOGIN_VIEW.SIGN_IN ? (
         <Login setCurrentView={setCurrentView} />
-      ) : currentView === LOGIN_VIEW.REGISTER ? (
-        <Register setCurrentView={setCurrentView} />
       ) : (
-        <></>
-        // <Otp setCurrentView={setCurrentView} />
+        <Register setCurrentView={setCurrentView} />
       )}
     </div>
   );

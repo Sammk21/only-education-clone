@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "streams",
+  "info": {
+    "singularName": "stream",
+    "pluralName": "streams",
+    "displayName": "Stream",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::university.university",
+      "inversedBy": "streams"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_university_overview_tabs",
+  "info": {
+    "displayName": "Overview Tabs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "latestUpdates": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "overview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "highlights": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "ranking": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "whyChoose": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "academicAdvantages": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

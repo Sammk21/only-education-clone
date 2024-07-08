@@ -4,13 +4,15 @@
  */
 import ckeditor from "@ckeditor/strapi-plugin-ckeditor/strapi-admin";
 import calendar from "@offset-dev/strapi-calendar/strapi-admin";
-import strapiNewsletter from "@strapi-newsletter/strapi/strapi-admin";
 import graphql from "@strapi/plugin-graphql/strapi-admin";
+import i18N from "@strapi/plugin-i18n/strapi-admin";
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
-import i18N from "@strapi/plugin-i18n/strapi-admin";
 import scheduler from "@webbio/strapi-plugin-scheduler/strapi-admin";
+import strapiGoogleAuth from "strapi-google-auth/strapi-admin";
+import meilisearch from "strapi-plugin-meilisearch/strapi-admin";
 import todo from "strapi-plugin-todo/strapi-admin";
+import strapiRegenerator from "strapi-regenerator/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
 import customisations from "../../src/admin/app.js";
@@ -21,12 +23,14 @@ renderAdmin(document.getElementById("strapi"), {
   plugins: {
     ckeditor: ckeditor,
     calendar: calendar,
-    "strapi-newsletter": strapiNewsletter,
     graphql: graphql,
+    i18n: i18N,
     seo: seo,
     "users-permissions": usersPermissions,
-    i18n: i18N,
     scheduler: scheduler,
+    "strapi-google-auth": strapiGoogleAuth,
+    meilisearch: meilisearch,
     todo: todo,
+    "strapi-regenerator": strapiRegenerator,
   },
 });

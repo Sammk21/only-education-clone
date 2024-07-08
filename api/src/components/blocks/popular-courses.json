@@ -12,10 +12,10 @@
       "repeatable": false,
       "component": "shared.header"
     },
-    "list": {
+    "documents": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.list"
+      "component": "shared.header"
     }
   }
 }

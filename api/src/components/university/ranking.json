@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_university_rankings",
+  "info": {
+    "displayName": "ranking",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "rankingYear": {
+      "type": "string"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "description": {
+      "type": "text"
+    },
+    "rankings": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ranking.ranking"
+    },
+    "rankingNumber": {
+      "type": "integer"
+    }
+  }
+}

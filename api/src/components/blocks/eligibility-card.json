@@ -20,7 +20,7 @@
         "preset": "light"
       },
       "customField": "plugin::ckeditor.CKEditor",
-      "required": true
+      "required": false
     },
     "criteriaList": {
       "displayName": "criteriaList",
@@ -29,7 +29,7 @@
       "component": "shared.criteria-list",
       "required": true,
       "max": 4,
-      "min": 3
+      "min": 1
     }
   }
 }

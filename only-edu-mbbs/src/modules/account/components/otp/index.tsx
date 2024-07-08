@@ -19,19 +19,20 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { resendOtp, verifyOtpAction } from "@/app/data/actions/auth-actions";
+import { resendOtp } from "@/app/data/actions/auth-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import DateTime from "@/modules/blog-components/ui/time";
-import { getResendOtpSession } from "@/app/data/services/get-token";
+import { UserType } from "@/types/types";
+import { getUserMeLoader } from "@/app/data/services/get-user-loader";
+import { maskPhoneNumber } from "@/utils/utils";
+import { updateVerifiedUserService } from "@/app/data/services/auth-service";
 
 export interface IOtpInput {
   pin: string;
 }
 export interface OtpProps {
   otpSession: string | undefined;
-  userId: string | undefined;
-  phone: string | undefined; // Add phone as a prop
+  user: UserType;
 }
 
 const FormSchema = z.object({
@@ -40,7 +41,7 @@ const FormSchema = z.object({
   }),
 });
 
-const Otp = ({ otpSession, userId, phone }: OtpProps) => {
+const Otp = ({ user }: OtpProps) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -52,51 +53,16 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [timer, setTimer] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const [otpErrorMessage, setOtpErrorMessage] = useState<string | null>(null);
-
-  async function onSubmit(formData: z.infer<typeof FormSchema>) {
-    const otpVerificationResponse = await verifyOtpAction(
-      otpSession,
-      formData,
-      userId
-    );
-
-    if (otpVerificationResponse?.success) {
-      toast.success("OTP verified successfully");
-      router.push("/");
-    } else {
-      toast.error("OTP verification failed");
-      setOtpErrorMessage("You entered the wrong OTP.");
-    }
-  }
-
-  const handleResendOtp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Call your OTP resend API
-    const resendResponse = await resendOtp(phone);
-    if (resendResponse?.success) {
-      toast.success("OTP resent successfully");
-      startTimer();
-    } else {
-      resendResponse.error?.noPhoneError &&
-        setOtpErrorMessage("no phone number found please try again later");
-      resendResponse.error?.resendError &&
-        setOtpErrorMessage("cannot resend otp until countdown persist");
-    }
-  };
-
-  const startTimer = () => {
-    setIsResendDisabled(true);
-    setTimer(30); // Set your timer duration here
-  };
+  const [otpErrorMessage, setOtpErrorMessage] = useState<
+    string | undefined | null
+  >(null);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
     if (isResendDisabled) {
-      interval = setInterval(() => {
+      timerRef.current = setInterval(() => {
         setTimer((prevTimer) => {
           if (prevTimer <= 1) {
-            clearInterval(interval);
+            clearInterval(timerRef.current!);
             setIsResendDisabled(false);
             return 0;
           }
@@ -104,8 +70,42 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
         });
       }, 1000);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [isResendDisabled]);
+
+  async function onSubmit(formData: z.infer<typeof FormSchema>) {
+    const user = await getUserMeLoader();
+
+    const id = user.data?.id;
+    const otpSession = user.data?.otp_session;
+
+    // const otpVerificationResponse = await verifyOtpAction(
+    //   otpSession,
+    //   formData,
+    //   id
+    // );
+
+    const otpVerificationResponse = {
+      success: true,
+    };
+
+    if (otpVerificationResponse?.success) {
+      const updateVerifiedUserData = await updateVerifiedUserService(id);
+      console.log(updateVerifiedUserData);
+      toast.success("OTP verified successfully");
+      router.push("/auth");
+    } else {
+      toast.error("OTP verification failed");
+      setOtpErrorMessage("You entered the wrong OTP.");
+    }
+  }
+  const handleResendOtp = async () => {
+    const response = await resendOtp();
+    console.log(response);
+    setOtpErrorMessage(response.message);
+  };
 
   return (
     <div>
@@ -122,6 +122,9 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
                 <FormLabel className="pb-4">
                   Please enter your 4 digit code
                 </FormLabel>
+                <p className="text-xs my-3">
+                  Sent on {maskPhoneNumber(user.data?.phone)}
+                </p>
                 <FormControl>
                   <InputOTP maxLength={4} {...field}>
                     <InputOTPGroup>
@@ -144,21 +147,18 @@ const Otp = ({ otpSession, userId, phone }: OtpProps) => {
         </form>
       </Form>
       {otpErrorMessage && (
-        <p className="text-red-500 font-medium text-xs">{otpErrorMessage}</p>
+        <p className="text-red-500 font-medium text-xs pt-2 text-center">
+          {otpErrorMessage}
+        </p>
       )}
-      <form
-        className="my-2 w-full flex justify-center items-center text-xs flex-col"
-        onSubmit={handleResendOtp}
+
+      <button
+        onClick={handleResendOtp}
+        type="submit"
+        className={`text-blue-500 disabled:text-gray-500`}
       >
-        <button
-          type="submit"
-          className={`text-blue-500 disabled:text-gray-500 `}
-          disabled={isResendDisabled}
-        >
-          Resend OTP
-        </button>
-        {isResendDisabled && <p>Resend available in {timer} seconds</p>}
-      </form>
+        Resend OTP
+      </button>
     </div>
   );
 };

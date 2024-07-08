@@ -50,20 +50,6 @@
         }
       }
     },
-    "blocks": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "dynamiczone",
-      "components": [
-        "blocks.related-articles",
-        "blocks.faq",
-        "blocks.cta-command-line"
-      ],
-      "required": false
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
@@ -121,7 +107,6 @@
         "Yogita",
         "Zhankana",
         "Parveen"
-
       ],
       "required": true
     },
@@ -130,7 +115,19 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "articles"
-
+    },
+    "recommendedArticle": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "boolean"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
     }
   }
 }
