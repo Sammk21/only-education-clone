@@ -98,10 +98,10 @@ export default function Hero({ data }: HeroProps) {
 
               <SearchBox query={query} setQuery={setQuery} />
               <div className="relative w-full z-10">
-                <div className="absolute w-full h-[400px] overflow-y-scroll top-0 rounded-sm">
+                <div className="absolute w-full h-[400px]  top-0 rounded-sm">
                   {results && query && (
-                    <Card className="w-full shadow-lg">
-                      <CardContent>
+                    <Card className="w-full shadow-lg overflow-y-scroll">
+                      <CardContent className="">
                         <Table className="text-xs sm:text-sm">
                           <TableHeader>
                             <TableRow>
@@ -211,4 +211,3 @@ export default function Hero({ data }: HeroProps) {
     </>
   );
 }
-

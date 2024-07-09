@@ -49,9 +49,11 @@ const ElegibilityCriteria = ({ data }: Props) => {
   };
 
   return (
-    <Card className="text-dark dark:text-light mt-6 mx-auto ">
-      <CardHeader>
-        <Title>{title}</Title>
+    <Card className="text-dark dark:text-light  mx-auto border-none shadow-none my-8">
+      <CardHeader className="sm:px-0">
+        <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark ">
+          {title}
+        </h2>
       </CardHeader>
       <CardContent>
         {data.criteriaTable && (

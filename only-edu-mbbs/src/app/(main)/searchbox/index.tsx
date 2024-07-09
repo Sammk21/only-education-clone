@@ -19,7 +19,7 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
   return (
     <>
       <form>
-        <div className="relative z-10 flex space-x-3 p-3 border bg-background rounded-lg shadow-lg">
+        <div className="relative z-10 flex space-x-3 p-3 border bg-background rounded-lg">
           <div className="flex-[1_0_0%]">
             <Label htmlFor="article" className="sr-only">
               Search article
@@ -30,7 +30,7 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
               type="text"
               className="h-full"
               id="university"
-              placeholder="Search article"
+              placeholder="Search colleges"
             />
           </div>
         </div>
