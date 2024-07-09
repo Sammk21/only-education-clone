@@ -120,6 +120,7 @@ export async function putPhoneUserService(userId: number, phone: string) {
 
 // Login User Service
 export async function loginUserService(userData: LoginUserProps) {
+
   const url = new URL("/api/auth/local", baseUrl);
 
   const response = await fetch(url.toString(), {
@@ -127,7 +128,7 @@ export async function loginUserService(userData: LoginUserProps) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(userData),
+    body: JSON.stringify({ ...userData }),
     cache: "no-cache",
   });
 

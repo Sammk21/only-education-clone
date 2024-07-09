@@ -26,7 +26,7 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
       >
         <Drawer.Trigger asChild>
           <div
-            className="fixed bottom-6 z-10 h-14 w-14 border border-dark/20 left-1/2 -translate-x-1/2 bg-custom-gradient rounded-full flex justify-center items-center text-light shadow-lg lg:hidden"
+            className="fixed bottom-6 z-10 h-14 w-14 border border-dark/20 left-1/2 -translate-x-1/2 bg-white text-dark rounded-full transition-all duration-300 hover:shadow-inner flex justify-center items-center text-xs shadow-lg lg:hidden"
             onClick={() => setIsDrawerOpen(true)} // Open the drawer on click
           >
             <p>Menu</p>

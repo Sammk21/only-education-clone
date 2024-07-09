@@ -17,10 +17,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, Settings, User } from "lucide-react";
+import { User } from "lucide-react";
 import Banner from "@/components/ui/tailwind-banner";
 
 export interface NavbarProps {
@@ -40,7 +39,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
           <Link className=" h-12 w-24 sm:h-14 sm:w-36 relative" href="/">
             <Image
               src={
-                "https://admin.onlyeducation.co.in/uploads/Only_Education_Main_Logo_f64b45b88c.svg"
+                "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_56f967fe38.png"
               }
               alt="logo"
               fill={true}
@@ -48,7 +47,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             />
           </Link>
 
-          <div className=" hidden 2lg:flex  text-sm font-normal">
+          <div className=" hidden lg:flex  text-sm font-normal">
             <ul className="flex justify-center items-cente ">
               {navigation.links.map((link: Links) => {
                 return <MenuItems items={link} key={link.id} />;
@@ -124,11 +123,6 @@ const UserProfileButton = () => {
               </DropdownMenuItem>
             </Link>
           </DropdownMenuGroup>
-          {/* <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
-          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

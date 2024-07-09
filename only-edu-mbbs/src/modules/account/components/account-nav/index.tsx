@@ -6,6 +6,8 @@ import { logoutAction } from "@/app/data/actions/auth-actions";
 import { BookUser, User } from "lucide-react";
 import { toast } from "sonner";
 import { RiSettingsLine } from "react-icons/ri";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 const AccountNav = ({
   user,
@@ -20,19 +22,30 @@ const AccountNav = ({
   };
 
   return (
-    <div className="flex  w-full flex-col my-2">
-      <AccountNavLink href="/auth" route={route!}>
-        <BookUser className="mr-2 h-4 w-4" />
-        Overview
-      </AccountNavLink>
-      <AccountNavLink href="/auth/profile" route={route!}>
-        <User className="mr-2 h-4 w-4" />
-        <span>Profile</span>
-      </AccountNavLink>
-      <AccountNavLink href="/auth/settings" route={route!}>
-        <RiSettingsLine className="mr-2 h-4 w-4" />
-        <span>Settings</span>
-      </AccountNavLink>
+    <div className="flex flex-col justify-between h-full">
+      <div className="flex  w-full flex-col my-2 px-4">
+        <AccountNavLink href="/auth" route={route!}>
+          <BookUser className="mr-2 h-4 w-4" />
+          Overview
+        </AccountNavLink>
+        <AccountNavLink href="/auth/profile" route={route!}>
+          <User className="mr-2 h-4 w-4" />
+          <span>Profile</span>
+        </AccountNavLink>
+        <AccountNavLink href="/auth/settings" route={route!}>
+          <RiSettingsLine className="mr-2 h-4 w-4" />
+          <span>Settings</span>
+        </AccountNavLink>
+      </div>
+      <div className="px-2 pb-3 ">
+        <Button
+          onClick={handleLogout}
+          variant="outline"
+          className="w-full mx-auto border-none text-xs mt-3 bg-red-500 text-white hover:bg-red-400"
+        >
+          Logout
+        </Button>
+      </div>
     </div>
   );
 };

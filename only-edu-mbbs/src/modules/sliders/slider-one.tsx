@@ -1,12 +1,12 @@
 "use client";
+import React from "react";
 import { FreeMode, Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { ArticleAttributes } from "@/types/types";
-import "@/styles/swiper-pagination/pagination.css";
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
+import "@/styles/swiper-pagination/pagination.css";
 import { ImageExtended } from "../common/extended-image/extended-image";
 
 interface BlogPageProps {
@@ -23,18 +23,26 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
 
   return (
     <>
-      <div className="px-2 sm:px-12 mt-4 sm:mt-8 lg:mt-10 relative">
-        <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10 items-center flex sm:flex-row">
-          <span className="mb-2 capitalize">Latest {href}</span>
-        </h4>
-        <div className="w-full h-full relative">
+      <div className="  mt-4 sm:mt-8 lg:mt-10 relative py-6  ">
+        <div className="flex justify-between items-center mb-4">
+          <h4 className="font-semibold text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
+            <span className=" capitalize">Latest {href} </span>
+          </h4>
+          <div className="flex gap-x-2 items-center mr-2">
+            <span className="front transition ease-in-out cursor-pointer rotate-180 z-20  p-2  border rounded-full text-lg sm:text-xl md:text-2xl   text-black textglobal  hover:-translate-x-1">
+              <MdOutlineArrowRightAlt />
+            </span>
+            <span className="back  transition ease-in-out cursor-pointer z-20 p-2    border rounded-full sm:text-xl md:text-2xl   text-black textglobal  hover:translate-x-1   ">
+              <MdOutlineArrowRightAlt />
+            </span>
+          </div>
+        </div>
+        <div className="h-1 w-full"></div>
+        <div className="w-full h-full relative ml-3">
           <Swiper
             speed={600}
             spaceBetween={40}
-            pagination={{
-              el: ".swiper-pagination",
-              clickable: true,
-            }}
+            pagination={true}
             autoplay={{
               delay: 2000,
               disableOnInteraction: true,
@@ -46,15 +54,15 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
                 spaceBetween: 10,
               },
               530: {
-                slidesPerView: 2.2,
+                slidesPerView: 2.4,
                 spaceBetween: 20,
               },
               768: {
-                slidesPerView: 2.2,
+                slidesPerView: 3.3,
                 spaceBetween: 30,
               },
               1080: {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 40,
               },
             }}
@@ -67,55 +75,46 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
                 key={university.id}
                 className="border rounded-md bg-"
               >
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-3 ">
-                    <Link href={`/${href}/post/${university.slug}`}>
-                      <div className="aspect-video flex flex-col p-4 text-sm sm:text-lg md:text-xl rounded-lg  relative group overflow-hidden cursor-pointer">
-                        <ImageExtended
-                          src={university.image.formats.thumbnail.url}
-                          alt={university.title}
-                          fill={true}
-                          blurDataURL={
-                            university.image.formats.thumbnail.blurhash
-                          }
-                          className="object-center object-cover group-hover:scale-105 transition-transform ease-out duration-300"
-                        />
-                        <span className="w-full h-full absolute top-0 left-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
-                        <span className="w-full h-[50%] absolute bottom-0 left-0 bg-gradient-to-t from-dark/80 to-transparent transition-opacity duration-300 ease-out"></span>
-                      </div>
-                      <div className=" capitalize mt-3">
-                        <div className="font-semibold sm:text-xl text-sm mb-2 line-clamp-2 text-dark">
-                          {university.live && (
-                            <span className="relative w-12 h-4 bg-red-500 rounded-full flex justify-end items-center text-white p-1 text-xs">
-                              <span className="livenow absolute left-0">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                              </span>
-                              <p>LIVE</p>
+                <div className="flex aspect-square items-center justify-center p-1 ">
+                  <Link href={`/${href}/post/${university.slug}`}>
+                    <div className="aspect-video flex border shadow-sm flex-col p-4 text-sm sm:text-lg md:text-xl rounded-sm  relative group overflow-hidden cursor-pointer">
+                      <ImageExtended
+                        src={university.image.url}
+                        alt={university.title}
+                        fill={true}
+                        blurDataURL={
+                          university.image.formats.thumbnail.blurhash
+                        }
+                        className="object-center object-cover group-hover:scale-105 transition-transform ease-out duration-300"
+                      />
+                      <div className="absolute top-1 left-1">
+                        {university.live && (
+                          <span className="relative w-12 h-4 bg-red-600 rounded-full flex justify-end items-center text-white p-1 text-xs">
+                            <span className="livenow absolute left-0">
+                              <span></span>
+                              <span></span>
+                              <span></span>
                             </span>
-                          )}
-                          {university.title}
-                        </div>
-                        <p className="text-sm font-normal text-accent z-10 my-2 line-clamp-2">
-                          {university.description}
-                        </p>
+                            <p>LIVE</p>
+                          </span>
+                        )}
                       </div>
-                    </Link>
-                  </CardContent>
-                </Card>
+                    </div>
+                    <div className="capitalize mt-3">
+                      <p className="text-md mb-2 line-clamp-2 text-dark">
+                        {university.title}
+                      </p>
+                      <p className="text-xs font-normal text-dark/50 tracking-wide z-10  line-clamp-2">
+                        {university.description}
+                      </p>
+                    </div>
+                  </Link>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
-          <span className="back hidden sm:block  transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1  -translate-y-1/2 -right-7">
-            <MdOutlineArrowRightAlt />
-          </span>
-          <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2   -translate-y-1/2 -left-7">
-            <MdOutlineArrowRightAlt />
-          </span>
         </div>
       </div>
-      <div className="h-6 w-full"></div>
     </>
   );
 };

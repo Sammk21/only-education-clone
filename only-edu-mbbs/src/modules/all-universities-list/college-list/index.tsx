@@ -149,7 +149,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
               {/* Buttons Section */}
               <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
-                <div className="bg-orange-500 hover:bg-orange-300 text-white w-full">
+                <Button className="bg-orange-500 hover:bg-orange-300 text-white w-full">
                   {user ? (
                     user.verified ? (
                       <Link
@@ -177,7 +177,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                       Login to Download
                     </Link>
                   )}
-                </div>
+                </Button>
                 <Button
                   className="text-accent bg-accent/10 hover:bg-transparent w-full"
                   variant="outline"

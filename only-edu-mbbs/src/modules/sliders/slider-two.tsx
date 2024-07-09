@@ -8,6 +8,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { ImageAttributes } from "@/types/types";
 import { University } from "lucide-react";
 import Link from "next/link";
+import "@/styles/swiper-pagination/pagination.css";
 
 interface UniversityProfile {
   backgroundImage: ImageAttributes;
@@ -31,23 +32,29 @@ interface Props {
 
 const UniversitiesRail = ({ data }: Props) => {
   const baseUrl = "https://admin.onlyeducation.co.in";
+
   return (
     <>
-      <div className="px-2 sm:px-12 mt-12 relative h-fit">
-        <h4 className="font-semibold text-dark dark:text-light text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6 md:mb-10  items-center flex sm:flex-row">
-          <span className="mb-2">Top universities </span>
-          <span className="sm:text-lg text-sm font-light text-accent hidden sm:block sm:ml-2">
-            to get admissons in
-          </span>
-        </h4>
-        <div className="w-full h-full relative">
+      <div className="mt-4 sm:mt-8 lg:mt-10 relative   bg-orange-50 py-6">
+        <div className="flex justify-between items-center mb-4">
+          <h4 className="font-semibold text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
+            <span className="mb-2 capitalize">Top Universities</span>
+          </h4>
+          <div className="flex gap-x-2 items-center mr-2">
+            <span className="front1 transition ease-in-out cursor-pointer rotate-180 z-20  p-2  border rounded-full text-lg sm:text-xl md:text-2xl   text-black textglobal  hover:-translate-x-1">
+              <MdOutlineArrowRightAlt />
+            </span>
+            <span className="back1  transition ease-in-out cursor-pointer rotate-125 z-20  p-2  border rounded-full text-lg sm:text-xl md:text-2xl  text-black textglobal  hover:translate-x-1  ">
+              <MdOutlineArrowRightAlt />
+            </span>
+          </div>
+        </div>
+        <div className="h-2 w-full"></div>
+        <div className="w-full h-full relative ml-3">
           <Swiper
             speed={600}
             spaceBetween={40}
-            pagination={{
-              el: ".swiper-pagination",
-              clickable: true,
-            }}
+            pagination={true}
             autoplay={{
               delay: 2000,
               disableOnInteraction: true,
@@ -68,7 +75,7 @@ const UniversitiesRail = ({ data }: Props) => {
                 spaceBetween: 30,
               },
               1080: {
-                slidesPerView: 3.3,
+                slidesPerView: 3.2,
                 spaceBetween: 40,
               },
             }}
@@ -100,16 +107,8 @@ const UniversitiesRail = ({ data }: Props) => {
               </SwiperSlide>
             ))}
           </Swiper>
-
-          <span className="back hidden sm:block transition ease-in-out absolute top-1/2  cursor-pointer z-20 bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:translate-x-1 back1  -translate-y-1/2 -right-7">
-            <MdOutlineArrowRightAlt />
-          </span>
-          <span className="front transition hidden sm:block  ease-in-out cursor-pointer rotate-180 z-20 absolute bg-white sm:p-3 border rounded-full text-3xl text-black textglobal drop-shadow-lg hover:-translate-x-1 top-1/2 front1  -translate-y-1/2 -left-7">
-            <MdOutlineArrowRightAlt />
-          </span>
         </div>
       </div>
-      <div className="h-6 w-full"></div>
     </>
   );
 };
