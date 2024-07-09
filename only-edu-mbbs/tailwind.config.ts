@@ -14,17 +14,10 @@ const config = {
 
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      screens: {
-        lg: "1080px",
-      },
-    },
     extend: {
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
-
       typography: {
         DEFAULT: {
           css: {
@@ -54,9 +47,6 @@ const config = {
           },
         },
       },
-      screens: {
-        "2lg": "1070px",
-      },
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%)",
@@ -83,20 +73,6 @@ const config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "#fff",
-
-        "flush-orange": {
-          "50": "#fff8ed",
-          "100": "#fff0d4",
-          "200": "#ffdea8",
-          "300": "#ffc570",
-          "400": "#ffa037",
-          "500": "#ff810a",
-          "600": "#f06806",
-          "700": "#c74e07",
-          "800": "#9e3d0e",
-          "900": "#7f350f",
-          "950": "#451805",
-        },
 
         primary: {
           DEFAULT: "hsl(var(--primary))",

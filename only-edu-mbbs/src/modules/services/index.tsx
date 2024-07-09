@@ -18,8 +18,14 @@ const OurServices = ({ data }: Props) => {
   const { title, description } = data.header;
 
   return (
-    <section className="bg-[#fffbf6] relative dark:bg-light text-dark    dark:shadow-accent/20 dark:text-dark rounded-[30px] py-12 px-3 my-8">
-      <div className="max-w-7xl mx-auto ">
+    <section
+      className="
+    relative  text-[#4b485d] bg-white    dark:shadow-accent/20  rounded-[30px] py-12 px-3 my-8"
+    >
+      <div
+        className=" container
+    mx-auto "
+      >
         <h1 className=" text-5xl mb-8 sm:text-6xl z-10">{title}</h1>
         {/* <p>{description}</p> */}
         <div className=" justify-center items-center sm:grid  mb-12 sm:mb-0 sm:grid-cols-5">
@@ -61,7 +67,7 @@ const OurServices = ({ data }: Props) => {
               {data.ourServiceInfo[0].title}
             </h4>
             <h5 className="mb-3 text-lg">{data.ourServiceInfo[0].subtitle}</h5>
-            <p className="text-accent">{data.ourServiceInfo[0].description}</p>
+            <p className="opacity-70 tracking-wide sm:tracking-normal">{data.ourServiceInfo[0].description}</p>
           </div>
         </div>
         <div
@@ -73,7 +79,7 @@ const OurServices = ({ data }: Props) => {
               {data.ourServiceInfo[1].title}
             </h1>
             <h2 className="mb-3 text-lg">{data.ourServiceInfo[1].subtitle}</h2>
-            <p className="text-accent">{data.ourServiceInfo[1].description}</p>
+            <p className="opacity-70">{data.ourServiceInfo[1].description}</p>
           </div>
           <div className="flex col-span-3 justify-center items-center md:justify-end">
             <svg
@@ -149,7 +155,7 @@ const OurServices = ({ data }: Props) => {
               {data.ourServiceInfo[2].title}
             </h1>
             <h2 className="mb-2 text-lg">{data.ourServiceInfo[2].subtitle}</h2>
-            <p className="text-accent">{data.ourServiceInfo[2].description}</p>
+            <p className="opacity-70">{data.ourServiceInfo[2].description}</p>
           </div>
         </div>
         <div className="   z-10justify-center flex flex-col-reverse  mb-12 sm:mb-0 items-center sm:grid sm:grid-cols-5">
@@ -158,7 +164,7 @@ const OurServices = ({ data }: Props) => {
               {data.ourServiceInfo[3].title}
             </h1>
             <h2 className="mb-3 text-lg">{data.ourServiceInfo[3].subtitle}</h2>
-            <p className="text-accent">{data.ourServiceInfo[3].description}</p>
+            <p className="opacity-70">{data.ourServiceInfo[3].description}</p>
           </div>
           <div className=" flex col-span-3 justify-center items-center md:justify-end">
             <svg
@@ -215,7 +221,7 @@ const OurServices = ({ data }: Props) => {
               {data.ourServiceInfo[4].title}
             </h1>
             <h2 className="mb-3 text-lg ">{data.ourServiceInfo[4].subtitle}</h2>
-            <p className="text-accent">{data.ourServiceInfo[4].description}</p>
+            <p className="opacity-70">{data.ourServiceInfo[4].description}</p>
           </div>
         </div>
       </div>

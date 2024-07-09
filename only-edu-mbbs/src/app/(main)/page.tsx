@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">
-        <div className="rounded-t-3xl relative">
+        <div className="relative ">
           <Hero data={data.hero} />
           <InformationSlider data={data.news} href="news" />
           <UniversitiesRail data={data.topUniversities} />

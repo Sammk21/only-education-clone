@@ -41,29 +41,22 @@ export default function Hero({ data }: HeroProps) {
   const searchIndex = client.index("university");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [noResults, setNoResults] = useState<boolean>(false);
 
   const search = async () => {
     if (query) {
-      setLoading(true);
       try {
         const searchResults = await searchIndex.search<Universitylist>(query);
         if (searchResults.hits.length === 0) {
-          setNoResults(true); // Set noResults state to true when no results are found
-          setResults([]); // Clear results when no results are found
+          setResults([]);
         } else {
           setResults(searchResults.hits);
-          setNoResults(false); // Reset noResults state if results are found
         }
       } catch (error) {
         console.error("Search error:", error);
       } finally {
-        setLoading(false);
       }
     } else {
-      setResults([]); // Reset results when query is empty
-      setNoResults(false); // Reset noResults state when query is empty
+      setResults([]);
     }
   };
   useEffect(() => {
@@ -73,8 +66,8 @@ export default function Hero({ data }: HeroProps) {
   return (
     <>
       {/* Hero */}
-      <div className="relative overflow-hidden h-[50rem]">
-        <div className="absolute bottom-4 right-4 text-white text">
+      <div className="relative overflow-hidden h-screen text-white">
+        <div className="absolute bottom-4 right-4 text">
           <h4 className="font-medium text-xl">IIM MADRAS</h4>
           <p className="text-xs">Madras 500898</p>
         </div>
@@ -82,18 +75,18 @@ export default function Hero({ data }: HeroProps) {
           alt="iim"
           src={"/uploads/FRI_fb24a736d4.jpg"}
           fill={true}
-          className="w-full h-full object-cover object-center -z-20 rounded-b-xl"
+          className="w-full h-full object-cover object-center -z-20 "
         />
         <div className="absolute top-0 left-0 w-full h-full bg-dark/50 -z-10" />
         <div className=" h-full flex items-center justify-center  py-24 lg:py-32 z-30">
           <div className="text-center">
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-white drop-shadow-md">
+            <h1 className="text-5xl font-semibold drop-shadow-lg">
               Right choice, Better future
             </h1>
-            <p className="mt-3 text-xl text-muted-foreground text-white drop-shadow-md">
+            <p className="mt-3 text-lg text-muted-foreground text-white drop-shadow-md">
               Stay in the know with insights from industry experts.
             </p>
-            <div className="mt-7 sm:mt-12 mx-auto max-w-xl relative">
+            <div className="mt-7 px-3 sm:px-0 sm:mt-12 mx-auto max-w-xl relative">
               {/* Form */}
 
               <SearchBox query={query} setQuery={setQuery} />
