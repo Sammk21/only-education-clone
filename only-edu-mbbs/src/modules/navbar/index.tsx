@@ -29,7 +29,6 @@ export interface NavbarProps {
 
 export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
   const user = await getUserMeLoader();
-  console.dir(dropdown, { depth: null });
   return (
     <>
       <header className="mb-9 w-screen top-0 fixed text-black  bg-clip-padding bg-white backdrop-filter backdrop-blur-md    z-30">
