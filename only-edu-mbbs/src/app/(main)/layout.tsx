@@ -29,6 +29,7 @@ export default async function MainLayout({
   const navData = await getStrapiData(
     "/api/global?populate[navigation][populate][links]=*&[populate][dropdown][populate][subMenuLinks][populate][country]=true&[populate][dropdown][populate][subMenuLinks][populate][university]=*&[populate][footer][populate][footerColumns][populate][links][populate]=true"
   );
+
   return (
     <div className="relative w-full h-full text-gray-400 ">
       <Navbar navigation={navData.navigation} dropdown={navData.dropdown} />

@@ -14,10 +14,12 @@ interface Props {
 const WhyAbroad = ({ data }: Props) => {
   return (
     <>
-      <section className=" dark:text-light  text-dark py-12 ">
-        <div className="px-6 container mx-auto">
-          <h1 className="text-5xl font-semibold">{data.header.title}</h1>
-          <p>{data.header.description}</p>
+      <section className=" dark:text-light  text-dark my-8 ">
+        <div className=" container mx-auto">
+          <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
+            {data.header.title}
+          </h2>
+          {/* <p>{data.header.description}</p> */}
           <div className="md:grid md:grid-cols-2">
             <div className="h-full items-center justify-center flex">
               <svg
@@ -57,7 +59,7 @@ const WhyAbroad = ({ data }: Props) => {
         </div>
       </section>
 
-      <FlowDiagram />
+      {/* <FlowDiagram /> */}
     </>
   );
 };

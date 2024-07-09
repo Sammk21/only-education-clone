@@ -34,12 +34,17 @@ export async function generateMetadata({
   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
   const { seo } = data.data[0];
   return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
+    title:
+      seo.metaTitle || "Colleges with the Best Campus Life | Only Education",
+    description:
+      seo.metaDescription ||
+      "Learn how to choose the right college with Education's comprehensive guide",
     openGraph: {
       images: [
         {
-          url: baseUrl + seo?.metaImage?.url || "",
+          url: seo?.metaImage?.url
+            ? baseUrl + seo.metaImage.url
+            : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
         },
       ],
     },
@@ -47,7 +52,7 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][apllicationDates][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][eventsInfo][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
   const data = await getStrapiData(getUniQuery);
 
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[relatedUniversities][populate]=true`;
@@ -80,8 +85,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const title = data.data[0].title;
   const id = data.data[0].id;
-  console.dir(gallery);
-
   const ctaProps = {
     title,
     id,
@@ -192,8 +195,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
               <GlobalUniversitiesTabs data={admission.courseAdmission} />
             )}
             <CallToAction id={id} data={cta} title={title} />
-            {admission?.apllicationDates && (
-              <GlobalUniversitiesTabs data={admission.apllicationDates} />
+            {admission?.eventsInfo && (
+              <GlobalUniversitiesTabs data={admission.eventsInfo} />
             )}
             {admission?.cutoff && (
               <GlobalUniversitiesTabs data={admission.cutoff} />

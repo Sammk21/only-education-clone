@@ -49,8 +49,14 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
     overview,
     cta,
   } = data.data[0];
-
   const title = data.data[0].title;
+  const id = data.data[0].id;
+  const ctaProps = {
+    title,
+    id,
+  };
+
+  // const title = data.data[0].title;
 
   return (
     <div className=" pb-12 text-dark dark:text-light">
@@ -59,8 +65,8 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={countryProfile}
       />
-      <div className=" px-3 ">
-        <div className="my-8 container">
+      <div className=" px-3 container ">
+        <div className="my-8 ">
           <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
             {overview.title}
           </h2>
@@ -69,8 +75,10 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
           </p>
         </div>
 
-        <WhyAbroad data={whyThisCountry} />
         <ElegibilityCriteria data={eligibilityCriteria} />
+        <CallToAction id={id} data={cta} title={title} />
+
+        <WhyAbroad data={whyThisCountry} />
         <InfoTableLayout data={feesStructure} />
         {/* <TopUniRail />  */}
         <QuestionDropdown data={faq} />
