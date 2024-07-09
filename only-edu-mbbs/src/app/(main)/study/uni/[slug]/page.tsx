@@ -35,9 +35,9 @@ export async function generateMetadata({
   const { seo } = data.data[0];
   return {
     title:
-      seo.metaTitle || "Colleges with the Best Campus Life | Only Education",
+      seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
     description:
-      seo.metaDescription ||
+      seo?.metaDescription ||
       "Learn how to choose the right college with Education's comprehensive guide",
     openGraph: {
       images: [
