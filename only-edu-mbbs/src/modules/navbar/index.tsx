@@ -47,7 +47,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             />
           </Link>
 
-          <div className=" hidden 2lg:flex  text-sm font-normal">
+          <div className=" hidden lg:flex  text-sm font-normal">
             <ul className="flex justify-center items-cente ">
               {navigation.links.map((link: Links) => {
                 return <MenuItems items={link} key={link.id} />;
