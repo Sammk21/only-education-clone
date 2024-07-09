@@ -11,7 +11,8 @@ const blogListQuery =
 console.dir("airtcle", blogListQuery);
 export const metadata: Metadata = {
   title: "Articles | Only education",
-  description: "this is the article page for Article section of only education",
+  description:
+    "this is the article page for Article section of only education.",
 };
 
 async function BlogIndexPage({ searchParams }: Readonly<SearchParamsProps>) {
