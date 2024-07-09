@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import ProfileName from "@/modules/account/components/profile-name";
 import ProfilePassword from "@/modules/account/components/profile-password";
 import ProfilePhone from "@/modules/account/components/profile-phone";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -28,24 +29,25 @@ export default async function Profile() {
   }
 
   return (
-    <Card x-chunk="dashboard-04-chunk-1">
-      <CardHeader>
-        <CardTitle>Profile</CardTitle>
-        <CardDescription>
-          View and update your profile information, including your name, email,
-          and phone number. You can also update your billing address, or change
-          your password.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="gap-y-4 flex flex-col">
+    <div className="text-dark my-3 px-2">
+      <h3 className="text-lg">Profile</h3>
+
+      <p className="text-dark/60 text-xs mb-2">
+        View and update your profile information, including your name, email,
+        and phone number. You can also update your billing address, or change
+        your password.
+      </p>
+
+      <Separator />
+      <div className="gap-y-4 flex flex-col mb-3 mt-2">
         <ProfileEmail user={user} />
         <ProfileName user={user} />
         <ProfilePassword user={user} />
         <ProfilePhone user={user} />
-      </CardContent>
+      </div>
       <CardFooter className="border-t px-6 py-4">
         <Button>Save</Button>
       </CardFooter>
-    </Card>
+    </div>
   );
 }

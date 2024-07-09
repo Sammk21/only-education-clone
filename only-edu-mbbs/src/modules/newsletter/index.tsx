@@ -3,6 +3,7 @@ import { HandIcon } from "lucide-react";
 import React, { useState } from "react";
 import { BsCalendar } from "react-icons/bs";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
 const handleUserSubscribe = async (email: string) => {
   try {
@@ -32,6 +33,8 @@ const NewsLetter: React.FC = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(email);
+
     event.preventDefault();
     if (email) {
       await handleUserSubscribe(email);
@@ -40,14 +43,14 @@ const NewsLetter: React.FC = () => {
   };
 
   return (
-    <div className="relative isolate overflow-hidden text-dark bg-gradient-to-l from-[#f49e43] to-[#fbdcad] pb-16 my-8 sm:py-24 lg:py-20 mx-3 max-w-7xl lg:mx-auto rounded-3xl">
+    <div className="relative isolate overflow-hidden text-dark bg-orange-200 shadow-md pb-16 my-8 sm:py-24 lg:py-20 mx-3 max-w-7xl lg:mx-auto rounded-3xl">
       <div className="mx-auto px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl pt-6 grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
             <h2 className="text-3xl font-bold tracking-tight text-dark sm:text-4xl">
               Subscribe to our newsletter.
             </h2>
-            <p className="mt-4 text-md leading-8 text-dark hidden md:block">
+            <p className="mt-4 text-md leading-8 text-dark/70 ">
               Get Latest Notification Of Colleges, Exams and News
             </p>
             <form
@@ -57,7 +60,7 @@ const NewsLetter: React.FC = () => {
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
-              <input
+              <Input
                 id="email-address"
                 name="email"
                 type="email"
@@ -70,7 +73,7 @@ const NewsLetter: React.FC = () => {
               />
               <button
                 type="submit"
-                className="flex-none rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-light shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                className="flex-none rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-light shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Subscribe
               </button>

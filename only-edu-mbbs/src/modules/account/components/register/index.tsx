@@ -88,7 +88,7 @@ export function Register({ setCurrentView }: Props) {
   };
 
   return (
-    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-light mb-6 dark:bg-black border border-border border-borderLight">
+    <div className="max-w-md w-full mx-auto  rounded-2xl p-4 md:p-8 shadow-input bg-light mb-6 dark:bg-black border border-border border-borderLight">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Welcome to Only Educations
       </h2>
