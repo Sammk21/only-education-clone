@@ -65,7 +65,7 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={countryProfile}
       />
-      <div className=" px-3 container ">
+      <div className=" px-3 container mx-auto">
         <div className="my-8 ">
           <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
             {overview.title}
