@@ -409,7 +409,8 @@ export default StudyUniversity;
             <ElegibilityCriteria data={eligibilityCriteria} />
             <AdmissionProcessFlow />
             <DocumentRquired data={documentRequired} />
-          <InfoTableLayout data={feesStructure} />
+            <InfoTableLayout data={feesStructure} />
             <PlacementInfo data={placement} />
-            <CampusHighlight /> */
+            <CampusHighlight /> 
+  */
 }

@@ -18,17 +18,9 @@ interface Props {
   title?: string;
   user: UserType;
   id: number;
-  buttonTitle: string;
-  buttonColor: string;
 }
 
-export function EnquiryDialog({
-  title,
-  user,
-  id,
-  buttonTitle,
-  buttonColor,
-}: Props) {
+export function EnquiryDialog({ title, user, id }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
