@@ -3,7 +3,7 @@ import { flattenAttributes } from "@/utils/utils";
 import { redirect } from "next/navigation";
 
 export async function getData(path: string) {
-  const baseUrl = process.env.API_URL || `http://localhost:1337`;
+  const baseUrl = process.env.API_URL || `https://admin.onlyeducation.co.in`;
   try {
     const response = await fetch(baseUrl + path, { cache: "no-store" });
     const data = await response.json();

@@ -52,16 +52,19 @@ const Ranking = ({ data }: Props) => {
                     />
                   )}
                 </div>
-                <div className="flex justify-between gap-4 mt-3">
-                  <p>{item?.description}</p>
+                {/* <div className="flex justify-between gap-4 mt-3"> */}
+                <div className="grid grid-cols-4 gap-4 content-between">
+                  <p className="md:col-span-3 col-span-4 ">
+                    {item?.description}
+                  </p>
 
                   {item?.rankings?.publisherImage?.url && (
                     <div className="relative p-4 border rounded-md hidden md:block">
                       <Image
                         src={`${baseUrl}${item.rankings.publisherImage.url}`}
                         alt={item.rankings.publisherName}
-                        width={150}
-                        height={150}
+                        width={100}
+                        height={100}
                         className="aspect-auto"
                       />
                     </div>

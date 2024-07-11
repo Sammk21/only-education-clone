@@ -52,7 +52,7 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][eventsInfo][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[notification][populate][header][populate]=true&populate[notification][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
+  const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}&populate[universityProfile][populate][profileImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[universityInfo][populate][list][populate]=true&populate[documentRequired][populate][documents][populate]=true&populate[highlights][populate]=true&populate[overviewTabs][populate][latestUpdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][ranking][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][academicAdvantages][populate]=true&populate[coursesFees][populate][feeDetails][populate]=true&populate[coursesFees][populate][entranceExams][populate]=true&populate[coursesFees][populate][paymentGuidelines][populate]=true&populate[admission][populate][courseAdmission][populate]=true&populate[admission][populate][eventsInfo][populate]=true&populate[admission][populate][cutoff][populate]=true&populate[placements][populate][placementInfo][populate]=true&populate[placements][populate][packagesInfo][populate]=true&populate[gallery][populate][events][populate]=true&populate[gallery][populate][infrastructure][populate]=true&populate[faculty][populate][facInfo][populate]=true&populate[hostel][populate][maleHostel][populate][header][populate]=true&populate[hostel][populate][maleHostel][populate][content][populate]=true&populate[hostel][populate][femaleHostel][populate][header][populate]=true&populate[hostel][populate][femaleHostel][populate][content][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][header][populate]=true&populate[scholarships][populate][scholarshipsInfo][populate][content][populate]=true&populate[ranking][populate]=true&populate[ranking][populate]=course&populate[ranking][populate]=rankings&populate[ranking][populate]=rankings.publisherImage`;
   const data = await getStrapiData(getUniQuery);
 
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[relatedUniversities][populate]=true`;
@@ -62,7 +62,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const {
     universityProfile,
     cta,
-
     feesStructure,
     faq,
     universityInfo,
@@ -76,7 +75,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     faculty,
     hostel,
     scholarships,
-    notification,
     ranking,
   } = data.data[0];
 
@@ -117,10 +115,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
-
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
@@ -160,9 +154,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
             {coursesFees?.feeDetails && (
               <GlobalUniversitiesTabs data={coursesFees.feeDetails} />
             )}
@@ -219,9 +210,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
             {placements?.placementInfo && (
               <GlobalUniversitiesTabs data={placements.placementInfo} />
             )}
@@ -270,10 +258,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
-
             {gallery?.events && gallery?.infrastructure && (
               <GalleryTabs
                 event={gallery.events}
@@ -299,10 +283,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
-
             {faculty && <FacultyList data={faculty} />}
 
             {faq && <QuestionDropdown data={faq} />}
@@ -322,9 +302,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
             {hostel?.maleHostel && (
               <GlobalUniversitiesTabs data={hostel.maleHostel} />
             )}
@@ -349,10 +326,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
-
             {newsData?.data && (
               <UniversitiesNews
                 data={newsData.data}
@@ -378,9 +351,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
-            {notification && (
-              <GlobalUniversitiesTabs data={notification} notification={true} />
-            )}
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>

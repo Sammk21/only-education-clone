@@ -6,7 +6,7 @@ import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
 import UniversitiesRail from "@/modules/sliders/slider-two";
 const HomePageQuery =
-  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image";
+  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image&populate[bannerImage][populate]=true";
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
@@ -15,7 +15,7 @@ export default async function Home() {
     <div className="w-full overflow-hidden">
       <div className="relative">
         <div className="relative ">
-          <Hero data={data.hero} />
+          <Hero data={data.hero} bannerImage={data.bannerImage} />
           <InformationSlider data={data.news} href="news" />
           <UniversitiesRail data={data.topUniversities} />
         </div>
