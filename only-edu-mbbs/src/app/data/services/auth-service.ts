@@ -14,6 +14,13 @@ interface LoginUserProps {
   password: string;
 }
 
+type EnquiryData = {
+  userId: number;
+  uniId: number;
+  level: string;
+  specialization: string;
+};
+
 const baseUrl = "https://admin.onlyeducation.co.in";
 
 // Register User Service
@@ -29,11 +36,7 @@ export async function registerUserService(userData: RegisterUserProps) {
       cache: "no-cache",
     });
 
-    if (!response.ok) {
-      return response.json();
-    }
-
-    return response.json();
+    return await response.json();
   } catch (error) {
     console.error("Registration Service Error:", error);
     throw new Error("Failed to register user. Please try again later.");
@@ -42,27 +45,33 @@ export async function registerUserService(userData: RegisterUserProps) {
 
 // Send OTP Service
 export async function sendOtpService(phone: string) {
-  const apiKey = process.env.TWOFACTOR_API_KEY;
-  const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
-  const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
-  const response = await axios.get(`https://2factor.in/API/V1${pathVariables}`);
-  return response.data;
+  try {
+    const apiKey = process.env.TWOFACTOR_API_KEY;
+    const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
+    const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
+    const response = await axios.get(
+      `https://2factor.in/API/V1${pathVariables}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Send OTP Service Error:", error);
+    throw new Error("Failed to send OTP. Please try again later.");
+  }
 }
 
-export async function putOtpSession(otpS: string, id: number) {
+// Update OTP Session Service
+export async function putOtpSession(otpSession: string, userId: number) {
   try {
     const response = await axios.put(
-      `${baseUrl}/api/users/${id}?populate=true`,
+      `${baseUrl}/api/users/${userId}?populate=true`,
       {
-        otp_session: otpS,
+        otp_session: otpSession,
       }
     );
     return response.data;
   } catch (error) {
-    return {
-      success: false,
-      error: true,
-    };
+    console.error("Put OTP Session Service Error:", error);
+    throw new Error("Failed to update OTP session. Please try again later.");
   }
 }
 
@@ -78,7 +87,8 @@ export async function verifyOtpService(
     );
     return response.data;
   } catch (error) {
-    return { Status: "fail" };
+    console.error("Verify OTP Service Error:", error);
+    throw new Error("Failed to verify OTP. Please try again later.");
   }
 }
 
@@ -94,11 +104,9 @@ export async function updateVerifiedUserService(userId: number | string) {
     );
     return response.data;
   } catch (error) {
-    return {
-      success: false,
-      error: true,
-      userId: userId,
-    };
+    // console.error("Update Verified User Service Error:", error);
+    // throw new Error("Failed to update verified user. Please try again later.");
+    return { error: "Something went wrong please try again later" };
   }
 }
 
@@ -112,51 +120,31 @@ export async function putPhoneUserService(userId: number, phone: string) {
         username: phone,
       }
     );
-    return response;
+    return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("Put Phone User Service Error:", error);
+    throw new Error("Failed to update phone number. Please try again later.");
   }
 }
 
 // Login User Service
 export async function loginUserService(userData: LoginUserProps) {
-
   const url = new URL("/api/auth/local", baseUrl);
 
-  const response = await fetch(url.toString(), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ...userData }),
-    cache: "no-cache",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Error: ${response.statusText}`);
-  }
-
-  return response.json();
-}
-
-// Additional Send OTP Service (if needed)
-export async function sendOtp(phone: string) {
   try {
-    const apiKey =
-      process.env.TWOFACTOR_API_KEY ?? "15288276-dc54-11ee-8cbb-0200cd936042";
-    const otpTemplateName = process.env.OTP_TEMPLATE_NAME;
-    const pathVariables = `/${apiKey}/SMS/+91${phone}/AUTOGEN3/${otpTemplateName}`;
-    const response = await axios.get(
-      `https://2factor.in/API/V1${pathVariables}`
-    );
+    const response = await axios.post(url.toString(), userData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error) {
-    console.error("Send OTP Service Error:", error);
-    throw new Error("Failed to send OTP. Please try again later.");
+    return { error: "Invalid Credentials! please try again." };
   }
 }
 
+// Verify Phone User Service
 export async function verifyPhoneUserService(
   userId: number,
   data: { last_otp_request: Date; resend_attempts: number }
@@ -168,7 +156,65 @@ export async function verifyPhoneUserService(
     );
     return response.data;
   } catch (error) {
-    console.error("Error updating user data:", error);
-    throw error;
+    console.error("Verify Phone User Service Error:", error);
+    throw new Error("Failed to verify phone user. Please try again later.");
+  }
+}
+
+export async function enquiryService({
+  userId,
+  uniId,
+  level,
+  specialization,
+}: EnquiryData) {
+  try {
+    // Attempt to update the existing enquiry
+    const putResponse = await axios.put(`${baseUrl}/api/enquiries`, {
+      data: {
+        users_permissions_user: {
+          connect: [userId],
+        },
+        university: {
+          connect: [uniId],
+        },
+        level: level,
+        specialization: specialization,
+      },
+    });
+
+    console.log(putResponse);
+    return {
+      success: true,
+      error: false,
+      userId: userId,
+    };
+  } catch (putError) {
+    try {
+      // If update fails, create a new enquiry
+      const postResponse = await axios.post(`${baseUrl}/api/enquiries`, {
+        data: {
+          users_permissions_user: {
+            connect: [userId],
+          },
+          university: {
+            connect: [uniId],
+          },
+          level: level,
+          specialization: specialization,
+        },
+      });
+
+      return {
+        success: true,
+        error: false,
+        userId: userId,
+      };
+    } catch (postError) {
+      return {
+        success: false,
+        error: true,
+        userId: userId,
+      };
+    }
   }
 }

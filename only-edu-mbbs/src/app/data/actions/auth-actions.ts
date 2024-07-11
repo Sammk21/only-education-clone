@@ -1,6 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import {
+  enquiryService,
   loginUserService,
   putOtpSession,
   putPhoneUserService,
@@ -8,14 +10,18 @@ import {
   sendOtpService,
   updateVerifiedUserService,
   verifyOtpService,
-  verifyPhoneUserService,
 } from "../services/auth-service";
-import { redirect } from "next/navigation";
 import { ILoginFormInput } from "@/modules/account/components/login";
 import { IFormInput } from "@/modules/account/components/register";
 import { IOtpInput } from "@/modules/account/components/otp";
-import { LoginSchema, OtpSchema, registerSchema } from "../zod/zod-schema";
+import {
+  EnquirySchema,
+  LoginSchema,
+  OtpSchema,
+  registerSchema,
+} from "../zod/zod-schema";
 import { getUserMeLoader } from "../services/get-user-loader";
+import { StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7,
@@ -25,13 +31,27 @@ const config = {
   secure: process.env.NODE_ENV === "production",
 };
 
-export async function registerUserAction(prevState: any, formData: IFormInput) {
+interface IActionResult {
+  success?: boolean;
+  message?: string;
+  zodErrors?: Record<string, any>;
+  strapiErrors?: StrapiErrorsProps;
+  phone?: string;
+  userId?: number;
+  details?: string;
+}
+
+interface IEnquiryInput {
+  level: string;
+  specialization: string;
+}
+
+export async function registerUserAction(
+  prevState: any,
+  formData: IFormInput
+): Promise<IActionResult> {
   const validatedFields = registerSchema.safeParse({
-    firstName: formData.firstName,
-    lastName: formData.lastName,
-    phone: formData.phone,
-    password: formData.password,
-    email: formData.email,
+    ...formData,
     username: formData.phone,
   });
 
@@ -39,117 +59,110 @@ export async function registerUserAction(prevState: any, formData: IFormInput) {
     return {
       ...prevState,
       zodErrors: validatedFields.error.flatten().fieldErrors,
-      strapiErrors: null,
       message: "Missing Fields. Failed to Register.",
     };
   }
 
-  const responseData = await registerUserService(validatedFields.data);
+  try {
+    const responseData = await registerUserService(validatedFields.data);
+    cookies().set("_jwt", responseData.jwt, config);
 
-  if (responseData.error) {
+    const otpResponseData = await sendOtpService(validatedFields.data.phone);
+    await putOtpSession(otpResponseData.Details, responseData.user.id);
+
     return {
-      ...prevState,
-      strapiErrors: responseData.error,
-      zodErrors: null,
-      message: "Failed to Register.",
-    };
-  }
-  cookies().set("_jwt", responseData.jwt, config);
-  // const otpResponseData = await sendOtpService(validatedFields.data.phone);
-
-  const otpResponseData = {
-    Status: true,
-    Details: "ufhdujnfidnidnfni",
-  };
-
-  const { Details } = otpResponseData;
-
-  if (otpResponseData.Status) {
-    const putOtpSessionResponse = await putOtpSession(
-      Details,
-      responseData.user.id
-    );
-    // cookies().set("otp_session", otpResponseData.Details, otpConfig);
-    const lastFourDigits = validatedFields.data.phone.slice(-4);
-    return {
-      phone: lastFourDigits,
+      phone: validatedFields.data.phone.slice(-4),
       userId: responseData.user.id,
       success: true,
       details: otpResponseData.Details,
     };
-  } else {
+  } catch (error) {
+    console.error("Register User Action Error:", error);
     return {
       ...prevState,
-      message: "Failed to send OTP.",
+      message: "Failed to register user. Please try again later.",
     };
   }
 }
 
-export async function resendOtp() {
-  const user = await getUserMeLoader();
-  await sendOtpService(user.data.phone);
-  return {
-    success: true,
-  };
+export async function resendOtp(): Promise<IActionResult> {
+  try {
+    const user = await getUserMeLoader();
+    await sendOtpService(user.data.phone);
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.error("Resend OTP Error:", error);
+    return {
+      success: false,
+      message: "Failed to resend OTP. Please try again later.",
+    };
+  }
 }
 
 export const sendAndVerifyOtpAction = async (
-  userId: number | undefined,
+  userId: number,
   phone: string
-) => {
-  if (userId === undefined) return;
-  const phoneUpdateResponse = await putPhoneUserService(userId, phone);
-  const updatedPhone = phoneUpdateResponse?.data.phone;
-  // const otpResponse = sendOtpService(updatedPhone);
-  const otpResponseData = {
-    Status: true,
-    Details: "ufhdujnfidnidnfni" /**UNIT TESTING for otp responseData */,
-  };
-  const putOtpSessionResponse = await putOtpSession(
-    otpResponseData.Details,
-    userId
-  );
-  return putOtpSessionResponse;
+): Promise<IActionResult> => {
+  try {
+    await putPhoneUserService(userId, phone);
+    const otpResponseData = await sendOtpService(phone);
+    await putOtpSession(otpResponseData.Details, userId);
+
+    return {
+      success: otpResponseData.Status,
+      details: otpResponseData.Details,
+    };
+  } catch (error) {
+    console.error("Send and Verify OTP Action Error:", error);
+    return {
+      success: false,
+      message: "Failed to send and verify OTP. Please try again later.",
+    };
+  }
 };
 
 export const verifyOtpAction = async (
   otpSession: string | undefined,
   formData: IOtpInput,
-  userId: string | undefined
-) => {
-  if (!otpSession || !userId) return;
+  userId: number | undefined
+): Promise<IActionResult> => {
+  if (!otpSession || !userId) {
+    return {
+      success: false,
+      message: "Invalid session or user ID.",
+    };
+  }
 
-  const validatedFields = OtpSchema.safeParse({
-    otp: formData.pin,
-  });
+  const validatedFields = OtpSchema.safeParse({ otp: formData.pin });
+
   if (!validatedFields.success) {
     return {
       zodErrors: validatedFields.error.flatten().fieldErrors,
-      strapiErrors: null,
-      message: "Missing Fields. Failed to verify otp.",
+      message: "Missing Fields. Failed to verify OTP.",
     };
   }
-  // const responseData = await verifyOtpService(
-  //   otpSession,
-  //   validatedFields.data.otp
-  // );
-  const responseData = {
-    Status: "Success",
-    Details: "ufhdujnfidnidnfni",
-  };
 
-  if (responseData.Status === "Success") {
-    const updatedUser = await updateVerifiedUserService(userId);
-    if (updatedUser.success) {
-      return {
-        success: true,
-        message: responseData.Details,
-      };
+  try {
+    const responseData = await verifyOtpService(
+      otpSession,
+      validatedFields.data.otp
+    );
+
+    if (responseData.Status === "Success") {
+      const updatedUser = await updateVerifiedUserService(userId);
+      return updatedUser.success
+        ? { success: true, message: responseData.Details }
+        : { success: false, message: "Failed to update user." };
     }
-  } else {
+
+    return { success: false, message: responseData.Details };
+  } catch (error) {
+    console.error("Verify OTP Action Error:", error);
     return {
       success: false,
-      message: responseData.Details,
+      message: "Failed to verify OTP. Please try again later.",
     };
   }
 };
@@ -157,7 +170,7 @@ export const verifyOtpAction = async (
 export async function loginUserAction(
   prevState: any,
   formData: ILoginFormInput
-) {
+): Promise<IActionResult> {
   const validatedFields = LoginSchema.safeParse({
     identifier: formData.phone,
     password: formData.password,
@@ -173,10 +186,62 @@ export async function loginUserAction(
 
   const responseData = await loginUserService(validatedFields.data);
 
+  if (!responseData || responseData.error) {
+    return {
+      ...prevState,
+      strapiErrors: responseData?.error,
+      message: responseData?.error,
+    };
+  }
+
+  cookies().set("_jwt", responseData.jwt, config);
+  return { success: true };
+}
+
+export async function logoutAction(): Promise<void> {
+  cookies().set("_jwt", "", { ...config, maxAge: 0 });
+  redirect("/auth");
+}
+
+export const enquiryAction = async (
+  prevState: any,
+  formData: IEnquiryInput,
+  userId: number | undefined,
+  uniId: number
+) => {
+  if (!userId)
+    return {
+      ...prevState,
+      zodErrors: null,
+      message: "Internal server error please try again later",
+    };
+
+  const validatedFields = EnquirySchema.safeParse({
+    userId: userId,
+    uniId: uniId,
+    level: formData.level,
+    specialization: formData.specialization,
+  });
+  if (!validatedFields.success) {
+    return {
+      ...prevState,
+      zodErrors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Login.",
+    };
+  }
+
+  const responseData = await enquiryService({
+    userId: validatedFields.data.userId,
+    uniId: validatedFields.data.uniId,
+    level: validatedFields.data.level,
+    specialization: validatedFields.data.specialization,
+  });
+
   if (!responseData) {
     return {
       ...prevState,
-      strapiErrors: responseData.error,
+      success: false,
+      strapiErrors: responseData || "",
       zodErrors: null,
       message: "Ops! Something went wrong. Please try again.",
     };
@@ -185,21 +250,19 @@ export async function loginUserAction(
   if (responseData.error) {
     return {
       ...prevState,
+      success: false,
       strapiErrors: responseData.error,
       zodErrors: null,
       message: "Failed to Login.",
     };
   }
-  cookies().set("_jwt", responseData.jwt, config);
-}
 
-export async function logoutAction() {
-  cookies().set("_jwt", "", { ...config, maxAge: 0 });
-  redirect("/auth");
-}
-
-export async function getLastFourLetters() {
-  const phone = cookies().get("_phn_")?.value;
-  if (phone) return phone.slice(-4);
-  else return null;
-}
+  if (responseData.success) {
+    return {
+      success: true,
+      strapiErrors: responseData.error,
+      zodErrors: null,
+      message: "success.",
+    };
+  }
+};

@@ -70,25 +70,20 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
             modules={[FreeMode, Pagination, Autoplay, Navigation]}
             className="mySwiper"
           >
-            {data.data.map((university) => (
-              <SwiperSlide
-                key={university.id}
-                className="border rounded-md bg-"
-              >
+            {data.data.map((item) => (
+              <SwiperSlide key={item.id} className="border rounded-md bg-">
                 <div className="flex aspect-square items-center justify-center p-1 ">
-                  <Link href={`/${href}/post/${university.slug}`}>
-                    <div className="aspect-video flex border shadow-sm flex-col p-4 text-sm sm:text-lg md:text-xl rounded-sm  relative group overflow-hidden cursor-pointer">
+                  <Link href={`/${href}/post/${item.slug}`}>
+                    <div className="aspect-video flex border shadow-sm flex-col  text-sm sm:text-lg md:text-xl rounded-sm  relative group overflow-hidden cursor-pointer">
                       <ImageExtended
-                        src={university.image.url}
-                        alt={university.title}
+                        src={item.image.url}
+                        alt={item.title}
                         fill={true}
-                        blurDataURL={
-                          university.image.formats.thumbnail.blurhash
-                        }
+                        blurDataURL={item.image.formats.thumbnail.blurhash}
                         className="object-center object-cover group-hover:scale-105 transition-transform ease-out duration-300"
                       />
                       <div className="absolute top-1 left-1">
-                        {university.live && (
+                        {item.live && (
                           <span className="relative w-12 h-4 bg-red-600 rounded-full flex justify-end items-center text-white p-1 text-xs">
                             <span className="livenow absolute left-0">
                               <span></span>
@@ -102,10 +97,10 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
                     </div>
                     <div className="capitalize mt-3">
                       <p className="text-md mb-2 line-clamp-2 text-dark">
-                        {university.title}
+                        {item.title}
                       </p>
                       <p className="text-xs font-normal text-dark/50 tracking-wide z-10  line-clamp-2">
-                        {university.description}
+                        {item.description}
                       </p>
                     </div>
                   </Link>

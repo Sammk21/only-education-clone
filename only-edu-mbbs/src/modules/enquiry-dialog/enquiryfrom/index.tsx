@@ -50,9 +50,9 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
     resolver: zodResolver(enquiryFormSchema),
   });
 
-  async function onSubmit(data: z.infer<typeof enquiryFormSchema>) {
+  async function onSubmit(formData: z.infer<typeof enquiryFormSchema>) {
     const userId = user.data?.id;
-    const response = await enquiryAction(INITIAL_STATE, data, userId, id);
+    const response = await enquiryAction(INITIAL_STATE, formData, userId, id);
     if (response.success) {
       toast.info("Enquiry has been sent");
     } else {

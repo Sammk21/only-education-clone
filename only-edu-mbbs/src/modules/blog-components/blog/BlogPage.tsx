@@ -14,7 +14,7 @@ const BlogPage: React.FC<BlogPageProps> = ({
   heading,
 }: BlogPageProps) => {
   return (
-    <section className="container px-4">
+    <section className="container mx-auto px-4">
       <h1 className="font-medium text-dark text-3xl">
         Only Education {heading}
       </h1>

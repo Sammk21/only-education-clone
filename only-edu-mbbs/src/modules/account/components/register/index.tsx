@@ -71,15 +71,17 @@ export function Register({ setCurrentView }: Props) {
     resolver: zodResolver(schema),
   });
 
-  const [strapiError, setStrapiError] = useState(null);
+  const [strapiError, setStrapiError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    setIsLoading(true); // Start loading
     const response = await registerUserAction(INITIAL_STATE, data);
-
-    if (response.strapiErrors) {
-      setStrapiError(response.strapiErrors);
+    setIsLoading(false); // End loading
+    if (response.message) {
+      setStrapiError(response.message);
     }
     if (response.success === true) {
       router.push(`/verify`);

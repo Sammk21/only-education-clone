@@ -45,16 +45,20 @@ export function flattenAttributes(data:any):any {
 }
 
 
-const token = "9739266bb3e37068ff04ee4ddd928783e584a9d514ea6005e917bea8d6fbdcc12912d87e290417302c6bf2d079c3de0d4db11af97956c6cb5fd2bed0b7fddab643aaf051c99ba4168556530affe53d2d70fbae6124066e6f26532e0465fb4ccf7c84ce8252b61a54fbc2dd53949126811db5dcdf27f86ce231b7946044955208";
 
+const token =
+  "9739266bb3e37068ff04ee4ddd928783e584a9d514ea6005e917bea8d6fbdcc12912d87e290417302c6bf2d079c3de0d4db11af97956c6cb5fd2bed0b7fddab643aaf051c99ba4168556530affe53d2d70fbae6124066e6f26532e0465fb4ccf7c84ce8252b61a54fbc2dd53949126811db5dcdf27f86ce231b7946044955208";
 
 export async function getStrapiData(path: string) {
-  
   try {
     const response = await fetch(baseUrl + path, {
       headers: { Authorization: `Bearer ${token}` },
       cache: "no-store",
+
     }); 
+
+  
+
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;

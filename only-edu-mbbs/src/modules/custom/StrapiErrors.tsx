@@ -5,14 +5,14 @@ export interface StrapiErrorsProps {
 }
 
 interface StrapiErrorsComponentProps {
-  readonly error: StrapiErrorsProps | null;
+  readonly error: string | null;
 }
 
 export function StrapiErrors({ error }: StrapiErrorsComponentProps) {
-  if (!error?.message) return null;
+  if (!error) return null;
   return (
     <div className="text-red-500 text-sm flex w-full h-full justify-center italic py-2">
-      {error?.message}
+      {error}
     </div>
   );
 }
