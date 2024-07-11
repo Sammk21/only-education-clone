@@ -174,7 +174,8 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                       className="flex items-center hover:bg-orange-300"
                       href="/auth"
                     >
-                      Login to Download
+                      <FaDownload className="mr-1" />
+                      Brochure
                     </Link>
                   )}
                 </Button>

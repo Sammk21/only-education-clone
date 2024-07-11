@@ -28,8 +28,6 @@ export interface ILoginFormInput {
   password: string;
 }
 
-
-
 const schema = zod.object({
   phone: zod
     .string()
@@ -46,9 +44,8 @@ const INITIAL_STATE = {
 };
 
 const Login = ({ setCurrentView }: Props) => {
-  const [strapiError, setStrapiError] = useState<StrapiErrorsProps | null>(
-    null
-  );
+  const [strapiError, setStrapiError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -59,9 +56,11 @@ const Login = ({ setCurrentView }: Props) => {
   });
 
   const onSubmit: SubmitHandler<ILoginFormInput> = async (data) => {
+    setIsLoading(true); // Start loading
     const res = await loginUserAction(INITIAL_STATE, data);
-    if (res?.strapiErrors) {
-      setStrapiError(res.strapiErrors);
+    setIsLoading(false); // End loading
+    if (res?.message) {
+      setStrapiError(res.message);
     } else {
       toast.success("You have logged in successfully");
     }
@@ -113,9 +112,35 @@ const Login = ({ setCurrentView }: Props) => {
         <Button
           className="bg-dark relative group/btn dark:bg-foreground w-full text-white rounded-md h-10 font-medium"
           type="submit"
+          disabled={isLoading} // Disable the button while loading
         >
-          Login &rarr;
-          <BottomGradient />
+          {isLoading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-white mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8v-8H4z"
+              ></path>
+            </svg>
+          ) : (
+            <>
+              Login &rarr;
+              <BottomGradient />
+            </>
+          )}
         </Button>
         <StrapiErrors error={strapiError} />
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />

@@ -10,7 +10,7 @@ interface AccountLayoutProps {
 const AccountLayout: React.FC<AccountLayoutProps> = ({ children, user }) => {
   return (
     <div className="w-full h-full mb-12">
-      <div className="container">
+      <div className="container mx-auto">
         {user?.ok ? (
           <div className="pb-3 mt-3">
             <h3 className="text-dark text-lg font-medium">Account Settings</h3>

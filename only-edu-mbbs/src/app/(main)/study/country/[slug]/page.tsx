@@ -1,5 +1,6 @@
 import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
 import WhyAbroad from "@/modules/aborad-page-content/why-aborad";
+import Title from "@/modules/common/title";
 import CountryProfileLayout from "@/modules/country-profile-layout";
 import CallToAction from "@/modules/footer/call-to-action";
 import GlobalProfileLayout from "@/modules/global-profile-layout";
@@ -65,14 +66,10 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={countryProfile}
       />
-      <div className=" px-3 container ">
+      <div className=" px-3 container mx-auto">
         <div className="my-8 ">
-          <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark">
-            {overview.title}
-          </h2>
-          <p className="  max-w-6xl w-full mx-auto text-accent">
-            {overview.description}
-          </p>
+          <Title>{overview.title}</Title>
+          <p className=" w-full mx-auto text-accent">{overview.description}</p>
         </div>
 
         <ElegibilityCriteria data={eligibilityCriteria} />

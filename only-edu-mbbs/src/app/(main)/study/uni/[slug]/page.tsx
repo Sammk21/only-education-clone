@@ -56,7 +56,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const data = await getStrapiData(getUniQuery);
 
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[relatedUniversities][populate]=true`;
-  // const getUniNewsQuery = `/api/news?populate[relatedUniversities][populate]=true`;
   const newsData = await getStrapiData(getUniNewsQuery);
 
   const {
@@ -99,13 +98,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         universityInfo={universityInfo}
       />
       <Tabs defaultValue="overview">
-        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 z-50">
+        <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 sm:top-[4.5rem] z-20">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
           <TabsTrigger value="placement">Placement</TabsTrigger>
-
-          <TabsTrigger value="scholarships">scholarships</TabsTrigger>
+          <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
           <TabsTrigger value="gallery">Gallery</TabsTrigger>
           <TabsTrigger value="faculty">Faculty</TabsTrigger>
           <TabsTrigger value="hostel">Hostel</TabsTrigger>

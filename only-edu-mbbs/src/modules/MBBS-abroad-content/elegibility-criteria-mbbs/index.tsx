@@ -20,7 +20,7 @@ interface Props {
 }
 
 const ElegibilityCriteria = ({ data }: Props) => {
-  const { title, description } = data.header;
+  const { title } = data.header;
 
   const renderCriteriaList = () => {
     return (
@@ -28,7 +28,7 @@ const ElegibilityCriteria = ({ data }: Props) => {
         {data.criteriaList.map((item, index) => (
           <div
             key={item.id}
-            className={`max-w-sm overflow-hidden border border-l-[3px] rounded-2xl ${
+            className={`w-full overflow-hidden border border-l-[3px] rounded-2xl ${
               index === 0
                 ? "border-l-yellow-500 dark:border-l-yellow-500"
                 : index === 1
@@ -51,9 +51,7 @@ const ElegibilityCriteria = ({ data }: Props) => {
   return (
     <Card className="text-dark dark:text-light  mx-auto border-none shadow-none my-8">
       <CardHeader className="sm:px-0">
-        <h2 className=" text-4xl font-medium mb-4 dark:text-light text-dark ">
-          {title}
-        </h2>
+        <Title>{title}</Title>
       </CardHeader>
       <CardContent>
         {data.criteriaTable && (
