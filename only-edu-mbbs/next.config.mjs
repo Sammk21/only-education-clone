@@ -25,7 +25,7 @@ const nextConfig = {
         hostname: "https://admin.onlyeducation.co.in",
       },
       {
-        hostname: "192.168.1.28",
+        hostname: "192.168.1.21",
       },
     ],
   },
