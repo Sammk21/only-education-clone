@@ -10,10 +10,6 @@ import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Roboto({
-  subsets: ["cyrillic"],
-  weight: ["300", "400", "500", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Only education",
