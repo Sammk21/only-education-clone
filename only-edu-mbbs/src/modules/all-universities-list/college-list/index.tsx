@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { UniversitiesData, Universitylist } from "@/types/types";
-import { FaDownload, FaRegPaperPlane } from "react-icons/fa";
+import { FaDownload, FaLock, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
 import SearchBox from "@/app/(main)/searchbox";
 import MeiliSearch from "meilisearch";
@@ -171,13 +171,12 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                     />
                   )
                 ) : (
-                  <Link
-                    className="flex items-center hover:bg-orange-300"
-                    href="/auth"
-                  >
-                    <FaDownload className="mr-1" />
-                    Brochure
-                  </Link>
+                  <Button className="bg-orange-500 hover:bg-orange-400">
+                    <Link className="flex items-center " href="/auth">
+                      <FaLock className="mr-1" />
+                      Brochure
+                    </Link>
+                  </Button>
                 )}
 
                 <Button

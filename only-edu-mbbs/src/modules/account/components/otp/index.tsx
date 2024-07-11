@@ -57,13 +57,15 @@ const Otp = ({ user }: OtpProps) => {
   async function onSubmit(formData: z.infer<typeof FormSchema>) {
     const user = await getUserMeLoader();
     const id = user.data?.id;
+
+
+
     const otpVerificationResponse = {
-      success: true,
+      success: true, //mock test unit
     };
 
     if (otpVerificationResponse?.success) {
       const updateVerifiedUserData = await updateVerifiedUserService(id);
-      console.log(updateVerifiedUserData);
       toast.success("OTP verified successfully");
       router.push("/auth");
     } else {

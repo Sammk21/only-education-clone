@@ -55,6 +55,8 @@ export async function registerUserAction(
     username: formData.phone,
   });
 
+  console.log(validatedFields.error);
+
   if (!validatedFields.success) {
     return {
       ...prevState,
