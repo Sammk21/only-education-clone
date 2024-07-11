@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { UniversitiesData, Universitylist } from "@/types/types";
-import { FaDownload, FaRegPaperPlane } from "react-icons/fa";
+import { FaDownload, FaLock, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
 import SearchBox from "@/app/(main)/searchbox";
 import MeiliSearch from "meilisearch";
@@ -149,36 +149,36 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
               {/* Buttons Section */}
               <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
-                <Button className="bg-orange-500 hover:bg-orange-300 text-white w-full">
-                  {user ? (
-                    user.verified ? (
-                      <Link
-                        className="flex items-center"
-                        href={
-                          "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
-                        }
-                      >
-                        <FaDownload className="mr-1" />
-                        Brochure
-                      </Link>
-                    ) : (
-                      <PhoneInputForm
-                        existingPhone={
-                          user.phone ? user.phone.toString() : undefined
-                        }
-                        userId={user.id}
-                      />
-                    )
-                  ) : (
+                {user ? (
+                  user.verified ? (
                     <Link
-                      className="flex items-center hover:bg-orange-300"
-                      href="/auth"
+                      className="flex items-center"
+                      href={
+                        "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
+                      }
                     >
                       <FaDownload className="mr-1" />
                       Brochure
                     </Link>
-                  )}
-                </Button>
+                  ) : (
+                    <PhoneInputForm
+                      existingPhone={
+                        user.phone ? user.phone.toString() : undefined
+                      }
+                      userId={user.id}
+                      title="Brochure"
+                      color="bg-orange-500"
+                    />
+                  )
+                ) : (
+                  <Button className="bg-orange-500 hover:bg-orange-400">
+                    <Link className="flex items-center " href="/auth">
+                      <FaLock className="mr-1" />
+                      Brochure
+                    </Link>
+                  </Button>
+                )}
+
                 <Button
                   className="text-accent bg-accent/10 hover:bg-transparent w-full"
                   variant="outline"

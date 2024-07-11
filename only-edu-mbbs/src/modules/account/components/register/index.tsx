@@ -54,7 +54,7 @@ const schema = zod
       .string()
       .nonempty("Email is required")
       .email("Invalid email address"),
-    password: zod.string().min(6, "Password must be at least 6 characters"),
+    password: zod.string().min(8, "Password must be at least 6 characters"),
     confirmPassword: zod.string().nonempty("Confirm Password is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -77,6 +77,8 @@ export function Register({ setCurrentView }: Props) {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    console.log(data);
+
     setIsLoading(true); // Start loading
     const response = await registerUserAction(INITIAL_STATE, data);
     setIsLoading(false); // End loading
@@ -95,8 +97,7 @@ export function Register({ setCurrentView }: Props) {
         Welcome to Only Educations
       </h2>
       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to Only Education if you can because we don&apos;t have a login
-        flow yet
+        Get started with only education
       </p>
       <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
@@ -217,6 +218,7 @@ export function Register({ setCurrentView }: Props) {
           <BottomGradient />
         </button>
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
         <GoogleButton />
         <StrapiErrors error={strapiError} />
       </form>

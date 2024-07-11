@@ -24,6 +24,7 @@ import { handlePhoneInput } from "@/utils/utils";
 import { sendAndVerifyOtpAction } from "@/app/data/actions/auth-actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { FaLock } from "react-icons/fa";
 
 // Define Zod schema for form validation
 const PhoneSchema = z.object({
@@ -38,9 +39,16 @@ type PhoneSchemaType = z.infer<typeof PhoneSchema>;
 interface Props {
   userId: number;
   existingPhone: string | undefined;
+  title: string;
+  color: string;
 }
 
-const PhoneInputForm: React.FC<Props> = ({ userId, existingPhone }) => {
+const PhoneInputForm: React.FC<Props> = ({
+  userId,
+  existingPhone,
+  title,
+  color,
+}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const form = useForm<PhoneSchemaType>({
@@ -66,10 +74,10 @@ const PhoneInputForm: React.FC<Props> = ({ userId, existingPhone }) => {
       <DialogTrigger asChild>
         <Button
           onClick={() => setIsDrawerOpen(true)}
-          className="flex-none px-3.5 py-1 text-sm font-semibold bg-orange-500 hover:bg-orange-300 text-white shadow-sm rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+          className={`flex-none px-3.5 py-1 text-sm ${`hover:${color}/60`} ${color} hover:bg-opacity-75  text-white shadow-sm rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900`}
           variant="default"
         >
-          Verify phone
+          {title === "Brochure" && <FaLock className="mr-1" />} {title}
         </Button>
       </DialogTrigger>
       <DialogContent status={null} className="sm:max-w-[425px] rounded-lg">
