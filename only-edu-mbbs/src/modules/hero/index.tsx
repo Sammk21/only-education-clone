@@ -45,8 +45,6 @@ interface HeroProps {
 }
 
 export default function Hero({ data, bannerImage }: HeroProps) {
-  console.dir(bannerImage);
-
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -239,9 +237,9 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                 {bannerImage.data.map((item) => (
                   <SwiperSlide key={item.id} className="">
                     <div className="  ">
-                      <div className="aspect-video h-screen ">
-                        <ImageExtended
-                          src={item.url}
+                      <div className="aspect-video h-screen relative ">
+                        <Image
+                          src={"https://admin.onlyeducation.co.in" + item.url}
                           alt={item.name}
                           fill={true}
                           blurDataURL={item.blurhash}

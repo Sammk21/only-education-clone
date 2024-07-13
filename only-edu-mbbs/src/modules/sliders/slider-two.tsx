@@ -1,7 +1,7 @@
 "use client";
 import { ImageAttributes } from "@/types/types";
-import Flickity from "react-flickity-component";
 import { UniversityCard } from "../university-card";
+import Flickity from "react-flickity-component";
 import "flickity/css/flickity.css";
 
 interface UniversityProfile {
@@ -61,3 +61,5 @@ export const UniversitiesRail = ({ data }: Props) => {
     </div>
   );
 };
+
+export default UniversitiesRail;

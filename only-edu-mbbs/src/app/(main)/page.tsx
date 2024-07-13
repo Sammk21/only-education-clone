@@ -4,13 +4,12 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
-import { UniversitiesRail } from "@/modules/sliders/slider-two";
-import Title from "@/modules/common/title";
+import UniversitiesRail from "@/modules/sliders/slider-two";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import RecentlyViewedProducts from "@/modules/recently-viewed-product/RecentlyViewedProduct";
+import RecentlyViewedUniversity from "@/modules/recently-viewed-university/RecentlyViewedProduct";
 const HomePageQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[topUniversities][populate][universities][populate][1]=universityProfile.profileImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image&populate[bannerImage][populate]=true";
 
@@ -21,6 +20,7 @@ export default async function Home() {
     <div className="w-full overflow-hidden">
       <div className="relative">
         <Hero data={data.hero} bannerImage={data.bannerImage} />
+        <RecentlyViewedUniversity />
         <InformationSlider data={data.news} href="news" />
         <LeadingEducationPortal />
         <UniversitiesRail data={data.topUniversities} />
@@ -29,21 +29,11 @@ export default async function Home() {
         <InformationSlider href="articles" data={data.articles} />
         <WhyUs data={data.whyOnlyEducation} />
         <InfiniteMovingCardsDemo />
-        <RecentlyViewedProducts />
         <NewsLetter />
       </div>
     </div>
   );
 }
-
-const RecentlyViewedColleges = () => {
-  "use client";
-  return (
-    <>
-      <div className="grid grid-cols-6 gap-x-3"></div>
-    </>
-  );
-};
 
 const LeadingEducationPortal = () => {
   return (
@@ -139,11 +129,8 @@ const SchedulesSection = () => {
         <h3 className="md:text-3xl sm:text-2xl text-xl text-center">
           India's Leading Education Portal For All Your Academic Needs
         </h3>
-        <Tabs defaultValue="account" className=" mt-6">
-          <TabsList
-            defaultValue="college"
-            className="grid w-full grid-cols-3 max-w-[400px] mx-auto border-orange-100 border"
-          >
+        <Tabs defaultValue="college" className=" mt-6">
+          <TabsList className="grid w-full grid-cols-3 max-w-[400px] mx-auto border-orange-100 border">
             <TabsTrigger className="border-orange-100" value="college">
               College
             </TabsTrigger>
