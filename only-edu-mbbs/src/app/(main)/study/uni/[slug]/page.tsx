@@ -24,6 +24,7 @@ import GalleryTabs from "@/modules/universities-tabs/gallery";
 import FacultyList from "@/modules/universities-tabs/faculty-list";
 import UniversitiesNews from "@/modules/universities-tabs/universities-news";
 import Ranking from "@/modules/universities-tabs/ranking";
+import MockComponent from "@/modules/mock-component";
 
 export async function generateMetadata({
   params,
@@ -61,11 +62,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const {
     universityProfile,
     cta,
-    feesStructure,
     faq,
     universityInfo,
-    highlights,
-    overview,
     overviewTabs,
     coursesFees,
     admission,
@@ -82,13 +80,20 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const title = data.data[0].title;
   const id = data.data[0].id;
-  const ctaProps = {
-    title,
-    id,
+
+  // const result = await response.json();
+  // console.log("consolelog", result);
+
+  const recentlyViewedData = {
+    slug: params.slug,
+    image: backgroundImage,
+    title: title,
   };
 
   return (
     <div className="mb-16">
+      <MockComponent data={recentlyViewedData} />
+      {/* 👆🏻 iT IS USED TO SAVE DATA IN LOCALSTORAGE FOR RECENTLY VIEWD UNIVERSITIES */}
       <GlobalProfileLayout
         profileImage={profileImage}
         backgroundImage={backgroundImage}
@@ -362,8 +367,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             />
           </div>
         </TabsContent>
-
-        <TabsContent value="password">Change your password here.</TabsContent>
       </Tabs>
     </div>
   );
@@ -371,16 +374,3 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
 export default StudyUniversity;
 
-{
-  /* 
-            <UniHighlights data={highlights} />
-            <WhyThisUni data={whythisUniversity} />
-            <UniRanking data={rankComparison} />
-            <ElegibilityCriteria data={eligibilityCriteria} />
-            <AdmissionProcessFlow />
-            <DocumentRquired data={documentRequired} />
-            <InfoTableLayout data={feesStructure} />
-            <PlacementInfo data={placement} />
-            <CampusHighlight /> 
-  */
-}

@@ -324,3 +324,11 @@ export interface IImageExtended
   objectPosition?: string | undefined;
   lazyBoundary?: string | undefined;
 }
+
+
+
+export interface recentlyViewed {
+  slug: string;
+  image: string;
+  title: string;
+}

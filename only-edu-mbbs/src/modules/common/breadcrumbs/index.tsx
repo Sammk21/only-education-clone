@@ -54,7 +54,7 @@ const NextBreadcrumb = ({
 
   return (
     <div className={`mt-20 ${paths === "/" && "hidden"}`}>
-      <ul className={containerClasses}>
+      <ul className={`${containerClasses} text-xs`}>
         <li className={listClasses}>
           <Link href={"/"}>{homeElement}</Link>
         </li>

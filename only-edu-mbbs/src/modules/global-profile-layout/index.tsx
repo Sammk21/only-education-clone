@@ -3,6 +3,7 @@ import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaTrophy } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
+import { ImageExtended } from "../common/extended-image/extended-image";
 
 interface Listprops {
   id: number;
@@ -40,19 +41,19 @@ const GlobalProfileLayout = async ({
     <div className=" bg-light  dark:bg-dark flex flex-wrap items-center border-none  justify-center  ">
       <div className="w-full   bg-light dark:bg-dark   transform  border-none   duration-200 easy-in-out">
         <div className=" h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] w-full overflow-hidden relative -z-10">
-          <Image
+          <ImageExtended
             fill={true}
             className=" object-cover object-center"
-            src={baseUrl + backgroundImage}
+            src={backgroundImage}
             alt="RUSSIA"
           />
         </div>
         <div className="flex justify-center px-5  -mt-12">
           <div className="h-32 relative border-2 w-32 bg-light dark:bg-dark p-2 rounded-full overflow-hidden">
-            <Image
+            <ImageExtended
               fill={true}
               className="object-center object-cover  "
-              src={baseUrl + profileImage}
+              src={profileImage}
               alt=""
             />
           </div>

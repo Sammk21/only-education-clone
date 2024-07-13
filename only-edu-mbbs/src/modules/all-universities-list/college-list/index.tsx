@@ -111,7 +111,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
             {/* Image Section */}
             <div className="relative aspect-video w-full  rounded-md overflow-hidden">
               <ImageExtended
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full transition"
                 src={university?.searchableImage?.url}
                 alt="University Image"
                 blurDataURL={university.searchableImage?.blurhash}
@@ -151,15 +151,17 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
               <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
                 {user ? (
                   user.verified ? (
-                    <Link
-                      className="flex items-center"
-                      href={
-                        "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
-                      }
-                    >
-                      <FaDownload className="mr-1" />
-                      Brochure
-                    </Link>
+                    <Button className="bg-orange-500 hover:bg-orange-400">
+                      <Link
+                        className="flex items-center"
+                        href={
+                          "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
+                        }
+                      >
+                        <FaDownload className="mr-1" />
+                        Brochure
+                      </Link>{" "}
+                    </Button>
                   ) : (
                     <PhoneInputForm
                       existingPhone={
