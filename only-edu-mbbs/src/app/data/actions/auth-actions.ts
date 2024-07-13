@@ -23,7 +23,7 @@ import {
 import { getUserMeLoader } from "../services/get-user-loader";
 import { StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
 
-export const config = {
+ const config = {
   maxAge: 60 * 60 * 24 * 7,
   path: "/",
   domain: process.env.HOST ?? "localhost",

@@ -59,7 +59,7 @@ const Ranking = ({ data }: Props) => {
                   </p>
 
                   {item?.rankings?.publisherImage?.url && (
-                    <div className="relative p-4 border rounded-md hidden md:block">
+                    <div className="relative p-4 border rounded-md hidden md:block m-auto">
                       <Image
                         src={`${baseUrl}${item.rankings.publisherImage.url}`}
                         alt={item.rankings.publisherName}
