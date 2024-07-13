@@ -1,3 +1,4 @@
+import { halfGetCountryQuery } from "@/app/data/quries/country-query";
 import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
 import WhyAbroad from "@/modules/aborad-page-content/why-aborad";
 import Title from "@/modules/common/title";
@@ -34,7 +35,7 @@ export async function generateMetadata({
 }
 
 const StudyCountry = async ({ params }: { params: { slug: string } }) => {
-  const getCountryQuery = `/api/countries?filters[slug][$eq]=${params.slug}&populate[countryProfile][populate][profileImage][populate]=true&populate[countryProfile][populate][backgroundImage][populate]=true&populate[whyThisCountry][populate][header]populate=true&populate[whyThisCountry][populate][qna]populate=true&populate[eligibilityCriteria][populate][header]populate=true&populate[eligibilityCriteria][populate][criteriaList]populate=true&populate[feesStructure][populate][header][populate]=true&populate[faq][populate][faq][populate]=true&populate[overview][populate]=true&populate[cta][populate]=true`;
+  const getCountryQuery = `/api/countries?filters[slug][$eq]=${params.slug}${halfGetCountryQuery}`;
 
   const data = await getStrapiData(getCountryQuery);
 

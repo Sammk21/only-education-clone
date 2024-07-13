@@ -8,11 +8,16 @@ import { getStrapiData, getUniversities } from "@/utils/utils";
 
 import React from "react";
 import { getUserMeLoader } from "../../data/services/get-user-loader";
+import {
+  examsQuery,
+  indianStatesQuery,
+  ownershipQuery,
+} from "@/app/data/quries/uniList-query";
 
-const ownershipQuery = "/api/ownerships?populate=true";
-const indianStatesQuery =
-  "/api/indian-states?populate[universities][populate]=true";
-const examsQuery = "/api/exams?populate=true";
+// const ownershipQuery = "/api/ownerships?populate=true";
+// const indianStatesQuery =
+//   "/api/indian-states?populate[universities][populate]=true";
+// const examsQuery = "/api/exams?populate=true";
 
 export default async function UniversitiesList({
   searchParams,

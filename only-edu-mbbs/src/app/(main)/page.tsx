@@ -9,8 +9,7 @@ import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import SchedulesSection from "@/modules/schedules-section";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
 import InfiniteMovingCardsDemo from "@/modules/testimonial";
-const HomePageQuery =
-  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image&populate[bannerImage][populate]=true";
+import { HomePageQuery } from "../data/quries/home-query";
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
