@@ -1,14 +1,21 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getUserMeLoader } from "@/app/data/services/get-user-loader";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  const user = await getUserMeLoader();
-  const currentPath = request.nextUrl.pathname;
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
 
-  //   if (currentPath.startsWith("/auth") && user.ok === false) {
-  //     return NextResponse.redirect(new URL("/", request.url));
-  //   }
+  // Set a cookie
+  response.cookies.set("myCookieName", "myCookieValue", {
+    httpOnly: true, // Prevent client-side JavaScript access
+    secure: process.env.NODE_ENV !== "development", // Only send over HTTPS in production
+    maxAge: 60 * 60 * 24 * 7, // Cookie expires in 1 week (seconds)
+    path: "/", // Cookie accessible on the entire domain
+    sameSite: "strict", // Prevent CSRF attacks
+  });
 
-  return NextResponse.next();
+  return response;
 }
+
+// Specify the paths where this middleware should run
+export const config = {
+  matcher: ["/"], // Run on all routes (adjust as needed)
+};

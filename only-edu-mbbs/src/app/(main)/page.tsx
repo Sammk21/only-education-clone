@@ -4,12 +4,19 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
-import UniversitiesRail from "@/modules/sliders/slider-two";
+
+import { UniversitiesRail } from "@/modules/sliders/slider-two";
+import Title from "@/modules/common/title";
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import SchedulesSection from "@/modules/schedules-section";
+import RecentlyViewedProducts from "@/modules/recently-viewed-product/RecentlyViewedProduct";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
+import SchedulesSection from "@/modules/schedules-section";
 import InfiniteMovingCardsDemo from "@/modules/testimonial";
-import { HomePageQuery } from "../data/quries/home-query";
+const HomePageQuery =
+  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[topUniversities][populate][universities][populate][1]=universityProfile.profileImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image&populate[bannerImage][populate]=true";
 
 export default async function Home() {
   const data = await getStrapiData(HomePageQuery);
@@ -17,100 +24,118 @@ export default async function Home() {
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">
-        <div className="relative ">
-          <Hero data={data.hero} bannerImage={data.bannerImage} />
-          <InformationSlider data={data.news} href="news" />
-          <UniversitiesRail data={data.topUniversities} />
-        </div>
+        <Hero data={data.hero} bannerImage={data.bannerImage} />
+        <InformationSlider data={data.news} href="news" />
         <LeadingEducationPortal />
+        <UniversitiesRail data={data.topUniversities} />
         <SchedulesSection />
         <OurServices data={data.services} />
         <InformationSlider href="articles" data={data.articles} />
         <WhyUs data={data.whyOnlyEducation} />
         <InfiniteMovingCardsDemo />
+        <RecentlyViewedProducts />
         <NewsLetter />
       </div>
     </div>
   );
 }
+
 /*
+
+
+const RecentlyViewedColleges = () => {
+  "use client";
+  return (
+    <>
+      <div className="grid grid-cols-6 gap-x-3"></div>
+    </>
+  );
+};
+
+>>>>>>> c22912ba678c53bb0dfb24f4d8310083176b29de
 const LeadingEducationPortal = () => {
   return (
-    <section className="py-3 mt-6 text-dark container px-6">
-      <h3 className="md:text-3xl sm:text-2xl text-xl text-center">
-        India's Leading Education Portal For All Your Academic Needs
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6 ">
-        <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
-          <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
-            <figure className="h-14 w-14 relative">
-              <Image
-                src={"https://www.onlyeducation.in/assets/img/icon/college.png"}
-                alt="college"
-                fill={true}
-                className="object-cover object-center"
-              />
-            </figure>
-            <p className="text-center text-lg">College</p>
-            <p className="text-center text-sm">
-              Find your dream college! Explore over 12,000+ colleges to find the
-              right one for you.
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
-          <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
-            <figure className="h-14 w-14 relative">
-              <Image
-                src={"https://www.onlyeducation.in/assets/img/icon/course.png"}
-                alt="college"
-                fill={true}
-                className="object-cover object-center"
-              />
-            </figure>
-            <p className="text-center text-lg">COURSES</p>
-            <p className="text-center text-sm">
-              Apply your skills in the right place. Choose from over 500+
-              trending courses across India.
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer  ">
-          <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
-            <figure className="h-14 w-14 relative">
-              <Image
-                src={
-                  "https://www.onlyeducation.in/assets/img/icon/admission.png"
-                }
-                alt="college"
-                fill={true}
-                className="object-cover object-center"
-              />
-            </figure>
-            <p className="text-center text-lg">ADMISSION</p>
-            <p className="text-center text-sm">
-              Apply your skills in the right place. Choose from over 500+
-              trending courses across India.
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer  ">
-          <CardContent className="flex justify-center h-full  items-center flex-col gap-y-2">
-            <figure className="h-14 w-14 relative">
-              <Image
-                src={"https://www.onlyeducation.in/assets/img/icon/exam.png"}
-                alt="college"
-                fill={true}
-                className="object-cover object-center"
-              />
-            </figure>
-            <p className="text-center text-lg">Exams</p>
-            <p className="text-center text-sm">
-              Search among 500+ government &amp; competitive entrance exams to
-              get the right answers, notifications .
-            </p>
-          </CardContent>
-        </Card>
+    <section className=" bg-orange-50">
+      <div className=" container px-6 py-12 mt-6 text-dark ">
+        <h3 className="md:text-3xl sm:text-2xl text-xl text-center">
+          India's Leading Education Portal For All Your Academic Needs
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6 ">
+          <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
+            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
+              <figure className="h-14 w-14 relative">
+                <Image
+                  src={
+                    "https://www.onlyeducation.in/assets/img/icon/college.png"
+                  }
+                  alt="college"
+                  fill={true}
+                  className="object-cover object-center"
+                />
+              </figure>
+              <p className="text-center text-lg">College</p>
+              <p className="text-center text-sm">
+                Find your dream college! Explore over 12,000+ colleges to find
+                the right one for you.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
+            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
+              <figure className="h-14 w-14 relative">
+                <Image
+                  src={
+                    "https://www.onlyeducation.in/assets/img/icon/course.png"
+                  }
+                  alt="college"
+                  fill={true}
+                  className="object-cover object-center"
+                />
+              </figure>
+              <p className="text-center text-lg">COURSES</p>
+              <p className="text-center text-sm">
+                Apply your skills in the right place. Choose from over 500+
+                trending courses across India.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer  ">
+            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
+              <figure className="h-14 w-14 relative">
+                <Image
+                  src={
+                    "https://www.onlyeducation.in/assets/img/icon/admission.png"
+                  }
+                  alt="college"
+                  fill={true}
+                  className="object-cover object-center"
+                />
+              </figure>
+              <p className="text-center text-lg">ADMISSION</p>
+              <p className="text-center text-sm">
+                Apply your skills in the right place. Choose from over 500+
+                trending courses across India.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer  ">
+            <CardContent className="flex justify-center h-full  items-center flex-col gap-y-2">
+              <figure className="h-14 w-14 relative">
+                <Image
+                  src={"https://www.onlyeducation.in/assets/img/icon/exam.png"}
+                  alt="college"
+                  fill={true}
+                  className="object-cover object-center"
+                />
+              </figure>
+              <p className="text-center text-lg">Exams</p>
+              <p className="text-center text-sm">
+                Search among 500+ government &amp; competitive entrance exams to
+                get the right answers, notifications .
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );

@@ -22,8 +22,9 @@ import {
 } from "../zod/zod-schema";
 import { getUserMeLoader } from "../services/get-user-loader";
 import { StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
+import { recentlyViewed } from "@/types/types";
 
- const config = {
+const config = {
   maxAge: 60 * 60 * 24 * 7,
   path: "/",
   domain: process.env.HOST ?? "localhost",
@@ -54,8 +55,6 @@ export async function registerUserAction(
     ...formData,
     username: formData.phone,
   });
-
-  console.log(validatedFields.error);
 
   if (!validatedFields.success) {
     return {
@@ -268,3 +267,4 @@ export const enquiryAction = async (
     };
   }
 };
+

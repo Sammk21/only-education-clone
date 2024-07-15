@@ -1,6 +1,16 @@
 'use server'
+import { recentlyViewed } from "@/types/types";
 import { flattenAttributes } from "@/utils/utils";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+
+const config = {
+  maxAge: 60 * 60 * 24 * 7, // 1 week
+  path: "/",
+  domain: process.env.HOST ?? "localhost",
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+};
 
 export async function getData(path: string) {
   const baseUrl = process.env.API_URL || `https://admin.onlyeducation.co.in`;
@@ -35,3 +45,27 @@ export const deleteFilters = async (event: React.FormEvent) => {
   redirect(`/universities-list`);
 };
 
+export const addRecentlyViewed = async (data: recentlyViewed) => {
+  const { slug, image, title } = data;
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("RVU");
+  let recentlyViewed: recentlyViewed[] = [];
+
+  if (cookie) {
+    try {
+      recentlyViewed = JSON.parse(cookie.value) as recentlyViewed[];
+    } catch (e) {
+      console.error("Failed to parse recently viewed products cookie:", e);
+    }
+  }
+
+  const updatedViewed = [
+    { slug, image, title },
+    ...recentlyViewed.filter((p) => p.slug !== slug),
+  ].slice(0, 6); // Adjusted to store only the last 6 viewed products
+
+  cookies().set("RVU", JSON.stringify(updatedViewed), config);
+  return {
+    success: true,
+  };
+};
