@@ -13,7 +13,7 @@ import { ImageAttributes, Universitylist } from "@/types/types";
 import MeiliSearch from "meilisearch";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageExtended } from "../common/extended-image/extended-image";
 import {
   FreeMode,
@@ -51,32 +51,54 @@ export default function Hero({ data, bannerImage }: HeroProps) {
   });
 
   const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
-
   const searchIndex = client.index("university");
+
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const search = async () => {
     if (query) {
       try {
         const searchResults = await searchIndex.search<Universitylist>(query);
-        if (searchResults.hits.length === 0) {
-          setResults([]);
-        } else {
-          setResults(searchResults.hits);
-        }
+        setResults(searchResults.hits.length === 0 ? [] : searchResults.hits);
       } catch (error) {
         console.error("Search error:", error);
-      } finally {
       }
     } else {
       setResults([]);
     }
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      searchRef.current &&
+      !searchRef.current.contains(event.target as Node)
+    ) {
+      setQuery("");
+      setResults([]);
+    }
+  };
+
+  const handleEscapePress = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setQuery("");
+      setResults([]);
+    }
+  };
+
   useEffect(() => {
     search();
   }, [query, data]);
 
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscapePress);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscapePress);
+    };
+  }, []);
   return (
     <>
       {/* Hero */}
@@ -95,10 +117,10 @@ export default function Hero({ data, bannerImage }: HeroProps) {
 
                 <SearchBox query={query} setQuery={setQuery} />
                 <div className="relative w-full z-10">
-                  <div className="absolute w-full h-[400px] top-0 rounded-sm overflow-y-auto">
+                  <div className="absolute w-full  top-0 rounded-sm overflow-y-auto">
                     {results && query && (
-                      <Card className="w-full shadow-lg ">
-                        <CardContent className="">
+                      <Card className="w-full shadow-lg">
+                        <CardContent>
                           <Table className="text-xs sm:text-sm">
                             <TableHeader>
                               <TableRow>
@@ -114,36 +136,32 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                               </TableRow>
                             </TableHeader>
                             <TableBody>
-                              {results &&
-                                results.map((item) => (
-                                  <TableRow className="w-full" key={item.id}>
-                                    <TableCell className="sm:1/2 sm:w-1/4">
-                                      <div className="aspect-video rounded-sm shadow-sm overflow-hidden relative">
-                                        <Link
-                                          href={`/study/uni/${item.slug}`}
-                                          className=""
-                                        >
-                                          <Image
-                                            alt="Product image"
-                                            className=" object-cover object-center"
-                                            fill={true}
-                                            src={
-                                              baseUrl +
-                                                item.searchableImage?.url ||
-                                              "https://admin.onlyeducation.co.in/uploads/Placeholder_view_vector_svg_1ab35cbc35.png"
-                                            }
-                                          />
-                                        </Link>
-                                      </div>
-                                    </TableCell>
-                                    <TableCell className="w-1/4 sm:w-1/2  font-medium">
-                                      {item.title}
-                                    </TableCell>
-                                    <TableCell className="w-1/4">
-                                      {item.indian_state?.title}
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
+                              {results.map((item) => (
+                                <TableRow className="w-full" key={item.id}>
+                                  <TableCell className="sm:1/2 sm:w-1/4">
+                                    <div className="aspect-video rounded-sm shadow-sm overflow-hidden relative">
+                                      <Link href={`/study/uni/${item.slug}`}>
+                                        <Image
+                                          alt="Product image"
+                                          className="object-cover object-center"
+                                          fill={true}
+                                          src={
+                                            baseUrl +
+                                              item.searchableImage?.url ||
+                                            "https://admin.onlyeducation.co.in/uploads/Placeholder_view_vector_svg_1ab35cbc35.png"
+                                          }
+                                        />
+                                      </Link>
+                                    </div>
+                                  </TableCell>
+                                  <TableCell className="w-1/4 sm:w-1/2 font-medium">
+                                    {item.title}
+                                  </TableCell>
+                                  <TableCell className="w-1/4">
+                                    {item.indian_state?.title}
+                                  </TableCell>
+                                </TableRow>
+                              ))}
                             </TableBody>
                           </Table>
                         </CardContent>

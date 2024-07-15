@@ -71,9 +71,7 @@ export async function getArticles(path:string, currentPage:number){
 const PAGE_SIZE = process.env.PAGE_SIZE || 10                                          
 const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`
  try {
-    const response = await fetch(baseUrl + path + paginationQuery, {
-      cache: "no-store",
-    }); 
+    const response = await fetch(baseUrl + path + paginationQuery); 
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;

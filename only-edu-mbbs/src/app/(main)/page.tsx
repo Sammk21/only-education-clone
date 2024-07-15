@@ -10,26 +10,63 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 import RecentlyViewedUniversity from "@/modules/recently-viewed-university/RecentlyViewedProduct";
-const HomePageQuery =
-  "/api/landing-page?populate[hero][populate][header][populate]=true&populate[experienceRail][populate][expBlock]=true&populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true&populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[topUniversities][populate][universities][populate][1]=universityProfile.profileImage&populate[articles][populate]=true&populate[articles][populate][2]=image&populate[news][populate]=true&populate[news][populate][2]=image&populate[bannerImage][populate]=true";
+import Link from "next/link";
+
+const HeroQuery =
+  "/api/landing-page?populate[hero][populate][header][populate]=true";
+const ServicesQuery =
+  "/api/landing-page?populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true";
+const WhyUsQuery =
+  "/api/landing-page?populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true";
+const NewsQuery =
+  "/api/landing-page?populate[news][populate]=true&populate[news][populate][2]=image";
+const ArticlesQuery =
+  "/api/landing-page?populate[articles][populate]=true&populate[articles][populate][2]=image";
+const TopUniversitiesQuery =
+  "/api/landing-page?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[topUniversities][populate][universities][populate][1]=universityProfile.profileImage";
+const BannerImageQuery =
+  "/api/landing-page?populate[bannerImage][populate]=true";
 
 export default async function Home() {
-  const data = await getStrapiData(HomePageQuery);
+  // const data = await getStrapiData(HomePageQuery);
+  const [
+    heroData,
+    servicesData,
+    whyUsData,
+    newsData,
+    articlesData,
+    topUniversitiesData,
+    bannerImageData,
+  ] = await Promise.all([
+    getStrapiData(HeroQuery),
+    getStrapiData(ServicesQuery),
+    getStrapiData(WhyUsQuery),
+    getStrapiData(NewsQuery),
+    getStrapiData(ArticlesQuery),
+    getStrapiData(TopUniversitiesQuery),
+    getStrapiData(BannerImageQuery),
+  ]);
 
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">
-        <Hero data={data.hero} bannerImage={data.bannerImage} />
-        <RecentlyViewedUniversity />
-        <InformationSlider data={data.news} href="news" />
-        <LeadingEducationPortal />
-        <UniversitiesRail data={data.topUniversities} />
-        <SchedulesSection />
-        <OurServices data={data.services} />
-        <InformationSlider href="articles" data={data.articles} />
-        <WhyUs data={data.whyOnlyEducation} />
-        <InfiniteMovingCardsDemo />
-        <NewsLetter />
+        <div className="w-full overflow-hidden">
+          <div className="relative">
+            <Hero
+              data={heroData.hero}
+              bannerImage={bannerImageData.bannerImage}
+            />
+            <RecentlyViewedUniversity />
+            <InformationSlider data={newsData.news} href="news" />
+            <LeadingEducationPortal />
+            <UniversitiesRail data={topUniversitiesData.topUniversities} />
+            <SchedulesSection />
+            <OurServices data={servicesData.services} />
+            <InformationSlider href="articles" data={articlesData.articles} />
+            <WhyUs data={whyUsData.whyOnlyEducation} />
+            <NewsLetter />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -43,25 +80,27 @@ const LeadingEducationPortal = () => {
           India's Leading Education Portal For All Your Academic Needs
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6 ">
-          <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
-            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
-              <figure className="h-14 w-14 relative">
-                <Image
-                  src={
-                    "https://www.onlyeducation.in/assets/img/icon/college.png"
-                  }
-                  alt="college"
-                  fill={true}
-                  className="object-cover object-center"
-                />
-              </figure>
-              <p className="text-center text-lg">College</p>
-              <p className="text-center text-sm">
-                Find your dream college! Explore over 12,000+ colleges to find
-                the right one for you.
-              </p>
-            </CardContent>
-          </Card>
+          <Link href={"/universities-list"}>
+            <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
+              <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
+                <figure className="h-14 w-14 relative">
+                  <Image
+                    src={
+                      "https://www.onlyeducation.in/assets/img/icon/college.png"
+                    }
+                    alt="college"
+                    fill={true}
+                    className="object-cover object-center"
+                  />
+                </figure>
+                <p className="text-center text-lg">COLLEGES</p>
+                <p className="text-center text-sm">
+                  Find your dream college! Explore over 12,000+ colleges to find
+                  the right one for you.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
           <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
             <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
               <figure className="h-14 w-14 relative">

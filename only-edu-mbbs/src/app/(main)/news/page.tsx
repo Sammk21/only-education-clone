@@ -7,7 +7,6 @@ import { Metadata } from "next";
 
 const blogListQuery =
   "/api/news?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category&fields[5]=live";
-console.dir("check", blogListQuery);
 export const metadata: Metadata = {
   title: "News | Only education",
   description: "this is the article page for Article section of only education",

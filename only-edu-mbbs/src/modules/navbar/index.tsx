@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User } from "lucide-react";
+import { ChevronDown, User } from "lucide-react";
 import Banner from "@/components/ui/tailwind-banner";
 
 export interface NavbarProps {
@@ -66,7 +66,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
           </div>
           {user.ok ? (
             <>
-              <UserProfileButton />
+              <UserProfileButton firstName={user.data.firstName} />
             </>
           ) : (
             <Link href={"/auth"}>
@@ -87,6 +87,10 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
 
 export default Navbar;
 
+interface Props {
+  firstName: string | undefined | null;
+}
+
 export const AuthLoader = () => {
   return (
     <div className="relative">
@@ -96,7 +100,7 @@ export const AuthLoader = () => {
   );
 };
 
-const UserProfileButton = () => {
+const UserProfileButton = ({ firstName }: Props) => {
   return (
     <div className="flex items-center gap-x-2  text-sm">
       <Avatar>
@@ -108,9 +112,10 @@ const UserProfileButton = () => {
       </Avatar>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="hover:bg-accent/10" variant="outline">
-            Profile
-          </Button>
+          <p className="flex justify-center items-center ">
+            {firstName ? "hello, " + firstName : "profile"}
+            <ChevronDown className="mt-1" size={15} />
+          </p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
