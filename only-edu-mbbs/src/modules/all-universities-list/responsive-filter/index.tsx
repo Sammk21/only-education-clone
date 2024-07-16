@@ -28,16 +28,23 @@ interface uniProp {
 }
 
 interface FilterProps {
-  ownership: {
+  ownership?: {
     data: Option[];
   };
-  indianStates: {
+  indianStates?: {
     data: Option[];
   };
   exams: {
     data: Option[];
   };
+  streams?: {
+    data: Option[];
+  };
+  modes?: {
+    data: Option[];
+  };
   filterParams: FilterParams;
+  context: string;
 }
 
 interface AccordionProps {
@@ -50,20 +57,33 @@ interface FilterParams {
   locationsParam?: string;
   examsParam?: string;
   ownershipsParam?: string;
+  streamsParam?: string;
+  modesParam?: string;
 }
 
 const MobileFilter: React.FC<FilterProps> = ({
   ownership,
   indianStates,
   exams,
+  streams,
+  context,
+  modes,
   filterParams,
 }) => {
-  const { locationsParam, examsParam, ownershipsParam } = filterParams;
+  const {
+    locationsParam,
+    examsParam,
+    ownershipsParam,
+    streamsParam,
+    modesParam,
+  } = filterParams;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
   const selectedExams = examsParam ? examsParam.split(",") : [];
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
+  const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
+  const selectedmodesParam = modesParam ? modesParam.split(",") : [];
 
   const handleSubmit = (event: React.FormEvent) => {
     setIsDrawerOpen(false); // Close the drawer after submitting the form
@@ -94,7 +114,10 @@ const MobileFilter: React.FC<FilterProps> = ({
             </div>
             <div className="flex-1 h-full overflow-y-scroll px-4 py-6">
               <ResetButton />
-              <form action={updatedFilters} onSubmit={handleSubmit}>
+              <form
+                action={(formData) => updatedFilters(formData, context)}
+                onSubmit={handleSubmit}
+              >
                 <div className="flex justify-end items-center gap-x-2 mb-4">
                   <Button type="submit">Apply filters</Button>
                 </div>
@@ -126,25 +149,60 @@ const MobileFilter: React.FC<FilterProps> = ({
                         <span>{ownership}</span>
                       </div>
                     ))}
+
+                    {selectedStreamsParam.map((streams) => (
+                      <div
+                        key={streams}
+                        className="px-1 border border-dark inline-block mt-1 justify-center"
+                      >
+                        <span>{streams}</span>
+                      </div>
+                    ))}
+                    {selectedmodesParam.map((modes) => (
+                      <div
+                        key={modes}
+                        className="px-1 border border-dark inline-block mt-1 justify-center"
+                      >
+                        <span>{modes}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div>
-                  <AccordionCustom
-                    name={"Location"}
-                    data={indianStates.data}
-                    selectedItems={selectedLocations}
-                  />
+                  {streams && (
+                    <AccordionCustom
+                      name={"Streams"}
+                      data={streams.data}
+                      selectedItems={selectedStreamsParam}
+                    />
+                  )}
+                  {indianStates && (
+                    <AccordionCustom
+                      name={"Location"}
+                      data={indianStates.data}
+                      selectedItems={selectedLocations}
+                    />
+                  )}
                   <AccordionCustom
                     name={"Exams"}
                     data={exams.data}
                     selectedItems={selectedExams}
                   />
-                  <AccordionCustom
-                    name={"Ownership"}
-                    data={ownership.data}
-                    selectedItems={selectedOwnerships}
-                  />
+                  {ownership && (
+                    <AccordionCustom
+                      name={"Ownership"}
+                      data={ownership.data}
+                      selectedItems={selectedOwnerships}
+                    />
+                  )}
+                  {modes && (
+                    <AccordionCustom
+                      name={"Examination Modes"}
+                      data={modes.data}
+                      selectedItems={selectedmodesParam}
+                    />
+                  )}
                 </div>
               </form>
             </div>

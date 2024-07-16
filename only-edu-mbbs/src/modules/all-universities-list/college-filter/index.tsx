@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Accordion,
@@ -25,16 +26,23 @@ interface uniProp {
 }
 
 interface Props {
-  ownership: {
+  ownership?: {
     data: Option[];
   };
-  indianStates: {
+  indianStates?: {
     data: Option[];
   };
   exams: {
     data: Option[];
   };
+  streams?: {
+    data: Option[];
+  };
+  modes?: {
+    data: Option[];
+  };
   filterParams: FilterParams;
+  context: string;
 }
 
 interface AccordionProps {
@@ -47,25 +55,44 @@ interface FilterParams {
   locationsParam?: string;
   examsParam?: string;
   ownershipsParam?: string;
+  streamsParam?: string;
+  modesParam?: string;
 }
 
 const CollegeFilter = ({
+  modes,
   ownership,
   indianStates,
   exams,
+  streams,
   filterParams,
+  context,
 }: Props) => {
-  const { locationsParam, examsParam, ownershipsParam } = filterParams;
+  const {
+    locationsParam,
+    examsParam,
+    ownershipsParam,
+    streamsParam,
+    modesParam,
+  } = filterParams;
 
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
   const selectedExams = examsParam ? examsParam.split(",") : [];
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
+  const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
+  const selectedmodesParam = modesParam ? modesParam.split(",") : [];
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    await updatedFilters(formData, context); // Call server-side action
+  };
 
   return (
     <div className="lg:w-[20%] hidden lg:block text-dark z-10 relative ">
       <div className="sticky top-24">
         <ResetButton />
-        <form className="" action={updatedFilters}>
+        <form className="" onSubmit={handleSubmit}>
           <div className="flex justify-end items-center gap-x-2">
             <Button type="submit">Apply filters</Button>
           </div>
@@ -97,25 +124,60 @@ const CollegeFilter = ({
                   <span>{ownership}</span>
                 </div>
               ))}
+
+              {selectedStreamsParam.map((streams) => (
+                <div
+                  key={streams}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{streams}</span>
+                </div>
+              ))}
+              {selectedmodesParam.map((modes) => (
+                <div
+                  key={modes}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{modes}</span>
+                </div>
+              ))}
             </div>
           </div>
 
           <div className=" border-b sticky top-20 w-full h-fit">
-            <AccordionCustom
-              name={"Location"}
-              data={indianStates.data}
-              selectedItems={selectedLocations}
-            />
+            {streams && (
+              <AccordionCustom
+                name={"Streams"}
+                data={streams.data}
+                selectedItems={selectedOwnerships}
+              />
+            )}
+            {indianStates && (
+              <AccordionCustom
+                name={"Location"}
+                data={indianStates.data}
+                selectedItems={selectedLocations}
+              />
+            )}
             <AccordionCustom
               name={"Exams"}
               data={exams.data}
               selectedItems={selectedExams}
             />
-            <AccordionCustom
-              name={"Ownership"}
-              data={ownership.data}
-              selectedItems={selectedOwnerships}
-            />
+            {ownership && (
+              <AccordionCustom
+                name={"Ownership"}
+                data={ownership.data}
+                selectedItems={selectedOwnerships}
+              />
+            )}
+            {modes && (
+              <AccordionCustom
+                name={"Examination Modes"}
+                data={modes.data}
+                selectedItems={selectedmodesParam}
+              />
+            )}
           </div>
         </form>
       </div>

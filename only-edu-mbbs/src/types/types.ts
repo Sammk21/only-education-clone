@@ -200,6 +200,12 @@ export interface ServerResponse {
   };
 }
 
+
+interface mode {
+  id: number;
+  title: string;
+  slug: string;
+}
 interface ownership {
   id: number;
   title: string;
@@ -219,6 +225,15 @@ interface data {
   id: number;
   title: string;
   slug: string;
+
+}
+interface exams{
+  id: number;
+  title: string;
+  slug: string;
+  fullForm:string;
+  description:string;
+  
 }
 export interface UniversityProfile {
   backgroundImage: ImageAttributes;
@@ -235,9 +250,15 @@ export interface Universitylist {
   indian_state?: indian_state;
   streams?: streams;
   searchableImage: ImageAttributes;
-  exams?: {
-    data: data[];
-  };
+  mode?:mode;
+  // exams?: {
+  //   data: data[];
+  // };
+  exams?:exams
+
+  applicationDate:string;
+  examinationDate:string;
+  resultDate:string;
 }
 
 export interface UniversitiesData {
@@ -246,9 +267,11 @@ export interface UniversitiesData {
 
 export interface SearchParamsProps {
   searchParams: {
+    streamsParam?:string
     locationsParam?: string;
     examsParam?: string;
     ownershipsParam?: string;
+    modesParam?:string;
     query?: string;
     page?: number;
   };

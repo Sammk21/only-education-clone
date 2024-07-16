@@ -13,6 +13,7 @@ import {
   indianStatesQuery,
   ownershipQuery,
 } from "@/app/data/quries/uniList-query";
+import EntranceExamList from "@/modules/all-universities-list/exam-list";
 
 // const ownershipQuery = "/api/ownerships?populate=true";
 // const indianStatesQuery =
@@ -32,6 +33,7 @@ export default async function UniversitiesList({
 
   let { locationsParam, examsParam, ownershipsParam } = searchParams;
   let filterParams = { locationsParam, examsParam, ownershipsParam }; //to send it as a prop
+
   if (searchParams) {
     if (locationsParam) {
       const locationFilters = locationsParam
@@ -78,6 +80,7 @@ export default async function UniversitiesList({
             ownership={ownership}
             indianStates={indianStates}
             filterParams={filterParams}
+            context="universities"
           />
           {data.data.length > 0 ? (
             <CollegeList user={newUser} data={data} />
@@ -93,6 +96,7 @@ export default async function UniversitiesList({
             ownership={ownership}
             indianStates={indianStates}
             filterParams={filterParams}
+            context="universities"
           />
         </div>
         <PaginationComponent pageCount={pagination.pageCount} />
