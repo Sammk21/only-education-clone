@@ -56,7 +56,6 @@ export default async function Home() {
               data={heroData.hero}
               bannerImage={bannerImageData.bannerImage}
             />
-            <RecentlyViewedUniversity />
             <InformationSlider data={newsData.news} href="news" />
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />

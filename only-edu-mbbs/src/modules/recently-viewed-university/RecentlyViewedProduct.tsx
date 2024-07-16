@@ -31,26 +31,30 @@ const RecentlyViewedUniversity = () => {
   return (
     <>
       {item ? (
-        <div className="mb-8">
-          <h4 className=" mb-6 text-dark ml-6 dark:text-light text-xl sm:text-2xl md:text-3xl text-center items-center flex sm:flex-row">
+        <div className=" mt-2">
+          <p className=" text-light text-xl text-center items-center flex sm:flex-row">
             Recently viewed colleges
-          </h4>
-          <div className=" flex gap-x-3 container mx-auto overflow-x-scroll">
+          </p>
+          <div className="gap-x-3  overflow-x-scroll mt-1.5 grid grid-cols-3 sm:grid-cols-5 gap-1 md:grid-cols-6">
             {item.map((viewedItem) => (
               <div
-                className="flex flex-col justify-center items-center w-56 "
+                className=" flex items-start text-clip w-16 "
                 key={viewedItem.slug}
               >
-                <Link href={"/study/uni/" + viewedItem.slug}>
-                  <div className="w-24 h-24 relative rounded-lg overflow-hidden border">
-                    <ImageExtended
-                      src={viewedItem.image}
-                      alt={viewedItem.title}
-                      fill={true}
-                    />
-                  </div>
-                </Link>
-                <p className="text-xs line-clamp-1">{viewedItem.title}</p>
+                <div className="flex flex-col  items-center w-full h-full">
+                  <Link href={"/study/uni/" + viewedItem.slug}>
+                    <div className="w-11 h-11 relative  rounded-lg overflow-hidden bg-white border">
+                      <ImageExtended
+                        src={viewedItem.image}
+                        alt={viewedItem.title}
+                        fill={true}
+                      />
+                    </div>
+                  </Link>
+                  <p className="text-xs text-center line-clamp-2">
+                    {viewedItem.title}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

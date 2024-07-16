@@ -26,18 +26,20 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
       >
         <Drawer.Trigger asChild>
           <div
-            className="fixed bottom-6 z-10 h-14 w-14 border border-dark/20 left-1/2 -translate-x-1/2 bg-white text-dark rounded-full transition-all duration-300 hover:shadow-inner flex justify-center items-center text-xs shadow-lg lg:hidden"
+            className="fixed z-[70] bottom-6 h-14 w-14 border border-dark/20 left-1/2 -translate-x-1/2 bg-white text-dark rounded-full transition-all duration-300 hover:shadow-inner flex justify-center items-center text-xs shadow-lg lg:hidden"
             onClick={() => setIsDrawerOpen(true)} // Open the drawer on click
           >
             <p>Menu</p>
           </div>
         </Drawer.Trigger>
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 z-30 bg-black/40" />
-          <Drawer.Content className="bg-light z-40 rounded-l-3xl flex flex-col h-full w-[320px] fixed bottom-0 right-0 ">
+          <Drawer.Overlay className="fixed inset-0 z-[80] bg-black/40" />
+          <Drawer.Content className="bg-light z-[90] rounded-l-3xl flex flex-col h-full w-[320px] fixed bottom-0 right-0 ">
             <span className="absolute w-1 h-28 bg-gray-500/30 rounded-2xl left-1 top-1/2 -translate-y-1/2"></span>
-            <div className="text-gradient w-full mt-5 px-3 flex justify-center items-center border-b pb-3 ">
-              <span>slide to close</span>
+            <div className=" w-full mt-5 px-3 flex justify-center items-center border-b pb-3 ">
+              <span className="text-gradient text-transparent bg-clip-text">
+                slide to close
+              </span>
               <ChevronRightIcon
                 color="#ff8005"
                 size={17}
@@ -55,7 +57,7 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                       key={link.id}
                       className={`py-2 pl-1 mx-2 mr-1 rounded-xl ${
                         isActive(link.href) ? "bg-accent/20" : ""
-                      } flex items-center gap-x-2 `}
+                      } flex items-center gap-x-2 hover:bg-accent/20 `}
                     >
                       <Link
                         className="pl-3"
@@ -76,7 +78,7 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
                       {item.subMenuLinks.map((link) => (
                         <li
                           key={link.href}
-                          className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2"
+                          className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 hover:bg-accent/20"
                         >
                           <Link
                             className="pl-3"

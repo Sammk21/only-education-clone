@@ -235,6 +235,7 @@ export interface Universitylist {
   indian_state?: indian_state;
   streams?: streams;
   searchableImage: ImageAttributes;
+
   exams?: {
     data: data[];
   };

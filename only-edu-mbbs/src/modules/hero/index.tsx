@@ -25,6 +25,8 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import RecentlyViewedUniversity from "../recently-viewed-university/RecentlyViewedProduct";
+import { Badge } from "@/components/ui/badge";
 
 interface HeaderProps {
   id: number;
@@ -50,12 +52,24 @@ export default function Hero({ data, bannerImage }: HeroProps) {
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
+  const suggestedBadges = [
+    "IIT",
+    "IIM",
+    "Mumbai University",
+    "Science",
+    "Engneering",
+    "JEE",
+  ];
+
+  const handleBadgeClick = (badge: string) => {
+    setQuery(badge);
+  };
+
   const searchIndex = client.index("university");
 
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const search = async () => {
     if (query) {
@@ -70,35 +84,10 @@ export default function Hero({ data, bannerImage }: HeroProps) {
     }
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      searchRef.current &&
-      !searchRef.current.contains(event.target as Node)
-    ) {
-      setQuery("");
-      setResults([]);
-    }
-  };
-
-  const handleEscapePress = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setQuery("");
-      setResults([]);
-    }
-  };
-
   useEffect(() => {
     search();
   }, [query, data]);
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscapePress);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscapePress);
-    };
-  }, []);
   return (
     <>
       {/* Hero */}
@@ -115,63 +104,72 @@ export default function Hero({ data, bannerImage }: HeroProps) {
               <div className="mt-7 px-3 sm:px-0 sm:mt-12 mx-auto max-w-xl relative">
                 {/* Form */}
 
-                <SearchBox query={query} setQuery={setQuery} />
-                <div className="relative w-full z-10">
-                  <div className="absolute w-full  top-0 rounded-sm overflow-y-auto">
-                    {results && query && (
-                      <Card className="w-full shadow-lg">
-                        <CardContent>
-                          <Table className="text-xs sm:text-sm">
-                            <TableHeader>
-                              <TableRow>
-                                <TableHead className="w-1/2 sm:w-1/4">
-                                  Image
-                                </TableHead>
-                                <TableHead className="w-1/4 sm:w-1/2">
-                                  Name
-                                </TableHead>
-                                <TableHead className="w-1/4">
-                                  Location
-                                </TableHead>
-                              </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                              {results.map((item) => (
-                                <TableRow className="w-full" key={item.id}>
-                                  <TableCell className="sm:1/2 sm:w-1/4">
-                                    <div className="aspect-video rounded-sm shadow-sm overflow-hidden relative">
-                                      <Link href={`/study/uni/${item.slug}`}>
-                                        <Image
-                                          alt="Product image"
-                                          className="object-cover object-center"
-                                          fill={true}
-                                          src={
-                                            baseUrl +
-                                              item.searchableImage?.url ||
-                                            "https://admin.onlyeducation.co.in/uploads/Placeholder_view_vector_svg_1ab35cbc35.png"
-                                          }
-                                        />
-                                      </Link>
-                                    </div>
-                                  </TableCell>
-                                  <TableCell className="w-1/4 sm:w-1/2 font-medium">
-                                    {item.title}
-                                  </TableCell>
-                                  <TableCell className="w-1/4">
-                                    {item.indian_state?.title}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        </CardContent>
-                      </Card>
-                    )}
+                <div
+                  className="p-2 border border-gray-300 text-xs flex justify-start items-center text-gray-400 bg-white h-8 rounded-md w-full z-20 cursor-text"
+                  onClick={() => setIsSearchOpen(true)}
+                >
+                  Search Universities ...
+                </div>
+                <div>
+                  <RecentlyViewedUniversity />
+                </div>
+
+                <div
+                  className={`fixed transition-opacity duration-300 inset-0 bg-dark bg-opacity-50 backdrop-blur-lg ${
+                    isSearchOpen ? "opacity-100 flex" : "opacity-0 hidden"
+                  } ${
+                    results ? "items-start pt-28" : "items-center"
+                  }   justify-center p-4 z-[60]`}
+                >
+                  <div className="relative w-full max-w-2xl">
+                    <div className="flex w-full relative">
+                      <SearchBox query={query} setQuery={setQuery} />
+                      <button
+                        onClick={() => {
+                          setIsSearchOpen(false);
+                          setQuery("");
+                        }}
+                        className="h-full text-dark absolute right-0 text-2xl -top-3 mt-1.5 w-8 z-30"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 my-2 text-white">
+                      <p className="inline-block italic">Suggestions:</p>
+                      {suggestedBadges.map((badge) => (
+                        <Badge
+                          className="hover:bg-white hover:text-dark cursor-pointer"
+                          key={badge}
+                          onClick={() => handleBadgeClick(badge)}
+                          variant="outline"
+                        >
+                          {badge}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="relative w-full z-10">
+                      <div className="absolute w-full bg-white text-black top-0 rounded-sm max-h-[600px] overflow-y-scroll">
+                        {results &&
+                          query &&
+                          results.map((item) => (
+                            <Link
+                              key={item.slug}
+                              className="block"
+                              href={`/study/uni/${item.slug}`}
+                            >
+                              <p className="text-start px-1 py-2 my-3 border-b">
+                                {item.title}
+                              </p>
+                            </Link>
+                          ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
+
                 {/* End Form */}
                 {/* SVG Element */}
-                <div className="hidden md:block absolute top-0 end-0 -translate-y-12 translate-x-20">
+                <div className="hidden md:block absolute top-0 end-0 -translate-y-12 translate-x-20 -z-10">
                   <svg
                     className="w-16 h-auto text-orange-500"
                     width={121}
