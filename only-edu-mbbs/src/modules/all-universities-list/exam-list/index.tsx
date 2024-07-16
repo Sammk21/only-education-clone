@@ -12,13 +12,14 @@ import { Separator } from "@/components/ui/separator";
 import { json } from "stream/consumers";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   data: UniversitiesData;
   user: User | null;
 }
 interface FilteredProps {
-  university: Universitylist;
+  exam: Universitylist;
   user: User | null;
 }
 interface User {
@@ -83,12 +84,8 @@ const EntranceExamList = ({ data, user }: Props) => {
         </>
       )}
       {(query && results.length > 0 ? results : data.data).map(
-        (university: Universitylist) => (
-          <FilteredExamsItem
-            university={university}
-            user={user}
-            key={university.id}
-          />
+        (exam: Universitylist) => (
+          <FilteredExamsItem exam={exam} user={user} key={exam.id} />
         )
       )}
     </section>
@@ -97,29 +94,29 @@ const EntranceExamList = ({ data, user }: Props) => {
 
 export default EntranceExamList;
 
-const FilteredExamsItem = ({ university, user }: FilteredProps) => {
-  // console.log(university.mode?.title);
+const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
+  // console.log(exam.mode?.title);
   return (
     <>
       <div
-        key={university?.id}
-        className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
+        key={exam?.id}
+        className="m-auto mb-4 relative p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
         <div className="flex flex-col w-full sm:flex-row items-center">
-          <Link
-            className=" w-full sm:w-1/4"
-            href={`study/exam/${university?.slug}`}
-          >
-            <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
-              {university.mode?.title}
-            </p>
+          <Link className=" w-full sm:w-1/4" href={`study/exam/${exam?.slug}`}>
+            <Badge
+              variant="secondary"
+              className="lowercase absolute top-2 left-2 text-white"
+            >
+              {exam.mode?.title}
+            </Badge>
 
             <div className="relative aspect-video w-full  rounded-md overflow-hidden">
               <ImageExtended
                 className="object-contain w-full h-full transition"
-                src={university?.searchableImage?.url}
-                alt="University Image"
-                blurDataURL={university.searchableImage?.blurhash}
+                src={exam?.searchableImage?.url}
+                alt="exam Image"
+                blurDataURL={exam.searchableImage?.blurhash}
                 fill
               />
             </div>
@@ -127,17 +124,17 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <Link href={`study/exam/${university?.slug}`}>
+              <Link href={`study/exam/${exam?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    {university?.title}
+                    {exam?.title}
                   </h3>
 
                   <p className="line-clamp-2  text-dark/70 text-sm">
-                    {university.exams?.fullForm}
+                    {exam.exams?.fullForm}
                   </p>
                   <p className="line-clamp-1 my-2 italic text-sm block md:hidden">
-                    {university.exams?.description}
+                    {exam.exams?.description}
                   </p>
                 </div>
               </Link>
@@ -177,7 +174,7 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
               </div>
             </div>
             <p className="line-clamp-2 my-2 italic text-sm hidden md:block">
-              {university.exams?.description}
+              {exam.exams?.description}
             </p>
 
             <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60 gap-5 md:gap-10">
@@ -185,7 +182,7 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
                 <div className="">
                   Application Date
                   <p className="font-semibold text-dark my-2">
-                    {university?.applicationDate}
+                    {exam?.applicationDate}
                   </p>
                 </div>
               </div>
@@ -193,7 +190,7 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
                 <div className="">
                   Exam Date
                   <p className="font-semibold text-dark my-2">
-                    {university?.examinationDate}
+                    {exam?.examinationDate}
                   </p>
                 </div>
               </div>
@@ -201,7 +198,7 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
                 <div className="">
                   Result Date
                   <p className="font-semibold text-dark my-2">
-                    {university?.resultDate}
+                    {exam?.resultDate}
                   </p>
                 </div>
               </div>

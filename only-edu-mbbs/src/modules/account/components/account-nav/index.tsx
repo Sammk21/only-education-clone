@@ -37,11 +37,11 @@ const AccountNav = ({
           <span>Settings</span>
         </AccountNavLink>
       </div>
-      <div className="px-2 pb-3 ">
+      <div className="px-2 pb-3 sm:block hidden">
         <Button
           onClick={handleLogout}
           variant="outline"
-          className="w-full mx-auto border-none text-xs mt-3 bg-red-500 text-white hover:bg-red-400"
+          className="w-full  mx-auto border-none text-xs mt-3 bg-red-500 text-white hover:bg-red-400"
         >
           Logout
         </Button>

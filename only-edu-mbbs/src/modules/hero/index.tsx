@@ -230,7 +230,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                 pagination={false}
                 effect={"fade"}
                 autoplay={{
-                  delay: 2000,
+                  delay: 6000,
                   disableOnInteraction: true,
                   pauseOnMouseEnter: true,
                 }}
@@ -253,7 +253,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                 {bannerImage.data.map((item) => (
                   <SwiperSlide key={item.id} className="">
                     <div className="  ">
-                      <div className="w-full h-screen relative ">
+                      <div className="w-full h-[100svh] relative ">
                         <Image
                           src={"https://admin.onlyeducation.co.in" + item.url}
                           alt={item.name}
@@ -263,8 +263,8 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                         />
                         <div className="absolute top-0 left-0 w-full h-full bg-dark/50 -z-10" />
                       </div>
-                      <div className="capitalize mt-3 text-white text-right">
-                        <p className="text-md mb-2 line-clamp-2 ">
+                      <div className="uppercase  rounded-lg px-1 py-2 border-[0.8px] backdrop-blur-lg items-center text-white absolute inline-block bottom-5 right-5">
+                        <p className="sm:text-sm text-xs line-clamp-2 ">
                           {item.name.replace(/\.[^/.]+$/, "")}
                         </p>
                       </div>
