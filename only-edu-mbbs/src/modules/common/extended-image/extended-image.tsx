@@ -22,6 +22,7 @@ export const ImageExtended: FC<IImageExtended> = ({
       src={baseUrl + src}
       blurDataURL={newBlurUrl ? newBlurUrl! : ""}
       placeholder={newBlurUrl ? "blur" : "empty"}
+
       {...props}
     />
   );

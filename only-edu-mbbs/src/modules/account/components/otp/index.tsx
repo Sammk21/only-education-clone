@@ -67,7 +67,7 @@ const Otp = ({ user }: OtpProps) => {
     if (otpVerificationResponse?.success) {
       const updateVerifiedUserData = await updateVerifiedUserService(id);
       toast.success("OTP verified successfully");
-      router.push("/auth");
+      router.back();
     } else {
       toast.error("OTP verification failed");
       setOtpErrorMessage("You entered the wrong OTP.");

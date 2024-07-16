@@ -18,6 +18,7 @@ import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handlePhoneInput } from "@/utils/utils";
 import { GoogleButton } from "../providers-button";
+import { useRouter } from "next/navigation";
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;
@@ -78,6 +79,7 @@ const Login = ({ setCurrentView }: Props) => {
         <LabelInputContainer className="mb-4">
           <Label htmlFor="phone">Phone</Label>
           <Input
+            autoComplete="tel"
             id="phone"
             placeholder="Enter your phone number"
             type="tel"
@@ -95,6 +97,7 @@ const Login = ({ setCurrentView }: Props) => {
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
           <Input
+            autoComplete="current-password"
             id="password"
             placeholder="••••••••"
             type="password"

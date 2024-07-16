@@ -7,6 +7,7 @@ import { getArticles } from "@/utils/utils";
 import { Metadata } from "next";
 
 console.dir("check", blogListQuery);
+
 export const metadata: Metadata = {
   title: "News | Only education",
   description: "this is the article page for Article section of only education",

@@ -53,8 +53,7 @@ export async function getStrapiData(path: string) {
   try {
     const response = await fetch(baseUrl + path, {
       headers: { Authorization: `Bearer ${token}` },
-      cache: "no-store",
-
+      next: { revalidate: 3600 },
     }); 
 
   
@@ -71,7 +70,9 @@ export async function getArticles(path:string, currentPage:number){
 const PAGE_SIZE = process.env.PAGE_SIZE || 10                                          
 const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`
  try {
-    const response = await fetch(baseUrl + path + paginationQuery); 
+    const response = await fetch(baseUrl + path + paginationQuery, {
+      next: { revalidate: 3600 },
+    }); 
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;

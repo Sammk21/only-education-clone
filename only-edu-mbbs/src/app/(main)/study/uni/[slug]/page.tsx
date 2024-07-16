@@ -91,7 +91,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const recentlyViewedData = {
     slug: params.slug,
-    image: backgroundImage,
+    image: profileImage,
     title: title,
   };
 
