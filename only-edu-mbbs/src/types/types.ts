@@ -267,7 +267,9 @@ export interface UniversitiesData {
 
 export interface SearchParamsProps {
   searchParams: {
-    streamsParam?:string
+    streamsParam?:string;
+    courseParam?:string;
+    durationParam?:string;
     locationsParam?: string;
     examsParam?: string;
     ownershipsParam?: string;

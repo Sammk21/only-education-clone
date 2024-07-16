@@ -27,7 +27,7 @@ interface User {
   phone: number;
 }
 
-const EntranceExamList = ({ data, user }: Props) => {
+const CourseList = ({ data, user }: Props) => {
   console.log(data, "by");
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
@@ -95,10 +95,10 @@ const EntranceExamList = ({ data, user }: Props) => {
   );
 };
 
-export default EntranceExamList;
+export default CourseList;
 
 const FilteredExamsItem = ({ university, user }: FilteredProps) => {
-  // console.log(university.mode?.title);
+  console.log(university);
   return (
     <>
       <div
@@ -113,16 +113,6 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
             <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
               {university.mode?.title}
             </p>
-
-            <div className="relative aspect-video w-full  rounded-md overflow-hidden">
-              <ImageExtended
-                className="object-contain w-full h-full transition"
-                src={university?.searchableImage?.url}
-                alt="University Image"
-                blurDataURL={university.searchableImage?.blurhash}
-                fill
-              />
-            </div>
           </Link>
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
