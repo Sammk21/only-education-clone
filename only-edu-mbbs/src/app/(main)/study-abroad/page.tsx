@@ -12,7 +12,7 @@ import CountrySelect from "@/modules/aborad-page-content/countries-select";
 import PopularCoursesAbroad from "@/modules/aborad-page-content/popular-courses-abroad";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import { getStrapiData } from "@/utils/utils";
-import UniversitiesRail from "@/modules/sliders/slider-two";
+import { UniversitiesRail } from "@/modules/sliders/slider-two";
 
 const StudyMbbsAbroad = async () => {
   const studyAbroadQuey =

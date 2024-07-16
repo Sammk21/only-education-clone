@@ -35,7 +35,7 @@ const RecentlyViewedUniversity = () => {
           <p className=" text-light text-xl text-center items-center flex sm:flex-row">
             Recently viewed colleges
           </p>
-          <div className="gap-x-3  overflow-x-scroll mt-1.5 grid grid-cols-3 sm:grid-cols-5 gap-1 md:grid-cols-6">
+          <div className="gap-x-3  overflow-x-auto mt-1.5 grid grid-cols-3 sm:grid-cols-5 gap-1 md:grid-cols-6">
             {item.map((viewedItem) => (
               <div
                 className=" flex items-start text-clip w-16 "

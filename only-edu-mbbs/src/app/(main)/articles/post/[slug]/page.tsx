@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import InformationSlider from "@/modules/sliders/slider-one";
+import { halfBlogQuery } from "@/app/data/quries/articles-query";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -48,7 +49,7 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}&populate[image]=true?filters[recommendedArticle]=true&populate[articles][populate]=true&populate[articles][populate]=image`;
+  const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}${halfBlogQuery}`;
   const baseUrl = process.env.API_URL || "http://localhost:1337";
 
   const data = await getStrapiData(blogQuery);

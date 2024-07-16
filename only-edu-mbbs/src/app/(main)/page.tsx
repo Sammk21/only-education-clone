@@ -4,13 +4,17 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
+
 import UniversitiesRail from "@/modules/sliders/slider-two";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+
 import RecentlyViewedUniversity from "@/modules/recently-viewed-university/RecentlyViewedProduct";
 import Link from "next/link";
+import LeadingEducationPortal from "@/modules/leading-education-portal";
+import SchedulesSection from "@/modules/schedules-section";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -71,6 +75,21 @@ export default async function Home() {
   );
 }
 
+/*
+
+
+const RecentlyViewedColleges = () => {
+  "use client";
+  return (
+    <>
+      <div className="grid grid-cols-6 gap-x-3"></div>
+    </>
+  );
+};
+
+>>>>>>> c22912ba678c53bb0dfb24f4d8310083176b29de
+=======
+>>>>>>> f08580968cddd8057868c75c0486b7ba3a8b5924
 const LeadingEducationPortal = () => {
   return (
     <section className=" bg-orange-50">
@@ -284,3 +303,4 @@ const testimonials = [
     title: "Moby-Dick",
   },
 ];
+*/

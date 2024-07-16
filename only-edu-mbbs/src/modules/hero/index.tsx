@@ -253,7 +253,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                 {bannerImage.data.map((item) => (
                   <SwiperSlide key={item.id} className="">
                     <div className="  ">
-                      <div className="aspect-video h-screen relative ">
+                      <div className="w-full h-screen relative ">
                         <Image
                           src={"https://admin.onlyeducation.co.in" + item.url}
                           alt={item.name}

@@ -100,7 +100,11 @@ const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
   const renderImages = (images: ImageAttributes[], group: string) => (
     <div className={`grid sm:grid-cols-4 grid-cols-2 gap-4 ${className}`}>
       {images.map((item, index) => (
-        <div key={item.id} onClick={() => openLightbox(images, index)}>
+        <div
+          key={item.id}
+          onClick={() => openLightbox(images, index)}
+          className="aspect-video"
+        >
           <Image
             src={baseUrl + item.url}
             alt={item.alternativeText || ""}

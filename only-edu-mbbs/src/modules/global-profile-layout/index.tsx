@@ -4,6 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaTrophy } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { ImageExtended } from "../common/extended-image/extended-image";
+import { ImageAttributes } from "@/types/types";
 
 interface Listprops {
   id: number;

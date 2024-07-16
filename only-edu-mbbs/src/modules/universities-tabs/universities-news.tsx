@@ -26,14 +26,18 @@ const UniversitiesNews = ({ data, className, sticky }: RelatedUniversities) => {
             <div key={newsItem.id} className="mb-4 border-b border-dashed pb-5">
               <Link href={`/news/post/${newsItem.slug}`}>
                 <div className="text-dark text-base flex gap-3">
-                  <h2 className="line-clamp-2">{newsItem.title}</h2>
-                  <Image
-                    src={baseUrl + newsItem.image.formats.thumbnail.url}
-                    alt="hi"
-                    width={100}
-                    height={100}
-                    className="mt-2 rounded-lg"
-                  />
+                  <div>
+                    <h2 className="line-clamp-2">{newsItem.title}</h2>
+                  </div>
+                  <div className="aspect-video">
+                    <Image
+                      src={baseUrl + newsItem.image.formats.thumbnail.url}
+                      alt="hi"
+                      width={150}
+                      height={150}
+                      className="mt-2 rounded-lg "
+                    />
+                  </div>
                 </div>
               </Link>
             </div>

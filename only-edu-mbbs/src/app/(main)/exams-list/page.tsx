@@ -11,51 +11,51 @@ import { getUserMeLoader } from "../../data/services/get-user-loader";
 import {
   examsQuery,
   indianStatesQuery,
+  modeQuery,
   ownershipQuery,
+  streasmQuery,
 } from "@/app/data/quries/uniList-query";
 import EntranceExamList from "@/modules/all-universities-list/exam-list";
-
-// const ownershipQuery = "/api/ownerships?populate=true";
-// const indianStatesQuery =
-//   "/api/indian-states?populate[universities][populate]=true";
-// const examsQuery = "/api/exams?populate=true";
 
 export default async function UniversitiesList({
   searchParams,
 }: Readonly<SearchParamsProps>) {
-  let universityListQuery =
-    "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
+  let examListQuery =
+    "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[exams][populate]=true&populate[mode][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
-  const ownership = await getStrapiData(ownershipQuery);
-  const indianStates = await getStrapiData(indianStatesQuery);
+  // const ownership = await getStrapiData(ownershipQuery);
+  const streams = await getStrapiData(streasmQuery);
   const exams = await getStrapiData(examsQuery);
+  const modes = await getStrapiData(modeQuery);
 
-  let { locationsParam, examsParam, ownershipsParam } = searchParams;
-  let filterParams = { locationsParam, examsParam, ownershipsParam }; //to send it as a prop
-
+  let { examsParam, streamsParam, modesParam } = searchParams;
+  let filterParams = { examsParam, streamsParam, modesParam }; //to send it as a prop
   if (searchParams) {
-    if (locationsParam) {
-      const locationFilters = locationsParam
-        .split(",")
-        .map((location) => `filters[indian_state][slug][$eq]=${location}`)
-        .join("&");
-      universityListQuery += `&${locationFilters}`;
-    }
     if (examsParam) {
       const examFilters = examsParam
         .split(",")
         .map((exam) => `filters[exams][slug][$eq]=${exam}`)
         .join("&");
-      universityListQuery += `&${examFilters}`;
+      examListQuery += `&${examFilters}`;
     }
-    if (ownershipsParam) {
-      const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
-      universityListQuery += `&${ownershipFilters}`;
+    if (streamsParam) {
+      const streamsFilters = streamsParam
+        .split(",")
+        .map((streams) => `filters[stream][slug][$eq]=${streams}`)
+        .join("&");
+      examListQuery += `&${streamsFilters}`;
+    }
+    if (modesParam) {
+      const modesFilters = modesParam
+        .split(",")
+        .map((modes) => `filters[mode][slug][$eq]=${modes}`)
+        .join("&");
+      examListQuery += `&${modesFilters}`;
     }
   }
 
-  const data = await getUniversities(universityListQuery, currentPage);
+  const data = await getUniversities(examListQuery, currentPage);
   const user = await getUserMeLoader();
   interface newUserProp {
     id: number;
@@ -68,7 +68,6 @@ export default async function UniversitiesList({
     const { id, verified, phone } = user.data;
     newUser = { id, verified, phone };
   }
-
   const { pagination } = data.meta;
 
   return (
@@ -77,13 +76,13 @@ export default async function UniversitiesList({
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
             exams={exams}
-            ownership={ownership}
-            indianStates={indianStates}
+            streams={streams}
+            modes={modes}
+            context="exams"
             filterParams={filterParams}
-            context="universities"
           />
           {data.data.length > 0 ? (
-            <CollegeList user={newUser} data={data} />
+            <EntranceExamList user={newUser} data={data} />
           ) : (
             <div className=" w-[70%] flex justify-center ">
               <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
@@ -93,10 +92,10 @@ export default async function UniversitiesList({
           )}
           <MobileFilter
             exams={exams}
-            ownership={ownership}
-            indianStates={indianStates}
+            streams={streams}
+            modes={modes}
+            context="exams"
             filterParams={filterParams}
-            context="universities"
           />
         </div>
         <PaginationComponent pageCount={pagination.pageCount} />

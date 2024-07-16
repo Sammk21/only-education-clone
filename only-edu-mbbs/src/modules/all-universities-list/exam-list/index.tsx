@@ -27,13 +27,14 @@ interface User {
   phone: number;
 }
 
-const CollegeList = ({ data, user }: Props) => {
+const EntranceExamList = ({ data, user }: Props) => {
+  console.log(data, "by");
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const searchIndex = client.index("university");
+  const searchIndex = client.index("entrance-exam");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -83,7 +84,7 @@ const CollegeList = ({ data, user }: Props) => {
       )}
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
-          <FilteredUniversityItem
+          <FilteredExamsItem
             university={university}
             user={user}
             key={university.id}
@@ -94,24 +95,28 @@ const CollegeList = ({ data, user }: Props) => {
   );
 };
 
-export default CollegeList;
+export default EntranceExamList;
 
-const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
-  console.log(university);
+const FilteredExamsItem = ({ university, user }: FilteredProps) => {
+  // console.log(university.mode?.title);
   return (
     <>
       <div
         key={university?.id}
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <div className="flex flex-col w-full sm:flex-row">
+        <div className="flex flex-col w-full sm:flex-row items-center">
           <Link
             className=" w-full sm:w-1/4"
-            href={`study/uni/${university?.slug}`}
+            href={`study/exam/${university?.slug}`}
           >
+            <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
+              {university.mode?.title}
+            </p>
+
             <div className="relative aspect-video w-full  rounded-md overflow-hidden">
               <ImageExtended
-                className="object-cover w-full h-full transition"
+                className="object-contain w-full h-full transition"
                 src={university?.searchableImage?.url}
                 alt="University Image"
                 blurDataURL={university.searchableImage?.blurhash}
@@ -122,32 +127,22 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <Link href={`study/uni/${university?.slug}`}>
+              <Link href={`study/exam/${university?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                     {university?.title}
                   </h3>
-                  <div className="flex my-1 text-xs sm:text-sm">
-                    <p className="flex items-center mr-2">
-                      <FaLocationDot className="text-orange-500" />
-                      <span className="font-semibold text-accent">
-                        {university?.indian_state?.title}
-                      </span>
-                    </p>
-                    <p className="flex items-center">
-                      <FaBuilding className="text-orange-500" />
-                      <span className="font-semibold text-accent">
-                        {university?.ownership?.title}
-                      </span>
-                    </p>
-                  </div>
-                  <p className="line-clamp-2 mt-2 text-dark/70 text-sm">
-                    {university?.universityProfile?.description}
+
+                  <p className="line-clamp-2  text-dark/70 text-sm">
+                    {university.exams?.fullForm}
+                  </p>
+                  <p className="line-clamp-1 my-2 italic text-sm block md:hidden">
+                    {university.exams?.description}
                   </p>
                 </div>
               </Link>
 
-              <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-4 sm:mt-0 mb-2">
+              <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
                 {user ? (
                   user.verified ? (
                     <Button className="bg-orange-500 hover:bg-orange-400">
@@ -179,51 +174,37 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                     </Link>
                   </Button>
                 )}
-
-                <Button
-                  className="text-accent bg-accent/10 hover:bg-transparent w-full"
-                  variant="outline"
-                >
-                  <FaRegPaperPlane className="mr-1" />
-                  Apply
-                </Button>
               </div>
             </div>
+            <p className="line-clamp-2 my-2 italic text-sm hidden md:block">
+              {university.exams?.description}
+            </p>
 
-            <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60">
-              <p className="mr-5">
-                Fees: <span>{university?.universityProfile?.fees}</span>
-              </p>
-              <p>
-                Avg Package:{" "}
-                <span>{university?.universityProfile?.avgPackage}</span>
-              </p>
-            </div>
-
-            <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm overflow-x-scroll md:overflow-x-hidden mt-4">
-              <Link href={`/study/uni/${university.slug}`}>
-                <div className="hover:text-orange-500 cursor-pointer">
-                  Admission
+            <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60 gap-5 md:gap-10">
+              <div>
+                <div className="">
+                  Application Date
+                  <p className="font-semibold text-dark my-2">
+                    {university?.applicationDate}
+                  </p>
                 </div>
-              </Link>
-              <Separator className="ml-1 sm:ml-2" orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`} scroll={false}>
-                <div className="hover:text-orange-500 cursor-pointer">
-                  Placements
+              </div>
+              <div>
+                <div className="">
+                  Exam Date
+                  <p className="font-semibold text-dark my-2">
+                    {university?.examinationDate}
+                  </p>
                 </div>
-              </Link>
-              <Separator orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`}>
-                <div className="hover:text-orange-500 cursor-pointer">
-                  Courses
+              </div>
+              <div>
+                <div className="">
+                  Result Date
+                  <p className="font-semibold text-dark my-2">
+                    {university?.resultDate}
+                  </p>
                 </div>
-              </Link>
-              <Separator orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`}>
-                <div className="hover:text-orange-500 cursor-pointer">
-                  Facilities
-                </div>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
