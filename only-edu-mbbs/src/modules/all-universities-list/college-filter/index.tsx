@@ -32,10 +32,16 @@ interface Props {
   indianStates?: {
     data: Option[];
   };
-  exams: {
+  exams?: {
     data: Option[];
   };
   streams?: {
+    data: Option[];
+  };
+  duration?: {
+    data: Option[];
+  };
+  course?: {
     data: Option[];
   };
   modes?: {
@@ -57,6 +63,8 @@ interface FilterParams {
   ownershipsParam?: string;
   streamsParam?: string;
   modesParam?: string;
+  durationParam?: string;
+  courseParam?: string;
 }
 
 const CollegeFilter = ({
@@ -67,6 +75,8 @@ const CollegeFilter = ({
   streams,
   filterParams,
   context,
+  duration,
+  course,
 }: Props) => {
   const {
     locationsParam,
@@ -74,6 +84,8 @@ const CollegeFilter = ({
     ownershipsParam,
     streamsParam,
     modesParam,
+    durationParam,
+    courseParam,
   } = filterParams;
 
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
@@ -81,6 +93,8 @@ const CollegeFilter = ({
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
   const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
+  const selecteddurationParam = durationParam ? durationParam.split(",") : [];
+  const selectedcourseParam = courseParam ? courseParam.split(",") : [];
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -141,6 +155,22 @@ const CollegeFilter = ({
                   <span>{modes}</span>
                 </div>
               ))}
+              {selecteddurationParam.map((duration) => (
+                <div
+                  key={duration}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{duration}</span>
+                </div>
+              ))}
+              {selectedcourseParam.map((course) => (
+                <div
+                  key={course}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{course}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -159,11 +189,18 @@ const CollegeFilter = ({
                 selectedItems={selectedLocations}
               />
             )}
-            <AccordionCustom
+            {/* <AccordionCustom
               name={"Exams"}
               data={exams.data}
               selectedItems={selectedExams}
-            />
+            /> */}
+            {exams && (
+              <AccordionCustom
+                name={"Exams"}
+                data={exams.data}
+                selectedItems={selectedExams}
+              />
+            )}
             {ownership && (
               <AccordionCustom
                 name={"Ownership"}
@@ -176,6 +213,20 @@ const CollegeFilter = ({
                 name={"Examination Modes"}
                 data={modes.data}
                 selectedItems={selectedmodesParam}
+              />
+            )}
+            {duration && (
+              <AccordionCustom
+                name={"Duration"}
+                data={duration.data}
+                selectedItems={selecteddurationParam}
+              />
+            )}
+            {course && (
+              <AccordionCustom
+                name={"Course"}
+                data={course.data}
+                selectedItems={selectedcourseParam}
               />
             )}
           </div>

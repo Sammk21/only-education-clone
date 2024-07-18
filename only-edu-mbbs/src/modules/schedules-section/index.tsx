@@ -1,6 +1,8 @@
 import React from "react";
 import TestCards from "../test-card.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { streams } from "@/types/types.js";
+
 const SchedulesSection = () => {
   return (
     <section className="pb-3 pt-6 mt-6 text-dark  px-6 bg-orange-50">
@@ -29,15 +31,8 @@ const SchedulesSection = () => {
               value="college"
             >
               <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
-              <TestCards />
             </TabsContent>
+
             <TabsContent
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center"
               value="exams"

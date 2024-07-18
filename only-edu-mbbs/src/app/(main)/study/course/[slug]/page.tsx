@@ -25,7 +25,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const data: MetaProps = await getMetaData("entrance-exams", params.slug);
+  const data: MetaProps = await getMetaData("top-courses", params.slug);
   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
   const { seo } = data.data[0];
   return {
@@ -47,114 +47,51 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
+  const getUniQuery = `/api/top-courses?populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[salary][populate][averageSalary][populate]=true&populate[admissionProcess][populate][admissionProcess][populate]=true&populate[cta][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
 
-  const {
-    cta,
-    faq,
-    overviewTabs,
-    resultsTab,
-    cutoff,
-    previousPapers,
-    searchableImage,
-  } = data.data[0];
+  const { cta, faq, overviewTabs, admissionProcess, salary } = data.data[0];
 
   const title = data.data[0].title;
   const id = data.data[0].id;
 
   return (
     <div className="mb-16">
-      <div className="px-2 my-8 items-center sm:px-16 grid grid-cols-12 gap-3 ">
-        <div className=" col-span-2 sm:col-span-1 flex justify-end">
-          <div className="h-14 relative border-2 w-14 bg-light dark:bg-dark  rounded-full overflow-hidden justify-center flex">
-            <ImageExtended
-              fill={true}
-              className="object-center object-contain "
-              src={searchableImage.url}
-              alt=""
-            />
-          </div>
-        </div>
-        <h2 className="text-xl font-bold dark:text-light text-dark col-span-10 sm:col-span-11">
-          {title} Previous Year Papers PDFs with Solutions - Download JEE Mains
-          Question Paper PDF
+      <div className="px-2 my-8 items-center sm:px-16  ">
+        <h2 className="text-2xl font-bold dark:text-light text-dark ">
+          {title}
         </h2>
       </div>
       <Tabs defaultValue="overview">
         <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 sm:top-[4.5rem] z-20">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="result">Result</TabsTrigger>
-          <TabsTrigger value="cutoff">cutoff</TabsTrigger>
-          <TabsTrigger value="previousPapers">
-            Previous Year Question Papers
-          </TabsTrigger>
+          <TabsTrigger value="salary">Salary</TabsTrigger>
+          <TabsTrigger value="admission">Admission</TabsTrigger>
         </TabsList>
         <TabsContent
           className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {overviewTabs?.latestupdates && (
-              <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
             )}
+            <CallToAction id={id} data={cta} title={title} />
+            {overviewTabs?.latestupdates && (
+              <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
+            )}
+
             {overviewTabs?.highlights && (
               <GlobalUniversitiesTabs data={overviewTabs.highlights} />
             )}
-            {overviewTabs?.eligibilitycriteria && (
-              <GlobalUniversitiesTabs data={overviewTabs.eligibilitycriteria} />
+            {overviewTabs?.entranceExams && (
+              <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />
             )}
             <CallToAction id={id} data={cta} title={title} />
 
-            {overviewTabs?.exampattern && (
-              <GlobalUniversitiesTabs data={overviewTabs.exampattern} />
-            )}
-
-            {overviewTabs?.examdates && (
-              <GlobalUniversitiesTabs data={overviewTabs.examdates} />
-            )}
-            <QuestionDropdown data={faq} />
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
-
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="result"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {resultsTab?.resultDates && (
-              <GlobalUniversitiesTabs data={resultsTab.resultDates} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
-            {resultsTab?.checkResult && (
-              <GlobalUniversitiesTabs data={resultsTab.checkResult} />
-            )}
-
-            <QuestionDropdown data={faq} />
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="cutoff"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {cutoff?.categoryWise && (
-              <GlobalUniversitiesTabs data={cutoff.categoryWise} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
-            {cutoff?.subjectWise && (
-              <GlobalUniversitiesTabs data={cutoff.subjectWise} />
+            {overviewTabs?.whyChoose && (
+              <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
             )}
 
             <QuestionDropdown data={faq} />
@@ -166,12 +103,30 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
         <TabsContent
           className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="previousPapers"
+          value="salary"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {previousPapers?.previousPapers && (
-              <GlobalUniversitiesTabs data={previousPapers.previousPapers} />
+            {salary?.averageSalary && (
+              <GlobalUniversitiesTabs data={salary.averageSalary} />
             )}
+
+            <QuestionDropdown data={faq} />
+          </div>
+          <div className="col-span-4 mt-3 hidden md:block">
+            <CallToAction id={id} data={cta} title={title} />
+          </div>
+        </TabsContent>
+        <TabsContent
+          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          value="admission"
+        >
+          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
+            {admissionProcess?.admissionProcess && (
+              <GlobalUniversitiesTabs
+                data={admissionProcess.admissionProcess}
+              />
+            )}
+            <CallToAction id={id} data={cta} title={title} />
 
             <QuestionDropdown data={faq} />
           </div>
