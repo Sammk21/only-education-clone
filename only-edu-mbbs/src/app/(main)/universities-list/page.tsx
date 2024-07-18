@@ -12,6 +12,7 @@ import {
   examsQuery,
   indianStatesQuery,
   ownershipQuery,
+  streasmQuery,
 } from "@/app/data/quries/uniList-query";
 import EntranceExamList from "@/modules/all-universities-list/exam-list";
 
@@ -30,11 +31,20 @@ export default async function UniversitiesList({
   const ownership = await getStrapiData(ownershipQuery);
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
+  const streams = await getStrapiData(streasmQuery);
 
-  let { locationsParam, examsParam, ownershipsParam } = searchParams;
-  let filterParams = { locationsParam, examsParam, ownershipsParam }; //to send it as a prop
+
+  let { streamsParam,locationsParam, examsParam, ownershipsParam } = searchParams;
+  let filterParams = { locationsParam, examsParam, ownershipsParam,streamsParam }; //to send it as a prop
 
   if (searchParams) {
+    if (streamsParam) {
+      const streamsFilters = streamsParam
+        .split(",")
+        .map((streams) => `filters[streams][slug][$eq]=${streams}`)
+        .join("&");
+        universityListQuery += `&${streamsFilters}`;
+    }
     if (locationsParam) {
       const locationFilters = locationsParam
         .split(",")
@@ -76,6 +86,7 @@ export default async function UniversitiesList({
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
+           streams={streams}
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}
@@ -92,6 +103,7 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
+           streams={streams}
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}

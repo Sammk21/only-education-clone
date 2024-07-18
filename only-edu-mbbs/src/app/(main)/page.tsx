@@ -31,7 +31,10 @@ const TopUniversitiesQuery =
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
 
+  const streamQuery="/api/streams?populate[universities][fields][1]=title"
 export default async function Home() {
+
+
   const [
     heroData,
     servicesData,
@@ -49,7 +52,8 @@ export default async function Home() {
     getStrapiData(TopUniversitiesQuery),
     getStrapiData(BannerImageQuery),
   ]);
-
+  const stream= await getStrapiData(streamQuery)
+  const streams=stream.data
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">
@@ -62,7 +66,7 @@ export default async function Home() {
             <InformationSlider data={newsData.news} href="news" />
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
-            <SchedulesSection />
+            <SchedulesSection data={streams}/>
             <OurServices data={servicesData.services} />
             <InformationSlider href="articles" data={articlesData.articles} />
             <WhyUs data={whyUsData.whyOnlyEducation} />

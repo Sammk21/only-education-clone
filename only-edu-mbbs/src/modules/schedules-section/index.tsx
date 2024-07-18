@@ -3,7 +3,23 @@ import TestCards from "../test-card.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { streams } from "@/types/types.js";
 
-const SchedulesSection = () => {
+interface Props{
+
+  data:{
+    universities:{
+      data:{
+        title:string
+        
+      }[]
+    }
+    title:string
+    slug:string
+
+  }[]
+
+}
+
+const SchedulesSection = async({data}:Props) => {
   return (
     <section className="pb-3 pt-6 mt-6 text-dark  px-6 bg-orange-50">
       <div className="container">
@@ -30,10 +46,10 @@ const SchedulesSection = () => {
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center"
               value="college"
             >
-              <TestCards />
+              <TestCards data={data} context="streamsParam" tab="Colleges"/>
             </TabsContent>
 
-            <TabsContent
+            {/* <TabsContent
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center"
               value="exams"
             >
@@ -52,7 +68,7 @@ const SchedulesSection = () => {
               <TestCards />
               <TestCards />
               <TestCards />
-            </TabsContent>
+            </TabsContent> */}
           </div>
         </Tabs>
       </div>
@@ -61,3 +77,6 @@ const SchedulesSection = () => {
 };
 
 export default SchedulesSection;
+
+
+
