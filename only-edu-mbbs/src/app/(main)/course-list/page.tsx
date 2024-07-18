@@ -33,7 +33,7 @@ export default async function UniversitiesList({
   const course = await getStrapiData(courseQuery);
 
   let { streamsParam, durationParam, courseParam } = searchParams;
-  let filterParams = { streamsParam, durationParam, courseParam }; //to send it as a prop
+  let filterParams = { streamsParam, durationParam, courseParam };
   if (searchParams) {
     if (streamsParam) {
       const streamsFilters = streamsParam
@@ -93,11 +93,13 @@ export default async function UniversitiesList({
               </span>
             </div>
           )}
-          {/* <MobileFilter
+          <MobileFilter
             streams={streams}
+            duration={duration}
+            course={course}
             context="course"
             filterParams={filterParams}
-          /> */}
+          />
         </div>
         <PaginationComponent pageCount={pagination.pageCount} />
       </div>

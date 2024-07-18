@@ -211,7 +211,12 @@ interface ownership {
   title: string;
   slug: string;
 }
-interface streams {
+export interface streams {
+  id: number;
+  title: string;
+  slug: string;
+}
+interface duration {
   id: number;
   title: string;
   slug: string;
@@ -240,6 +245,7 @@ export interface UniversityProfile {
   fees: string;
   avgPackage: string;
   description: string;
+  
 }
 export interface Universitylist {
   title?: string;
@@ -248,7 +254,7 @@ export interface Universitylist {
   universityProfile?: UniversityProfile;
   ownership?: ownership;
   indian_state?: indian_state;
-  streams?: streams;
+  stream?: streams;
   searchableImage: ImageAttributes;
   mode?:mode;
   // exams?: {
@@ -259,6 +265,8 @@ export interface Universitylist {
   applicationDate:string;
   examinationDate:string;
   resultDate:string;
+  duration:duration
+  
 }
 
 export interface UniversitiesData {

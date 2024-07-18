@@ -34,13 +34,19 @@ interface FilterProps {
   indianStates?: {
     data: Option[];
   };
-  exams: {
+  exams?: {
     data: Option[];
   };
   streams?: {
     data: Option[];
   };
   modes?: {
+    data: Option[];
+  };
+  duration?: {
+    data: Option[];
+  };
+  course?: {
     data: Option[];
   };
   filterParams: FilterParams;
@@ -58,7 +64,9 @@ interface FilterParams {
   examsParam?: string;
   ownershipsParam?: string;
   streamsParam?: string;
+  durationParam?: string;
   modesParam?: string;
+  courseParam?: string;
 }
 
 const MobileFilter: React.FC<FilterProps> = ({
@@ -68,6 +76,8 @@ const MobileFilter: React.FC<FilterProps> = ({
   streams,
   context,
   modes,
+  duration,
+  course,
   filterParams,
 }) => {
   const {
@@ -76,6 +86,8 @@ const MobileFilter: React.FC<FilterProps> = ({
     ownershipsParam,
     streamsParam,
     modesParam,
+    durationParam,
+    courseParam,
   } = filterParams;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -84,6 +96,8 @@ const MobileFilter: React.FC<FilterProps> = ({
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
   const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
+  const selecteddurationParam = durationParam ? durationParam.split(",") : [];
+  const selectedcourseParam = courseParam ? courseParam.split(",") : [];
 
   const handleSubmit = (event: React.FormEvent) => {
     setIsDrawerOpen(false); // Close the drawer after submitting the form
@@ -166,6 +180,22 @@ const MobileFilter: React.FC<FilterProps> = ({
                         <span>{modes}</span>
                       </div>
                     ))}
+                    {selecteddurationParam.map((duration) => (
+                      <div
+                        key={duration}
+                        className="px-1 border border-dark inline-block mt-1 justify-center"
+                      >
+                        <span>{duration}</span>
+                      </div>
+                    ))}
+                    {selectedcourseParam.map((course) => (
+                      <div
+                        key={course}
+                        className="px-1 border border-dark inline-block mt-1 justify-center"
+                      >
+                        <span>{course}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -184,11 +214,14 @@ const MobileFilter: React.FC<FilterProps> = ({
                       selectedItems={selectedLocations}
                     />
                   )}
-                  <AccordionCustom
-                    name={"Exams"}
-                    data={exams.data}
-                    selectedItems={selectedExams}
-                  />
+                  {exams && (
+                    <AccordionCustom
+                      name={"Exams"}
+                      data={exams.data}
+                      selectedItems={selectedExams}
+                    />
+                  )}
+
                   {ownership && (
                     <AccordionCustom
                       name={"Ownership"}
@@ -201,6 +234,20 @@ const MobileFilter: React.FC<FilterProps> = ({
                       name={"Examination Modes"}
                       data={modes.data}
                       selectedItems={selectedmodesParam}
+                    />
+                  )}
+                  {duration && (
+                    <AccordionCustom
+                      name={"Duration"}
+                      data={duration.data}
+                      selectedItems={selecteddurationParam}
+                    />
+                  )}
+                  {course && (
+                    <AccordionCustom
+                      name={"Course"}
+                      data={course.data}
+                      selectedItems={selectedcourseParam}
                     />
                   )}
                 </div>

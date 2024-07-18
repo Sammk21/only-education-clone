@@ -18,7 +18,7 @@ interface Props {
   user: User | null;
 }
 interface FilteredProps {
-  university: Universitylist;
+  course: Universitylist;
   user: User | null;
 }
 interface User {
@@ -34,7 +34,7 @@ const CourseList = ({ data, user }: Props) => {
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const searchIndex = client.index("entrance-exam");
+  const searchIndex = client.index("top-course	");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -83,12 +83,8 @@ const CourseList = ({ data, user }: Props) => {
         </>
       )}
       {(query && results.length > 0 ? results : data.data).map(
-        (university: Universitylist) => (
-          <FilteredExamsItem
-            university={university}
-            user={user}
-            key={university.id}
-          />
+        (course: Universitylist) => (
+          <FilteredExamsItem course={course} user={user} key={course.id} />
         )
       )}
     </section>
@@ -97,42 +93,47 @@ const CourseList = ({ data, user }: Props) => {
 
 export default CourseList;
 
-const FilteredExamsItem = ({ university, user }: FilteredProps) => {
-  console.log(university);
+const FilteredExamsItem = ({ course, user }: FilteredProps) => {
   return (
     <>
       <div
-        key={university?.id}
+        key={course?.id}
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <div className="flex flex-col w-full sm:flex-row items-center">
+        <div className="">
           <Link
             className=" w-full sm:w-1/4"
-            href={`study/exam/${university?.slug}`}
+            href={`study/course/${course?.slug}`}
           >
             <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
-              {university.mode?.title}
+              {course.mode?.title}
             </p>
           </Link>
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <Link href={`study/exam/${university?.slug}`}>
+              <Link href={`study/course/${course?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    {university?.title}
+                    {course?.title}
                   </h3>
-
-                  <p className="line-clamp-2  text-dark/70 text-sm">
-                    {university.exams?.fullForm}
-                  </p>
-                  <p className="line-clamp-1 my-2 italic text-sm block md:hidden">
-                    {university.exams?.description}
+                  <p className="text-sm flex gap-5 mt-1 ">
+                    <span className="text-green-700 ">
+                      {course.duration.title}{" "}
+                    </span>
+                    <span className="text-orange-600">
+                      {course.stream?.title}
+                    </span>
                   </p>
                 </div>
               </Link>
+              <div>
+                <Button className="bg-orange-500 hover:bg-orange-400">
+                  Find Colleges
+                </Button>
+              </div>
 
-              <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
+              {/* <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
                 {user ? (
                   user.verified ? (
                     <Button className="bg-orange-500 hover:bg-orange-400">
@@ -164,61 +165,7 @@ const FilteredExamsItem = ({ university, user }: FilteredProps) => {
                     </Link>
                   </Button>
                 )}
-              </div>
-            </div>
-            <p className="line-clamp-2 my-2 italic text-sm hidden md:block">
-              {university.exams?.description}
-            </p>
-
-            <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60 gap-5 md:gap-10">
-              <div>
-                <div className="">
-                  Application Date
-                  <p className="font-semibold text-dark my-2">
-                    {university?.applicationDate &&
-                      new Date(university.applicationDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div className="">
-                  Exam Date
-                  <p className="font-semibold text-dark my-2">
-                    {university?.examinationDate &&
-                      new Date(university.examinationDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div className="">
-                  Result Date
-                  <p className="font-semibold text-dark my-2">
-                    {university?.resultDate &&
-                      new Date(university.resultDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-                  </p>
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

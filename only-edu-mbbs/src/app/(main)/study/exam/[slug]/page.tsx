@@ -63,7 +63,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const title = data.data[0].title;
   const id = data.data[0].id;
-  console.dir(searchableImage);
 
   return (
     <div className="mb-16">

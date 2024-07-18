@@ -32,7 +32,6 @@ const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
 
 export default async function Home() {
-  // const data = await getStrapiData(HomePageQuery);
   const [
     heroData,
     servicesData,
