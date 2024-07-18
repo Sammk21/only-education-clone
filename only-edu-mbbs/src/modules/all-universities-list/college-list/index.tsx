@@ -97,7 +97,6 @@ const CollegeList = ({ data, user }: Props) => {
 export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
-  console.log(university);
   return (
     <>
       <div

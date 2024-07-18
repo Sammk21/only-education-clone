@@ -215,6 +215,8 @@ export interface streams {
   id: number;
   title: string;
   slug: string;
+  
+  
 }
 interface duration {
   id: number;

@@ -34,7 +34,6 @@ const GlobalProfileLayout = async ({
   universityInfo,
 }: Props) => {
   const { name, description } = data;
-  console.dir(universityInfo, { depth: null });
 
   const baseUrl = "https://admin.onlyeducation.co.in";
 
