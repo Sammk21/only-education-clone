@@ -467,3 +467,7 @@ background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7
 
 
 
+.backdrop-blur-lg{
+   -webkit-backdrop-filter: blur(5px); /* Add this line first, it fixes blur for Safari*/
+    backdrop-filter: blur(5px);
+}

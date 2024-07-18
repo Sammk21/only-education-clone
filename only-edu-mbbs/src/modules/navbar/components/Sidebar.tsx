@@ -6,10 +6,11 @@ import { GoArrowRight } from "react-icons/go";
 import { usePathname } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
+import { ImCross } from "react-icons/im";
 
 export default function MySideBar({ navigation, dropdown }: NavbarProps) {
   const path = usePathname();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false); 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const isActive = (href: string) => path === href;
 
@@ -26,10 +27,12 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
       >
         <Drawer.Trigger asChild>
           <div
-            className="fixed z-[70] bottom-6 h-14 w-14 border border-dark/20 left-1/2 -translate-x-1/2 bg-white text-dark rounded-full transition-all duration-300 hover:shadow-inner flex justify-center items-center text-xs shadow-lg lg:hidden"
+            className={`fixed z-[70] bottom-6 h-14  ${
+              isDrawerOpen ? "rotate-0" : "-rotate-45"
+            }  w-14 border border-dark/20 left-1/2 text-orange-500 -translate-x-1/2 backdrop-blur-lg bg-white/80  rounded-full transition-all duration-300 hover:shadow-inner flex justify-center items-center text-xs shadow-lg lg:hidden`}
             onClick={() => setIsDrawerOpen(true)} // Open the drawer on click
           >
-            <p>Menu</p>
+            <ImCross className="drop-shadow-lg" stroke="#424242" size={20} />
           </div>
         </Drawer.Trigger>
         <Drawer.Portal>

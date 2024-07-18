@@ -36,10 +36,10 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
           <Banner existingPhone={user.data.phone} userId={user.data.id} />
         ) : null}
         <nav className="flex justify-between items-center px-6 py-2  border-b">
-          <Link className=" h-12 w-24 sm:h-14 sm:w-36 relative" href="/">
+          <Link className=" h-12 w-28 sm:h-14 sm:w-36 relative" href="/">
             <Image
               src={
-                "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_56f967fe38.png"
+                "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
               }
               alt="logo"
               fill={true}
@@ -114,7 +114,7 @@ const UserProfileButton = ({ firstName }: Props) => {
         <DropdownMenuTrigger asChild>
           <p className="flex justify-center items-center ">
             {firstName ? "hello, " + firstName : "profile"}
-            <ChevronDown className="mt-1" size={15} />
+            <ChevronDown className="" size={15} />
           </p>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

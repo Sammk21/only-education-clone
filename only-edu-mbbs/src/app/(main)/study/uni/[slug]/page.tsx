@@ -10,7 +10,7 @@ import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CallToAction from "@/modules/footer/call-to-action";
-import { MetaProps } from "@/types/types";
+import { ImageAttributes, MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import PlacementInfo from "@/modules/placement";
@@ -84,14 +84,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   } = data.data[0];
 
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
-  const profileImage = data.data[0].universityProfile.profileImage.url;
+  const profileImage: ImageAttributes =
+    data.data[0].universityProfile.profileImage;
 
   const title = data.data[0].title;
   const id = data.data[0].id;
 
   const recentlyViewedData = {
     slug: params.slug,
-    image: profileImage,
+    image: profileImage.formats.thumbnail.url,
     title: title,
   };
 
@@ -100,7 +101,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
       <MockComponent data={recentlyViewedData} />
       {/* 👆🏻 iT IS USED TO SAVE DATA IN LOCALSTORAGE FOR RECENTLY VIEWD UNIVERSITIES */}
       <GlobalProfileLayout
-        profileImage={profileImage}
+        profileImage={profileImage.url}
         backgroundImage={backgroundImage}
         data={universityProfile}
         universityInfo={universityInfo}

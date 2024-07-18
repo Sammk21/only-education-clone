@@ -20,9 +20,9 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({ children, user }) => {
         <div
           className={`bg-accent/5 ${
             user?.ok ? "border" : ""
-          }  text-sm font-normal rounded-lg`}
+          }  text-sm font-normal rounded-lg `}
         >
-          <div className={`${user?.ok ? "grid grid-cols-12" : ""}`}>
+          <div className={`${user?.ok ? "sm:grid  grid-cols-12" : ""}`}>
             <div className="accountNav col-span-2  border-r ">
               {user?.data && <AccountNav user={user} />}
             </div>
