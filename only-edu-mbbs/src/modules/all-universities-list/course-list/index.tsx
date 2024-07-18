@@ -12,14 +12,13 @@ import { Separator } from "@/components/ui/separator";
 import { json } from "stream/consumers";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
-import { Badge } from "@/components/ui/badge";
 
 interface Props {
   data: UniversitiesData;
   user: User | null;
 }
 interface FilteredProps {
-  exam: Universitylist;
+  course: Universitylist;
   user: User | null;
 }
 interface User {
@@ -28,14 +27,14 @@ interface User {
   phone: number;
 }
 
-const EntranceExamList = ({ data, user }: Props) => {
+const CourseList = ({ data, user }: Props) => {
   console.log(data, "by");
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const searchIndex = client.index("entrance-exam");
+  const searchIndex = client.index("top-course	");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -84,62 +83,57 @@ const EntranceExamList = ({ data, user }: Props) => {
         </>
       )}
       {(query && results.length > 0 ? results : data.data).map(
-        (exam: Universitylist) => (
-          <FilteredExamsItem exam={exam} user={user} key={exam.id} />
+        (course: Universitylist) => (
+          <FilteredExamsItem course={course} user={user} key={course.id} />
         )
       )}
     </section>
   );
 };
 
-export default EntranceExamList;
+export default CourseList;
 
-const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
-  // console.log(exam.mode?.title);
+const FilteredExamsItem = ({ course, user }: FilteredProps) => {
   return (
     <>
       <div
-        key={exam?.id}
-        className="m-auto mb-4 relative p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
+        key={course?.id}
+        className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <div className="flex flex-col w-full sm:flex-row items-center">
-          <Link className=" w-full sm:w-1/4" href={`study/exam/${exam?.slug}`}>
-            <Badge
-              variant="secondary"
-              className="lowercase absolute top-2 left-2 text-white"
-            >
-              {exam.mode?.title}
-            </Badge>
-
-            <div className="relative aspect-video w-full  rounded-md overflow-hidden">
-              <ImageExtended
-                className="object-contain w-full h-full transition"
-                src={exam?.searchableImage?.url}
-                alt="exam Image"
-                blurDataURL={exam.searchableImage?.blurhash}
-                fill
-              />
-            </div>
+        <div className="">
+          <Link
+            className=" w-full sm:w-1/4"
+            href={`study/course/${course?.slug}`}
+          >
+            <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
+              {course.mode?.title}
+            </p>
           </Link>
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <Link href={`study/exam/${exam?.slug}`}>
+              <Link href={`study/course/${course?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    {exam?.title}
+                    {course?.title}
                   </h3>
-
-                  <p className="line-clamp-2  text-dark/70 text-sm">
-                    {exam.exams?.fullForm}
-                  </p>
-                  <p className="line-clamp-1 my-2 italic text-sm block md:hidden">
-                    {exam.exams?.description}
+                  <p className="text-sm flex gap-5 mt-1 ">
+                    <span className="text-green-700 ">
+                      {course.duration.title}{" "}
+                    </span>
+                    <span className="text-orange-600">
+                      {course.stream?.title}
+                    </span>
                   </p>
                 </div>
               </Link>
+              <div>
+                <Button className="bg-orange-500 hover:bg-orange-400">
+                  Find Colleges
+                </Button>
+              </div>
 
-              <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
+              {/* <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
                 {user ? (
                   user.verified ? (
                     <Button className="bg-orange-500 hover:bg-orange-400">
@@ -171,70 +165,7 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                     </Link>
                   </Button>
                 )}
-              </div>
-            </div>
-            <p className="line-clamp-2 my-2 italic text-sm hidden md:block">
-              {exam.exams?.description}
-            </p>
-
-            <div className="border-t border-b border-dashed border-6 flex pt-2 pb-2 mb-2 text-sm text-dark/60 gap-5 md:gap-10">
-              <div>
-                <div className="">
-                  Application Date
-                  <p className="font-semibold text-dark my-2">
-
-                    {university?.applicationDate &&
-                      new Date(university.applicationDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-
-                    //{exam?.applicationDate}
-
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div className="">
-                  Exam Date
-                  <p className="font-semibold text-dark my-2">
-
-                    {university?.examinationDate &&
-                      new Date(university.examinationDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-                    //{exam?.examinationDate}
-
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div className="">
-                  Result Date
-                  <p className="font-semibold text-dark my-2">
-
-                    {university?.resultDate &&
-                      new Date(university.resultDate).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        }
-                      )}
-                    //{exam?.resultDate}
-                  </p>
-                </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -16,10 +16,7 @@ interface UniTabsProps {
   notification?: boolean;
 }
 const GlobalUniversitiesTabs = ({ data, notification }: UniTabsProps) => {
-  console.log(data);
-
   if (!data) {
-    console.log("No data or incomplete data:", data); // Log the issue to console
     return null;
   }
   return (
