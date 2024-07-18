@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_entrance_exams_entrance_exams",
+  "info": {
+    "displayName": "overviewTabs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "latestupdates": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "overview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "highlights": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "eligibilitycriteria": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "exampattern": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

@@ -52,6 +52,16 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::new.new"
+    },
+    "bannerImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

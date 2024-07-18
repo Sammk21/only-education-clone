@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_top_course_admission_processes",
+  "info": {
+    "displayName": "admissionProcess"
+  },
+  "options": {},
+  "attributes": {
+    "admissionProcess": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

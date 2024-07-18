@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_entrance_exams_cutoffs",
+  "info": {
+    "displayName": "cutoff",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "categoryWise": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "subjectWise": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

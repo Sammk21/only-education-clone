@@ -23,6 +23,14 @@
       "relation": "manyToOne",
       "target": "api::university.university",
       "inversedBy": "streams"
+    },
+    "broucher": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
     }
   }
 }

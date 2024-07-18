@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_courser_and_fees",
+  "info": {
+    "displayName": "courserAndFees",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "fees": {
+      "type": "decimal"
+    },
+    "specialization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::specialization.specialization"
+    },
+    "courseSpecializationFirstYearFees": {
+      "type": "decimal"
+    }
+  }
+}

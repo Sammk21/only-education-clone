@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modes",
+  "info": {
+    "singularName": "mode",
+    "pluralName": "modes",
+    "displayName": "Mode"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

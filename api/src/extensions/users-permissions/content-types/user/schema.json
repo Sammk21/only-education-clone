@@ -114,7 +114,8 @@
       "type": "datetime"
     },
     "resend_attempts": {
-      "type": "integer"
+      "type": "integer",
+      "default": 3
     },
     "otp_session": {
       "type": "string"

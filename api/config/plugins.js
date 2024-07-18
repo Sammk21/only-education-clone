@@ -1,7 +1,27 @@
 module.exports = ({ env }) => ({
-
  'strapi-regenerator': {
       enabled: true
+    },
+
+    menus: {
+      config: {
+        layouts: {
+          menuItem: {
+            link: [
+              {
+                input: {
+                  label: 'Example Field Label',
+                  name: 'example_field',
+                  type: 'text',
+                },
+                grid: {
+                  col: 6,
+                },
+              },
+            ],
+          },
+        },
+      },
     },
   'strapi-blurhash-plugin': {
         enabled: true,
@@ -21,26 +41,7 @@ module.exports = ({ env }) => ({
   "users-permissions": {
     config: {
       register: {
-        allowedFields: ["firstName", "lastName","phone", "verified"],
-      },
-    },
-  },
-  scheduler: {
-    enabled: true,
-    config: {
-      regenerateOnUpdate: true,
-    },
-  },
-  meilisearch: {
-    config: {
-      host: "http://localhost:7700",
-      apiKey: "QQG06lBk2eA1GZlO6QQnTXIFQb19PrY1eKJ9FJRD2r",
-    },
-  },
-  "users-permissions": {
-    config: {
-      register: {
-        allowedFields: [
+         allowedFields: [
           "firstName",
           "lastName",
           "phone",
@@ -52,5 +53,10 @@ module.exports = ({ env }) => ({
       },
     },
   },
-
+  scheduler: {
+    enabled: true,
+    config: {
+      model: 'scheduler',
+    },
+  },
 });
