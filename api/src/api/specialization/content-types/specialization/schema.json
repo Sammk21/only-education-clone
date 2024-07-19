@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "specializations",
+  "info": {
+    "singularName": "specialization",
+    "pluralName": "specializations",
+    "displayName": "Specialization"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "specializationName": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "specializationName"
+    }
+  }
+}

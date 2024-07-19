@@ -1,0 +1,115 @@
+{
+  "kind": "collectionType",
+  "collectionName": "entrance_exams",
+  "info": {
+    "singularName": "entrance-exam",
+    "pluralName": "entrance-exams",
+    "displayName": "Entrance-exam",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.cta"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.faq"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "authorName": {
+      "type": "enumeration",
+      "enum": [
+        "Omkar",
+        "Sam",
+        "Sarfraj",
+        "Adesh",
+        "Dhanashree",
+        "Afreen",
+        "Ketkki",
+        "Premita",
+        "Yogita",
+        "Zhankana",
+        "Parveen",
+        "Dweep",
+        "Raviraj"
+      ]
+    },
+    "overviewTabs": {
+      "displayName": "Entrance-Exams",
+      "type": "component",
+      "repeatable": false,
+      "component": "entrance-exams.entrance-exams"
+    },
+    "resultsTab": {
+      "displayName": "resultsTab",
+      "type": "component",
+      "repeatable": false,
+      "component": "entrance-exams.results-tab"
+    },
+    "cutoff": {
+      "displayName": "cutoff",
+      "type": "component",
+      "repeatable": false,
+      "component": "entrance-exams.cutoff"
+    },
+    "previousPapers": {
+      "displayName": "previousPapers",
+      "type": "component",
+      "repeatable": false,
+      "component": "entrance-exams.previous-papers"
+    },
+    "stream": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::stream.stream"
+    },
+    "exams": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::exam.exam"
+    },
+    "searchableImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "mode": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mode.mode"
+    },
+    "applicationDate": {
+      "type": "date"
+    },
+    "examinationDate": {
+      "type": "date"
+    },
+    "resultDate": {
+      "type": "date"
+    }
+  }
+}

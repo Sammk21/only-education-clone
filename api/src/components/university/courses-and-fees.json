@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_university_courses_and_fees",
+  "info": {
+    "displayName": "courses and fees",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "fees": {
+      "type": "decimal"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_entrance_exams_previous_papers",
+  "info": {
+    "displayName": "previousPapers"
+  },
+  "options": {},
+  "attributes": {
+    "previousPapers": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

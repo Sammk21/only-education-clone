@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_top_course_overview_tabs",
+  "info": {
+    "displayName": "Overview Tab",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "overview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "latestupdates": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "highlights": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "entranceExams": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    },
+    "whyChoose": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

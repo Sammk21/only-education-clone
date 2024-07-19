@@ -18,7 +18,8 @@
     },
     "slug": {
       "type": "uid",
-      "required": true
+      "required": true,
+      "targetField": "title"
     },
     "universityProfile": {
       "type": "component",
@@ -31,42 +32,6 @@
       "repeatable": false,
       "component": "blocks.cta",
       "required": false
-    },
-    "overview": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.header",
-      "required": true
-    },
-    "whythisUniversity": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.why-us",
-      "required": true
-    },
-    "rankComparison": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.rank-comparison",
-      "required": true
-    },
-    "eligibilityCriteria": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.eligibility-card",
-      "required": true
-    },
-    "documentRequired": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.popular-courses",
-      "required": true
-    },
-    "feesStructure": {
-      "type": "component",
-      "repeatable": false,
-      "component": "blocks.eligibility-table",
-      "required": true
     },
     "faq": {
       "type": "component",
@@ -82,7 +47,7 @@
     },
     "noOfStudentsStudying": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "seo": {
       "type": "component",
@@ -103,19 +68,11 @@
         "Premita",
         "Yogita",
         "Zhankana",
-        "Parveen"
+        "Parveen",
+        "Dweep",
+        "Raviraj"
       ],
       "required": true
-    },
-    "universityInfo": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.list"
-    },
-    "placement": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.placement"
     },
     "streams": {
       "type": "relation",
@@ -151,11 +108,6 @@
       "target": "api::indian-state.indian-state",
       "inversedBy": "universities"
     },
-    "highlights": {
-      "type": "component",
-      "repeatable": false,
-      "component": "shared.highlights"
-    },
     "affiliated": {
       "type": "relation",
       "relation": "oneToOne",
@@ -165,60 +117,75 @@
       "displayName": "Overview Tabs",
       "type": "component",
       "repeatable": false,
-      "component": "university.overview-tabs"
+      "component": "university.overview-tabs",
+      "required": true
     },
     "coursesFees": {
       "displayName": "coursesFees",
       "type": "component",
       "repeatable": false,
-      "component": "university.courses-fees"
+      "component": "university.courses-fees",
+      "required": true
     },
     "admission": {
       "displayName": "admission",
       "type": "component",
       "repeatable": false,
-      "component": "university.admission"
+      "component": "university.admission",
+      "required": true
     },
     "placements": {
       "displayName": "placements",
       "type": "component",
       "repeatable": false,
-      "component": "university.placements"
+      "component": "university.placements",
+      "required": true
     },
     "gallery": {
       "displayName": "gallery",
       "type": "component",
       "repeatable": false,
-      "component": "university.gallery"
+      "component": "university.gallery",
+      "required": true
     },
     "faculty": {
       "displayName": "faculty",
       "type": "component",
       "repeatable": false,
-      "component": "university.faculty"
+      "component": "university.faculty",
+      "required": true
     },
     "hostel": {
       "displayName": "hostel",
       "type": "component",
       "repeatable": false,
-      "component": "university.hostel"
+      "component": "university.hostel",
+      "required": true
     },
     "scholarships": {
       "displayName": "scholarships",
       "type": "component",
       "repeatable": false,
-      "component": "university.scholarships"
-    },
-    "notification": {
-      "displayName": "notification",
-      "type": "component",
-      "repeatable": false,
-      "component": "university.notification"
+      "component": "university.scholarships",
+      "required": true
     },
     "ranking": {
       "type": "component",
       "repeatable": true,
-      "component": "university.ranking"
+      "component": "university.ranking",
+      "required": true
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "university"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course",
+      "mappedBy": "university"
     }
   }
 }

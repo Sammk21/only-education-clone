@@ -35,7 +35,7 @@
       "minLength": 2
     },
     "description": {
-      "type": "string",
+      "type": "text",
       "required": true,
       "minLength": 100
     },
@@ -43,7 +43,7 @@
       "type": "string"
     },
     "fees": {
-      "type": "integer"
+      "type": "decimal"
     },
     "location": {
       "type": "string"

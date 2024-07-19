@@ -16,13 +16,20 @@
       "type": "string"
     },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "title"
     },
     "university": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::university.university",
       "inversedBy": "exams"
+    },
+    "fullForm": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

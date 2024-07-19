@@ -66,7 +66,7 @@
       "type": "customField",
       "options": {
         "output": "HTML",
-        "preset": "standard"
+        "preset": "rich"
       },
       "customField": "plugin::ckeditor.CKEditor"
     },
@@ -122,6 +122,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::university.university"
+    },
+    "admin_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
     }
   }
 }

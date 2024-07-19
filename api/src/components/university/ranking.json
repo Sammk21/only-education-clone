@@ -15,7 +15,8 @@
       "target": "api::course.course"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "minLength": 150
     },
     "rankings": {
       "type": "relation",

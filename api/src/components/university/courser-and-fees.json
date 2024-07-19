@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_university_courser_and_fees",
+  "info": {
+    "displayName": "courserAndFees"
+  },
+  "options": {},
+  "attributes": {
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "courseFee": {
+      "type": "decimal"
+    },
+    "courseSpecialization": {
+      "displayName": "courseSpecialization",
+      "type": "component",
+      "repeatable": true,
+      "component": "university.course-specialization"
+    }
+  }
+}
