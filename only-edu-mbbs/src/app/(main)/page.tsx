@@ -31,7 +31,7 @@ const TopUniversitiesQuery =
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
 
-  const streamQuery="/api/streams?populate[universities][fields][1]=title"
+  const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon"
 export default async function Home() {
 
 
@@ -54,6 +54,8 @@ export default async function Home() {
   ]);
   const stream= await getStrapiData(streamQuery)
   const streams=stream.data
+  
+
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">

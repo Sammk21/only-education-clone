@@ -183,8 +183,8 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                   Application Date
                   <p className="font-semibold text-dark my-2">
 
-                    {university?.applicationDate &&
-                      new Date(university.applicationDate).toLocaleDateString(
+                    {exam?.applicationDate &&
+                      new Date(exam.applicationDate).toLocaleDateString(
                         "en-GB",
                         {
                           day: "numeric",
@@ -203,8 +203,8 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                   Exam Date
                   <p className="font-semibold text-dark my-2">
 
-                    {university?.examinationDate &&
-                      new Date(university.examinationDate).toLocaleDateString(
+                    {exam?.examinationDate &&
+                      new Date(exam.examinationDate).toLocaleDateString(
                         "en-GB",
                         {
                           day: "numeric",
@@ -222,8 +222,8 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                   Result Date
                   <p className="font-semibold text-dark my-2">
 
-                    {university?.resultDate &&
-                      new Date(university.resultDate).toLocaleDateString(
+                    {exam?.resultDate &&
+                      new Date(exam.resultDate).toLocaleDateString(
                         "en-GB",
                         {
                           day: "numeric",

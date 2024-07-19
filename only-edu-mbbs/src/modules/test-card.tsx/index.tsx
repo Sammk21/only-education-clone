@@ -1,8 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { ImageAttributes } from "@/types/types";
+import { ImageError } from "next/dist/server/image-optimizer";
 import Image from "next/image";
 import Link from "next/link";
 import { title } from "process";
 import React from "react";
+import { ImageExtended } from "../common/extended-image/extended-image";
 interface Props{
 
   data:{
@@ -15,11 +18,15 @@ interface Props{
     title:string,
     id:number,
     slug:string
+    streamIcon:ImageAttributes;
   }[]
 context:string
 tab:string
+
 }
 const TestCards = ({data,context,tab}:Props) => {
+  
+
 
   return (
     <>
@@ -28,8 +35,8 @@ const TestCards = ({data,context,tab}:Props) => {
       <Link href={`/universities-list?${context}=${stream.slug}`}>
       <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
         <figure className="h-14 w-14 relative">
-          <Image
-            src={"https://www.onlyeducation.in/assets/img/logo/864164102_3.png"}
+          <ImageExtended
+            src={stream.streamIcon.url}
             alt="college"
             fill={true}
             className="object-cover object-center"
