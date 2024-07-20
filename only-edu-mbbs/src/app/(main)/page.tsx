@@ -8,6 +8,7 @@ import InformationSlider from "@/modules/sliders/slider-one";
 import UniversitiesRail from "@/modules/sliders/slider-two";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
 import SchedulesSection from "@/modules/schedules-section";
+import ExploreArticles from "@/modules/explore-articles";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -24,7 +25,7 @@ const TopUniversitiesQuery =
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
 
-  const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon"
+  const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[top_courses]=true"
 export default async function Home() {
 
 
@@ -47,7 +48,7 @@ export default async function Home() {
   ]);
   const stream= await getStrapiData(streamQuery)
   const streams=stream.data
-  
+
 
   return (
     <div className="w-full overflow-hidden">
@@ -64,11 +65,15 @@ export default async function Home() {
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
             <SchedulesSection data={streams}/>
-            <OurServices data={servicesData.services} />
-            <InformationSlider href="articles" data={articlesData.articles} />
+            {/* testing */}
+            {/* <OurServices data={servicesData.services} /> */}
+            <ExploreArticles href="articles" data={articlesData.articles}   />
+            {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
             <WhyUs data={whyUsData.whyOnlyEducation} />
+
             <NewsLetter />
            
+
           </div>
         </div>
       </div>

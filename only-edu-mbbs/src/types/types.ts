@@ -126,6 +126,7 @@ export interface ArticleAttributes {
   image: ImageAttributes;
   category: CategoryAttributes;
   recommendedArticle: string | null;
+  createdAt?:string
 }
 
 interface MetaData {
