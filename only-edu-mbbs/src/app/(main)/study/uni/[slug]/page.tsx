@@ -99,7 +99,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   return (
     <div className="mb-16">
       <MockComponent data={recentlyViewedData} />
-      {/* 👆🏻 iT IS USED TO SAVE DATA IN LOCALSTORAGE FOR RECENTLY VIEWD UNIVERSITIES */}
+
       <GlobalProfileLayout
         profileImage={profileImage.url}
         backgroundImage={backgroundImage}
