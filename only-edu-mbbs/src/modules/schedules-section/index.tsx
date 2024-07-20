@@ -16,6 +16,7 @@ interface Props{
         title:string
         
       }[]
+
     };
   
     entrance_exams:{
@@ -56,6 +57,9 @@ const extractedData = data.map(item => ({
 
 
 
+
+
+  console.log(data)
 
 
   return (

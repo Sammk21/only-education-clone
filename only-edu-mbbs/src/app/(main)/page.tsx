@@ -6,13 +6,6 @@ import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
 
 import UniversitiesRail from "@/modules/sliders/slider-two";
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-
-import RecentlyViewedUniversity from "@/modules/recently-viewed-university/RecentlyViewedProduct";
-import Link from "next/link";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
 import SchedulesSection from "@/modules/schedules-section";
 import ExploreArticles from "@/modules/explore-articles";
@@ -66,6 +59,8 @@ export default async function Home() {
               data={heroData.hero}
               bannerImage={bannerImageData.bannerImage}
             />
+            <div className="z-[9999]">
+            </div>
             <InformationSlider data={newsData.news} href="news" />
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
@@ -74,10 +69,14 @@ export default async function Home() {
             <ExploreArticles href="articles" data={articlesData.articles}   />
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
             <WhyUs data={whyUsData.whyOnlyEducation} />
-            <NewsLetter />  
+
+            <NewsLetter />
+           
+
           </div>
         </div>
       </div>
     </div>
   );
 }
+
