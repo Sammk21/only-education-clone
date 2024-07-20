@@ -1,7 +1,7 @@
 import React from "react";
 import TestCards from "../test-card.tsx";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { streams } from "@/types/types.js";
+import { ImageAttributes, streams } from "@/types/types.js";
 
 interface Props{
 
@@ -12,14 +12,21 @@ interface Props{
         
       }[]
     }
+    id:number
     title:string
     slug:string
+    streamIcon:ImageAttributes;
 
   }[]
 
 }
 
 const SchedulesSection = async({data}:Props) => {
+
+
+  console.log(data)
+
+
   return (
     <section className="pb-3 pt-6 mt-6 text-dark  px-6 bg-orange-50">
       <div className="container">
