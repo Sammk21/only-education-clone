@@ -19,6 +19,9 @@ const config = {
       center: true,
     },
     extend: {
+      screens:{
+        xlg:"1124px"
+      },
       container:{
         center:true,
         screens: {

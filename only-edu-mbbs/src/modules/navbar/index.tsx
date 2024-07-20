@@ -37,7 +37,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
         {user?.ok && !user?.data?.verified ? (
           <Banner existingPhone={user.data.phone} userId={user.data.id} />
         ) : null}
-        <nav className="grid grid-cols-12 px-6 py-2 place-items-center w-full  border-b">
+        <nav className="xlg:grid flex justify-between grid-cols-12 px-6 py-2 place-items-center w-full  border-b">
           <Link className=" col-span-1 h-12 w-28 sm:h-14 sm:w-36 relative" href="/">
             <Image
               src={
@@ -48,7 +48,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
               className="object-cover object-center top-4 drop-shadow-lg"
             />
           </Link>
-          <div className=" hidden col-span-10  lg:block text-sm font-normal">
+          <div className=" hidden col-span-10  xlg:block text-sm font-normal">
           <NavigationMenu>
             <ul className=" flex items-center justify-center ">
              
