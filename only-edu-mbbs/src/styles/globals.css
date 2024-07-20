@@ -158,6 +158,10 @@ html {scrollbar-width: none;} /* Firefox */
   display: none;
 }
 
+.desktop-nav .dropdown {
+  display: block;
+ }
+
 .dropdown.show {
   display: block;
 }

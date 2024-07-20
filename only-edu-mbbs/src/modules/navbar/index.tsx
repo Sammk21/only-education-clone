@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, User } from "lucide-react";
 import Banner from "@/components/ui/tailwind-banner";
+import {NavbarDrop} from "./dropdown";
+import { NavigationMenu } from "@/components/ui/navigation-menu";
 
 export interface NavbarProps {
   navigation: Navigation;
@@ -31,12 +33,12 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
   const user = await getUserMeLoader();
   return (
     <>
-      <header className="mb-9 w-screen top-0 fixed text-black  bg-clip-padding bg-white backdrop-filter backdrop-blur-md    z-30">
+      <header className="mb-9 w-screen top-0 fixed text-black bg-clip-padding bg-white backdrop-filter backdrop-blur-md    z-30">
         {user?.ok && !user?.data?.verified ? (
           <Banner existingPhone={user.data.phone} userId={user.data.id} />
         ) : null}
-        <nav className="flex justify-between items-center px-6 py-2  border-b">
-          <Link className=" h-12 w-28 sm:h-14 sm:w-36 relative" href="/">
+        <nav className="grid grid-cols-12 px-6 py-2 place-items-center w-full  border-b">
+          <Link className=" col-span-1 h-12 w-28 sm:h-14 sm:w-36 relative" href="/">
             <Image
               src={
                 "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
@@ -46,24 +48,16 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
               className="object-cover object-center top-4 drop-shadow-lg"
             />
           </Link>
-
-          <div className=" hidden lg:flex  text-sm font-normal">
-            <ul className="flex justify-center items-cente ">
-              {navigation.links.map((link: Links) => {
-                return <MenuItems items={link} key={link.id} />;
-              })}
-              {dropdown.map((link: Dropdown) => {
-                const depthLevel = 0;
-                return (
-                  <DropDownItems
-                    items={link}
-                    key={link.id}
-                    depthLevel={depthLevel}
-                  />
-                );
-              })}
+          <div className=" hidden col-span-10  lg:block text-sm font-normal">
+          <NavigationMenu>
+            <ul className=" flex items-center justify-center ">
+             
+             <NavbarDrop/>
+            
             </ul>
+            </NavigationMenu>
           </div>
+          <div className="col-span-1">
           {user.ok ? (
             <>
               <UserProfileButton firstName={user.data.firstName} />
@@ -79,7 +73,12 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
               </Button>
             </Link>
           )}
-        </nav>
+          </div>
+         </nav>
+         
+
+    
+        
       </header>
     </>
   );

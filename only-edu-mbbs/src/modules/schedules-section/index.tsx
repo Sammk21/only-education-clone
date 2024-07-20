@@ -12,6 +12,7 @@ interface Props{
         
       }[]
     }
+    id:number
     title:string
     slug:string
     streamIcon:ImageAttributes;
@@ -21,6 +22,9 @@ interface Props{
 }
 
 const SchedulesSection = async({data}:Props) => {
+
+
+  console.log(data)
 
 
   return (
