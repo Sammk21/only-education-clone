@@ -1,21 +1,50 @@
 "use client";
 import { Drawer } from "vaul";
-import { NavbarProps } from "..";
 import Link from "next/link";
 import { GoArrowRight } from "react-icons/go";
 import { usePathname } from "next/navigation";
 import { ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 import { ImCross } from "react-icons/im";
+import { navbarLinks } from "@/app/json/navLink";
+interface MenuItem {
+  id: number;
+  title: string;
+  href: string;
+  submenu?: MenuItem[];
+}
 
-export default function MySideBar({ navigation, dropdown }: NavbarProps) {
+interface NavbarProps {
+  navigation: MenuItem[];
+}
+
+export default function MySideBar() {
   const path = usePathname();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [currentLevel, setCurrentLevel] = useState<MenuItem[]>(navbarLinks.navbar);
+  const [history, setHistory] = useState<MenuItem[][]>([]);
 
   const isActive = (href: string) => path === href;
 
   const handleLinkClick = () => {
     setIsDrawerOpen(false); // Close the drawer when a link is clicked
+  };
+
+  const handleItemClick = (item: MenuItem) => {
+    if (item.submenu) {
+      setHistory((prev) => [...prev, currentLevel]);
+      setCurrentLevel(item.submenu);
+    } else {
+      handleLinkClick();
+    }
+  };
+
+  const handleBackClick = () => {
+    const prevLevel = history.pop();
+    if (prevLevel) {
+      setCurrentLevel(prevLevel);
+      setHistory(history);
+    }
   };
 
   return (
@@ -39,9 +68,17 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
           <Drawer.Overlay className="fixed inset-0 z-[80] bg-black/40" />
           <Drawer.Content className="bg-light z-[90] rounded-l-3xl flex flex-col h-full w-[320px] fixed bottom-0 right-0 ">
             <span className="absolute w-1 h-28 bg-gray-500/30 rounded-2xl left-1 top-1/2 -translate-y-1/2"></span>
-            <div className=" w-full mt-5 px-3 flex justify-center items-center border-b pb-3 ">
+            <div className="w-full mt-5 px-3 flex justify-center items-center border-b pb-3">
+              {history.length > 0 && (
+                <button
+                  onClick={handleBackClick}
+                  className="absolute left-3 text-gradient text-transparent bg-clip-text"
+                >
+                  Back
+                </button>
+              )}
               <span className="text-gradient text-transparent bg-clip-text">
-                slide to close
+                {history.length > 0 ? "Select an option" : "Sitemap"}
               </span>
               <ChevronRightIcon
                 color="#ff8005"
@@ -52,55 +89,27 @@ export default function MySideBar({ navigation, dropdown }: NavbarProps) {
             <div className="flex-1 h-full overflow-y-scroll">
               <div className="max-w-md mx-auto">
                 <ul className="mb-6">
-                  <p className="pl-6 text-dark text-lg font-medium mb-3 border-b py-2">
-                    Sitemap
-                  </p>
-                  {navigation.links.map((link) => (
+                  {currentLevel.map((item) => (
                     <li
-                      key={link.id}
+                      key={item.id}
                       className={`py-2 pl-1 mx-2 mr-1 rounded-xl ${
-                        isActive(link.href) ? "bg-accent/20" : ""
+                        isActive(item.href) ? "bg-accent/20" : ""
                       } flex items-center gap-x-2 hover:bg-accent/20 `}
+                      onClick={() => handleItemClick(item)}
                     >
-                      <Link
-                        className="pl-3"
-                        href={link.href}
-                        onClick={handleLinkClick}
-                      >
-                        {link.label}
+                      <Link className="pl-3" href={item.href}>
+                        {item.title}
                       </Link>
+                      {item.submenu && (
+                        <ChevronRightIcon
+                          color="#ff8005"
+                          size={17}
+                          className="ml-auto"
+                        />
+                      )}
                     </li>
                   ))}
                 </ul>
-                {dropdown.map((item) => (
-                  <div key={item.id}>
-                    <ul>
-                      <p className="pl-6 text-dark text-lg font-medium mb-3 border-y py-2">
-                        {item.label}
-                      </p>
-                      {item.subMenuLinks.map((link) => (
-                        <li
-                          key={link.href}
-                          className="py-2 pl-1 mx-2 mr-1 rounded-xl flex items-center gap-x-2 hover:bg-accent/20"
-                        >
-                          <Link
-                            className="pl-3"
-                            href={link.href + link.university.slug}
-                            onClick={handleLinkClick}
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="universities-list"
-                      className="mt-1 ml-6 text-blue-500 underline mb-3 flex items-center gap-x-1"
-                    >
-                      view all <GoArrowRight className="-rotate-45" />
-                    </Link>
-                  </div>
-                ))}
               </div>
             </div>
           </Drawer.Content>

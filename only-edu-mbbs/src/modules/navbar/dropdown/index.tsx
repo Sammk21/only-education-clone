@@ -83,13 +83,13 @@ export function NavbarDrop() {
             {navItem.submenu ? (
  <NavigationMenuTrigger >{navItem.title}</NavigationMenuTrigger>
             ):(
-              <Link className="inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/20 hover:text-accent-foreground focus:bg-accent/20 focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href={navItem.href}>
+              <Link className="inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/20 hover:text-accent-foreground focus:bg-accent/20 focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" href={navItem.href}>
               {navItem.title}
               </Link>
             )}
              
             <NavigationMenuContent>
-              <div className=" flex gap-x-4 min-w-[1200px] justify-between p-3 max-h-[800px]">
+              <div className=" flex gap-x-4 min-w-[950px] justify-between p-3 ">
                 {navItem.submenu && renderSubMenu(navItem.submenu)}
               </div>
             </NavigationMenuContent>

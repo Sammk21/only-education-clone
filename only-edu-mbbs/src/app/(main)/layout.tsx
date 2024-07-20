@@ -44,7 +44,7 @@ export default async function MainLayout({
       {children}
       <Footer navigation={navData.navigation} />
 
-      <MySideBar navigation={navData.navigation} dropdown={navData.dropdown} />
+      <MySideBar  />
       <Toaster richColors position="top-center" />
     </div>
   );
