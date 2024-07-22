@@ -1,3 +1,4 @@
+import axios from "axios";
 import { enquiryService } from "../services/enquiry-service";
 import { EnquirySchema } from "../zod/zod-schema";
 
@@ -33,39 +34,29 @@ export const enquiryAction = async (
     };
   }
 
-  const responseData = await enquiryService(
-    validatedFields.data.userId,
-    validatedFields.data.uniId,
-    validatedFields.data.level,
-    validatedFields.data.specialization
-  );
+  try {
+    const response = await axios.post(
+      "http://localhost:8000/api/submit-enquiry",
+      {
+        userId: userId,
+        level: formData.level,
+        specialization: formData.specialization,
+        universityId: uniId,
+      }
+    );
 
-  if (!responseData) {
     return {
       ...prevState,
-      success: false,
-      strapiErrors: responseData || "",
       zodErrors: null,
-      message: "Ops! Something went wrong. Please try again.",
-    };
-  }
-
-  if (responseData.error) {
-    return {
-      ...prevState,
-      success: false,
-      strapiErrors: responseData.error,
-      zodErrors: null,
-      message: "Failed to Login.",
-    };
-  }
-
-  if (responseData.success) {
-    return {
       success: true,
-      strapiErrors: responseData.error,
+      message: response.data.message,
+    };
+  } catch (error) {
+    return {
+      ...prevState,
       zodErrors: null,
-      message: "success.",
+      success: false,
+      message: "Failed to submit enquiry. Please try again later.",
     };
   }
 };

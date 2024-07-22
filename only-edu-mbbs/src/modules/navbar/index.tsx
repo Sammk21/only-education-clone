@@ -37,48 +37,45 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
         {user?.ok && !user?.data?.verified ? (
           <Banner existingPhone={user.data.phone} userId={user.data.id} />
         ) : null}
-        <nav className="xlg:grid flex justify-between grid-cols-12 px-6 py-2 place-items-center w-full  border-b">
-          <Link className=" col-span-1 h-12 w-28 sm:h-14 sm:w-36 relative" href="/">
-            <Image
-              src={
-                "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
-              }
-              alt="logo"
-              fill={true}
-              className="object-cover object-center top-4 drop-shadow-lg"
-            />
-          </Link>
-          <div className=" hidden col-span-10  xlg:block text-sm font-normal">
-          <NavigationMenu>
-            <ul className=" flex items-center justify-center ">
-             
-             <NavbarDrop/>
-            
-            </ul>
-            </NavigationMenu>
-          </div>
-          <div className="col-span-1">
-          {user.ok ? (
-            <>
-              <UserProfileButton firstName={user.data.firstName} />
-            </>
-          ) : (
-            <Link href={"/auth"}>
-              <Button
-                className="relative group/btn hover:bg-light"
-                variant={"outline"}
-              >
-                <span>Login</span>
-                <BottomGradient />
-              </Button>
+        <NavigationMenu>
+          <nav className="xlg:grid flex justify-between grid-cols-12 px-6 py-2 place-items-center w-full  border-b">
+            <Link
+              className=" col-span-1 h-12 w-28 sm:h-14 sm:w-36 relative"
+              href="/"
+            >
+              <Image
+                src={
+                  "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
+                }
+                alt="logo"
+                fill={true}
+                className="object-cover object-center top-4 drop-shadow-lg"
+              />
             </Link>
-          )}
-          </div>
-         </nav>
-         
-
-    
-        
+            <div className=" hidden col-span-10  xlg:block text-sm font-normal">
+              <ul className=" flex items-center justify-center ">
+                <NavbarDrop />
+              </ul>
+            </div>
+            <div className="col-span-1">
+              {user.ok ? (
+                <>
+                  <UserProfileButton firstName={user.data.firstName} />
+                </>
+              ) : (
+                <Link href={"/auth"}>
+                  <Button
+                    className="relative group/btn hover:bg-light"
+                    variant={"outline"}
+                  >
+                    <span>Login</span>
+                    <BottomGradient />
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </nav>
+        </NavigationMenu>
       </header>
     </>
   );

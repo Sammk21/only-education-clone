@@ -5,7 +5,7 @@ import {
 } from "@/modules/account/components/register";
 import { Label } from "@/modules/account/components/ui/label";
 import { Input } from "@/modules/account/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { enquiryFormSchema, maskPhoneNumber } from "@/utils/utils";
 import { z } from "zod";
@@ -45,18 +45,21 @@ const INITIAL_STATE = {
   data: null,
 };
 
-export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
+export function EnquiryFrom({ title, user, id, onClose }: EnquiryFromProps) {
   const form = useForm<z.infer<typeof enquiryFormSchema>>({
     resolver: zodResolver(enquiryFormSchema),
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   async function onSubmit(formData: z.infer<typeof enquiryFormSchema>) {
     const userId = user.data?.id;
     const response = await enquiryAction(INITIAL_STATE, formData, userId, id);
     if (response.success) {
       toast.info("Enquiry has been sent");
+      setIsSubmitted(true);
+      setTimeout(onClose, 2000); // Close the tab after 2 seconds
     } else {
-      toast.error("internal server error");
+      toast.error("Internal server error");
     }
   }
 
@@ -101,7 +104,7 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
         />
       </LabelInputContainer>
       <LabelInputContainer className="mb-4">
-        <Label className="text-accent" htmlFor="phone">
+        <Label className="text-accent" htmlFor="for">
           For
         </Label>
         <Input
@@ -130,7 +133,7 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
             name="level"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>level</FormLabel>
+                <FormLabel>Level</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -159,14 +162,14 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
             name="specialization"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>specialization</FormLabel>
+                <FormLabel>Specialization</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Select Level" />
+                      <SelectValue placeholder="Select Specialization" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -186,7 +189,9 @@ export function EnquiryFrom({ title, user, id }: EnquiryFromProps) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={isSubmitted}>
+            {isSubmitted ? "Applied" : "Submit"}
+          </Button>
         </form>
       </Form>
     </div>
