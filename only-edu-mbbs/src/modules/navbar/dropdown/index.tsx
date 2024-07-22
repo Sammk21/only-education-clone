@@ -20,12 +20,6 @@ interface SubmenuItem {
   submenu?: SubmenuItem[];
 }
 
-interface NavbarItem {
-  id: number;
-  title: string;
-  href: string;
-  submenu?: SubmenuItem[];
-}
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,

@@ -27,7 +27,6 @@
     "strapi-plugin-navigation": "^2.5.2",
     "strapi-plugin-populate-deep": "^1.1.2",
     "strapi-plugin-todo": "^0.0.9",
-    "strapi-regenera/admin/plugins/seotor": "^0.2.1",
     "unzip-stream": "^0.3.1",
     "uuid-v4": "^0.1.0"
   },
