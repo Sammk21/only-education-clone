@@ -15,23 +15,23 @@ import {
   streasmQuery,
 } from "@/app/data/quries/uniList-query";
 import EntranceExamList from "@/modules/all-universities-list/exam-list";
-
-// const ownershipQuery = "/api/ownerships?populate=true";
-// const indianStatesQuery =
-//   "/api/indian-states?populate[universities][populate]=true";
-// const examsQuery = "/api/exams?populate=true";
+const rankingQuery="/api/rankings?fields[0]=publisherName"
 
 export default async function UniversitiesList({
   searchParams,
 }: Readonly<SearchParamsProps>) {
   let universityListQuery =
-    "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
+    "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber";
+    const UniRanking="/api/universities?populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber"
+
 
   const currentPage = Number(searchParams?.page) || 1;
   const ownership = await getStrapiData(ownershipQuery);
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
   const streams = await getStrapiData(streasmQuery);
+    const ranking = await getStrapiData(rankingQuery);
+const UniRank=await getStrapiData(UniRanking)
 
 
   let { streamsParam,locationsParam, examsParam, ownershipsParam } = searchParams;
@@ -94,7 +94,7 @@ export default async function UniversitiesList({
             context="universities"
           />
           {data.data.length > 0 ? (
-            <CollegeList user={newUser} data={data} />
+            <CollegeList user={newUser} data={data} ranking={ranking} UniRank={UniRank}/>
           ) : (
             <div className=" w-[70%] flex justify-center ">
               <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
