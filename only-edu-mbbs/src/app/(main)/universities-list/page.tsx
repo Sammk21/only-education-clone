@@ -67,22 +67,41 @@ export default async function UniversitiesList({
  
   const data = await getUniversities(universityListQuery, currentPage);
 
+const defaultRankingParam = 'nirf';
+const rankingParamToUse = rankingParam || defaultRankingParam;
+
   let filteredUniversities = data.data;
 
-  if (rankingParam) {
-    filteredUniversities = filteredUniversities.map((university: { ranking: any[]; }) => {
-      if (university.ranking) {
-        const filteredRankings = university.ranking.filter((rank: { rankings: { slug: string; }; }) => {
-          return rank.rankings.slug === rankingParam;
-        });
-        return {
-          ...university,
-          ranking: filteredRankings
-        };
-      }
-      return university;
-    }).filter((university: { ranking: string | any[]; }) => university.ranking.length > 0);
+  if (rankingParamToUse) {
+    filteredUniversities = filteredUniversities
+      .map((university: { ranking: any[], rankingNumber: number }) => {
+        if (university.ranking) {
+          const filteredRankings = university.ranking.filter((rank: { rankings: { slug: string; }; }) => {
+            return rank.rankings.slug === rankingParamToUse;
+          });
+  
+          // Keep only the lowest ranking
+          const lowestRanking = filteredRankings.reduce((prev, current) => {
+            return (prev.rankingNumber < current.rankingNumber) ? prev : current;
+          }, filteredRankings[0]);
+  
+          return {
+            ...university,
+            ranking: lowestRanking ? [lowestRanking] : []
+          };
+        }
+        return university;
+      })
+      .filter((university: { ranking: string | any[]; }) => university.ranking.length > 0)
+      .sort((a: { ranking: { rankingNumber: number }[] }, b: { ranking: { rankingNumber: number }[] }) => {
+        // Ensure both universities have at least one ranking, then sort by the first ranking number
+        if (a.ranking[0] && b.ranking[0]) {
+          return a.ranking[0].rankingNumber - b.ranking[0].rankingNumber;
+        }
+        return 0;
+      });
   }
+  
   const user = await getUserMeLoader();
 
 
@@ -109,15 +128,15 @@ export default async function UniversitiesList({
             filterParams={filterParams}
             context="universities"
           />
-          {finalData.data.length > 0 ? (
-            <CollegeList user={newUser} data={finalData} ranking={ranking}  filterParams={filterParams}  context="universities"/>
-          ) : (
-            <div className=" w-[70%] flex justify-center ">
-              <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
-                Uh oh... no result found
-              </span>
-            </div>
-          )}
+         {finalData.data.length > 0 ? (
+          <CollegeList user={newUser} data={finalData} ranking={ranking} filterParams={filterParams} context="universities" />
+        ) : (
+          <div className=" w-[70%] flex justify-center ">
+            <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
+              Uh oh... no result found
+            </span>
+          </div>
+        )}
           <MobileFilter
            streams={streams}
             exams={exams}

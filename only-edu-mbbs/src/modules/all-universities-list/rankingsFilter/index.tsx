@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { getStrapiData } from '@/utils/utils';
 import React, { useState } from 'react';
 import { rankingFilter } from "@/types/types";
-import { updatedFilters, updatedRankingFilter } from '@/app/action';
+import { updatedFilters } from '@/app/action';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 interface RankingFilterProps {
   ranking: rankingFilter;
@@ -28,16 +29,14 @@ interface FilterParams {
   rankingParam?: string;
 }
 
-const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams,context }) => {
+const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams}) => {
   const [selectedRanking, setSelectedRanking] = useState<string | undefined>(undefined);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Selected Ranking Publisher:", selectedRanking);
-    const context ="universities"
-    if(selectedRanking){
-      await updatedRankingFilter(selectedRanking, context) 
-    }
+    const context = "universities"
+    const formData = new FormData(event.currentTarget);
+    await updatedFilters(formData, context) 
   };
 
   return (
@@ -47,13 +46,13 @@ const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams,con
         {ranking.data.map((item) => (
           <label
             key={item.id}
-            className={`relative inline-flex items-center px-4 py-2 border border-orange-500 bg-white text-dark cursor-pointer ${
-              selectedRanking === item.slug ? 'bg-orange-500 text-white' : ''
+            className={`relative inline-flex items-center px-2 py-1 border rounded-lg text-xs hover:bg-orange-500 border-orange-500 bg-white text-dark cursor-pointer ${
+              selectedRanking === item.slug ? 'bg-orange-400 text-white' : ''
             }`}
           >
-            <input
+            <Input
               type="radio"
-              value={item.publisherName}
+              value={item.slug}
               className="hidden"
               name={"Ranking"}
               checked={selectedRanking === item.slug}

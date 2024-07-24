@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
-import RankingFilter from "@/app/(main)/rankingsFilter";
+import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 
 interface Props {
   data: UniversitiesData;
