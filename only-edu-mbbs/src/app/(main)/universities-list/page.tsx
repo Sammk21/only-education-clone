@@ -22,7 +22,7 @@ export default async function UniversitiesList({
 }: Readonly<SearchParamsProps>) {
   let universityListQuery =
     "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber";
-    const UniRanking="/api/universities?populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber"
+    // const UniRanking="/api/universities?populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber"
 
 
   const currentPage = Number(searchParams?.page) || 1;
@@ -30,14 +30,20 @@ export default async function UniversitiesList({
   const indianStates = await getStrapiData(indianStatesQuery);
   const exams = await getStrapiData(examsQuery);
   const streams = await getStrapiData(streasmQuery);
-    const ranking = await getStrapiData(rankingQuery);
-const UniRank=await getStrapiData(UniRanking)
+  const ranking = await getStrapiData(rankingQuery);
+// const UniRank=await getStrapiData(UniRanking)
 
 
-  let { streamsParam,locationsParam, examsParam, ownershipsParam } = searchParams;
-  let filterParams = { locationsParam, examsParam, ownershipsParam,streamsParam }; //to send it as a prop
+  let { streamsParam,locationsParam, examsParam, ownershipsParam,rankingParam } = searchParams;
+  let filterParams = { locationsParam, examsParam, ownershipsParam,streamsParam, rankingParam }; //to send it as a prop
 
   if (searchParams) {
+    if (rankingParam) {
+      const rankingFilters = `filters[rankings][publisherName][$eq]=${rankingParam}`
+      universityListQuery += `&${rankingFilters}`;
+        
+    }
+
     if (streamsParam) {
       const streamsFilters = streamsParam
         .split(",")
@@ -63,15 +69,12 @@ const UniRank=await getStrapiData(UniRanking)
       const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
       universityListQuery += `&${ownershipFilters}`;
     }
+
   }
 
   const data = await getUniversities(universityListQuery, currentPage);
   const user = await getUserMeLoader();
-  interface newUserProp {
-    id: number;
-    verified: boolean;
-    phone: number;
-  }
+
 
   let newUser: { id: number; verified: boolean; phone: number } | null = null;
   if (user && user.data) {
@@ -80,13 +83,12 @@ const UniRank=await getStrapiData(UniRanking)
   }
 
   const { pagination } = data.meta;
-
   return (
     <>
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-           streams={streams}
+            streams={streams}
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}
@@ -94,7 +96,7 @@ const UniRank=await getStrapiData(UniRanking)
             context="universities"
           />
           {data.data.length > 0 ? (
-            <CollegeList user={newUser} data={data} ranking={ranking} UniRank={UniRank}/>
+            <CollegeList user={newUser} data={data} ranking={ranking}  filterParams={filterParams}  context="universities"/>
           ) : (
             <div className=" w-[70%] flex justify-center ">
               <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">

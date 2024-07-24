@@ -42,6 +42,14 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   }
 };
 */
+const params = new URLSearchParams();
+
+export const updatedRankingFilter = async (ranking:string, context:string) =>{
+      params.append("rankingParam", ranking)
+      if(context === "universities"){
+        redirect(`/universities-list?${params.toString()}`);
+      }
+}
 
 
 export const updatedFilters = async (formData: FormData, context: string) => {
@@ -53,8 +61,9 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   const duration = formData.getAll("Duration");
   const course = formData.getAll("Course");
 
-  const params = new URLSearchParams();
 
+
+ 
   if (locations.length > 0) params.append("locationsParam", locations.join(","));
   if (exams.length > 0) params.append("examsParam", exams.join(","));
   if (ownerships.length > 0) params.append("ownershipsParam", ownerships.join(","));
@@ -62,6 +71,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   if (modes.length > 0) params.append("modesParam", modes.join(","));
   if (duration.length > 0) params.append("durationParam", duration.join(","));
   if (course.length > 0) params.append("courseParam", course.join(","));
+ 
 
   if (context === "universities") {
     redirect(`/universities-list?${params.toString()}`);

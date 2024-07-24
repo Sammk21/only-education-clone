@@ -19,12 +19,14 @@ interface Props {
   data: UniversitiesData;
   user: User | null;
   ranking:rankingFilter
-  UniRank:UniRanking
+  filterParams: FilterParams;
+  context: string;
+
 }
 interface FilteredProps {
   university: Universitylist;
   user: User | null;
-  UniRank:UniRanking
+  // UniRank:UniRanking
 
 }
 interface User {
@@ -34,8 +36,23 @@ interface User {
 }
 
 
+interface FilterParams {
+  locationsParam?: string;
+  examsParam?: string;
+  ownershipsParam?: string;
+  streamsParam?: string;
+  modesParam?: string;
+  durationParam?: string;
+  courseParam?: string;
+  rankingParam?:string
+}
 
-const CollegeList = ({ data, user, ranking, UniRank }: Props) => {
+
+
+
+const CollegeList = ({ data, user, ranking,filterParams,  context}: Props) => {
+
+ 
 
 
   const client = new MeiliSearch({
@@ -79,7 +96,7 @@ const CollegeList = ({ data, user, ranking, UniRank }: Props) => {
   return (
     <section className="lg:w-[70%] mb-4 px-4">
       <SearchBox query={query} setQuery={setQuery} />
-      <RankingFilter ranking={ranking}/> 
+      <RankingFilter ranking={ranking} filterParams={filterParams} context="/universities"/> 
       {query && noResults && (
         <>
           <div className=" w-full flex justify-center ">
@@ -95,7 +112,7 @@ const CollegeList = ({ data, user, ranking, UniRank }: Props) => {
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
-          UniRank={UniRank}
+          // UniRank={UniRank}
             university={university}
             user={user}            
             key={university.id}
@@ -108,8 +125,11 @@ const CollegeList = ({ data, user, ranking, UniRank }: Props) => {
 
 export default CollegeList;
 
-const FilteredUniversityItem = ({ university, user, UniRank }: FilteredProps) => {
-console.log("hello",university.ranking)
+const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
+  // console.log("hello", university.ranking?.[6]?.rankings?.publisherName ?? "Ranking not available");
+
+
+
 
   return (
     <>
@@ -120,20 +140,15 @@ console.log("hello",university.ranking)
         <div className="flex flex-col w-full sm:flex-row">
 
      <div>
-     {/* {UniRank.data.map((item) => (
-  <div key={item.id}>
-    {item.ranking.map((rankItem) => (
-      <div key={rankItem.id}>
-        <p>{rankItem.rankings.publisherName}</p>
-      </div>
-    ))}
-  </div>
-))} */}
-{/* {university.UniRank.data.map((item)=>{
-  <div key={item.id}>
-  <p>{item.ranking.rankingNumber}</p>
-  </div>
-})} */}
+    
+     {
+  university.ranking?.map((item, index) => (
+    <div key={index} className="text-dark text-center">
+      <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
+      {item.rankings?.publisherName}
+    </div>
+  ))
+}
 
 
      </div>

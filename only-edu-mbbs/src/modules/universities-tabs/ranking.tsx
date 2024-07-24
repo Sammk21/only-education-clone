@@ -18,7 +18,7 @@ interface rankingProps {
     publisherName: string;
     publisherImage: ImageAttributes;
   };
-}
+};
 
 interface Props {
   data: rankingProps[];
@@ -27,7 +27,6 @@ interface Props {
 const Ranking = ({ data }: Props) => {
   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
 
-  // console.dir(data);
   return (
     <div className="mt-3">
       <Card>

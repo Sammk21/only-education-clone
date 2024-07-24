@@ -264,15 +264,23 @@ export interface UniRanking{
   // }[]
 
 }
-export interface ranking{
-  id:number
-  rankingNumber:string
-  rankings:{
+export interface ranking {
+  
+  
+  id: number;
+  rankingNumber: number; 
+  rankings?: 
+    {
+    
+    id: number;
+   
+    publisherName: string;
+    
+  
+}
 
-    id:number
-    publisherName:string
-  }[]
-} 
+
+}
 
 export interface Universitylist {
   title?: string;
@@ -294,7 +302,9 @@ export interface Universitylist {
   resultDate:string;
   duration:duration
   UniRank:UniRanking
- ranking:ranking
+  
+    ranking?:ranking[]
+  
 }
 
 export interface UniversitiesData {
@@ -313,6 +323,8 @@ export interface SearchParamsProps {
     modesParam?:string;
     query?: string;
     page?: number;
+    rankingParam?:string
+    
   };
 }
 
