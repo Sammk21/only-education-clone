@@ -29,6 +29,7 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ user }) => {
   return (
     <form className="w-full">
       <AccountInfo
+       isLoading={false}
         label="Password"
         currentInfo={`Password is not shown for security reason`}
         isSuccess={false}

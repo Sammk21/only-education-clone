@@ -269,11 +269,11 @@ export interface ranking {
   
   id: number;
   rankingNumber: number; 
-  rankings?: 
+  rankings: 
     {
     
     id: number;
-   
+     slug:string
     publisherName: string;
     
   
@@ -292,18 +292,13 @@ export interface Universitylist {
   stream?: streams;
   searchableImage: ImageAttributes;
   mode?:mode;
-  // exams?: {
-  //   data: data[];
-  // };
   exams?:exams
-
   applicationDate:string;
   examinationDate:string;
   resultDate:string;
   duration:duration
   UniRank:UniRanking
-  
-    ranking?:ranking[]
+  ranking:ranking[]
   
 }
 
@@ -410,5 +405,6 @@ export interface rankingFilter{
   data:{
     id:number
   publisherName:string
+  slug:string
   }[]
 }

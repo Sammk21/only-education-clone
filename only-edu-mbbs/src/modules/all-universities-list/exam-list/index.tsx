@@ -95,7 +95,6 @@ const EntranceExamList = ({ data, user }: Props) => {
 export default EntranceExamList;
 
 const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
-  // console.log(exam.mode?.title);
   return (
     <>
       <div

@@ -28,6 +28,7 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ user }) => {
   return (
     <form className="w-full">
       <AccountInfo
+       isLoading={false}
         label="Phone"
         currentInfo={`${user.data?.username}`}
         isSuccess={false}

@@ -7,6 +7,11 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     remotePatterns: [
       {

@@ -33,15 +33,11 @@ const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams,con
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
     console.log("Selected Ranking Publisher:", selectedRanking);
-
     const context ="universities"
-
     if(selectedRanking){
       await updatedRankingFilter(selectedRanking, context) 
     }
-
   };
 
   return (
@@ -52,7 +48,7 @@ const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams,con
           <label
             key={item.id}
             className={`relative inline-flex items-center px-4 py-2 border border-orange-500 bg-white text-dark cursor-pointer ${
-              selectedRanking === item.publisherName ? 'bg-orange-500 text-white' : ''
+              selectedRanking === item.slug ? 'bg-orange-500 text-white' : ''
             }`}
           >
             <input
@@ -60,8 +56,8 @@ const RankingFilter: React.FC<RankingFilterProps> = ({ ranking, filterParams,con
               value={item.publisherName}
               className="hidden"
               name={"Ranking"}
-              checked={selectedRanking === item.publisherName}
-              onChange={() => setSelectedRanking(item.publisherName)}
+              checked={selectedRanking === item.slug}
+              onChange={() => setSelectedRanking(item.slug)}
             />
             {item.publisherName}
           </label>

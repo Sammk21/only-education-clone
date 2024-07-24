@@ -32,6 +32,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ user }) => {
   return (
     <form className="w-full overflow-visible ">
       <AccountInfo
+      isLoading={false}
         label="Name"
         currentInfo={`${user.data?.firstName} ${user.data?.lastName}`}
         isSuccess={false}
