@@ -9,5 +9,5 @@ export const examsQuery = "/api/exams?populate=true";
   export const durationQuery="/api/durations?populate=true"
   export const courseQuery="/api/courses?populate=true"
 
-  
-  
+
+  // export const rankingFilterQuery=

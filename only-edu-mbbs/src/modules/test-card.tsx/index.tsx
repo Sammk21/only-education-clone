@@ -13,11 +13,7 @@ import { ImageExtended } from "../common/extended-image/extended-image";
 interface Props{
 
 
-
-   
-  
-
-   key:number
+key:number
 context:string
 tab:string
 href:string

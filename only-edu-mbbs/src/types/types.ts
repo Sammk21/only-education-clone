@@ -250,6 +250,38 @@ export interface UniversityProfile {
   description: string;
   
 }
+export interface UniRanking{
+  // data:{
+  //   id:number
+  //   ranking:{
+  //   id:number
+  //   rankingNumber:string
+  //   rankings:{
+  //     id:number
+  //     publisherName:string
+  //   }
+  // }[]
+  // }[]
+
+}
+export interface ranking {
+  
+  
+  id: number;
+  rankingNumber: number; 
+  rankings?: 
+    {
+    
+    id: number;
+   
+    publisherName: string;
+    
+  
+}
+
+
+}
+
 export interface Universitylist {
   title?: string;
   id?: number;
@@ -269,11 +301,15 @@ export interface Universitylist {
   examinationDate:string;
   resultDate:string;
   duration:duration
+  UniRank:UniRanking
+  
+    ranking?:ranking[]
   
 }
 
 export interface UniversitiesData {
   data: Universitylist[];
+
 }
 
 export interface SearchParamsProps {
@@ -287,6 +323,8 @@ export interface SearchParamsProps {
     modesParam?:string;
     query?: string;
     page?: number;
+    rankingParam?:string
+    
   };
 }
 
@@ -367,4 +405,10 @@ export interface recentlyViewed {
   slug: string;
   image: string;
   title: string;
+}
+export interface rankingFilter{
+  data:{
+    id:number
+  publisherName:string
+  }[]
 }

@@ -65,7 +65,7 @@ export default async function Home() {
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
             <SchedulesSection data={streams}/>
-            {/* testing */}
+          
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}

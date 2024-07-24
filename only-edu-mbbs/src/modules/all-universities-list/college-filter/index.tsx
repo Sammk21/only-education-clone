@@ -189,11 +189,7 @@ const CollegeFilter = ({
                 selectedItems={selectedLocations}
               />
             )}
-            {/* <AccordionCustom
-              name={"Exams"}
-              data={exams.data}
-              selectedItems={selectedExams}
-            /> */}
+           
             {exams && (
               <AccordionCustom
                 name={"Exams"}

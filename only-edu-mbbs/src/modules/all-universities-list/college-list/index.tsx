@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { UniversitiesData, Universitylist } from "@/types/types";
+import { rankingFilter, UniRanking, UniversitiesData, Universitylist } from "@/types/types";
 import { FaDownload, FaLock, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
 import SearchBox from "@/app/(main)/searchbox";
@@ -12,14 +12,22 @@ import { Separator } from "@/components/ui/separator";
 import { json } from "stream/consumers";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
+import RankingFilter from "@/app/(main)/rankingsFilter";
+import { data } from "flickity";
 
 interface Props {
   data: UniversitiesData;
   user: User | null;
+  ranking:rankingFilter
+  filterParams: FilterParams;
+  context: string;
+
 }
 interface FilteredProps {
   university: Universitylist;
   user: User | null;
+  // UniRank:UniRanking
+
 }
 interface User {
   id: number;
@@ -27,7 +35,26 @@ interface User {
   phone: number;
 }
 
-const CollegeList = ({ data, user }: Props) => {
+
+interface FilterParams {
+  locationsParam?: string;
+  examsParam?: string;
+  ownershipsParam?: string;
+  streamsParam?: string;
+  modesParam?: string;
+  durationParam?: string;
+  courseParam?: string;
+  rankingParam?:string
+}
+
+
+
+
+const CollegeList = ({ data, user, ranking,filterParams,  context}: Props) => {
+
+ 
+
+
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -69,6 +96,7 @@ const CollegeList = ({ data, user }: Props) => {
   return (
     <section className="lg:w-[70%] mb-4 px-4">
       <SearchBox query={query} setQuery={setQuery} />
+      <RankingFilter ranking={ranking} filterParams={filterParams} context="/universities"/> 
       {query && noResults && (
         <>
           <div className=" w-full flex justify-center ">
@@ -84,8 +112,9 @@ const CollegeList = ({ data, user }: Props) => {
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
+          // UniRank={UniRank}
             university={university}
-            user={user}
+            user={user}            
             key={university.id}
           />
         )
@@ -97,6 +126,11 @@ const CollegeList = ({ data, user }: Props) => {
 export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
+  // console.log("hello", university.ranking?.[6]?.rankings?.publisherName ?? "Ranking not available");
+
+
+
+
   return (
     <>
       <div
@@ -104,13 +138,30 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
         <div className="flex flex-col w-full sm:flex-row">
+
+     <div>
+    
+     {
+  university.ranking?.map((item, index) => (
+    <div key={index} className="text-dark text-center">
+      <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
+      {item.rankings?.publisherName}
+    </div>
+  ))
+}
+
+
+     </div>
+
+    
+
           <Link
             className=" w-full sm:w-1/4"
             href={`study/uni/${university?.slug}`}
           >
             <div className="relative aspect-video w-full  rounded-md overflow-hidden">
               <ImageExtended
-                className="object-cover w-full h-full transition"
+                className="object-contain w-full h-full transition"
                 src={university?.searchableImage?.url}
                 alt="University Image"
                 blurDataURL={university.searchableImage?.blurhash}
