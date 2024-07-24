@@ -1,10 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { useFormState } from "react-dom";
-
 import { Input } from "@/components/ui/input";
-// import { updateCustomerName } from "@modules/account/actions"
-
 import AccountInfo from "../account-info";
 import { UserType } from "@/types/types";
 import { Label } from "@/components/ui/label";

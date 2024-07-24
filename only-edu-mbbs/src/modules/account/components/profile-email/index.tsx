@@ -51,7 +51,6 @@ const ProfileEmail = ({ user }: MyInformationProps) => {
  
 
   const onSubmit: SubmitHandler<IEmailInput> = async (data) => {
-    console.log(data);
     setIsLoading(true); // Start loading
     const res = await updateEmailAction(INITIAL_STATE, data);
     setIsLoading(false); // End loading
