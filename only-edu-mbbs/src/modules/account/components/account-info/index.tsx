@@ -5,6 +5,7 @@ import useToggleState from "@/lib/use-toggle-state";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/util/cn";
 import { Badge } from "@/components/ui/badge";
+import { BottomGradient } from "../register";
 
 type AccountInfoProps = {
   label: string;
@@ -14,6 +15,7 @@ type AccountInfoProps = {
   errorMessage?: string;
   clearState: () => void;
   children?: React.ReactNode;
+  isLoading:boolean
 };
 
 const AccountInfo = ({
@@ -22,12 +24,11 @@ const AccountInfo = ({
   isSuccess,
   isError,
   clearState,
+  isLoading,
   errorMessage = "An error occurred, please try again",
   children,
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState();
-
-  const { pending } = useFormStatus();
 
   const handleToggle = () => {
     clearState();
@@ -83,24 +84,6 @@ const AccountInfo = ({
         </DisclosurePanel>
       </Disclosure>
 
-      {/* Error state */}
-      {/* <Disclosure>
-        <DisclosurePanel
-          static
-          className={cn(
-            "transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden",
-            {
-              "max-h-[1000px] opacity-100": isError,
-              "max-h-0 opacity-0": !isError,
-            }
-          )}
-        >
-          <Badge className="p-2 my-4 bg-red-500" color="red">
-            <span>{errorMessage}</span>
-          </Badge>
-        </DisclosurePanel>
-      </Disclosure> */}
-
       <Disclosure>
         <DisclosurePanel
           static
@@ -116,12 +99,38 @@ const AccountInfo = ({
             <div>{children}</div>
             <div className="flex items-center justify-end mt-2">
               <Button
-                // isLoading={pending}
+                disabled={isLoading}
                 className="w-full small:max-w-[140px]"
                 type="submit"
               >
-                Save changes
-              </Button>
+                 {isLoading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-white mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8h8a8 8 0 01-8 8v-8H4z"
+              ></path>
+            </svg>
+          ) : (
+            <>
+              update 
+              <BottomGradient />
+            </>
+           )} </Button>
+              <BottomGradient />
             </div>
           </div>
         </DisclosurePanel>

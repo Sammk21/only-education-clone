@@ -22,26 +22,6 @@ export async function getData(path: string) {
   } catch (error) {}
 }
 
-/*
-the below old code is filter code for university 
-
-export const updatedFilters = async (formData: FormData, context: string) => {
-  const locations = formData.getAll("Location");
-  const exams = formData.getAll("Exams");
-  const ownerships = formData.getAll("Ownership");
-
-  if (locations.length > 0 || exams.length > 0 || ownerships.length > 0) {    const params = new URLSearchParams();
-    if (locations.length > 0)
-      params.append("locationsParam", locations.join(","));
-    if (exams.length > 0) params.append("examsParam", exams.join(","));
-    if (ownerships.length > 0)
-      params.append("ownershipsParam", ownerships.join(","));
-    redirect(`/universities-list?${params.toString()}`);
-  } else {
-    redirect("/universities-list");
-  }
-};
-*/
 
 
 export const updatedFilters = async (formData: FormData, context: string) => {
