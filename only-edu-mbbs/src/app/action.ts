@@ -22,6 +22,7 @@ export async function getData(path: string) {
   } catch (error) {}
 }
 
+
 /*
 the below old code is filter code for university 
 
@@ -50,6 +51,7 @@ export const updatedRankingFilter = async (ranking:string, context:string) =>{
         redirect(`/universities-list?${params.toString()}`);
       }
 }
+
 
 
 export const updatedFilters = async (formData: FormData, context: string) => {

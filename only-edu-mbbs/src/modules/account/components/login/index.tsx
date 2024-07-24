@@ -1,16 +1,11 @@
 "use client";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
 import { BottomGradient, LabelInputContainer } from "../register";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { LOGIN_VIEW } from "../../templates/login-template";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { loginUserAction } from "@/app/data/actions/auth-actions";
-import { StrapiErrors, StrapiErrorsProps } from "@/modules/custom/StrapiErrors";
+import { StrapiErrors} from "@/modules/custom/StrapiErrors";
 import { Button } from "@headlessui/react";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -18,7 +13,6 @@ import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handlePhoneInput } from "@/utils/utils";
 import { GoogleButton } from "../providers-button";
-import { useRouter } from "next/navigation";
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;
