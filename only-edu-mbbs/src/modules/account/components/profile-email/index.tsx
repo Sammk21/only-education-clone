@@ -6,7 +6,7 @@ import { UserType } from "@/types/types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { BottomGradient, LabelInputContainer } from "../register";
+import { LabelInputContainer } from "../register";
 import { Label } from "@/components/ui/label";
 import { StrapiErrors } from "@/modules/custom/StrapiErrors";
 import { updateEmailAction, updateEmailSchema } from "@/app/data/actions/update-user-actions";

@@ -73,8 +73,12 @@ const ProfilePhone = ({ user }: MyInformationProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <AccountInfo
+<<<<<<< HEAD
         disable={user.data?.last_phone_update !== null}
         isLoading={isLoading}
+=======
+       isLoading={false}
+>>>>>>> 1f66462738a94541924095219f2db77988bec226
         label="Phone"
         currentInfo={user.data ? `${user.data.phone}` : "couldn't fetch data please try later"}
         isSuccess={false}

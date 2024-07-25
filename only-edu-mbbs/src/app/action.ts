@@ -23,38 +23,9 @@ export async function getData(path: string) {
 }
 
 
-/*
-the below old code is filter code for university 
 
 export const updatedFilters = async (formData: FormData, context: string) => {
-  const locations = formData.getAll("Location");
-  const exams = formData.getAll("Exams");
-  const ownerships = formData.getAll("Ownership");
-
-  if (locations.length > 0 || exams.length > 0 || ownerships.length > 0) {    const params = new URLSearchParams();
-    if (locations.length > 0)
-      params.append("locationsParam", locations.join(","));
-    if (exams.length > 0) params.append("examsParam", exams.join(","));
-    if (ownerships.length > 0)
-      params.append("ownershipsParam", ownerships.join(","));
-    redirect(`/universities-list?${params.toString()}`);
-  } else {
-    redirect("/universities-list");
-  }
-};
-*/
-const params = new URLSearchParams();
-
-export const updatedRankingFilter = async (ranking:string, context:string) =>{
-      params.append("rankingParam", ranking)
-      if(context === "universities"){
-        redirect(`/universities-list?${params.toString()}`);
-      }
-}
-
-
-
-export const updatedFilters = async (formData: FormData, context: string) => {
+  const params = new URLSearchParams();
   const locations = formData.getAll("Location");
   const exams = formData.getAll("Exams");
   const ownerships = formData.getAll("Ownership");
@@ -62,8 +33,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   const modes = formData.getAll("Examination Modes");
   const duration = formData.getAll("Duration");
   const course = formData.getAll("Course");
-
-
+  const ranking = formData.getAll("Ranking")
 
  
   if (locations.length > 0) params.append("locationsParam", locations.join(","));
@@ -73,6 +43,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   if (modes.length > 0) params.append("modesParam", modes.join(","));
   if (duration.length > 0) params.append("durationParam", duration.join(","));
   if (course.length > 0) params.append("courseParam", course.join(","));
+  if (ranking.length > 0) params.append("rankingParam", ranking.join(","))
  
 
   if (context === "universities") {
@@ -115,7 +86,6 @@ export const addRecentlyViewed = async (data: recentlyViewed) => {
     { slug, image, title },
     ...recentlyViewed.filter((p) => p.slug !== slug),
   ].slice(0, 6); // Adjusted to store only the last 6 viewed products
-
   cookies().set("RVU", JSON.stringify(updatedViewed), config);
   return {
     success: true,

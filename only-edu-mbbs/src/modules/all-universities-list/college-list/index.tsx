@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { rankingFilter, UniRanking, UniversitiesData, Universitylist } from "@/types/types";
@@ -9,11 +8,9 @@ import SearchBox from "@/app/(main)/searchbox";
 import MeiliSearch from "meilisearch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { json } from "stream/consumers";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
-import RankingFilter from "@/app/(main)/rankingsFilter";
-import { data } from "flickity";
+import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 
 interface Props {
   data: UniversitiesData;
@@ -50,7 +47,7 @@ interface FilterParams {
 
 
 
-const CollegeList = ({ data, user, ranking,filterParams,  context}: Props) => {
+const CollegeList = ({ data, user, ranking,filterParams}: Props) => {
 
  
 
@@ -126,7 +123,7 @@ const CollegeList = ({ data, user, ranking,filterParams,  context}: Props) => {
 export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
-  // console.log("hello", university.ranking?.[6]?.rankings?.publisherName ?? "Ranking not available");
+
 
 
 
