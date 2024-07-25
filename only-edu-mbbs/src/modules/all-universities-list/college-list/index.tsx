@@ -251,27 +251,27 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
             </div>
 
             <div className="flex h-5 items-center space-x-4 text-xs sm:text-sm overflow-x-scroll md:overflow-x-hidden mt-4">
-              <Link href={`/study/uni/${university.slug}`}>
+              <Link href={`/study/uni/${university.slug}#admission`}>
                 <div className="hover:text-orange-500 cursor-pointer">
                   Admission
                 </div>
               </Link>
               <Separator className="ml-1 sm:ml-2" orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`} scroll={false}>
+              <Link href={`/study/uni/${university.slug}#placement`} scroll={false}>
                 <div className="hover:text-orange-500 cursor-pointer">
                   Placements
                 </div>
               </Link>
               <Separator orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`}>
+              <Link href={`/study/uni/${university.slug}#courses&fees`}>
                 <div className="hover:text-orange-500 cursor-pointer">
                   Courses
                 </div>
               </Link>
               <Separator orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}`}>
+              <Link href={`/study/uni/${university.slug}#scholarships`}>
                 <div className="hover:text-orange-500 cursor-pointer">
-                  Facilities
+                Scholarships
                 </div>
               </Link>
             </div>

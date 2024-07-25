@@ -1,3 +1,5 @@
+
+
 "use client"
 import React from "react";
 import { Input } from "@/components/ui/input";
@@ -12,19 +14,13 @@ type MyInformationProps = {
 const ProfilePassword: React.FC<MyInformationProps> = ({ user }) => {
   const [successState, setSuccessState] = React.useState(false);
 
-  // const [state, formAction] = useFormState(updateCustomerPassword, {
-  //   user,
-  //   success: false,
-  //   error: false,
-  // });
+
 
   const clearState = () => {
     setSuccessState(false);
   };
 
-  // useEffect(() => {
-  //   setSuccessState(state.success);
-  // }, [state]);
+ 
 
   return (
     <form className="w-full">

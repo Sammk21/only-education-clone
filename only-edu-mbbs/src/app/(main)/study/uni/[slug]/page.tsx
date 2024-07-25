@@ -109,10 +109,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
       <Tabs defaultValue="overview">
         <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 sm:top-[4.5rem] z-20">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="courses&fees">Courses & Fees</TabsTrigger>
-          <TabsTrigger value="admission">Admission</TabsTrigger>
-          <TabsTrigger value="placement">Placement</TabsTrigger>
-          <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
+          <TabsTrigger value="courses&fees" id="courses&fees">Courses & Fees</TabsTrigger>
+          <TabsTrigger value="admission" id="admission">Admission</TabsTrigger>
+          <TabsTrigger value="placement" id="placement">Placement</TabsTrigger>
+          <TabsTrigger value="scholarships" id="scholarships">Scholarships</TabsTrigger>
           <TabsTrigger value="gallery">Gallery</TabsTrigger>
           <TabsTrigger value="faculty">Faculty</TabsTrigger>
           <TabsTrigger value="hostel">Hostel</TabsTrigger>

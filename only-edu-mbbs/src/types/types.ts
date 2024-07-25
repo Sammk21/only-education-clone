@@ -337,6 +337,7 @@ export interface searchParamUserId {
 export interface UserType {
   ok: boolean;
   data: {
+    last_phone_update:Date | null,
     id: number;
     email: string;
     provider: string;

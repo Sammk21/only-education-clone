@@ -21,7 +21,7 @@ export default async function UniversitiesList({
   searchParams,
 }: Readonly<SearchParamsProps>) {
   let universityListQuery =
-    "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber";
+    "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&filters[rankingStreams][rankingPublisher][slug][$eq]=nirf&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=nirf&populate[rankingStreams][sort][0]=rankingNumber:asc&populate[rankingStreams][populate][stream]=true&populate[rankingStreams][populate][rankingPublisher]=true";
     // const UniRanking="/api/universities?populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber"
 
 
@@ -37,40 +37,40 @@ export default async function UniversitiesList({
   let { streamsParam,locationsParam, examsParam, ownershipsParam,rankingParam } = searchParams;
   let filterParams = { locationsParam, examsParam, ownershipsParam,streamsParam, rankingParam }; //to send it as a prop
 
-  if (searchParams) {
-    if (rankingParam) {
-      const rankingFilters = `filters[rankings][publisherName][$eq]=${rankingParam}`
-      universityListQuery += `&${rankingFilters}`;
+  // if (searchParams) {
+  //   if (rankingParam) {
+  //     const rankingFilters = `filters[rankings][publisherName][$eq]=${rankingParam}`
+  //     universityListQuery += `&${rankingFilters}`;
         
-    }
+  //   }
 
-    if (streamsParam) {
-      const streamsFilters = streamsParam
-        .split(",")
-        .map((streams) => `filters[streams][slug][$eq]=${streams}`)
-        .join("&");
-        universityListQuery += `&${streamsFilters}`;
-    }
-    if (locationsParam) {
-      const locationFilters = locationsParam
-        .split(",")
-        .map((location) => `filters[indian_state][slug][$eq]=${location}`)
-        .join("&");
-      universityListQuery += `&${locationFilters}`;
-    }
-    if (examsParam) {
-      const examFilters = examsParam
-        .split(",")
-        .map((exam) => `filters[exams][slug][$eq]=${exam}`)
-        .join("&");
-      universityListQuery += `&${examFilters}`;
-    }
-    if (ownershipsParam) {
-      const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
-      universityListQuery += `&${ownershipFilters}`;
-    }
+  //   if (streamsParam) {
+  //     const streamsFilters = streamsParam
+  //       .split(",")
+  //       .map((streams) => `filters[streams][slug][$eq]=${streams}`)
+  //       .join("&");
+  //       universityListQuery += `&${streamsFilters}`;
+  //   }
+  //   if (locationsParam) {
+  //     const locationFilters = locationsParam
+  //       .split(",")
+  //       .map((location) => `filters[indian_state][slug][$eq]=${location}`)
+  //       .join("&");
+  //     universityListQuery += `&${locationFilters}`;
+  //   }
+  //   if (examsParam) {
+  //     const examFilters = examsParam
+  //       .split(",")
+  //       .map((exam) => `filters[exams][slug][$eq]=${exam}`)
+  //       .join("&");
+  //     universityListQuery += `&${examFilters}`;
+  //   }
+  //   if (ownershipsParam) {
+  //     const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
+  //     universityListQuery += `&${ownershipFilters}`;
+  //   }
 
-  }
+  // }
 
   const data = await getUniversities(universityListQuery, currentPage);
   const user = await getUserMeLoader();

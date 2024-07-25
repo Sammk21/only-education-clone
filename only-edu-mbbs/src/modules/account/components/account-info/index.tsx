@@ -16,6 +16,7 @@ type AccountInfoProps = {
   clearState: () => void;
   children?: React.ReactNode;
   isLoading:boolean
+  disable:boolean
 };
 
 const AccountInfo = ({
@@ -25,6 +26,7 @@ const AccountInfo = ({
   isError,
   clearState,
   isLoading,
+  disable=false,
   errorMessage = "An error occurred, please try again",
   children,
 }: AccountInfoProps) => {
@@ -99,7 +101,7 @@ const AccountInfo = ({
             <div>{children}</div>
             <div className="flex items-center justify-end mt-2">
               <Button
-                disabled={isLoading}
+                disabled={isLoading || disable}
                 className="w-full small:max-w-[140px]"
                 type="submit"
               >
