@@ -124,8 +124,7 @@ export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
-
-
+console.log()
 
 
   return (
@@ -138,20 +137,27 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
      <div>
     
-     {
+     {/* {
   university.ranking?.map((item, index) => (
     <div key={index} className="text-dark text-center">
       <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
       {item.rankings?.publisherName}
     </div>
   ))
-}
+} */}
+
+<div className="text-dark flex flex-col text-lg font-semibold"> 
+  <div>
+  {university.rankingStreams[0].rankingPublisher.publisherName} 
+  </div>
+<div>
+ {university.rankingStreams[0].rankingNumber}
+</div>
+  
+</div>
 
 
      </div>
-
-    
-
           <Link
             className=" w-full sm:w-1/4"
             href={`study/uni/${university?.slug}`}

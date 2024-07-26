@@ -9,6 +9,7 @@ import UniversitiesRail from "@/modules/sliders/slider-two";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
 import SchedulesSection from "@/modules/schedules-section";
 import ExploreArticles from "@/modules/explore-articles";
+import CitySlider from "@/modules/sliders/city-slider";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -25,6 +26,8 @@ const TopUniversitiesQuery =
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
 
+const cityQuery=`/api/cities?populate=true&fields[0]=title&fields[1]=slug&populate=streamIcon`
+
   const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[top_courses]=true"
 export default async function Home() {
 
@@ -37,6 +40,7 @@ export default async function Home() {
     articlesData,
     topUniversitiesData,
     bannerImageData,
+   
   ] = await Promise.all([
     getStrapiData(HeroQuery),
     getStrapiData(ServicesQuery),
@@ -45,10 +49,12 @@ export default async function Home() {
     getStrapiData(ArticlesQuery),
     getStrapiData(TopUniversitiesQuery),
     getStrapiData(BannerImageQuery),
+   
   ]);
   const stream= await getStrapiData(streamQuery)
+  const cityData= await getStrapiData(cityQuery)
+  const city=cityData.data
   const streams=stream.data
-
 
   return (
     <div className="w-full overflow-hidden">
@@ -65,6 +71,7 @@ export default async function Home() {
             <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
             <SchedulesSection data={streams}/>
+            <CitySlider data={city} />
           
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />

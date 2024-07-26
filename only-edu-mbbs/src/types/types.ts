@@ -216,8 +216,8 @@ export interface streams {
   id: number;
   title: string;
   slug: string;
-  
-  
+  broucher:any;
+  streamIcon:ImageAttributes; 
 }
 interface duration {
   id: number;
@@ -264,23 +264,32 @@ export interface UniRanking{
   // }[]
 
 }
-export interface ranking {
+
+export interface rankingPublisher{
+   publisherName:string
+   publisherImage:ImageAttributes
+   slug:string
+   description:string
+}
+
+export interface StreamRanking {
+  stream:streams
+  rankingNumber:number
+  rankingYear:Date
+  rankingPublisher:rankingPublisher;
+  description:string;
+  pdfData:ImageAttributes
+}
+export interface CourseRanking {
   
-  
-  id: number;
-  rankingNumber: number; 
-  rankings: 
-    {
-    
-    id: number;
-     slug:string
-    publisherName: string;
-    
-  
+  rankingNumber:number
+  rankingYear:Date
+  rankingPublisher:rankingPublisher;
+  description:string;
+  pdfData:ImageAttributes
 }
 
 
-}
 
 export interface Universitylist {
   title?: string;
@@ -298,7 +307,8 @@ export interface Universitylist {
   resultDate:string;
   duration:duration
   UniRank:UniRanking
-  ranking:ranking[]
+  rankingStreams:StreamRanking[]
+  rankingCourses:CourseRanking[]
   
 }
 

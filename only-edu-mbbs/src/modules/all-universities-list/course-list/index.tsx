@@ -119,7 +119,7 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
                   </h3>
                   <p className="text-sm flex gap-5 mt-1 ">
                     <span className="text-green-700 ">
-                      {course.duration.title}{" "}
+                      {/* {course.duration.title}{" "} */}
                     </span>
                     <span className="text-orange-600">
                       {course.stream?.title}
