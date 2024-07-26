@@ -265,35 +265,18 @@ export interface UniRanking{
 
 }
 
-export interface rankingPublisher{
-   publisherName:string
-   publisherImage:ImageAttributes
-   slug:string
-   description:string
-}
-
-export interface StreamRanking {
-  stream:streams
-  rankingNumber:number
+export interface ranking {
   rankingYear:Date
-  rankingPublisher:rankingPublisher;
-  description:string;
-  pdfData:ImageAttributes
-}
-export interface CourseRanking {
-  
-  rankingNumber:number
-  rankingYear:Date
-  rankingPublisher:rankingPublisher;
-  description:string;
-  pdfData:ImageAttributes
-}
+  id:number
+  rankingNumber: number
+  stream: { id: number, slug: string },
+  rankingPublisher: { id: number, slug: string }
 
 
 
 export interface Universitylist {
   title?: string;
-  id?: number;
+  id: number;
   slug: string;
   universityProfile?: UniversityProfile;
   ownership?: ownership;
@@ -307,13 +290,14 @@ export interface Universitylist {
   resultDate:string;
   duration:duration
   UniRank:UniRanking
-  rankingStreams:StreamRanking[]
-  rankingCourses:CourseRanking[]
+
+  rankingStreams:ranking[]
   
 }
 
 export interface UniversitiesData {
   data: Universitylist[];
+  meta:any
 
 }
 

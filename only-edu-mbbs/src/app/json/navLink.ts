@@ -113,7 +113,7 @@ export const navbarLinks = {
           submenu: [
             {
               id: 1,
-              href: "courseParam=mba",
+              href: "universities-list?streamsParam=management&rankingParam=nirf",
               title: "Top MBA Colleges in India",
             },
             {
@@ -229,7 +229,7 @@ export const navbarLinks = {
           ],
         },
         {
-          id: 22,
+          id: 23,
           title: "Colleges by States",
           href: "colleges-by-states",
           submenu: [

@@ -1,4 +1,4 @@
-'use server'
+"use server";
 import { recentlyViewed } from "@/types/types";
 import { flattenAttributes } from "@/utils/utils";
 import { cookies } from "next/headers";
@@ -22,8 +22,6 @@ export async function getData(path: string) {
   } catch (error) {}
 }
 
-
-
 export const updatedFilters = async (formData: FormData, context: string) => {
   const params = new URLSearchParams();
   const locations = formData.getAll("Location");
@@ -33,35 +31,30 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   const modes = formData.getAll("Examination Modes");
   const duration = formData.getAll("Duration");
   const course = formData.getAll("Course");
-  const ranking = formData.getAll("Ranking")
+  const ranking = formData.getAll("Ranking");
 
- 
-  if (locations.length > 0) params.append("locationsParam", locations.join(","));
+
+  if (locations.length > 0)
+    params.append("locationsParam", locations.join(","));
   if (exams.length > 0) params.append("examsParam", exams.join(","));
-  if (ownerships.length > 0) params.append("ownershipsParam", ownerships.join(","));
+  if (ownerships.length > 0)
+    params.append("ownershipsParam", ownerships.join(","));
   if (streams.length > 0) params.append("streamsParam", streams.join(","));
   if (modes.length > 0) params.append("modesParam", modes.join(","));
   if (duration.length > 0) params.append("durationParam", duration.join(","));
   if (course.length > 0) params.append("courseParam", course.join(","));
-  if (ranking.length > 0) params.append("rankingParam", ranking.join(","))
- 
+  if (ranking.length > 0) params.append("rankingParam", ranking.join(","));
 
   if (context === "universities") {
     redirect(`/universities-list?${params.toString()}`);
   } else if (context === "exams") {
     redirect(`/exams-list?${params.toString()}`);
-  } 
- else if (context === "course") {
-  redirect(`/course-list?${params.toString()}`);
-}
-  else {
+  } else if (context === "course") {
+    redirect(`/course-list?${params.toString()}`);
+  } else {
     redirect("/universities-list");
   }
 };
-
-
-
-
 
 export const deleteFilters = async (event: React.FormEvent) => {
   event.preventDefault();

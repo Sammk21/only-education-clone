@@ -1,7 +1,12 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { rankingFilter, UniRanking, UniversitiesData, Universitylist } from "@/types/types";
+import {
+  rankingFilter,
+  UniRanking,
+  UniversitiesData,
+  Universitylist,
+} from "@/types/types";
 import { FaDownload, FaLock, FaRegPaperPlane } from "react-icons/fa";
 import { FaBuilding, FaLocationDot } from "react-icons/fa6";
 import SearchBox from "@/app/(main)/searchbox";
@@ -15,23 +20,20 @@ import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 interface Props {
   data: UniversitiesData;
   user: User | null;
-  ranking:rankingFilter
+  ranking: rankingFilter;
   filterParams: FilterParams;
   context: string;
-
 }
 interface FilteredProps {
   university: Universitylist;
   user: User | null;
   // UniRank:UniRanking
-
 }
 interface User {
   id: number;
   verified: boolean;
   phone: number;
 }
-
 
 interface FilterParams {
   locationsParam?: string;
@@ -41,17 +43,10 @@ interface FilterParams {
   modesParam?: string;
   durationParam?: string;
   courseParam?: string;
-  rankingParam?:string
+  rankingParam?: string;
 }
 
-
-
-
-const CollegeList = ({ data, user, ranking,filterParams}: Props) => {
-
- 
-
-
+const CollegeList = ({ data, user, ranking, filterParams }: Props) => {
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -91,9 +86,8 @@ const CollegeList = ({ data, user, ranking,filterParams}: Props) => {
   }, [query, data.data]);
 
   return (
-    <section className="lg:w-[70%] mb-4 px-4">
+    <section className=" mb-4 px-4">
       <SearchBox query={query} setQuery={setQuery} />
-      <RankingFilter ranking={ranking} filterParams={filterParams} context="/universities"/> 
       {query && noResults && (
         <>
           <div className=" w-full flex justify-center ">
@@ -109,9 +103,9 @@ const CollegeList = ({ data, user, ranking,filterParams}: Props) => {
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
-          // UniRank={UniRank}
+            // UniRank={UniRank}
             university={university}
-            user={user}            
+            user={user}
             key={university.id}
           />
         )
@@ -123,54 +117,44 @@ const CollegeList = ({ data, user, ranking,filterParams}: Props) => {
 export default CollegeList;
 
 const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
-
-console.log()
-
-
   return (
     <>
       <div
         key={university?.id}
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-        <div className="flex flex-col w-full sm:flex-row">
 
-     <div>
-    
-     {/* {
-  university.ranking?.map((item, index) => (
-    <div key={index} className="text-dark text-center">
-      <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
-      {item.rankings?.publisherName}
-    </div>
-  ))
-} */}
-
-<div className="text-dark flex flex-col text-lg font-semibold"> 
-  <div>
-  {university.rankingStreams[0].rankingPublisher.publisherName} 
-  </div>
-<div>
- {university.rankingStreams[0].rankingNumber}
-</div>
-  
-</div>
-
-
-     </div>
+        <div className="flex flex-col w-full sm:grid grid-cols-[auto,auto,1fr] gap-x-3">
+          <div className="h-full flex flex-col items-center">
+            {university.rankingStreams?.map((item, index) => (
+              <div
+                key={index}
+                className="text-dark text-center h-full flex items-center flex-col"
+              >
+                <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
+                {item.rankingPublisher?.slug}
+                <p>
+                  {item.rankingYear
+                    ? new Date(item.rankingYear).getFullYear()
+                    : ""}
+                </p>
+              </div>
+            ))}
+          </div>
           <Link
             className=" w-full sm:w-1/4"
             href={`study/uni/${university?.slug}`}
           >
-            <div className="relative aspect-video w-full  rounded-md overflow-hidden">
+            <div className="relative h-40 w-40  rounded-md overflow-hidden">
               <ImageExtended
-                className="object-contain w-full h-full transition"
+                className="object-cover w-full h-full transition"
                 src={university?.searchableImage?.url}
                 alt="University Image"
                 blurDataURL={university.searchableImage?.blurhash}
                 fill
               />
             </div>
+         
           </Link>
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
