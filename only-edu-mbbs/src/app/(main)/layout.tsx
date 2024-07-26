@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/normalize.css";
 import Navbar from "@/modules/navbar";
@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description: "Only education is a information hub for the students",
   applicationName: "Only Education",
 };
+
+
 
 export default async function MainLayout({
   children,

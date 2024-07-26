@@ -1,4 +1,5 @@
 
+import { UniversitiesData, Universitylist } from "@/types/types";
 import { z } from "zod";
 
 
@@ -155,3 +156,76 @@ export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
    if (!username) return;
    return username.replace(/\d{6}(\d{4})/, "******$1");
  };
+
+
+ export function removeDuplicates(data: UniversitiesData): UniversitiesData {
+  const uniqueUniversities: { [key: number]: Universitylist } = {};
+  
+  // data.data.forEach(university => {
+  //   if (!uniqueUniversities[university.id]) {
+  //     uniqueUniversities[university.id] = university;
+  //   }
+  // });
+
+  data.data.forEach((university)=>{
+    if (!uniqueUniversities[university.id]) {
+          uniqueUniversities[university.id] = university;
+        }
+  })
+
+  const uniqueData = Object.values(uniqueUniversities);
+
+  return {
+    data: uniqueData,
+    meta: {
+      ...data.meta,
+      pagination: {
+        ...data.meta.pagination,
+        total: uniqueData.length
+      }
+    }
+  };
+}
+
+interface FilterParams {
+  streamsParam?: string;
+  locationsParam?: string;
+  examsParam?: string;
+  ownershipsParam?: string;
+  rankingParam?: string;
+}
+
+const DEFAULT_STREAM_PARAM = "engineering";
+const DEFAULT_RANKING_PARAM = "nirf";
+
+export function buildUniversityListQuery(filterParams: FilterParams): string {
+  let query = "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber";
+
+  const { streamsParam, locationsParam, examsParam, ownershipsParam, rankingParam } = filterParams;
+
+  if (streamsParam) {
+    const streamsFilters = streamsParam.split(",").map(stream => `filters[streams][slug][$eq]=${stream}`).join("&");
+    query += `&${streamsFilters}`;
+  }
+
+  if (locationsParam) {
+    const locationFilters = locationsParam.split(",").map(location => `filters[indian_state][slug][$eq]=${location}`).join("&");
+    query += `&${locationFilters}`;
+  }
+
+  if (examsParam) {
+    const examFilters = examsParam.split(",").map(exam => `filters[exams][slug][$eq]=${exam}`).join("&");
+    query += `&${examFilters}`;
+  }
+
+  if (ownershipsParam) {
+    query += `&filters[ownership][slug][$eq]=${ownershipsParam}`;
+  }
+
+  if (rankingParam || streamsParam) {
+    const rankingFilters = `populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=id&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][stream][slug]=${streamsParam || DEFAULT_STREAM_PARAM}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][stream][slug]=${streamsParam || DEFAULT_STREAM_PARAM}&filters[rankingStreams][rankingPublisher][slug][$eq]=${rankingParam || DEFAULT_RANKING_PARAM}&filters[rankingStreams][rankingNumber][$notNull]=true`;
+    query += `&${rankingFilters}`;
+  }
+
+  return query;
+}

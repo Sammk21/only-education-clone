@@ -266,25 +266,17 @@ export interface UniRanking{
 }
 export interface ranking {
   
-  
-  id: number;
-  rankingNumber: number; 
-  rankings: 
-    {
-    
-    id: number;
-     slug:string
-    publisherName: string;
-    
-  
-}
+  id:number
+  rankingNumber: number
+  stream: { id: number, slug: string },
+  rankingPublisher: { id: number, slug: string }
 
 
 }
 
 export interface Universitylist {
   title?: string;
-  id?: number;
+  id: number;
   slug: string;
   universityProfile?: UniversityProfile;
   ownership?: ownership;
@@ -298,12 +290,13 @@ export interface Universitylist {
   resultDate:string;
   duration:duration
   UniRank:UniRanking
-  ranking:ranking[]
+  rankingStreams:ranking[]
   
 }
 
 export interface UniversitiesData {
   data: Universitylist[];
+  meta:any
 
 }
 

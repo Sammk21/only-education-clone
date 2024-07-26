@@ -139,10 +139,10 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
      <div>
     
      {
-  university.ranking?.map((item, index) => (
+  university.rankingStreams?.map((item, index) => (
     <div key={index} className="text-dark text-center">
       <h3 className="text-4xl font-semibold">{item.rankingNumber}</h3>
-      {item.rankings?.publisherName}
+      {item.rankingPublisher?.slug}
     </div>
   ))
 }

@@ -3,7 +3,7 @@ import CollegeList from "@/modules/all-universities-list/college-list";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
 
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
-import { SearchParamsProps, UniversitiesData } from "@/types/types";
+import { SearchParamsProps, UniversitiesData, Universitylist } from "@/types/types";
 import { getStrapiData, getUniversities } from "@/utils/utils";
 
 import React from "react";
@@ -14,7 +14,13 @@ import {
   ownershipQuery,
   streasmQuery,
 } from "@/app/data/quries/uniList-query";
+
+
+const DEFAULT_RANKING_PARAM = 'nirf';
+const DEFAULT_STREAM_PARAM = 'engineering';
+
 const rankingQuery="/api/rankings?fields[0]=publisherName&fields[1]=slug"
+
 
 export default async function UniversitiesList({
   searchParams,
@@ -29,6 +35,7 @@ export default async function UniversitiesList({
   const exams = await getStrapiData(examsQuery);
   const streams = await getStrapiData(streasmQuery);
   const ranking = await getStrapiData(rankingQuery);
+
 
 
   let { streamsParam,locationsParam, examsParam, ownershipsParam,rankingParam } = searchParams;
@@ -61,48 +68,32 @@ export default async function UniversitiesList({
       const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
       universityListQuery += `&${ownershipFilters}`;
     }
+    if(rankingParam || DEFAULT_RANKING_PARAM && streamsParam || DEFAULT_STREAM_PARAM){
+      const r = rankingParam || DEFAULT_RANKING_PARAM
+      const s = streamsParam || DEFAULT_STREAM_PARAM
+      const rankingFilters = `populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${r}&populate[rankingStreams][filters][stream][slug]=${s}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
+      universityListQuery += `&${rankingFilters}`;
+
+    }
 
   }
 
  
   const data = await getUniversities(universityListQuery, currentPage);
 
-const defaultRankingParam = 'nirf';
-const rankingParamToUse = rankingParam || defaultRankingParam;
+
 
   let filteredUniversities = data.data;
 
-  if (rankingParamToUse) {
-    filteredUniversities = filteredUniversities
-      .map((university: { ranking: any[], rankingNumber: number }) => {
-        if (university.ranking) {
-          const filteredRankings = university.ranking.filter((rank: { rankings: { slug: string; }; }) => {
-            return rank.rankings.slug === rankingParamToUse;
-          });
-  
-          // Keep only the lowest ranking
-          const lowestRanking = filteredRankings.reduce((prev, current) => {
-            return (prev.rankingNumber < current.rankingNumber) ? prev : current;
-          }, filteredRankings[0]);
-  
-          return {
-            ...university,
-            ranking: lowestRanking ? [lowestRanking] : []
-          };
-        }
-        return university;
-      })
-      .filter((university: { ranking: string | any[]; }) => university.ranking.length > 0)
-      .sort((a: { ranking: { rankingNumber: number }[] }, b: { ranking: { rankingNumber: number }[] }) => {
-        // Ensure both universities have at least one ranking, then sort by the first ranking number
-        if (a.ranking[0] && b.ranking[0]) {
-          return a.ranking[0].rankingNumber - b.ranking[0].rankingNumber;
-        }
-        return 0;
-      });
+  if (rankingParam && streamsParam) {
+    filteredUniversities = filteredUniversities.filter(
+      (university:Universitylist) => university.rankingStreams && university.rankingStreams.length > 0
+    );
   }
   
   const user = await getUserMeLoader();
+
+  console.log(filteredUniversities[0].rankingStreams)
 
 
   const finalData: UniversitiesData = filteredUniversities.length > 0 
@@ -114,6 +105,8 @@ const rankingParamToUse = rankingParam || defaultRankingParam;
     const { id, verified, phone } = user.data;
     newUser = { id, verified, phone };
   }
+
+
 
   const { pagination } = data.meta;
   return (

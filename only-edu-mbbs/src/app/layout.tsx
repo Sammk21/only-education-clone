@@ -1,3 +1,6 @@
+import { Inter } from 'next/font/google'
+ 
+const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
@@ -5,7 +8,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <head>
         <link rel="icon" href="/images/onlyEducation.svg" sizes="any"></link>
       </head>
-      <body>
+      <body className={inter.className}>
         <main>{props.children}</main>
       </body>
     </html>
