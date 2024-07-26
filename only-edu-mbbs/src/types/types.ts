@@ -216,8 +216,8 @@ export interface streams {
   id: number;
   title: string;
   slug: string;
-  
-  
+  broucher:any;
+  streamIcon:ImageAttributes; 
 }
 interface duration {
   id: number;
@@ -264,6 +264,7 @@ export interface UniRanking{
   // }[]
 
 }
+
 export interface ranking {
   rankingYear:Date
   id:number
@@ -272,7 +273,6 @@ export interface ranking {
   rankingPublisher: { id: number, slug: string }
 
 
-}
 
 export interface Universitylist {
   title?: string;
@@ -290,6 +290,7 @@ export interface Universitylist {
   resultDate:string;
   duration:duration
   UniRank:UniRanking
+
   rankingStreams:ranking[]
   
 }
@@ -325,6 +326,7 @@ export interface searchParamUserId {
 export interface UserType {
   ok: boolean;
   data: {
+    last_phone_update:Date | null,
     id: number;
     email: string;
     provider: string;

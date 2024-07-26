@@ -211,13 +211,13 @@ const CollegeFilter = ({
                 selectedItems={selectedmodesParam}
               />
             )}
-            {duration && (
+            {/* {duration && (
               <AccordionCustom
                 name={"Duration"}
                 data={duration.data}
                 selectedItems={selecteddurationParam}
               />
-            )}
+            )} */}
             {course && (
               <AccordionCustom
                 name={"Course"}

@@ -16,8 +16,11 @@ import {
   examsQuery,
   indianStatesQuery,
   ownershipQuery,
+  rankingQuery,
   streasmQuery,
+  getRankingQuery,
 } from "@/app/data/quries/uniList-query";
+
 import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 
 const DEFAULT_RANKING_PARAM = "nirf";
@@ -28,8 +31,11 @@ const rankingQuery = "/api/rankings?fields[0]=publisherName&fields[1]=slug";
 export default async function UniversitiesList({
   searchParams,
 }: Readonly<SearchParamsProps>) {
+  // const uniRankingQuery = getRankingQuery(ranking);
   let universityListQuery =
+
     "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
+
 
   const currentPage = Number(searchParams?.page) || 1;
   const ownership = await getStrapiData(ownershipQuery);
@@ -52,6 +58,9 @@ export default async function UniversitiesList({
     streamsParam,
     rankingParam,
   };
+
+  const defaultRankingParam = 'nirf';
+  const rankingParamToUse = rankingParam || defaultRankingParam;
 
   if (searchParams) {
     if (streamsParam) {
@@ -79,6 +88,7 @@ export default async function UniversitiesList({
       const ownershipFilters = `filters[ownership][slug][$eq]=${ownershipsParam}`;
       universityListQuery += `&${ownershipFilters}`;
     }
+
     if (
       rankingParam ||
       (DEFAULT_RANKING_PARAM && streamsParam) ||
@@ -94,6 +104,7 @@ export default async function UniversitiesList({
   const data = await getUniversities(universityListQuery, currentPage);
 
   let filteredUniversities = data.data;
+
 
   filteredUniversities = filteredUniversities.filter(
     (university: Universitylist) =>
@@ -114,6 +125,7 @@ export default async function UniversitiesList({
       }
     }
   );
+
 
   const user = await getUserMeLoader();
 

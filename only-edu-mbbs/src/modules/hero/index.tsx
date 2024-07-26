@@ -167,48 +167,59 @@ export default function Hero({ data, bannerImage }: HeroProps) {
           </div>
         </div>
 
-        <div className=" w-full h-[80vh]">
-          <Swiper
+          <div className=" ">
+            <div className="w-full h-full relative  ">
+              <Swiper
+                speed={600}
+                spaceBetween={40}
+                pagination={false}
+                effect={"fade"}
+                autoplay={{
+                  delay: 6000,
+                  disableOnInteraction: true,
+                  pauseOnMouseEnter: true,
+                }}
+                breakpoints={{
+                  1080: {
+                    slidesPerView: 1,
+                    spaceBetween: 40,
+                  },
+                }}
+                navigation={{ nextEl: ".back", prevEl: ".front" }}
+                modules={[
+                  FreeMode,
+                  Pagination,
+                  Autoplay,
+                  Navigation,
+                  EffectFade,
+                ]}
+                className="mySwiper"
+              >
+                {bannerImage.data.map((item) => (
+                  <SwiperSlide key={item.id} className="">
+                    <div className="  ">
+                      <div className="w-full h-[70svh] relative ">
+                        <Image
+                          src={"https://admin.onlyeducation.co.in" + item.url}
+                          alt={item.name}
+                          fill={true}
+                          blurDataURL={item.blurhash}
+                          className="w-full h-full object-cover object-center -z-20"
+                        />
+                        <div className="absolute top-0 left-0 w-full h-full bg-dark/50 -z-10" />
+                      </div>
+                      <div className="uppercase  rounded-lg px-1 py-2 border-[0.8px] backdrop-blur-lg items-center text-white absolute inline-block bottom-5 right-5">
+                        <p className="sm:text-sm text-xs line-clamp-2 ">
+                          {item.name.replace(/\.[^/.]+$/, "")}
+                        </p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
 
-            speed={600}
-            spaceBetween={40}
-            pagination={false}
-            effect={"fade"}
-            autoplay={{
-              delay: 6000,
-              disableOnInteraction: true,
-              pauseOnMouseEnter: true,
-            }}
-            breakpoints={{
-              1080: {
-                slidesPerView: 1,
-                spaceBetween: 40,
-              },
-            }}
-            navigation={{ nextEl: ".back", prevEl: ".front" }}
-            modules={[FreeMode, Pagination, Autoplay, Navigation, EffectFade]}
-            className="mySwiper"
-          >
-            {bannerImage.data.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div className=" absolute w-screen h-[60vh] top-0 left-0">
-                  <Image
-                    src={"https://admin.onlyeducation.co.in" + item.url}
-                    alt={item.name}
-                    fill={true}
-                    blurDataURL={item.blurhash}
-                    className="w-full h-full object-cover object-center z-20"
-                  />
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/60 via-transparent to-transparent -z-10" />
-                </div>
-                <div className="uppercase rounded-lg px-1 py-2 border-[0.8px] backdrop-blur-lg items-center text-white absolute bottom-5 right-5">
-                  <p className="sm:text-sm text-xs line-clamp-2">
-                    {item.name.replace(/\.[^/.]+$/, "")}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
         </div>
       </div>
       {/* End Hero */}

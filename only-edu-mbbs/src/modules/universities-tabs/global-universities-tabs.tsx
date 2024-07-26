@@ -8,19 +8,24 @@ import Title from "../common/title";
 import { IoNotifications } from "react-icons/io5";
 
 interface UniTabsProps {
-  data: {
+  data?: {
     id: number;
     header: string;
     content?: string;
+  
   };
   notification?: boolean;
+
 }
 const GlobalUniversitiesTabs = ({ data, notification }: UniTabsProps) => {
+
   if (!data) {
     return null;
   }
   return (
+  
     <div className=" ">
+   
       {data?.content && (
         <div className="mt-3">
           <Card>
@@ -36,6 +41,9 @@ const GlobalUniversitiesTabs = ({ data, notification }: UniTabsProps) => {
           </Card>
         </div>
       )}
+
+
+
     </div>
   );
 };
