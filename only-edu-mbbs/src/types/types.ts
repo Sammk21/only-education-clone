@@ -265,7 +265,7 @@ export interface UniRanking{
 
 }
 export interface ranking {
-  
+  rankingYear:Date
   id:number
   rankingNumber: number
   stream: { id: number, slug: string },
