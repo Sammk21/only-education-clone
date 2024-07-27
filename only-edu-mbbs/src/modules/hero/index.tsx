@@ -90,7 +90,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
 
   return (
     <>
-      {/* Hero */}
+    
       <div className="relative text-white">
         <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center h-[60vh] z-20">
           <div className="text-center">
