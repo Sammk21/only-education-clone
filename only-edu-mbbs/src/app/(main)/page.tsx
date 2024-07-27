@@ -10,6 +10,7 @@ import LeadingEducationPortal from "@/modules/leading-education-portal";
 import SchedulesSection from "@/modules/schedules-section";
 import ExploreArticles from "@/modules/explore-articles";
 import CitySlider from "@/modules/sliders/city-slider";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -68,6 +69,11 @@ export default async function Home() {
             <div className="z-[9999]">
             </div>
             <InformationSlider data={newsData.news} href="news" />
+
+         
+            <LeadingEducationPortal />
+            <Separator aria-orientation="vertical"/>
+
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
             <LeadingEducationPortal />
             <SchedulesSection data={streams}/>

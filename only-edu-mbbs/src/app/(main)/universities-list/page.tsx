@@ -16,9 +16,9 @@ import {
   examsQuery,
   indianStatesQuery,
   ownershipQuery,
+  rankingQuery,
   // rankingQuery,
   streasmQuery,
-  getRankingQuery,
 } from "@/app/data/quries/uniList-query";
 
 import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
@@ -26,7 +26,6 @@ import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 const DEFAULT_RANKING_PARAM = "nirf";
 const DEFAULT_STREAM_PARAM = "engineering";
 
-const rankingQuery = "/api/rankings?fields[0]=publisherName&fields[1]=slug";
 
 export default async function UniversitiesList({
   searchParams,
@@ -63,13 +62,6 @@ export default async function UniversitiesList({
   const rankingParamToUse = rankingParam || defaultRankingParam;
 
   if (searchParams) {
-    if (streamsParam) {
-      const streamsFilters = streamsParam
-        .split(",")
-        .map((streams) => `filters[streams][slug][$eq]=${streams}`)
-        .join("&");
-      universityListQuery += `&${streamsFilters}`;
-    }
     if (locationsParam) {
       const locationFilters = locationsParam
         .split(",")
@@ -126,6 +118,8 @@ export default async function UniversitiesList({
     }
   );
 
+  console.log(filteredUniversities.length)
+
 
   const user = await getUserMeLoader();
 
@@ -146,7 +140,6 @@ export default async function UniversitiesList({
       <div className="bg-white mx-8 rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            streams={streams}
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}

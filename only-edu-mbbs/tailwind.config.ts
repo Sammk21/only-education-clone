@@ -66,7 +66,7 @@ const config = {
         "custom-gradient":
           "linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%)",
       },
-
+       //remove custom colors
       colors: {
         transparent: "transparent",
         light: "#fff",

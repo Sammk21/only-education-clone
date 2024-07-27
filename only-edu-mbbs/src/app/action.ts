@@ -56,8 +56,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   }
 };
 
-export const deleteFilters = async (event: React.FormEvent) => {
-  event.preventDefault();
+export const deleteFilters = async () => {
   redirect(`/universities-list`);
 };
 
