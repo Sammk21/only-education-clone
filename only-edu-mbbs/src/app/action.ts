@@ -2,7 +2,7 @@
 import { recentlyViewed } from "@/types/types";
 import { flattenAttributes } from "@/utils/utils";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 const config = {
   maxAge: 60 * 60 * 24 * 7, // 1 week
@@ -22,7 +22,7 @@ export async function getData(path: string) {
   } catch (error) {}
 }
 
-export const updatedFilters = async (formData: FormData, context: string) => {
+export const updatedFilters = async (formData: FormData, context: string, pathName:string) => {
   const params = new URLSearchParams();
   const locations = formData.getAll("Location");
   const exams = formData.getAll("Exams");
@@ -33,6 +33,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   const course = formData.getAll("Course");
   const ranking = formData.getAll("Ranking");
 
+  
 
   if (locations.length > 0)
     params.append("locationsParam", locations.join(","));
@@ -46,7 +47,7 @@ export const updatedFilters = async (formData: FormData, context: string) => {
   if (ranking.length > 0) params.append("rankingParam", ranking.join(","));
 
   if (context === "universities") {
-    redirect(`/universities-list?${params.toString()}`);
+    redirect(`${pathName}?${params.toString()}`);
   } else if (context === "exams") {
     redirect(`/exams-list?${params.toString()}`);
   } else if (context === "course") {

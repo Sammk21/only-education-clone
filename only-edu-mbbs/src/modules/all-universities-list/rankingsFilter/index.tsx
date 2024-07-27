@@ -7,6 +7,7 @@ import { rankingFilter } from "@/types/types";
 import { updatedFilters } from "@/app/action";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { usePathname } from "next/navigation";
 
 interface RankingFilterProps {
   ranking: rankingFilter;
@@ -33,11 +34,15 @@ const RankingFilter: React.FC<RankingFilterProps> = ({ ranking }) => {
     undefined
   );
 
+
+  let pathName = usePathname()
+
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const context = "universities";
     const formData = new FormData(event.currentTarget);
-    await updatedFilters(formData, context);
+    await updatedFilters(formData, context, pathName);
   };
 
   return (

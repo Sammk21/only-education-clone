@@ -272,7 +272,7 @@ export interface ranking {
   stream: { id: number, slug: string },
   rankingPublisher: { id: number, slug: string }
 
-
+}
 
 export interface Universitylist {
   title?: string;
@@ -302,7 +302,7 @@ export interface UniversitiesData {
 }
 
 export interface SearchParamsProps {
-  searchParams: {
+ 
     streamsParam?:string;
     courseParam?:string;
     durationParam?:string;
@@ -314,7 +314,7 @@ export interface SearchParamsProps {
     page?: number;
     rankingParam?:string
     
-  };
+
 }
 
 export interface searchParamUserId {
@@ -402,4 +402,12 @@ export interface rankingFilter{
   publisherName:string
   slug:string
   }[]
+}
+
+export interface FilterParams {
+  streamsParam?: string;
+  locationsParam?: string;
+  examsParam?: string;
+  ownershipsParam?: string;
+  rankingParam?: string;
 }
