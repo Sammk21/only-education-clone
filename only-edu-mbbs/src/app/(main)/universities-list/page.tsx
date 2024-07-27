@@ -16,7 +16,7 @@ import {
   examsQuery,
   indianStatesQuery,
   ownershipQuery,
-  rankingQuery,
+  // rankingQuery,
   streasmQuery,
   getRankingQuery,
 } from "@/app/data/quries/uniList-query";

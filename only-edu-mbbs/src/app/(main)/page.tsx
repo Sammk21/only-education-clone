@@ -68,8 +68,8 @@ export default async function Home() {
             <div className="z-[9999]">
             </div>
             <InformationSlider data={newsData.news} href="news" />
-            <LeadingEducationPortal />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
+            <LeadingEducationPortal />
             <SchedulesSection data={streams}/>
             <CitySlider data={city} />
           

@@ -92,7 +92,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
     <>
       {/* Hero */}
       <div className="relative text-white">
-        <div className="relative flex items-center justify-center h-[60vh] z-20">
+        <div className="absolute left-0 right-0 flex items-center justify-center h-[60vh] z-20">
           <div className="text-center">
             <h1 className="text-5xl font-semibold drop-shadow-lg">
               Right choice, Better future
@@ -221,7 +221,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
           </div>
 
         </div>
-      </div>
+      
       {/* End Hero */}
     </>
   );

@@ -8,12 +8,16 @@ import { useEffect } from "react";
 interface UniversityProfile {
   backgroundImage: ImageAttributes;
   profileImage: ImageAttributes;
+  fees:string;
+  Approvedby:string;
+  location:string;
 }
 
 export interface University {
   id: number;
   title: string;
   slug: string;
+
   universityProfile: UniversityProfile;
 }
 

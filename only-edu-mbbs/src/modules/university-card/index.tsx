@@ -13,6 +13,7 @@ interface InformationProps {
 }
 
 export const UniversityCard = ({ university }: UniversityProps) => {
+  console.log(university)
   return (
     <div className="max-w-sm mx-auto bg-white border h-64 w-64 sm:h-80 sm:w-80 rounded-lg overflow-hidden">
       <div className="relative w-full h-[60%]">
@@ -31,18 +32,21 @@ export const UniversityCard = ({ university }: UniversityProps) => {
             <ImageExtended
               src={university.universityProfile.profileImage.url} // Replace with the actual logo path
               alt={university.universityProfile.profileImage.alternativeText}
-              className=" mr-3 object-cover object-center"
+              className=" mr-3 object-contain object-center"
               fill={true}
               placeholder="blur"
               blurDataURL={university.universityProfile.profileImage.url}
             />
           </div>
         </div>
-        <div className="h-full flex justify-start items-center">
+        <div className="mt-10">
           <h2 className="text-lg font-semibold text-gray-900">
             {university.title}
           </h2>
+          <p className="text-sm text-dark/40"><span>{ university.universityProfile.location}</span> | <span>{university.universityProfile.Approvedby}</span></p> 
+
         </div>
+      
       </div>
     </div>
   );

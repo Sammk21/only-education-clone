@@ -64,7 +64,7 @@ const CitySlider = ({ data }: Props) => {
         >
           {data.map((item) => (
             <div key={item.id} className=" mr-3 border mb-4">
-             <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={100} height={100} />
+             <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={200} height={200} />
             <p className="">{item.title}</p>
             </div>
           ))}
