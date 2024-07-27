@@ -1,6 +1,7 @@
-import { Inter } from 'next/font/google'
+import { Karla } from "next/font/google";
+
+const karla = Karla({ subsets: ['latin'] , preload:true})
  
-const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
@@ -8,9 +9,12 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <head>
         <link rel="icon" href="/images/onlyEducation.svg" sizes="any"></link>
       </head>
-      <body className={inter.className}>
+      <body className={karla.className}>
         <main>{props.children}</main>
       </body>
     </html>
   );
 }
+
+
+// ../fonts/karla/static/Karla-VariableFont_wght.ttf

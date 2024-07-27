@@ -46,7 +46,7 @@ interface FilterParams {
   rankingParam?: string;
 }
 
-const CollegeList = ({ data, user, ranking, filterParams }: Props) => {
+const CollegeList = ({ data, user,}: Props) => {
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",

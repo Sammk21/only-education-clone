@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -33,9 +33,6 @@ interface Props {
     data: Option[];
   };
   exams?: {
-    data: Option[];
-  };
-  streams?: {
     data: Option[];
   };
   duration?: {
@@ -72,10 +69,8 @@ const CollegeFilter = ({
   ownership,
   indianStates,
   exams,
-  streams,
   filterParams,
   context,
-  duration,
   course,
 }: Props) => {
   const {
@@ -91,7 +86,6 @@ const CollegeFilter = ({
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
   const selectedExams = examsParam ? examsParam.split(",") : [];
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
-  const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
@@ -139,14 +133,6 @@ const CollegeFilter = ({
                 </div>
               ))}
 
-              {selectedStreamsParam.map((streams) => (
-                <div
-                  key={streams}
-                  className="px-1 border border-dark inline-block mt-1 justify-center"
-                >
-                  <span>{streams}</span>
-                </div>
-              ))}
               {selectedmodesParam.map((modes) => (
                 <div
                   key={modes}
@@ -175,13 +161,6 @@ const CollegeFilter = ({
           </div>
 
           <div className=" border-b sticky top-20 w-full h-fit">
-            {streams && (
-              <AccordionCustom
-                name={"Streams"}
-                data={streams.data}
-                selectedItems={selectedOwnerships}
-              />
-            )}
             {indianStates && (
               <AccordionCustom
                 name={"Location"}
@@ -211,13 +190,6 @@ const CollegeFilter = ({
                 selectedItems={selectedmodesParam}
               />
             )}
-            {/* {duration && (
-              <AccordionCustom
-                name={"Duration"}
-                data={duration.data}
-                selectedItems={selecteddurationParam}
-              />
-            )} */}
             {course && (
               <AccordionCustom
                 name={"Course"}
@@ -239,6 +211,8 @@ const AccordionCustom: React.FC<AccordionProps> = ({
   name,
   selectedItems,
 }) => {
+
+
   return (
     <Accordion defaultValue={name} className="w-full " type="single">
       <AccordionItem value={name}>

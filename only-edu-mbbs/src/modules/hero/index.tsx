@@ -221,7 +221,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
           </div>
 
         </div>
-      </div>
+
       {/* End Hero */}
     </>
   );
