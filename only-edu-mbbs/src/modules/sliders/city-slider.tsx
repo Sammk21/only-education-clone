@@ -66,7 +66,7 @@ const CitySlider = ({ data }: Props) => {
         >
           {data.map((item) => (
 
-            <div key={item.id} className=" mr-3  border mb-4 p-4 h-[15vh]  rounded-sm  grid grid-rows-4">
+            <div key={item.id} className=" mr-3  border mb-4 p-4 h-36  rounded-sm  grid grid-rows-4">
             <div className="flex h-full row-span-3 items-">
             <div className="h-full w-full flex items-end">
              <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={100} height={100} />
