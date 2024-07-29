@@ -59,14 +59,15 @@ const extractedData = data.map(item => ({
 
 
 
-  console.log(data)
 
 
   return (
     <section className="pb-3 pt-6 mt-6 text-dark  px-6 bg-orange-50">
       <div className="container">
         <h3 className="md:text-3xl sm:text-2xl text-xl text-center">
-          India's Leading Education Portal For All Your Academic Needs
+          
+Exploring Colleges, Courses, and Exams Aligned with Your Interests
+
         </h3>
         <Tabs defaultValue="college" className=" mt-6">
           <TabsList
