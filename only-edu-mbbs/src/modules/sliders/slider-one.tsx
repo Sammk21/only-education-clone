@@ -1,9 +1,10 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import Flickity from "react-flickity-component";
 import "flickity/css/flickity.css";
 import { ArticleAttributes } from "@/types/types";
 import { InformationCard } from "../university-card";
-import { useEffect } from "react";
+import { SkeletonCard } from "./skeleton-loader-slider/sliderSkeleton";
 
 interface BlogPageProps {
   data: {
@@ -12,7 +13,13 @@ interface BlogPageProps {
   href: string;
 }
 
-const InformationSlider = ({ data, href }: BlogPageProps) => {
+const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false); // Set loading to false once the component mounts
+  }, []);
+
   const flickityOptions = {
     wrapAround: data.data.length >= 8 ? true : false,
     initialIndex: 2,
@@ -22,32 +29,26 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
     lazyLoad: 2,
     imagesLoaded: true,
     pageDots: false
-
   };
 
-  useEffect(() => {
-    const elem = window.document.querySelector(".carousel");
-    if (elem) {
-      elem.classList.add("flex");
-    }
-    const initializeFlickity = async () => {
-      const Flickity = (await import("flickity")).default;
-
-      if (elem) {
-        const flkty = new Flickity(elem);
-        flkty.on("ready", () => {
-          elem.classList.remove("flex");
-          flkty.resize();
-        });
-      }
-    };
-    initializeFlickity();
-  }, []);
+  if (loading) {
+    return (
+      <div className="container">
+         <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl items-center flex sm:flex-row">
+          <span className="mb-2 capitalize">Latest {href} </span>
+        </h4>
+      <div className="flex gap-x-2  ">
+        <SkeletonCard count={5}/>
+      </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="mt-6 pb-6">
-      <div className="container">
-        <h4 className="font-semibold mb-4 text-dark text-3xl">
+    <div className="mt-6 pb-6 container">
+      <div className="">
+        <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl items-center flex sm:flex-row">
+
           <span className="mb-2 capitalize">Latest {href} </span>
         </h4>
         <Flickity
@@ -58,7 +59,7 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
           reloadOnUpdate
         >
           {data.data.map((item) => (
-            <div key={item.id} className=" mr-3">
+            <div key={item.id} className="mr-3">
               <InformationCard item={item} href={href} />
             </div>
           ))}
@@ -69,9 +70,3 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
 };
 
 export default InformationSlider;
-
-
-
-
-
-

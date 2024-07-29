@@ -92,7 +92,9 @@ export default function Hero({ data, bannerImage }: HeroProps) {
     <>
     
       <div className="relative text-white">
+
         <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center h-[60vh] z-20">
+
           <div className="text-center">
             <h1 className="text-5xl font-semibold drop-shadow-lg">
               Right choice, Better future
@@ -209,7 +211,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
                         <div className="absolute top-0 left-0 w-full h-full bg-dark/50 -z-10" />
                       </div>
                       <div className="uppercase  rounded-lg px-1 py-2 border-[0.8px] backdrop-blur-lg items-center text-white absolute inline-block bottom-5 right-5">
-                        <p className="sm:text-sm text-xs line-clamp-2 ">
+                        <p className="sm:text-sm text-xs line-clamp-2  ">
                           {item.name.replace(/\.[^/.]+$/, "")}
                         </p>
                       </div>

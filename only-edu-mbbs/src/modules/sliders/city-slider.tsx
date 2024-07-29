@@ -5,6 +5,7 @@ import { ArticleAttributes, ImageAttributes } from "@/types/types";
 import { InformationCard } from "../university-card";
 import { useEffect } from "react";
 import { ImageExtended } from "../common/extended-image/extended-image";
+import Link from "next/link";
 
 interface Props {
   data: {
@@ -19,14 +20,16 @@ interface Props {
 const CitySlider = ({ data }: Props) => {
 
   const flickityOptions = {
-    wrapAround: data.length >= 8 ? true : false,
+    // wrapAround: data.length >= 8 ? true : false,
     initialIndex: 2,
     fade: true,
     autoPlay: true,
-    pauseAutoPlayOnHover: false,
+    pauseAutoPlayOnHover: true,
     lazyLoad: 2,
     imagesLoaded: true,
+
     pageDots: false
+
 
   };
 
@@ -57,16 +60,26 @@ const CitySlider = ({ data }: Props) => {
           <span className="mb-2 capitalize">Top Study Places </span>
         </h4>
         <Flickity
-          className={"carousel"}
+          className={"carousel "}
           elementType={"div"}
           options={flickityOptions}
           disableImagesLoaded={true}
           reloadOnUpdate
         >
           {data.map((item) => (
-            <div key={item.id} className=" mr-3 border mb-4 flex flex-col gap-1 items-center rounded-sm h-36 p-3 aspect-square">
-             <ImageExtended className="object-cover object-center" src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={120} height={120} />
-            <p className="">{item.title}</p>
+
+
+            <div key={item.id} className=" mr-3  border mb-4 p-4 h-[15vh]  rounded-sm  grid grid-rows-4">
+            <div className="flex h-full row-span-3 items-">
+            <div className="h-full w-full flex items-end">
+             <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={100} height={100} />
+            </div>
+            </div>
+            <div className="row-span-1">
+            <p className="text-center mt-2">{item.title}</p>
+
+            </div>
+           
             </div>
           ))}
         </Flickity>

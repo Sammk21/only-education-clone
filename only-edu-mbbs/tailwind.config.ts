@@ -25,8 +25,7 @@ const config = {
       container:{
         center:true,
         screens: {
-          lg: "1124px",
-         
+          lg: "1300px",
         }     
         
       },

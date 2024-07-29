@@ -13,7 +13,7 @@ export interface UniversityProfile {
   location:string;
 }
 
- interface University {
+export interface University {
   id: number;
   title: string;
   slug: string;
@@ -38,8 +38,9 @@ export const UniversitiesRail = ({ data }: Props) => {
     autoPlay: true,
     pauseAutoPlayOnHover: false,
     lazyLoad: 2,
+    pageDots:false,
     imagesLoaded: true,
-    pageDots: false
+  
 
   };
   useEffect(() => {

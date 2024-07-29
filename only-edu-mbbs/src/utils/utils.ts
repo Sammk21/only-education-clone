@@ -1,5 +1,5 @@
 
-import { UniversitiesData, Universitylist } from "@/types/types";
+import { FilterParams, UniversitiesData, Universitylist } from "@/types/types";
 import { z } from "zod";
 
 
@@ -187,45 +187,54 @@ export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   };
 }
 
-interface FilterParams {
-  streamsParam?: string;
-  locationsParam?: string;
-  examsParam?: string;
-  ownershipsParam?: string;
-  rankingParam?: string;
-}
+
+
+
+
+
 
 const DEFAULT_STREAM_PARAM = "engineering";
 const DEFAULT_RANKING_PARAM = "nirf";
 
-export function buildUniversityListQuery(filterParams: FilterParams): string {
-  let query = "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true&populate[ranking][populate][rankings][populate]=publisherName&populate[ranking][fields][0]=rankingNumber";
-
-  const { streamsParam, locationsParam, examsParam, ownershipsParam, rankingParam } = filterParams;
-
-  if (streamsParam) {
-    const streamsFilters = streamsParam.split(",").map(stream => `filters[streams][slug][$eq]=${stream}`).join("&");
-    query += `&${streamsFilters}`;
-  }
+export const buildUniversityListQuery = (baseQuery: string, filterParams: FilterParams, params: { stream: string }) => {
+  const { locationsParam, examsParam, ownershipsParam, rankingParam, streamsParam } = filterParams;
+  let query = baseQuery;
 
   if (locationsParam) {
-    const locationFilters = locationsParam.split(",").map(location => `filters[indian_state][slug][$eq]=${location}`).join("&");
-    query += `&${locationFilters}`;
+    query += `&${locationsParam.split(",").map(location => `filters[indian_state][slug][$eq]=${location}`).join("&")}`;
   }
 
   if (examsParam) {
-    const examFilters = examsParam.split(",").map(exam => `filters[exams][slug][$eq]=${exam}`).join("&");
-    query += `&${examFilters}`;
+    query += `&${examsParam.split(",").map(exam => `filters[exams][slug][$eq]=${exam}`).join("&")}`;
   }
 
   if (ownershipsParam) {
     query += `&filters[ownership][slug][$eq]=${ownershipsParam}`;
   }
 
-  if (rankingParam || streamsParam) {
-    const rankingFilters = `populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=id&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][stream][slug]=${streamsParam || DEFAULT_STREAM_PARAM}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][stream][slug]=${streamsParam || DEFAULT_STREAM_PARAM}&filters[rankingStreams][rankingPublisher][slug][$eq]=${rankingParam || DEFAULT_RANKING_PARAM}&filters[rankingStreams][rankingNumber][$notNull]=true`;
-    query += `&${rankingFilters}`;
-  }
+  // Add default stream filter
+  query += `&filters[streams][slug][$eq]=${params.stream}`;
+
+  const rankingParamToUse = rankingParam || DEFAULT_RANKING_PARAM;
+
+  query += `&populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=rankingYear&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${rankingParamToUse}&populate[rankingStreams][filters][stream][slug]=${params.stream}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
 
   return query;
-}
+};
+
+
+
+export const filterUniversities = (universities: Universitylist[]): Universitylist[] => {
+  const uniqueUniversityIds = new Set<number>();
+  return universities.filter(university => 
+    university.rankingStreams?.length > 0 && !uniqueUniversityIds.has(university.id) && uniqueUniversityIds.add(university.id)
+  );
+};
+
+export const getUserData = (user: any) => {
+  if (user?.data) {
+    const { id, verified, phone } = user.data;
+    return { id, verified, phone };
+  }
+  return null;
+};

@@ -80,7 +80,6 @@ const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
             </div>
             <InformationSlider data={newsData.news} href="news" />
 
-         
             <LeadingEducationPortal />
             <Separator aria-orientation="vertical"/>
 
@@ -89,16 +88,14 @@ const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
             <SchedulesSection data={streamData.data}/>
             <CitySlider data={cityData.data} />
           
+
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />
             <InfoButton title="Admission 2024" data={uniButtonData.data} href="study/uni/"/>
             <InfoButton title="Top courses 2024" data={courseButtonData.data} href="study/course/"/>
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
             <WhyUs data={whyUsData.whyOnlyEducation} />
-
             <NewsLetter />
-           
-
           </div>
         </div>
       </div>
