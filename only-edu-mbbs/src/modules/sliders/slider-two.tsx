@@ -5,7 +5,7 @@ import Flickity from "react-flickity-component";
 import "flickity/css/flickity.css";
 import { useEffect } from "react";
 
-interface UniversityProfile {
+export interface UniversityProfile {
   backgroundImage: ImageAttributes;
   profileImage: ImageAttributes;
   fees:string;
@@ -13,7 +13,7 @@ interface UniversityProfile {
   location:string;
 }
 
-export interface University {
+ interface University {
   id: number;
   title: string;
   slug: string;
@@ -39,6 +39,8 @@ export const UniversitiesRail = ({ data }: Props) => {
     pauseAutoPlayOnHover: false,
     lazyLoad: 2,
     imagesLoaded: true,
+    pageDots: false
+
   };
   useEffect(() => {
     const initializeFlickity = async () => {
@@ -57,7 +59,7 @@ export const UniversitiesRail = ({ data }: Props) => {
 
   return (
     <div className="my-12">
-      <div className="">
+      <div className="container">
         <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
           <span className="mb-2 capitalize">Top Universities</span>
         </h4>

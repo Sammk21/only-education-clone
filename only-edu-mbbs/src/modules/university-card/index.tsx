@@ -54,8 +54,8 @@ export const UniversityCard = ({ university }: UniversityProps) => {
 
 export const InformationCard = ({ item, href }: InformationProps) => {
   return (
-    <div className="grid grid-rows-5  items-center  h-64 w-64 border rounded-md sm:h-80 sm:w-80 justify-center">
-      <div className=" shadow-sm row-span-3  h-full w-full text-sm sm:text-lg md:text-xl rounded-sm rounded-b-none  relative group overflow-hidden cursor-pointer">
+    <div className="grid   h-64 w-64 border rounded-md sm:h-72 sm:w-80 justify-center">
+      <div className=" shadow-sm   h-36 w-full text-sm sm:text-lg md:text-xl rounded-sm rounded-b-none  relative group overflow-hidden cursor-pointer">
         <Link className="" href={`/${href}/post/${item.slug}`}>
           <ImageExtended
             src={item.image.url}
@@ -78,8 +78,8 @@ export const InformationCard = ({ item, href }: InformationProps) => {
           </div>
         </Link>
       </div>
-      <div className="capitalize mt-1 row-span-2 px-2">
-        <p className="text-md mb-2 line-clamp-2 text-dark">{item.title}</p>
+      <div className="capitalize mt-1  px-2">
+        <p className="text-md mb-2 line-clamp-2 text-dark font-semibold">{item.title}</p>
         <p className="text-xs font-normal text-dark/50 tracking-wide z-10  line-clamp-2">
           {item.description}
         </p>

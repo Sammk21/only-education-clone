@@ -11,6 +11,7 @@ import SchedulesSection from "@/modules/schedules-section";
 import ExploreArticles from "@/modules/explore-articles";
 import CitySlider from "@/modules/sliders/city-slider";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import InfoButton from "@/modules/info-button/info-button";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -30,7 +31,10 @@ const BannerImageQuery =
 const cityQuery=`/api/cities?populate=true&fields[0]=title&fields[1]=slug&populate=streamIcon`
 
   const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[top_courses]=true"
-export default async function Home() {
+
+const courseQuery="/api/courses?fields[0]=title&fields[1]=slug"
+const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
+  export default async function Home() {
 
 
   const [
@@ -41,6 +45,10 @@ export default async function Home() {
     articlesData,
     topUniversitiesData,
     bannerImageData,
+    streamData,
+    cityData,
+    courseButtonData,
+    uniButtonData,
    
   ] = await Promise.all([
     getStrapiData(HeroQuery),
@@ -50,12 +58,14 @@ export default async function Home() {
     getStrapiData(ArticlesQuery),
     getStrapiData(TopUniversitiesQuery),
     getStrapiData(BannerImageQuery),
+    getStrapiData(streamQuery),
+    getStrapiData(cityQuery),
+    getStrapiData(courseQuery),
+    getStrapiData(uniButtonQuery)
    
   ]);
-  const stream= await getStrapiData(streamQuery)
-  const cityData= await getStrapiData(cityQuery)
-  const city=cityData.data
-  const streams=stream.data
+  
+
 
   return (
     <div className="w-full overflow-hidden">
@@ -75,12 +85,14 @@ export default async function Home() {
             <Separator aria-orientation="vertical"/>
 
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
-            <LeadingEducationPortal />
-            <SchedulesSection data={streams}/>
-            <CitySlider data={city} />
+         
+            <SchedulesSection data={streamData.data}/>
+            <CitySlider data={cityData.data} />
           
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />
+            <InfoButton title="Admission 2024" data={uniButtonData.data} href="study/uni/"/>
+            <InfoButton title="Top courses 2024" data={courseButtonData.data} href="study/course/"/>
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
             <WhyUs data={whyUsData.whyOnlyEducation} />
 

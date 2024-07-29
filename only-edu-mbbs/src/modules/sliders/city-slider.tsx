@@ -17,7 +17,6 @@ interface Props {
 }
 
 const CitySlider = ({ data }: Props) => {
-  console.log(data)
 
   const flickityOptions = {
     wrapAround: data.length >= 8 ? true : false,
@@ -27,6 +26,8 @@ const CitySlider = ({ data }: Props) => {
     pauseAutoPlayOnHover: false,
     lazyLoad: 2,
     imagesLoaded: true,
+    pageDots: false
+
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const CitySlider = ({ data }: Props) => {
 
   return (
     <div className="mt-6 pb-6">
-      <div className="">
+      <div className="container">
         <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
           <span className="mb-2 capitalize">Top Study Places </span>
         </h4>
@@ -63,8 +64,8 @@ const CitySlider = ({ data }: Props) => {
           reloadOnUpdate
         >
           {data.map((item) => (
-            <div key={item.id} className=" mr-3 border mb-4">
-             <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={200} height={200} />
+            <div key={item.id} className=" mr-3 border mb-4 flex flex-col gap-1 items-center rounded-sm h-36 p-3 aspect-square">
+             <ImageExtended className="object-cover object-center" src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={120} height={120} />
             <p className="">{item.title}</p>
             </div>
           ))}

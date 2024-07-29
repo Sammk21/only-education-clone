@@ -5,7 +5,8 @@ import Link from "next/link";
 
 const LeadingEducationPortal = () => {
   return (
-    <section className="py-3 mt-6 text-dark container px-6">
+    <section className="py-3 mt-6 text-dark  px-6">
+      <div className="container">
       <h3 className="md:text-3xl sm:text-2xl text-xl text-center">
         India's Leading Education Portal For All Your Academic Needs
       </h3>
@@ -92,6 +93,7 @@ const LeadingEducationPortal = () => {
             </CardContent>
           </Link>
         </Card>
+      </div>
       </div>
     </section>
   );

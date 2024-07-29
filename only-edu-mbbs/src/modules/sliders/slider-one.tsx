@@ -21,6 +21,8 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
     pauseAutoPlayOnHover: false,
     lazyLoad: 2,
     imagesLoaded: true,
+    pageDots: false
+
   };
 
   useEffect(() => {
@@ -44,8 +46,8 @@ const InformationSlider = ({ data, href }: BlogPageProps) => {
 
   return (
     <div className="mt-6 pb-6">
-      <div className="">
-        <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
+      <div className="container">
+        <h4 className="font-semibold mb-4 text-dark text-3xl">
           <span className="mb-2 capitalize">Latest {href} </span>
         </h4>
         <Flickity

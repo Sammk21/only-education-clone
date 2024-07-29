@@ -32,6 +32,8 @@ const nextConfig = {
       {
         hostname: "www.onlyeducation.in",
       },
+
+    
     ],
   },
 };

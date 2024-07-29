@@ -59,7 +59,6 @@ const extractedData = data.map(item => ({
 
 
 
-  console.log(data)
 
 
   return (

@@ -79,7 +79,7 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
           <Banner existingPhone={user.data.phone} userId={user.data.id} />
       ) : null}
 
-      <div className=" grid grid-cols-[auto,1fr,auto] place-items-center h-full ">
+      <div className=" grid grid-cols-[auto,1fr,auto] place-items-center h-full justify-between ">
       <Link
               className=" col-span-1 h-9 w-24 sm:h-12 sm:w-28 relative"
               href="/"

@@ -118,7 +118,7 @@ export default async function UniversitiesList({
     }
   );
 
-  console.log(filteredUniversities.length)
+  
 
 
   const user = await getUserMeLoader();
