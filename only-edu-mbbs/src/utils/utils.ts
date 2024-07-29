@@ -216,9 +216,8 @@ export const buildUniversityListQuery = (baseQuery: string, filterParams: Filter
   query += `&filters[streams][slug][$eq]=${params.stream}`;
 
   const rankingParamToUse = rankingParam || DEFAULT_RANKING_PARAM;
-  const streamParamToUse = streamsParam || DEFAULT_STREAM_PARAM;
 
-  query += `&populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=rankingYear&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${rankingParamToUse}&populate[rankingStreams][filters][stream][slug]=${streamParamToUse}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
+  query += `&populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=rankingYear&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${rankingParamToUse}&populate[rankingStreams][filters][stream][slug]=${params.stream}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
 
   return query;
 };

@@ -16,6 +16,16 @@ import { Separator } from "@/components/ui/separator";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
 import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface Props {
   data: UniversitiesData;
@@ -46,7 +56,10 @@ interface FilterParams {
   rankingParam?: string;
 }
 
-const CollegeList = ({ data, user,}: Props) => {
+const CollegeList = ({ data, user }: Props) => {
+
+
+
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -100,6 +113,11 @@ const CollegeList = ({ data, user,}: Props) => {
           </p>
         </>
       )}
+      { data.data.length > 0 &&
+      <p className="text-dark text-center my-5 font-medium">
+          {data.data.length} { data.data.length === 1 ? "result" : "results" } found
+          </p>
+}
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
@@ -123,7 +141,6 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
         key={university?.id}
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
-
         <div className="flex flex-col w-full sm:grid grid-cols-[auto,auto,1fr] gap-x-3">
           <div className="h-full flex flex-col items-center">
             {university.rankingStreams?.map((item, index) => (
@@ -154,7 +171,6 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                 fill
               />
             </div>
-         
           </Link>
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
@@ -209,12 +225,37 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                     />
                   )
                 ) : (
-                  <Button className="bg-orange-500 hover:bg-orange-400">
-                    <Link className="flex items-center " href="/auth">
-                      <FaLock className="mr-1" />
-                      Brochure
-                    </Link>
-                  </Button>
+                  //             <Dialog>
+                  // <DialogTrigger asChild>
+                  //
+                  // </DialogTrigger>
+
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="bg-orange-500 hover:bg-orange-400">
+                          <FaLock className="mr-1" />
+                          Brochure
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent status={null} className="sm:max-w-md rounded-md">
+                      <DialogHeader>
+                      <DialogTitle>You're not signed in</DialogTitle>
+                        <DialogDescription>
+                          You have to login/signup to perfrom this action
+                        </DialogDescription>
+                      </DialogHeader>
+                      <Button>
+                        <Link href="/auth">Login/Signup</Link>
+                      </Button>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogDescription>
+                          <Link className="" href={"/privacypolicy"}>
+                        <p className="underline text-blue-500">privacy and policy</p>  
+                          </Link>
+                        </DialogDescription>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 )}
 
                 <Button
@@ -244,7 +285,10 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                 </div>
               </Link>
               <Separator className="ml-1 sm:ml-2" orientation="vertical" />
-              <Link href={`/study/uni/${university.slug}#placement`} scroll={false}>
+              <Link
+                href={`/study/uni/${university.slug}#placement`}
+                scroll={false}
+              >
                 <div className="hover:text-orange-500 cursor-pointer">
                   Placements
                 </div>
@@ -258,7 +302,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
               <Separator orientation="vertical" />
               <Link href={`/study/uni/${university.slug}#scholarships`}>
                 <div className="hover:text-orange-500 cursor-pointer">
-                Scholarships
+                  Scholarships
                 </div>
               </Link>
             </div>

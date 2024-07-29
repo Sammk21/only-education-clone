@@ -69,21 +69,16 @@ export default async function Home() {
             <div className="z-[9999]">
             </div>
             <InformationSlider data={newsData.news} href="news" />
-         
             <LeadingEducationPortal />
             <Separator aria-orientation="vertical"/>
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
             <SchedulesSection data={streams}/>
             <CitySlider data={city} />
-          
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
             <WhyUs data={whyUsData.whyOnlyEducation} />
-
             <NewsLetter />
-           
-
           </div>
         </div>
       </div>
