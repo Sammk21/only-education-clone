@@ -11,6 +11,7 @@ import { updatedFilters } from "@/app/action";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import ResetButton from "../resetButton";
+import { usePathname } from "next/navigation";
 
 interface Option {
   id: number;
@@ -25,6 +26,10 @@ interface uniProp {
   id: number;
 }
 
+interface entrance_exams{
+
+}
+
 interface Props {
   ownership?: {
     data: Option[];
@@ -33,7 +38,7 @@ interface Props {
     data: Option[];
   };
   exams?: {
-    data: Option[];
+    data: any;
   };
   duration?: {
     data: Option[];
@@ -90,10 +95,16 @@ const CollegeFilter = ({
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
 
+
+  const pathname = usePathname();
+
+  console.log(exams?.data[0].entrance_exams.data)
+
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    await updatedFilters(formData, context); // Call server-side action
+    await updatedFilters(formData, context, pathname); // Call server-side action
   };
 
   return (
@@ -172,7 +183,7 @@ const CollegeFilter = ({
             {exams && (
               <AccordionCustom
                 name={"Exams"}
-                data={exams.data}
+                data={exams?.data[0].entrance_exams.data  }
                 selectedItems={selectedExams}
               />
             )}
@@ -211,6 +222,8 @@ const AccordionCustom: React.FC<AccordionProps> = ({
   name,
   selectedItems,
 }) => {
+
+
 
 
   return (

@@ -17,7 +17,7 @@
     "@strapi/plugin-i18n": "4.13.5",
     "@strapi/plugin-seo": "^1.9.4",
     "@strapi/plugin-users-permissions": "4.13.5",
-    "@strapi/strapi": "4.13.5",
+    "@strapi/strapi": "^4.25.5",
     "@webbio/strapi-plugin-scheduler": "^0.1.2",
     "fs-extra": "^10.0.0",
     "pg": "^8.11.5",
@@ -25,8 +25,7 @@
     "strapi-google-auth": "^0.2.1",
     "strapi-plugin-meilisearch": "^0.12.0",
     "strapi-plugin-navigation": "^2.5.2",
-    "strapi-plugin-populate-deep": "^1.1.2",
-    "strapi-plugin-todo": "^0.0.9",
+    "strapi-plugin-todo": "^0.0.10",
     "unzip-stream": "^0.3.1",
     "uuid-v4": "^0.1.0"
   },

@@ -65,16 +65,16 @@ export function NavbarDrop() {
           )}
 
           {navItem.submenu && (
-            <NavigationMenuContent className="mt-2">
-              <div className="w-[800px] max-h-[60vh] grid grid-cols-5 gap-4 bg-white p-4 rounded-md shadow-lg">
-                <div className="col-span-2 border-r pr-4">
+            <NavigationMenuContent className="">
+              <div className="w-[800px] max-h-[60vh] grid grid-cols-5  bg-white  rounded-md shadow-lg">
+                <div className="col-span-2 border-r ">
                   <ul>
                     {navItem.submenu.map((item) => (
                       <li
                         key={item.id}
                         className={cn(
-                          "cursor-pointer p-2 rounded-md transition-colors capitalize",
-                          selectedMenu === item.id ? "bg-gray-100" : "hover:bg-gray-50"
+                          "relative border-b-orange-400 group hover:border-l-2 outline-l-orange-500 py-1.5 px-2.5 text-black",
+                          selectedMenu === item.id ? "bg-gray-100 border-l-2 border-l-orange-500" : "hover:bg-gray-50 "
                         )}
                         onMouseOver={() => setSelectedMenu(item.id)}
                       >
@@ -83,12 +83,12 @@ export function NavbarDrop() {
                     ))}
                   </ul>
                 </div>
-                <div className="col-span-3 pl-4">
+                <div className="col-span-3 ">
                   {navItem.submenu
                     .filter((item) => item.id === selectedMenu)
                     .flatMap((item) =>
                       item.submenu ? (
-                        <ul key={item.id} className="">
+                        <ul key={item.id} className="bg-gray-100">
                           {item.submenu.map((subItem) => (
                             <li key={subItem.id} className="p-2 rounded-md hover:underline hover:bg-gray-50">
                               <Link href={subItem.href} className="text-sm text-gray-700">

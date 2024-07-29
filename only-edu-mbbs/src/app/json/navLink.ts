@@ -275,37 +275,6 @@ export const navbarLinks = {
             },
           ],
         },
-        //     {
-        //       id: 22,
-        //       title: "Popular specialization",
-        //       href: "popular-specialization",
-        //       submenu: [
-        //         { id: 241, href: "fashion-designing", title: "Fashion Designing" },
-        //         { id: 242, href: "interior-design", title: "Interior Design" },
-        //         { id: 243, href: "graphic-design", title: "Graphic Design" },
-        //         { id: 244, href: "jewellery-design", title: "Jewellery Design" },
-        //         { id: 245, href: "web-design", title: "Web Design" },
-        //         { id: 246, href: "furniture-design", title: "Furniture Design" },
-        //         { id: 247, href: "game-design", title: "Game Design" },
-        //         { id: 248, href: "product-design", title: "Product Design" },
-        //         { id: 249, href: "textile-design", title: "Textile Design" },
-        //         { id: 250, href: "visual-merchandising", title: "Visual Merchandising" },
-        //         { id: 251, href: "ceramic-and-glass-design", title: "Ceramic & Glass Design" },
-        //         { id: 252, href: "film-and-video-design", title: "Film & Video Design" },
-        //         { id: 253, href: "ui--ux", title: "UI / UX" },
-        //         { id: 254, href: "footwear-design", title: "Footwear Design" },
-        //         { id: 255, href: "automotive-design", title: "Automotive Design" },
-        //         { id: 256, href: "communication-design", title: "Communication Design" },
-        //         { id: 257, href: "apparel-design", title: "Apparel Design" },
-        //         { id: 258, href: "exhibition-design", title: "Exhibition Design" },
-        //         { id: 259, href: "information-design", title: "Information Design" },
-        //         { id: 260, href: "knitwear-design", title: "Knitwear Design" },
-        //         { id: 261, href: "leather-design", title: "Leather Design" },
-        //         { id: 262, href: "toy-design", title: "Toy Design" },
-        //         { id: 263, href: "lifestyle-accesory-design", title: "Lifestyle Accesory Design" },
-        //         { id: 264, href: "all-design-specializations", title: "All Design Specializations" }
-        //     ]
-        // }
       ],
     },
     {
@@ -655,15 +624,9 @@ export const navbarLinks = {
     },
     {
       id: 5,
-      title: "Top Universities",
-      href: "universities-list",
-    },
-    {
-      id: 5,
       title: "Entrance exams",
       href: "universities-list",
     },
-
     {
       id: 6,
       title: "More",

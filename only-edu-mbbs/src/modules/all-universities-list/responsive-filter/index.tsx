@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import ResetButton from "../resetButton";
 import { updatedFilters } from "@/app/action";
 import { FaFilter } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 interface Option {
   id: number;
@@ -73,7 +74,6 @@ const MobileFilter: React.FC<FilterProps> = ({
   ownership,
   indianStates,
   exams,
-  streams,
   context,
   modes,
   duration,
@@ -103,6 +103,8 @@ const MobileFilter: React.FC<FilterProps> = ({
     setIsDrawerOpen(false); // Close the drawer after submitting the form
   };
 
+  const pathname = usePathname();
+
   return (
     <div className="block lg:hidden">
       <Drawer.Root
@@ -129,7 +131,7 @@ const MobileFilter: React.FC<FilterProps> = ({
             <div className="flex-1 h-full overflow-y-scroll px-4 py-6">
               <ResetButton />
               <form
-                action={(formData) => updatedFilters(formData, context)}
+                action={(formData) => updatedFilters(formData, context,pathname)}
                 onSubmit={handleSubmit}
               >
                 <div className="flex justify-end items-center gap-x-2 mb-4">
@@ -200,13 +202,7 @@ const MobileFilter: React.FC<FilterProps> = ({
                 </div>
 
                 <div>
-                  {streams && (
-                    <AccordionCustom
-                      name={"Streams"}
-                      data={streams.data}
-                      selectedItems={selectedStreamsParam}
-                    />
-                  )}
+  
                   {indianStates && (
                     <AccordionCustom
                       name={"Location"}

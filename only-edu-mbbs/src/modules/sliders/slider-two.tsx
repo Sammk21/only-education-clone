@@ -34,6 +34,7 @@ export const UniversitiesRail = ({ data }: Props) => {
     autoPlay: true,
     pauseAutoPlayOnHover: false,
     lazyLoad: 2,
+    pageDots:false,
     imagesLoaded: true,
   };
   useEffect(() => {
