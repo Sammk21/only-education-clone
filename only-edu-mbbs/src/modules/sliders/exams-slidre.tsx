@@ -1,10 +1,10 @@
-
-"use client"
+"use client";
 import { ImageAttributes } from "@/types/types";
 import Flickity from "react-flickity-component";
 import { ImageExtended } from "../common/extended-image/extended-image";
-
-
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 interface EntranceExamData {
   entrance_exams: {
@@ -27,8 +27,6 @@ interface Props {
 }
 
 const ExamsSlider = ({ data }: Props) => {
-
-
   const flickityOptions = {
     initialIndex: 2,
     fade: true,
@@ -39,7 +37,6 @@ const ExamsSlider = ({ data }: Props) => {
     pageDots: false,
   };
 
- 
   return (
     <section className=" py-9 border-b">
       <div className="container">
@@ -54,27 +51,68 @@ const ExamsSlider = ({ data }: Props) => {
           reloadOnUpdate
         >
           {data.entrance_exams.data.map((item) => (
-            <div key={item.id} className=" mr-3  border mb-4 p-4  rounded-sm  ">
-              <div className="">
-                <div className="w-32 h-32 rounded-full border border-gray-300 p-1">
+            <div className="border p-4 relative h-64 w-64  sm:w-72  bg-white rounded-lg mr-4">
+              <a
+                className="jsx-3656862976 flex items-center  mb-6"
+                href="/exams/neet"
+              >
+                <div className="exam-img mr-3">
                   <ImageExtended
                     src={item.searchableImage.url}
                     alt={item.searchableImage.alternativeText}
-                    width={120}
-                    height={120}
-                    className=" w-full h-full object-contain rounded-full"
+                    height={50}
+                    width={50}
+                    className="border rounded-full lazyloaded border-black"
                   />
                 </div>
-                <div>
-                  <p className="text-center mt-2 bg-gray-100 text-dark rounded-sm">
+                <div className="jsx-3656862976">
+                  <Badge className="bg-accent text-dark">
+                    {" "}
                     {item.mode.title} Exam
-                  </p>
-                  <p className="text-2xl font-semibold text-dark">
-                    {item.title}
-                  </p>
+                  </Badge>
+                  <h3 className="font-medium text-sm ">{item.title}</h3>
                 </div>
-                <div>
-                    <p>Application Date {item.applicationDate}</p>
+              </a>
+              <div className="flex flex-row justify-between text-black text-lg">
+                <div className="">
+                  <p className=" text-black/60">Participating Colleges</p>
+                </div>
+                <div className=" font-medium text-right">
+                  <p className="">893</p>
+                </div>
+              </div>
+              <div className="flex flex-row justify-between text-black text-lg">
+                <div className="">
+                  <p className=" text-black/60"> Exam Date</p>
+                </div>
+                <div className=" font-medium text-right">
+                  <p className="">{item.applicationDate}</p>
+                </div>
+              </div>
+              <div className="flex flex-row justify-between text-black text-lg">
+                <div className="">
+                  <p className=" text-black/60">Exam Level</p>
+                </div>
+                <div className=" font-medium text-right">
+                  <p className="">national</p>
+                </div>
+              </div>
+              <Separator className="mt-3 mb-1" />
+              <div className="flex flex-row justify-between hover:text-orange-500 cursor-pointer text-black text-lg">
+                <div className="font-medium">
+                  <p className=" ">Application Process</p>
+                </div>
+                <div className=" text-right">
+                  <MdKeyboardArrowRight />
+                </div>
+              </div>
+              <Separator className="my-1" />
+              <div className="flex flex-row justify-between hover:text-orange-500 cursor-pointer text-black text-lg">
+                <div className="font-medium">
+                  <p className="">Exam info</p>
+                </div>
+                <div className=" font-medium text-right">
+                  <MdKeyboardArrowRight />
                 </div>
               </div>
             </div>
