@@ -13,6 +13,7 @@ interface InformationProps {
 }
 
 export const UniversityCard = ({ university }: UniversityProps) => {
+  console.log(university)
   return (
     <div className="max-w-sm mx-auto bg-white border h-64 w-64 sm:h-80 sm:w-80 rounded-lg overflow-hidden">
       <div className="relative w-full h-[60%]">
@@ -31,18 +32,21 @@ export const UniversityCard = ({ university }: UniversityProps) => {
             <ImageExtended
               src={university.universityProfile.profileImage.url} // Replace with the actual logo path
               alt={university.universityProfile.profileImage.alternativeText}
-              className=" mr-3 object-cover object-center"
+              className=" mr-3 object-contain object-center"
               fill={true}
               placeholder="blur"
               blurDataURL={university.universityProfile.profileImage.url}
             />
           </div>
         </div>
-        <div className="h-full flex justify-start items-center">
+        <div className="mt-10">
           <h2 className="text-lg font-semibold text-gray-900">
             {university.title}
           </h2>
+          <p className="text-sm text-dark/40"><span>{ university.universityProfile.location}</span> | <span>{university.universityProfile.Approvedby}</span></p> 
+
         </div>
+      
       </div>
     </div>
   );
@@ -50,8 +54,8 @@ export const UniversityCard = ({ university }: UniversityProps) => {
 
 export const InformationCard = ({ item, href }: InformationProps) => {
   return (
-    <div className="grid grid-rows-5  items-center  h-64 w-64 border rounded-md sm:h-80 sm:w-80 justify-center">
-      <div className=" shadow-sm row-span-3  h-full w-full text-sm sm:text-lg md:text-xl rounded-sm rounded-b-none  relative group overflow-hidden cursor-pointer">
+    <div className="grid   h-64 w-64 border rounded-md sm:h-72 sm:w-80 justify-center">
+      <div className=" shadow-sm   h-36 w-full text-sm sm:text-lg md:text-xl rounded-sm rounded-b-none  relative group overflow-hidden cursor-pointer">
         <Link className="" href={`/${href}/post/${item.slug}`}>
           <ImageExtended
             src={item.image.url}
@@ -74,8 +78,8 @@ export const InformationCard = ({ item, href }: InformationProps) => {
           </div>
         </Link>
       </div>
-      <div className="capitalize mt-1 row-span-2 px-2">
-        <p className="text-md mb-2 line-clamp-2 text-dark">{item.title}</p>
+      <div className="capitalize mt-1  px-2">
+        <p className="text-md mb-2 line-clamp-2 text-dark font-semibold">{item.title}</p>
         <p className="text-xs font-normal text-dark/50 tracking-wide z-10  line-clamp-2">
           {item.description}
         </p>

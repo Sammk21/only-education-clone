@@ -48,7 +48,6 @@ import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 // }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  // const getUniQuery = `/api/top-courses?populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[salary][populate][averageSalary][populate]=true&populate[admissionProcess][populate][admissionProcess][populate]=true&populate[cta][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true`;
 const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][aboutCourse][populate]=true&populate[overviewTabs][populate][eligibilityCriteria][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][admissionProcess][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][Cutoff][populate]=true`
   const data = await getStrapiData(getUniQuery);
 

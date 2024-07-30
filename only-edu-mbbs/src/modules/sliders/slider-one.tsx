@@ -48,6 +48,7 @@ const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
     <div className="mt-6 pb-6 container">
       <div className="">
         <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl items-center flex sm:flex-row">
+
           <span className="mb-2 capitalize">Latest {href} </span>
         </h4>
         <Flickity

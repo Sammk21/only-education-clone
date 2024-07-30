@@ -32,9 +32,11 @@ const nextConfig = {
       {
         hostname: "www.onlyeducation.in",
       },
+
       {
         hostname: "admin.onlyeducation.co.inundefined",
       },
+
 
     ],
   },

@@ -24,7 +24,7 @@ export default async function UniversitiesList({
   searchParams,
 }: Readonly<SearchParamsProps>) {
   let courseListQuery =
-    "/api/top-courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
+    "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -78,7 +78,7 @@ export default async function UniversitiesList({
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            streams={streams}
+            // streams={streams}
             duration={duration}
             course={course}
             context="course"

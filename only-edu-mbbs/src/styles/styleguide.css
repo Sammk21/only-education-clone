@@ -239,7 +239,7 @@ p {
    font-style: normal;
    font-size: var(--copy-size-l);
    line-height: 1.5;
-   color: var(--color-text);
+   /* color: var(--color-text); */
 }
 
 span {
