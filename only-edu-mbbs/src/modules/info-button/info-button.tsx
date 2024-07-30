@@ -22,10 +22,10 @@ const InfoButton = ({data, href, title}:Props) => {
    
 
   return (
-    <section className='pb-3 pt-6 mt-6   px-6 bg-orange-50 '>
+    <section className='py-9 border-b  bg-orange-50 '>
     <div  className='container'>
-        <h4 className='font-semibold mb-4 text-dark  dark:text-light text-3xl'>{title}
-        </h4>
+        <h3 className='capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0'>{title}
+        </h3>
         <div className='flex  flex-wrap gap-3'>
                     {data.map((item) => (
                         <div key={item.id} className='mb-1 border py-2 px-3 rounded-full bg-white cursor-pointer hover:bg-gray-50'>

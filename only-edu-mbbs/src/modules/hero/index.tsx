@@ -96,7 +96,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
         <div className="absolute left-0 right-0 top-0 bottom-0 flex items-center justify-center h-[60vh] z-20">
 
           <div className="text-center">
-            <h1 className="text-5xl font-semibold drop-shadow-lg">
+            <h1 className="md:text-5xl text-3xl font-semibold drop-shadow-lg">
               Right choice, Better future
             </h1>
             <p className="mt-3 text-lg text-muted-foreground text-white drop-shadow-md">
