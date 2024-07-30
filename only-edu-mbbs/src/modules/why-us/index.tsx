@@ -9,9 +9,9 @@ interface Props {
 const WhyUs = ({ data }: Props) => {
   const { title } = data.header;
   return (
-    <section className=" dark:text-light  text-dark mb-12 px-3 my-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-semibold">{title}</h1>
+    <section className=" dark:text-light  py-6">
+      <div className="container">
+        <h3 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">{title}</h3>
         <div className="md:grid md:grid-cols-2">
           <div className="h-full items-center justify-center flex">
             <svg

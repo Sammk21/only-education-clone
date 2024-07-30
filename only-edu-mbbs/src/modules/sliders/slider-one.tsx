@@ -33,24 +33,27 @@ const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
 
   if (loading) {
     return (
+      <section className="py-6">
       <div className="container">
-         <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl items-center flex sm:flex-row">
+         <h4 className="capitalize font-semibold mb-4 text-dark text-2xl md:text-3xl pl-2 lg:pl-0">
           <span className="mb-2 capitalize">Latest {href} </span>
         </h4>
       <div className="flex gap-x-2  ">
         <SkeletonCard count={5}/>
       </div>
       </div>
+      </section>
     );
   }
 
   return (
-    <div className="mt-6 pb-6 container">
+    <section className="py-9 border-b">
+    <div className="container">
       <div className="">
-        <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl items-center flex sm:flex-row">
+        <h3 className="capitalize font-semibold mb-4 text-dark md:text-3xl pl-2 lg:pl-0 text-2xl">
 
-          <span className="mb-2 capitalize">Latest {href} </span>
-        </h4>
+      Latest {href}
+        </h3>
         <Flickity
           className={"carousel"}
           elementType={"div"}
@@ -66,6 +69,7 @@ const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
         </Flickity>
       </div>
     </div>
+    </section>
   );
 };
 

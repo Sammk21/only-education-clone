@@ -12,6 +12,7 @@ import ExploreArticles from "@/modules/explore-articles";
 import CitySlider from "@/modules/sliders/city-slider";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import InfoButton from "@/modules/info-button/info-button";
+import ExamsSlider from "@/modules/sliders/exams-slidre";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -34,7 +35,10 @@ const cityQuery=`/api/cities?populate=true&fields[0]=title&fields[1]=slug&popula
 
 const courseQuery="/api/courses?fields[0]=title&fields[1]=slug"
 const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
-  export default async function Home() {
+
+const examsQuery="/api/landing-page?populate[entrance_exams][populate]=true&populate[entrance_exams][populate]=searchableImage&populate[entrance_exams][populate]=mode"
+  
+export default async function Home() {
 
 
   const [
@@ -49,6 +53,7 @@ const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
     cityData,
     courseButtonData,
     uniButtonData,
+    examsData,
    
   ] = await Promise.all([
     getStrapiData(HeroQuery),
@@ -61,10 +66,12 @@ const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
     getStrapiData(streamQuery),
     getStrapiData(cityQuery),
     getStrapiData(courseQuery),
-    getStrapiData(uniButtonQuery)
+    getStrapiData(uniButtonQuery),
+    getStrapiData(examsQuery)
    
   ]);
-  
+ 
+  // console.log(examsData)
 
 
   return (
@@ -91,6 +98,7 @@ const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
 
             {/* <OurServices data={servicesData.services} /> */}
             <ExploreArticles href="articles" data={articlesData.articles}   />
+            <ExamsSlider data={examsData}/>
             <InfoButton title="Admission 2024" data={uniButtonData.data} href="study/uni/"/>
             <InfoButton title="Top courses 2024" data={courseButtonData.data} href="study/course/"/>
             {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
