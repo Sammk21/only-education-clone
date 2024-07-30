@@ -11,12 +11,12 @@ interface BlogPageProps {
   }
 const ExploreArticles = ({ data, href }: BlogPageProps) => {
   return (
-    <div className="mt-6 py-6 bg-orange-50">
+    <div className="py-9 border-b bg-orange-50">
     <div className="container">
-      <h4 className="font-semibold mb-4 text-dark  dark:text-light text-2xl sm:text-3xl md:text-4xl    items-center flex sm:flex-row">
-        <span className="mb-2 capitalize">Explore Our Articles
-        </span>
-      </h4>
+      <h3 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">
+        Explore Our Articles
+     
+      </h3>
         <div className='grid grid-cols-1 sm:grid-cols-2 py-4 '>
         {data.data.map((item) => (
           <div key={item.id} className="grid grid-cols-3 mb-10  sm:mr-5 ">

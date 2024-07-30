@@ -54,10 +54,10 @@ const CitySlider = ({ data }: Props) => {
   
 
   return (
-    <div className="mt-6 pb-6">
+    <section className=" py-9 border-b">
       <div className="container">
-        <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
-          <span className="mb-2 capitalize">Top Study Places </span>
+        <h4 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">
+         Top Study Places 
         </h4>
         <Flickity
           className={"carousel "}
@@ -85,7 +85,7 @@ const CitySlider = ({ data }: Props) => {
           ))}
         </Flickity>
       </div>
-    </div>
+    </section>
   );
 };
 

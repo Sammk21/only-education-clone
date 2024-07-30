@@ -59,10 +59,10 @@ export const UniversitiesRail = ({ data }: Props) => {
   }, []);
 
   return (
-    <div className="my-12">
+    <div className="py-9 border-b">
       <div className="container">
-        <h4 className="font-semibold mb-4 text-dark ml-6 dark:text-light text-2xl sm:text-3xl md:text-4xl  items-center flex sm:flex-row">
-          <span className="mb-2 capitalize">Top Universities</span>
+        <h4 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">
+          Top Universities/Colleges
         </h4>
         <Flickity
           className={"carousel2 flex"} // default ''

@@ -22,11 +22,14 @@ const config = {
       screens:{
         xlg:"1124px"
       },
+     
       container:{
         center:true,
+       
         screens: {
           lg: "1300px",
-        }     
+        },    
+        padding:"8px", 
         
       },
       boxShadow: {
