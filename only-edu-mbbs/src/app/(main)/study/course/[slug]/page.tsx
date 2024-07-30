@@ -20,43 +20,48 @@ import {
 import MockComponent from "@/modules/mock-component";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 
-
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }): Promise<Metadata> {
-//   const data: MetaProps = await getMetaData("top-courses", params.slug);
-//   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
-//   const { seo } = data.data[0];
-//   return {
-//     title:
-//       seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
-//     description:
-//       seo?.metaDescription ||
-//       "Learn how to choose the right college with Education's comprehensive guide",
-//     openGraph: {
-//       images: [
-//         {
-//           url: seo?.metaImage?.url
-//             ? baseUrl + seo.metaImage.url
-//             : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
-//         },
-//       ],
-//     },
-//   };
-// }
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data: MetaProps = await getMetaData("top-courses", params.slug);
+  const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+  const { seo } = data.data[0];
+  return {
+    title:
+      seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
+    description:
+      seo?.metaDescription ||
+      "Learn how to choose the right college with Education's comprehensive guide",
+    openGraph: {
+      images: [
+        {
+          url: seo?.metaImage?.url
+            ? baseUrl + seo.metaImage.url
+            : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
+        },
+      ],
+    },
+  };
+}
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][aboutCourse][populate]=true&populate[overviewTabs][populate][eligibilityCriteria][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][admissionProcess][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][Cutoff][populate]=true`
+  const getUniQuery = `/api/courses?populate[overviewTabs][populate][latestUpdate][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][aboutCourse][populate]=true&populate[overviewTabs][populate][eligibilityCriteria][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][admissionProcess][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][Cutoff][populate]=true`;
   const data = await getStrapiData(getUniQuery);
 
-  const { cta, faq, overviewTabs, admissionProcess, salary } = data.data[0];
+  const entry = data.data.find((item:any) => item.slug === params.slug);
 
-  const title = data.data[0].title;
-  const id = data.data[0].id;
+  if (!entry) {
+    return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
+  }
 
- 
+  const { cta, overviewTabs, admissionProcess, salary, title, id } = entry;
+
+  // const title = data.data[0].title;
+  // const id = data.data[0].id;
+
+
   return (
     <div className="mb-16">
       <div className="px-2 my-8 items-center sm:px-16  ">
@@ -75,29 +80,27 @@ const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][p
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-           
             {overviewTabs?.highlights && (
               <GlobalUniversitiesTabs data={overviewTabs.highlights} />
             )}
 
-{overviewTabs?.aboutCourse && (
+            {overviewTabs?.aboutCourse && (
               <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />
             )}
 
-{overviewTabs?.eligibilityCriteria && (
+            {overviewTabs?.eligibilityCriteria && (
               <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />
             )}
 
-
-{overviewTabs?.whyChoose && (
+            {overviewTabs?.whyChoose && (
               <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
             )}
 
-{overviewTabs?.admissionProcess && (
+            {overviewTabs?.admissionProcess && (
               <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />
             )}
 
-{overviewTabs?.entranceExams && (
+            {overviewTabs?.entranceExams && (
               <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />
             )}
             {overviewTabs?.Cutoff && (
@@ -106,8 +109,8 @@ const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][p
 
             {/* <CallToAction id={id} data={cta} title={title} />
            
-
-            <QuestionDropdown data={faq} /> */}
+*/}
+            {/* <QuestionDropdown data={faq} />  */}
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             {/* <CallToAction id={id} data={cta} title={title} /> */}
@@ -118,29 +121,27 @@ const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][p
           value="salary"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-           
             {overviewTabs?.highlights && (
               <GlobalUniversitiesTabs data={overviewTabs.highlights} />
             )}
 
-{overviewTabs?.aboutCourse && (
+            {overviewTabs?.aboutCourse && (
               <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />
             )}
 
-{overviewTabs?.eligibilityCriteria && (
+            {overviewTabs?.eligibilityCriteria && (
               <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />
             )}
 
-
-{overviewTabs?.whyChoose && (
+            {overviewTabs?.whyChoose && (
               <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
             )}
 
-{overviewTabs?.admissionProcess && (
+            {overviewTabs?.admissionProcess && (
               <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />
             )}
 
-{overviewTabs?.entranceExams && (
+            {overviewTabs?.entranceExams && (
               <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />
             )}
             {overviewTabs?.Cutoff && (
@@ -148,24 +149,17 @@ const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][p
             )}
 
             {/* <CallToAction id={id} data={cta} title={title} />
-           
+            */}
 
-            <QuestionDropdown data={faq} /> */}
+            {/* <QuestionDropdown data={faq} /> */}
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             {/* <CallToAction id={id} data={cta} title={title} /> */}
           </div>
         </TabsContent>
-            
-     
-
-     
       </Tabs>
     </div>
   );
 };
 
 export default StudyUniversity;
-
-
-

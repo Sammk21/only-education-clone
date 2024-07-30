@@ -1,3 +1,4 @@
+
 import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 
@@ -51,6 +52,13 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   const data = await getStrapiData(getUniQuery);
 
+
+  const entry = data.data.find((item:any) => item.slug === params.slug);
+
+  if (!entry) {
+    return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
+  }
+
   const {
     cta,
     faq,
@@ -59,10 +67,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     cutoff,
     previousPapers,
     searchableImage,
-  } = data.data[0];
+    title,
+    id
+  } = entry;
 
-  const title = data.data[0].title;
-  const id = data.data[0].id;
+  // const title = data.data[0].title;
+  // const id = data.data[0].id;
 
   return (
     <div className="mb-16">
@@ -78,8 +88,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
         <h2 className="text-xl font-bold dark:text-light text-dark col-span-10 sm:col-span-11">
-          {title} Previous Year Papers PDFs with Solutions - Download JEE Mains
-          Question Paper PDF
+          {title} Previous Year Papers PDFs with Solutions
         </h2>
       </div>
       <Tabs defaultValue="overview">
@@ -92,10 +101,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           </TabsTrigger>
         </TabsList>
         <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="overview"
         >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
+          <div className="mt-3 px-1 sm:px-3 col-span-8  pt-0  ">
             {overviewTabs?.latestupdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
             )}
@@ -126,10 +135,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="result"
         >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
+          <div className="mt-3 px-1 sm:px-3 col-span-8  ">
             {resultsTab?.resultDates && (
               <GlobalUniversitiesTabs data={resultsTab.resultDates} />
             )}
@@ -145,7 +154,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           </div>
         </TabsContent>
         <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="cutoff"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
@@ -165,7 +174,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="previousPapers"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
