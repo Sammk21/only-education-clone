@@ -10,7 +10,7 @@ import UniRanking from "@/modules/uni-ranking";
 import WhyThisUni from "@/modules/why-this-uni";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CallToAction from "@/modules/footer/call-to-action";
-import { ImageAttributes, MetaProps } from "@/types/types";
+import { College, ImageAttributes, Meta, MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import PlacementInfo from "@/modules/placement";
@@ -59,14 +59,18 @@ export async function generateMetadata({
   };
 }
 
+export type CourseDataResponse = {
+  data: College[];
+  meta: Meta;
+};
+
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}${halfGetUniQuery}`;
-
-  const data = await getStrapiData(getUniQuery);
-
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}${halfGetUniNewsQuery}`;
-
+  const getCourseQuery = `/api/universities?filters[slug]=${params.slug}&populate[collegeCourseManager][populate][spzm][populate][specialization][populate]=true&populate[collegeCourseManager][populate][course][populate]=true&populate[collegeCourseManager][populate][spzm][populate][entrance_exam][populate]=true`;
+  const data = await getStrapiData(getUniQuery);
   const newsData = await getStrapiData(getUniNewsQuery);
+  const courseData: CourseDataResponse = await getStrapiData(getCourseQuery);
 
   const {
     universityProfile,
@@ -153,7 +157,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
-            <CourseListUniversity />
+            {courseData && <CourseListUniversity data={courseData} />}
             <QuestionDropdown data={faq} />
           </div>
           <div className="col-span-4 mt-3 hidden md:block">

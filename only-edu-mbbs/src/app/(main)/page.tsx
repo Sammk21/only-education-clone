@@ -44,6 +44,7 @@ const courseQuery =
 const examsQuery =
   "/api/landing-page?populate[entrance_exams][fields][0]=title&populate[entrance_exams][fields][1]=slug&populate[entrance_exams][populate][searchableImage][fields][0]=url&populate[entrance_exams][populate][searchableImage][fields][1]=alternativeText&populate[entrance_exams][populate][searchableImage][fields][2]=blurhash&populate[entrance_exams][populate][searchableImage][fields][3]=formats&populate[entrance_exams][populate][mode][fields][0]=title";
 
+
 export default async function Home() {
   const [
     heroData,
@@ -68,9 +69,11 @@ export default async function Home() {
     getStrapiData(streamQuery),
     getStrapiData(cityQuery),
     getStrapiData(courseQuery),
+
     getStrapiData(examsQuery),
   ]);
 
+  // console.log(examsData)
 
   return (
     <div className="w-full overflow-hidden">
@@ -83,24 +86,22 @@ export default async function Home() {
             />
             <div className="z-[9999]"></div>
             <InformationSlider data={newsData.news} href="news" />
-
             <LeadingEducationPortal />
             <Separator aria-orientation="vertical" />
-
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
-
             <SchedulesSection data={streamData.data} />
             <CitySlider data={cityData.cities.data} />
-
             <ExploreArticles href="articles" data={articlesData.articles} />
             <ExamsSlider data={examsData} />
             <InfoButton
               title="Admission 2024"
+
               data={topUniversitiesData.topUniversities.universities.data}
               href="study/uni/"
             />
             <InfoButton
               title="Top courses 2024"
+
               data={courseButtonData.courses.data}
               href="study/course/"
             />

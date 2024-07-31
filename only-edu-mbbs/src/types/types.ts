@@ -1,24 +1,21 @@
 // types.ts
 
-
-export interface HeaderProps{
-  id:number
- title: string;
- description:string| null
-
+export interface HeaderProps {
+  id: number;
+  title: string;
+  description: string | null;
 }
 
-
-export interface faqProps{
-  id:number
-  question:string
-  answer:string
+export interface faqProps {
+  id: number;
+  question: string;
+  answer: string;
 }
 
-export interface QnaProps{
-  id:number
-  Question:string
-  Answer:string
+export interface QnaProps {
+  id: number;
+  Question: string;
+  Answer: string;
 }
 
 export interface Links {
@@ -36,35 +33,34 @@ export interface Dropdown {
   subMenuLinks: subMenuLinks[];
 }
 
-export interface CountryProps{
-  id:number
-  title:string
-  slug:string;
-  noOfStudentsStudying:string;
-}
-
-export interface subMenuLinks{
+export interface CountryProps {
   id: number;
-  href:string
-  label:string | null;
-  target:string | null;
-  isExternal: boolean;
-  university:University
-  country:CountryProps
+  title: string;
+  slug: string;
+  noOfStudentsStudying: string;
 }
 
-interface University{
-  id:number
-  title:string
-  slug:string
+export interface subMenuLinks {
+  id: number;
+  href: string;
+  label: string | null;
+  target: string | null;
+  isExternal: boolean;
+  university: University;
+  country: CountryProps;
+}
+
+interface University {
+  id: number;
+  title: string;
+  slug: string;
 }
 
 export interface Navigation {
   id: number;
   links: Links[];
-  dropdown:Dropdown[];
+  dropdown: Dropdown[];
 }
-
 
 //image Props from strapi response
 interface ImageFormat {
@@ -78,9 +74,7 @@ interface ImageFormat {
   size: number;
   width: number;
   height: number;
-
 }
-
 
 export interface ImageAttributes {
   // To Do reduce incomming objects (query optimization)
@@ -126,7 +120,7 @@ export interface ArticleAttributes {
   image: ImageAttributes;
   category: CategoryAttributes;
   recommendedArticle: string | null;
-  createdAt?:string
+  createdAt?: string;
 }
 
 interface MetaData {
@@ -201,7 +195,6 @@ export interface ServerResponse {
   };
 }
 
-
 interface mode {
   id: number;
   title: string;
@@ -216,8 +209,8 @@ export interface streams {
   id: number;
   title: string;
   slug: string;
-  broucher:any;
-  streamIcon:ImageAttributes; 
+  broucher: any;
+  streamIcon: ImageAttributes;
 }
 interface duration {
   id: number;
@@ -233,24 +226,21 @@ interface data {
   id: number;
   title: string;
   slug: string;
-
 }
-interface exams{
+interface exams {
   id: number;
   title: string;
   slug: string;
-  fullForm:string;
-  description:string;
-  
+  fullForm: string;
+  description: string;
 }
 export interface UniversityProfile {
   backgroundImage: ImageAttributes;
   fees: string;
   avgPackage: string;
   description: string;
-  
 }
-export interface UniRanking{
+export interface UniRanking {
   // data:{
   //   id:number
   //   ranking:{
@@ -262,16 +252,14 @@ export interface UniRanking{
   //   }
   // }[]
   // }[]
-
 }
 
 export interface ranking {
-  rankingYear:Date
-  id:number
-  rankingNumber: number
-  stream: { id: number, slug: string },
-  rankingPublisher: { id: number, slug: string }
-
+  rankingYear: Date;
+  id: number;
+  rankingNumber: number;
+  stream: { id: number; slug: string };
+  rankingPublisher: { id: number; slug: string };
 }
 
 export interface Universitylist {
@@ -283,38 +271,33 @@ export interface Universitylist {
   indian_state?: indian_state;
   stream?: streams;
   searchableImage: ImageAttributes;
-  mode?:mode;
-  exams?:exams
-  applicationDate:string;
-  examinationDate:string;
-  resultDate:string;
-  duration:duration
-  UniRank:UniRanking
+  mode?: mode;
+  exams?: exams;
+  applicationDate: string;
+  examinationDate: string;
+  resultDate: string;
+  duration: duration;
+  UniRank: UniRanking;
 
-  rankingStreams:ranking[]
-  
+  rankingStreams: ranking[];
 }
 
 export interface UniversitiesData {
   data: Universitylist[];
-  meta:any
-
+  meta: any;
 }
 
 export interface SearchParamsProps {
- 
-    streamsParam?:string;
-    courseParam?:string;
-    durationParam?:string;
-    locationsParam?: string;
-    examsParam?: string;
-    ownershipsParam?: string;
-    modesParam?:string;
-    query?: string;
-    page?: number;
-    rankingParam?:string
-    
-
+  streamsParam?: string;
+  courseParam?: string;
+  durationParam?: string;
+  locationsParam?: string;
+  examsParam?: string;
+  ownershipsParam?: string;
+  modesParam?: string;
+  query?: string;
+  page?: number;
+  rankingParam?: string;
 }
 
 export interface searchParamUserId {
@@ -326,7 +309,7 @@ export interface searchParamUserId {
 export interface UserType {
   ok: boolean;
   data: {
-    last_phone_update:Date | null,
+    last_phone_update: Date | null;
     id: number;
     email: string;
     provider: string;
@@ -389,19 +372,17 @@ export interface IImageExtended
   lazyBoundary?: string | undefined;
 }
 
-
-
 export interface recentlyViewed {
   slug: string;
   image: string;
   title: string;
 }
-export interface rankingFilter{
-  data:{
-    id:number
-  publisherName:string
-  slug:string
-  }[]
+export interface rankingFilter {
+  data: {
+    id: number;
+    publisherName: string;
+    slug: string;
+  }[];
 }
 
 export interface FilterParams {
@@ -411,3 +392,77 @@ export interface FilterParams {
   ownershipsParam?: string;
   rankingParam?: string;
 }
+
+type Specialization = {
+  id: number;
+  title: string;
+  fullFrom: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};
+
+type Exam = {
+  id: number;
+  title: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  fullForm: string;
+  description: string;
+};
+
+type Spzm = {
+  id: number;
+  fees: string;
+  cutoff: number;
+
+  specialization: Specialization;
+  entrance_exam: Exam;
+};
+
+type Course = {
+  id: number;
+  title: string;
+  slug: string;
+  durationYear: number;
+  courseFullForm: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+};
+
+type CollegeCourseManager = {
+  id: number;
+  eligibility: string;
+  applicationDate: {
+    startDate: string;
+    endDate: string;
+  };
+  fees: string | null;
+  spzm: Spzm[];
+  course: Course;
+};
+
+export type College = {
+  id: number;
+  title: string;
+  slug: string;
+  noOfStudentsStudying: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  authorName: string;
+  collegeCourseManager: CollegeCourseManager[];
+};
+
+export type Meta = {
+  pagination: {
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
+  };
+};
