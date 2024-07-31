@@ -50,9 +50,8 @@ export async function generateMetadata({
 
 export default async function Blog({ params }: { params: { slug: string } }) {
   const blogQuery = `/api/news?filters[slug][$eq]=${params.slug}${halfBlogQuery}`;
-  const baseUrl = process.env.API_URL || "http://localhost:1337";
+  const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
   const data = await getStrapiData(blogQuery);
-
   const {
     title,
     description,
@@ -62,6 +61,8 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     image,
     news,
   } = data.data[0];
+// console.log("newsde", title)
+
 
   const recommendedQuery = `/api/news?filters[recommendedNews][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);

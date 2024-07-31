@@ -1,4 +1,5 @@
-export const blogListQuery =
-  "/api/news?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category&fields[5]=live";
+export const blogListQuery ="/api/news?fields[0]=title&fields[1]=slug&fields[2]=live&fields[3]=description&populate[image][fields][0]=url&populate[image][fields][1]=alternativeText&populate[image][fields][2]=formats&populate[image][fields][3]=blurhash&populate[category][fields][0]=name"
+  // "/api/news?fields[0]=title&fields[1]=slug&fields[2]=description&populate[3]=image&populate[4]=category&fields[5]=live";
 
-  export const halfBlogQuery="&populate[image]=true&populate[news][populate][2]=image&populate[news][populate]=true"
+  export const halfBlogQuery="&fields[0]=title&fields[1]=slug&fields[2]=description&fields[3]=ckeditor_content&populate[image][fields][0]=url&populate[image][fields][1]=alternativeText&populate[image][fields][2]=formats&populate[image][fields][3]=blurhash&populate[news][fields][0]=title&populate[news][fields][1]=description&populate[news][fields][2]=live&populate[news][populate][image][fields][0]=url&populate[news][populate][image][fields][1]=alternativeText&populate[news][populate][image][fields][2]=blurhash&populate[news][populate][image][fields][3]=formats&populate[news][fields][3]=slug"
+  // "&populate[image]=true&populate[news][populate][2]=image&populate[news][populate]=true"

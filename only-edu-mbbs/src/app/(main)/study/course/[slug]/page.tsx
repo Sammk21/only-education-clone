@@ -20,7 +20,6 @@ import {
 import MockComponent from "@/modules/mock-component";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 
-
 // export async function generateMetadata({
 //   params,
 // }: {
@@ -48,15 +47,21 @@ import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 // }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][aboutCourse][populate]=true&populate[overviewTabs][populate][eligibilityCriteria][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][admissionProcess][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][Cutoff][populate]=true`
+  const getUniQuery = `/api/courses?populate[overviewTabs][populate][latestUpdate][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][aboutCourse][populate]=true&populate[overviewTabs][populate][eligibilityCriteria][populate]=true&populate[overviewTabs][populate][whyChoose][populate]=true&populate[overviewTabs][populate][admissionProcess][populate]=true&populate[overviewTabs][populate][entranceExams][populate]=true&populate[overviewTabs][populate][Cutoff][populate]=true`;
   const data = await getStrapiData(getUniQuery);
 
-  const { cta, faq, overviewTabs, admissionProcess, salary } = data.data[0];
+  const entry = data.data.find((item:any) => item.slug === params.slug);
 
-  const title = data.data[0].title;
-  const id = data.data[0].id;
+  if (!entry) {
+    return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
+  }
 
- 
+  const { cta, overviewTabs, admissionProcess, salary, title, id } = entry;
+
+  // const title = data.data[0].title;
+  // const id = data.data[0].id;
+
+
   return (
     <div className="mb-16">
       <div className="px-2 my-8 items-center sm:px-16  ">
@@ -70,102 +75,81 @@ const getUniQuery=`/api/courses?populate[overviewTabs][populate][latestUpdate][p
           <TabsTrigger value="syllabus">Syllabus and Subjects</TabsTrigger>
           <TabsTrigger value="admission">Admission</TabsTrigger>
         </TabsList>
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="overview"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-           
-            {overviewTabs?.highlights && (
-              <GlobalUniversitiesTabs data={overviewTabs.highlights} />
-            )}
+        <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
+ 
+  <div className="col-span-2 py-6 hidden lg:block sticky top-0">
+    <nav className="toc-nav-list text-sm border rounded-sm bg-white">
+      <div className="pr-1 pl-2 py-2 my-2 font-medium text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">01</span>
+        <span className="inline-block text-md font-semibold self-center">NEET Application Form Dates</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">02</span>
+        <span className="inline-block text-md font-semibold self-center">Documents Required for NEET</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">03</span>
+        <span className="inline-block text-md font-semibold self-center">NEET Registration Process</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">04</span>
+        <span className="inline-block text-md font-semibold self-center">NEET Application Fees</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">05</span>
+        <span className="inline-block text-md font-semibold self-center">NEET Application Form Correction</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">06</span>
+        <span className="inline-block text-md font-semibold self-center">NEET Registration Statistics</span>
+      </div>
+      <div className="pr-1 pl-2 py-2 my-2 font-medium flex text-black/60 hover:text-orange-500 cursor-pointer">
+        <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">07</span>
+        <span className="inline-block text-md font-semibold self-center">Frequently Asked Questions</span>
+      </div>
+    </nav>
+  </div>
 
-{overviewTabs?.aboutCourse && (
-              <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />
-            )}
-
-{overviewTabs?.eligibilityCriteria && (
-              <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />
-            )}
-
-
-{overviewTabs?.whyChoose && (
-              <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
-            )}
-
-{overviewTabs?.admissionProcess && (
-              <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />
-            )}
-
-{overviewTabs?.entranceExams && (
-              <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />
-            )}
-            {overviewTabs?.Cutoff && (
-              <GlobalUniversitiesTabs data={overviewTabs.Cutoff} />
-            )}
-
-            {/* <CallToAction id={id} data={cta} title={title} />
-           
-
-            <QuestionDropdown data={faq} /> */}
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            {/* <CallToAction id={id} data={cta} title={title} /> */}
-          </div>
-        </TabsContent>
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="salary"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-           
-            {overviewTabs?.highlights && (
-              <GlobalUniversitiesTabs data={overviewTabs.highlights} />
-            )}
-
-{overviewTabs?.aboutCourse && (
-              <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />
-            )}
-
-{overviewTabs?.eligibilityCriteria && (
-              <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />
-            )}
-
-
-{overviewTabs?.whyChoose && (
-              <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
-            )}
-
-{overviewTabs?.admissionProcess && (
-              <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />
-            )}
-
-{overviewTabs?.entranceExams && (
-              <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />
-            )}
-            {overviewTabs?.Cutoff && (
-              <GlobalUniversitiesTabs data={overviewTabs.Cutoff} />
-            )}
-
-            {/* <CallToAction id={id} data={cta} title={title} />
-           
-
-            <QuestionDropdown data={faq} /> */}
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            {/* <CallToAction id={id} data={cta} title={title} /> */}
-          </div>
-        </TabsContent>
-            
+  <div className="lg:col-span-8 col-span-12">
+    <TabsContent className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid  lg:px-10 sm:px-6 px-px xl:px-16 mx-auto" value="overview">
+      <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12">
+        {overviewTabs?.highlights && <GlobalUniversitiesTabs data={overviewTabs.highlights} />}
+        {overviewTabs?.aboutCourse && <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />}
+        {overviewTabs?.eligibilityCriteria && <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />}
+        {overviewTabs?.whyChoose && <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />}
+        {overviewTabs?.admissionProcess && <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />}
+        {overviewTabs?.entranceExams && <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />}
+        {overviewTabs?.Cutoff && <GlobalUniversitiesTabs data={overviewTabs.Cutoff} />}
+       
+      </div>
      
+    </TabsContent>
+    
 
-     
+    <TabsContent className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid lg:px-10 sm:px-6 px-px xl:px-16 mx-auto" value="salary">
+      <div className="mt-3 px-1 sm:px-3 col-span-8">
+        {overviewTabs?.highlights && <GlobalUniversitiesTabs data={overviewTabs.highlights} />}
+        {overviewTabs?.aboutCourse && <GlobalUniversitiesTabs data={overviewTabs.aboutCourse} />}
+        {overviewTabs?.eligibilityCriteria && <GlobalUniversitiesTabs data={overviewTabs.eligibilityCriteria} />}
+        {overviewTabs?.whyChoose && <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />}
+        {overviewTabs?.admissionProcess && <GlobalUniversitiesTabs data={overviewTabs.admissionProcess} />}
+        {overviewTabs?.entranceExams && <GlobalUniversitiesTabs data={overviewTabs.entranceExams} />}
+        {overviewTabs?.Cutoff && <GlobalUniversitiesTabs data={overviewTabs.Cutoff} />}
+       
+      </div>
+    
+    </TabsContent>
+  </div>
+
+
+  <div className="col-span-2 hidden lg:block py-6">
+  hello
+  </div>
+</div>
+
       </Tabs>
     </div>
   );
 };
 
 export default StudyUniversity;
-
-
-

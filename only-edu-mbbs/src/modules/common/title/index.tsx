@@ -4,7 +4,7 @@ type Props = {
 
 const Title = (props: Props) => {
   return (
-    <h3 className="scroll-m-20  text-xl sm:text-2xl xl:text-2xl  font-semibold  first:mt-0 text-black">
+    <h3 className="scroll-m-20 capitalize font-semibold text-dark  pl-2 lg:pl-0 text-2xl">
       {props.children}
     </h3>
   );

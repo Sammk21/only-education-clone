@@ -23,34 +23,34 @@ const merriweather = Merriweather({
   display: "swap",
 });
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const data: MetaProps = await getMetaData("articles", params.slug);
-  const baseUrl = process.env.API_URL || "http://localhost:1337";
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   const data: MetaProps = await getMetaData("articles", params.slug);
+//   const baseUrl = process.env.API_URL || "http://localhost:1337";
 
-  const { seo } = data.data[0];
-  return {
-    title: seo.metaTitle,
-    description: seo.metaDescription,
-    openGraph: {
-      images: [
-        {
-          url: baseUrl + seo?.metaImage?.url || "",
-        },
-      ],
-    },
-    keywords: seo?.keywords,
-    viewport: seo.metaViewport,
-    robots: seo.metaRobots,
-  };
-}
+//   const { seo } = data.data[0];
+//   return {
+//     title: seo.metaTitle,
+//     description: seo.metaDescription,
+//     openGraph: {
+//       images: [
+//         {
+//           url: baseUrl + seo?.metaImage?.url || "",
+//         },
+//       ],
+//     },
+//     keywords: seo?.keywords,
+//     viewport: seo.metaViewport,
+//     robots: seo.metaRobots,
+//   };
+// }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
   const blogQuery = `/api/articles?filters[slug][$eq]=${params.slug}${halfBlogQuery}`;
-  const baseUrl = process.env.API_URL || "http://localhost:1337";
+  const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
 
   const data = await getStrapiData(blogQuery);
 

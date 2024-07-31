@@ -11,6 +11,24 @@ interface Props {
         title: string;
       }[];
     };
+    entrance_exams:{
+      data:{
+        id:number
+        title:string
+    }[]
+  };
+  courses?:{
+    data:{
+      id:number
+      title:string
+    }[]
+  }
+  id:number
+  title:string  
+  streamIcon:ImageAttributes;
+  slug:string
+}[]
+
 
     entrance_exams: {
       data: {
@@ -30,16 +48,17 @@ interface Props {
     slug: string;
   }[];
 }
+const SchedulesSection =  ({data}:Props) => {
 
-const SchedulesSection = ({ data }: Props) => {
-  const extractedData = data?.map((item) => ({
-    universitiesLength: item?.universities.data.length,
-    entranceExamsLength: item?.entrance_exams.data.length,
-    topCoursesLength: item?.top_courses.data.length,
-    streamTitle: item?.title,
-    streamIcon: item?.streamIcon,
-    streamSlug: item?.slug,
-  }));
+
+const extractedData = data.map(item => ({
+  universitiesLength: item.universities.data.length,
+  entranceExamsLength: item.entrance_exams.data.length,
+  topCoursesLength: item.courses?.data.length,
+  streamTitle:item.title,
+  streamIcon:item.streamIcon,
+  streamSlug:item.slug
+}));
 
   return (
     <section className=" py-9 border-b text-dark bg-orange-50">
@@ -63,25 +82,28 @@ const SchedulesSection = ({ data }: Props) => {
             </TabsTrigger>
           </TabsList>
           <div className="mt-6">
-            <TabsContent
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center mt-0"
-              value="college"
-            >
-              {extractedData.map((item, index) => (
-                <TestCards
-                  key={index}
-                  length={item.universitiesLength}
-                  context="streamsParam"
-                  tab="Colleges"
-                  href="/universities-list"
-                  streamTitle={item.streamTitle}
-                  streamIcon={item.streamIcon}
-                  streamSlug={item.streamSlug}
-                />
-              ))}
-            </TabsContent>
+          <TabsContent
+  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center mt-0"
+  value="college"
+>
+  {extractedData.map((item, index) => (
+    <TestCards
+      key={index} 
+      length={item.universitiesLength} 
+      context="streamsParam"
+      tab="Colleges"
+      href="universities-list/"
+      streamTitle={item.streamTitle}
+      streamIcon={item.streamIcon}
+      streamSlug={item.streamSlug}
+    />
+  ))}
+</TabsContent>
 
-            <TabsContent
+
+
+         <TabsContent
+
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 justify-center mt-0"
               value="exams"
             >

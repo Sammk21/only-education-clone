@@ -23,9 +23,10 @@ const GlobalUniversitiesTabs = ({ data, notification }: UniTabsProps) => {
     return null;
   }
   return (
+    
   
     <div className=" ">
-   
+      
       {data?.content && (
         <div className="mt-3">
           <Card>

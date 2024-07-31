@@ -19,10 +19,11 @@ interface Props {
 
 const QuestionDropdown = ({ data }: Props) => {
   const { title, faq } = data;
+  console.log(data.faq)
 
   return (
     <>
-      <section className=" py-6 my-6  px-2 ">
+      <section className=" py-6 my-6  ">
         <Title>Commanly asked questions</Title>
         <div className=" pt-6 w-full ">
           <div className="mx-auto w-full max-w-5xl divide-y divide-dark/5 dark:divide-border divide-borderLight  rounded-xl dark:bg-foreground bg-dark/5">
@@ -35,7 +36,8 @@ const QuestionDropdown = ({ data }: Props) => {
                   <IoIosArrowForward className="size-5 fill-dark dark:fill-light rotate-90 dark:group-data-[hover]:fill-light/50 group-data-[hover]:fill-dark/50 group-data-[open]:-rotate-90" />
                 </DisclosureButton>
                 <DisclosurePanel className="mt-2 text-sm/5  dark:text-light/70 text-dark/50">
-                  {parse(item.answer)}
+                {item.answer &&  parse(item?.answer) }
+              
                 </DisclosurePanel>
               </Disclosure>
             ))}
