@@ -14,10 +14,10 @@ interface Props{
 
 
 key:number
-context:string
+context?:string
 tab:string
 href:string
-length:number
+length?:number
 streamTitle:string  
 streamIcon:ImageAttributes
 streamSlug:string

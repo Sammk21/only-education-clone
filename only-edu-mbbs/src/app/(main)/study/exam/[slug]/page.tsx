@@ -1,51 +1,40 @@
 
+
 import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CallToAction from "@/modules/footer/call-to-action";
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
-
 import GlobalUniversitiesTabs from "@/modules/universities-tabs/global-universities-tabs";
-import GalleryTabs from "@/modules/universities-tabs/gallery";
-import FacultyList from "@/modules/universities-tabs/faculty-list";
-import Ranking from "@/modules/universities-tabs/ranking";
-
-import {
-  halfGetUniNewsQuery,
-  halfGetUniQuery,
-} from "@/app/data/quries/uni-query";
-
-import MockComponent from "@/modules/mock-component";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const data: MetaProps = await getMetaData("entrance-exams", params.slug);
-  const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
-  const { seo } = data.data[0];
-  return {
-    title:
-      seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
-    description:
-      seo?.metaDescription ||
-      "Learn how to choose the right college with Education's comprehensive guide",
-    openGraph: {
-      images: [
-        {
-          url: seo?.metaImage?.url
-            ? baseUrl + seo.metaImage.url
-            : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
-        },
-      ],
-    },
-  };
-}
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string };
+// }): Promise<Metadata> {
+//   const data: MetaProps = await getMetaData("entrance-exams", params.slug);
+//   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+//   const { seo } = data.data[0];
+//   return {
+//     title:
+//       seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
+//     description:
+//       seo?.metaDescription ||
+//       "Learn how to choose the right college with Education's comprehensive guide",
+//     openGraph: {
+//       images: [
+//         {
+//           url: seo?.metaImage?.url
+//             ? baseUrl + seo.metaImage.url
+//             : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
+//         },
+//       ],
+//     },
+//   };
+// }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
@@ -100,94 +89,150 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             Previous Year Question Papers
           </TabsTrigger>
         </TabsList>
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="overview"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8  pt-0  ">
-            {overviewTabs?.latestupdates && (
-              <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
-            {overviewTabs?.overview && (
-              <GlobalUniversitiesTabs data={overviewTabs.overview} />
-            )}
-            {overviewTabs?.highlights && (
-              <GlobalUniversitiesTabs data={overviewTabs.highlights} />
-            )}
-            {overviewTabs?.eligibilitycriteria && (
-              <GlobalUniversitiesTabs data={overviewTabs.eligibilitycriteria} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
 
-            {overviewTabs?.exampattern && (
-              <GlobalUniversitiesTabs data={overviewTabs.exampattern} />
-            )}
+        <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
+          <div className="col-span-2 py-6 hidden lg:block sticky top-0">
+            <nav className=" toc-nav-list text-sm border rounded-sm bg-white">
+              <div className=" pr-1 pl-2 py-2 my-2 font-medium  text-black/60  hover:text-orange-500 cursor-pointer">
+                <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">
+                  01
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  NEET Application Form Dates
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  02
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  Documents Required for NEET
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  03
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  NEET Registration Process
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  04
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  NEET Application Fees
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  05
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  NEET Application Form Correction
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  06
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  NEET Registration Statistics
+                </span>
+              </div>
+              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
+                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
+                  07
+                </span>
+                <span className="inline-block text-md font-semibold self-center">
+                  Frequently Asked Questions
+                </span>
+              </div>
+            </nav>
+          </div>
+          <div className="lg:col-span-8 col-span-12">
+            <TabsContent
+              className="  mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
+              value="overview"
+            >
+              <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
+                {overviewTabs?.latestupdates && (
+                  <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
+                )}
+                <CallToAction id={id} data={cta} title={title} />
+                {overviewTabs?.overview && (
+                  <GlobalUniversitiesTabs data={overviewTabs.overview} />
+                )}
+                {overviewTabs?.highlights && (
+                  <GlobalUniversitiesTabs data={overviewTabs.highlights} />
+                )}
+                {overviewTabs?.eligibilitycriteria && (
+                  <GlobalUniversitiesTabs
+                    data={overviewTabs.eligibilitycriteria}
+                  />
+                )}
+                <CallToAction id={id} data={cta} title={title} />
 
-            {overviewTabs?.examdates && (
-              <GlobalUniversitiesTabs data={overviewTabs.examdates} />
-            )}
-            <QuestionDropdown data={faq} />
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
+                {overviewTabs?.exampattern && (
+                  <GlobalUniversitiesTabs data={overviewTabs.exampattern} />
+                )}
 
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="result"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8  ">
-            {resultsTab?.resultDates && (
-              <GlobalUniversitiesTabs data={resultsTab.resultDates} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
-            {resultsTab?.checkResult && (
-              <GlobalUniversitiesTabs data={resultsTab.checkResult} />
-            )}
+                {overviewTabs?.examdates && (
+                  <GlobalUniversitiesTabs data={overviewTabs.examdates} />
+                )}
+                <QuestionDropdown data={faq} />
+              </div>
+            </TabsContent>
+            <TabsContent
+              className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:px-10 sm:px-6 px-px  mx-auto"
+              value="result"
+            >
+              <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
+                {resultsTab?.resultDates && (
+                  <GlobalUniversitiesTabs data={resultsTab.resultDates} />
+                )}
+                <CallToAction id={id} data={cta} title={title} />
+                {resultsTab?.checkResult && (
+                  <GlobalUniversitiesTabs data={resultsTab.checkResult} />
+                )}
 
-            <QuestionDropdown data={faq} />
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="cutoff"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {cutoff?.categoryWise && (
-              <GlobalUniversitiesTabs data={cutoff.categoryWise} />
-            )}
-            <CallToAction id={id} data={cta} title={title} />
-            {cutoff?.subjectWise && (
-              <GlobalUniversitiesTabs data={cutoff.subjectWise} />
-            )}
+                <QuestionDropdown data={faq} />
+              </div>
+            </TabsContent>
+            <TabsContent
+              className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
+              value="cutoff"
+            >
+              <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
+                {cutoff?.categoryWise && (
+                  <GlobalUniversitiesTabs data={cutoff.categoryWise} />
+                )}
+                <CallToAction id={id} data={cta} title={title} />
+                {cutoff?.subjectWise && (
+                  <GlobalUniversitiesTabs data={cutoff.subjectWise} />
+                )}
 
-            <QuestionDropdown data={faq} />
-          </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
+                <QuestionDropdown data={faq} />
+              </div>
+            </TabsContent>
+            <TabsContent
+              className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
+              value="previousPapers"
+            >
+              <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
+                {previousPapers?.previousPapers && (
+                  <GlobalUniversitiesTabs
+                    data={previousPapers.previousPapers}
+                  />
+                )}
 
-        <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-0 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-          value="previousPapers"
-        >
-          <div className="mt-3 px-1 sm:px-3 col-span-8 ">
-            {previousPapers?.previousPapers && (
-              <GlobalUniversitiesTabs data={previousPapers.previousPapers} />
-            )}
-
-            <QuestionDropdown data={faq} />
+                <QuestionDropdown data={faq} />
+              </div>
+            </TabsContent>
           </div>
-          <div className="col-span-4 mt-3 hidden md:block">
-            <CallToAction id={id} data={cta} title={title} />
-          </div>
-        </TabsContent>
+          <div className="col-span-2  hidden lg:block py-6">hello</div>
+        </div>
       </Tabs>
     </div>
   );

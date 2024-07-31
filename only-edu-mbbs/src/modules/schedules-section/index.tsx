@@ -25,7 +25,7 @@ interface Props{
         title:string
     }[]
   };
-  top_courses:{
+  courses?:{
     data:{
       id:number
       title:string
@@ -45,7 +45,7 @@ const SchedulesSection =  ({data}:Props) => {
 const extractedData = data.map(item => ({
   universitiesLength: item.universities.data.length,
   entranceExamsLength: item.entrance_exams.data.length,
-  topCoursesLength: item.top_courses.data.length,
+  topCoursesLength: item.courses?.data.length,
   streamTitle:item.title,
   streamIcon:item.streamIcon,
   streamSlug:item.slug
@@ -93,7 +93,7 @@ const extractedData = data.map(item => ({
       length={item.universitiesLength} 
       context="streamsParam"
       tab="Colleges"
-      href="/universities-list"
+      href="universities-list/"
       streamTitle={item.streamTitle}
       streamIcon={item.streamIcon}
       streamSlug={item.streamSlug}

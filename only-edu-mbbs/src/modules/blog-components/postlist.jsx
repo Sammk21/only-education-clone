@@ -1,3 +1,5 @@
+
+
 import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@/utils/all";
@@ -18,6 +20,8 @@ import { FaLinkedin } from "react-icons/fa";
 import { CiShare1 } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 
+
+
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
@@ -28,7 +32,7 @@ const merriweather = Merriweather({
 export default function PostList({ post, href }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
-  console.dir(image);
+
 
   return (
     <section>
@@ -105,6 +109,7 @@ export default function PostList({ post, href }) {
                   <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-green-600">
                     <FaWhatsapp />
                     Whatsapp
+                    
                   </DropdownMenuItem>
                   <DropdownMenuItem className="flex justify-start items-center gap-x-2">
                     <FaXTwitter />

@@ -66,6 +66,7 @@ const CitySlider = ({ data }: Props) => {
           disableImagesLoaded={true}
           reloadOnUpdate
         >
+        
           {data.map((item) => (
 
 

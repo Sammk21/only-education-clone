@@ -23,7 +23,7 @@ const QuestionDropdown = ({ data }: Props) => {
 
   return (
     <>
-      <section className=" py-6 my-6  px-2 ">
+      <section className=" py-6 my-6  ">
         <Title>Commanly asked questions</Title>
         <div className=" pt-6 w-full ">
           <div className="mx-auto w-full max-w-5xl divide-y divide-dark/5 dark:divide-border divide-borderLight  rounded-xl dark:bg-foreground bg-dark/5">
