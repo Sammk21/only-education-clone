@@ -28,19 +28,15 @@ const TopUniversitiesQuery =
   "/api/landing-page?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][populate]=true&populate[topUniversities][populate][universities][populate][0]=universityProfile.backgroundImage&populate[topUniversities][populate][universities][populate][1]=universityProfile.profileImage";
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][populate]=true";
+const cityQuery = `/api/cities?populate=true&fields[0]=title&fields[1]=slug&populate=streamIcon`;
+const streamQuery =
+  "/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[top_courses]=true";
+const courseQuery = "/api/courses?fields[0]=title&fields[1]=slug";
+const uniButtonQuery = "/api/universities?fields[0]=title&fields[1]=slug";
+const examsQuery =
+  "/api/landing-page?populate[entrance_exams][populate]=true&populate[entrance_exams][populate]=searchableImage&populate[entrance_exams][populate]=mode";
 
-const cityQuery=`/api/cities?populate=true&fields[0]=title&fields[1]=slug&populate=streamIcon`
-
-  const streamQuery="/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[top_courses]=true"
-
-const courseQuery="/api/courses?fields[0]=title&fields[1]=slug"
-const uniButtonQuery="/api/universities?fields[0]=title&fields[1]=slug"
-
-const examsQuery="/api/landing-page?populate[entrance_exams][populate]=true&populate[entrance_exams][populate]=searchableImage&populate[entrance_exams][populate]=mode"
-  
 export default async function Home() {
-
-
   const [
     heroData,
     servicesData,
@@ -54,7 +50,6 @@ export default async function Home() {
     courseButtonData,
     uniButtonData,
     examsData,
-   
   ] = await Promise.all([
     getStrapiData(HeroQuery),
     getStrapiData(ServicesQuery),
@@ -67,12 +62,10 @@ export default async function Home() {
     getStrapiData(cityQuery),
     getStrapiData(courseQuery),
     getStrapiData(uniButtonQuery),
-    getStrapiData(examsQuery)
-   
+    getStrapiData(examsQuery),
   ]);
- 
-  // console.log(examsData)
 
+  // console.log(examsData)
 
   return (
     <div className="w-full overflow-hidden">
@@ -83,25 +76,25 @@ export default async function Home() {
               data={heroData.hero}
               bannerImage={bannerImageData.bannerImage}
             />
-            <div className="z-[9999]">
-            </div>
+            <div className="z-[9999]"></div>
             <InformationSlider data={newsData.news} href="news" />
-
             <LeadingEducationPortal />
-            <Separator aria-orientation="vertical"/>
-
+            <Separator aria-orientation="vertical" />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
-         
-            <SchedulesSection data={streamData.data}/>
+            <SchedulesSection data={streamData.data} />
             <CitySlider data={cityData.data} />
-          
-
-            {/* <OurServices data={servicesData.services} /> */}
-            <ExploreArticles href="articles" data={articlesData.articles}   />
-            <ExamsSlider data={examsData}/>
-            <InfoButton title="Admission 2024" data={uniButtonData.data} href="study/uni/"/>
-            <InfoButton title="Top courses 2024" data={courseButtonData.data} href="study/course/"/>
-            {/* <InformationSlider href="articles" data={articlesData.articles} /> */}
+            <ExploreArticles href="articles" data={articlesData.articles} />
+            <ExamsSlider data={examsData} />
+            <InfoButton
+              title="Admission 2024"
+              data={uniButtonData.data}
+              href="study/uni/"
+            />
+            <InfoButton
+              title="Top courses 2024"
+              data={courseButtonData.data}
+              href="study/course/"
+            />
             <WhyUs data={whyUsData.whyOnlyEducation} />
             <NewsLetter />
           </div>
@@ -110,4 +103,3 @@ export default async function Home() {
     </div>
   );
 }
-
