@@ -57,6 +57,7 @@ interface FilterParams {
 }
 
 const CollegeList = ({ data, user }: Props) => {
+ 
 
 
 
@@ -160,7 +161,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
           </div>
           <Link
             className=" w-full sm:w-1/4"
-            href={`study/uni/${university?.slug}`}
+            href={`/study/uni/${university?.slug}`}
           >
             <div className="relative h-40 w-40  rounded-md overflow-hidden">
               <ImageExtended

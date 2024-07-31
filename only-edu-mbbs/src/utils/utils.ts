@@ -205,7 +205,7 @@ export const buildUniversityListQuery = (baseQuery: string, filterParams: Filter
   }
 
   if (examsParam) {
-    query += `&${examsParam.split(",").map(exam => `filters[exams][slug][$eq]=${exam}`).join("&")}`;
+    query += `&${examsParam.split(",").map(exam => `filters[entrance_exams][slug][$eq]=${exam}`).join("&")}`;
   }
 
   if (ownershipsParam) {
