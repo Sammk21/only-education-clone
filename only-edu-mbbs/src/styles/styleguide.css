@@ -177,16 +177,13 @@ h1, h2, h3, h4, h5, h6, p, a, li, ul, ol, span, strong, em, figcaption  {padding
 
 h1.big,
 h2.big {
-  
-   font-weight: 400;
    font-size: calc(var(--title-size) * 0.775);
    line-height: 1.2;
    color: var(--color-light);
 }
 
 h2 {
- 
-   font-weight: 400;
+   font-weight: 600;
    font-size: calc(var(--title-size) * 0.55);
    line-height: 1.2;
    color: var(--color-dark);
@@ -194,7 +191,6 @@ h2 {
 
 h3 {
 
-   font-weight: 400;
    font-size: calc(var(--title-size) * 0.4);
    line-height: 1.2;
    color: var(--color-dark);
@@ -205,15 +201,12 @@ h3.small {
 }
 
 h4 {
-
-   font-weight: 400;
    font-size: calc(var(--title-size) * 0.275);
    line-height: 1.2;
    color: var(--color-dark);
 }
 
 h5 {
-   font-weight: 400;
    font-size: calc(var(--title-size) * 0.2);
    line-height: 1;
    color: var(--color-dark);
@@ -235,7 +228,6 @@ h5 {
 }
 
 p {
-   font-weight: 400;
    font-style: normal;
    font-size: var(--copy-size-l);
    line-height: 1.5;
@@ -264,7 +256,6 @@ span.inactive {
 }
 
 strong {
-   font-weight: 400;
    color: var(--color-dark);
 }
 
@@ -288,7 +279,6 @@ a {
    font-size: 0.725em;
    line-height: 1;
    color: rgba(var(--color-dark-rgb), 0.4);
-   font-weight: 400;
 }
 
 .eyebrow.small {

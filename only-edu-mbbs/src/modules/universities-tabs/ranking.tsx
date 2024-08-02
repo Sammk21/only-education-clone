@@ -1,6 +1,5 @@
 import { Card, CardHeader } from "@/components/ui/card";
 import React from "react";
-import Title from "../common/title";
 import { ImageAttributes } from "@/types/types";
 import Image from "next/image";
 
@@ -18,7 +17,7 @@ interface rankingProps {
     publisherName: string;
     publisherImage: ImageAttributes;
   };
-};
+}
 
 interface Props {
   data: rankingProps[];
@@ -31,7 +30,7 @@ const Ranking = ({ data }: Props) => {
     <div className="mt-3">
       <Card>
         <CardHeader>
-          <Title>Ranking Highlight</Title>
+          <h2>Ranking Highlight</h2>
         </CardHeader>
         <div className=" px-2 sm:p-4">
           {data?.map((item, index) => (

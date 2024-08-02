@@ -1,11 +1,9 @@
-
 import { FilterParams, UniversitiesData, Universitylist } from "@/types/types";
 import { z } from "zod";
 
+const baseUrl = process.env.API_URL || `https://admin.onlyeducation.co.in`;
 
- const baseUrl = process.env.API_URL || `https://admin.onlyeducation.co.in`;
-
-export function flattenAttributes(data:any):any {
+export function flattenAttributes(data: any): any {
   // Check if data is a plain object; return as is if not
   if (
     typeof data !== "object" ||
@@ -45,8 +43,6 @@ export function flattenAttributes(data:any):any {
   return flattened;
 }
 
-
-
 const token =
   "9739266bb3e37068ff04ee4ddd928783e584a9d514ea6005e917bea8d6fbdcc12912d87e290417302c6bf2d079c3de0d4db11af97956c6cb5fd2bed0b7fddab643aaf051c99ba4168556530affe53d2d70fbae6124066e6f26532e0465fb4ccf7c84ce8252b61a54fbc2dd53949126811db5dcdf27f86ce231b7946044955208";
 
@@ -55,9 +51,8 @@ export async function getStrapiData(path: string) {
     const response = await fetch(baseUrl + path, {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: 3600 },
-    }); 
-
-  
+      // cache: "no-store",
+    });
 
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
@@ -67,57 +62,39 @@ export async function getStrapiData(path: string) {
   }
 }
 
-export async function getArticles(path:string, currentPage:number){
-const PAGE_SIZE = process.env.PAGE_SIZE || 10                                          
-const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`
- try {
+export async function getArticles(path: string, currentPage: number) {
+  const PAGE_SIZE = process.env.PAGE_SIZE || 10;
+  const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`;
+  try {
     const response = await fetch(baseUrl + path + paginationQuery, {
       next: { revalidate: 3600 },
-    }); 
+    });
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;
   } catch (error) {
     console.error(error);
   }
-  
 }
 
-export async function getUniversities(path:string, currentPage:number){
-const PAGE_SIZE = process.env.PAGE_SIZE || 10                                          
-const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`
- try {
-    const response = await fetch(baseUrl + path + paginationQuery, {cache:"no-store"}); 
+export async function getUniversities(path: string, currentPage: number) {
+  const PAGE_SIZE = process.env.PAGE_SIZE || 10;
+  const paginationQuery = `&pagination[page]=${currentPage}&pagination[pageSize]=${PAGE_SIZE}`;
+  try {
+    const response = await fetch(baseUrl + path + paginationQuery, {
+      cache: "no-store",
+    });
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;
   } catch (error) {
-    return error
+    return error;
   }
 }
-
 
 export async function getCachedData(path: string) {
-
- 
-
   try {
-    const response = await fetch(baseUrl + path); 
-    const data = await response.json();
-    const flattenedData = flattenAttributes(data);
-    return flattenedData;
-  } catch (error) {
-    console.error(error);
-  }
-
-}
-
-export async function getMetaData(plural:string, slug:string){
- const seoQuery = `/api/${plural}?filters[slug][$eq]=${slug}&populate[seo][populate][metaSocial][populate]=true&populate[seo][populate][metaImage][populate]=true`;
-  
-
-  try {
-    const response = await fetch(baseUrl + seoQuery, {cache: "no-store"}); 
+    const response = await fetch(baseUrl + path);
     const data = await response.json();
     const flattenedData = flattenAttributes(data);
     return flattenedData;
@@ -126,6 +103,18 @@ export async function getMetaData(plural:string, slug:string){
   }
 }
 
+export async function getMetaData(plural: string, slug: string) {
+  const seoQuery = `/api/${plural}?filters[slug][$eq]=${slug}&populate[seo][populate][metaSocial][populate]=true&populate[seo][populate][metaImage][populate]=true`;
+
+  try {
+    const response = await fetch(baseUrl + seoQuery, { cache: "no-store" });
+    const data = await response.json();
+    const flattenedData = flattenAttributes(data);
+    return flattenedData;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export function getStrapiURL() {
   return process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
@@ -152,26 +141,25 @@ export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   e.target.value = value; // Set the input value
 };
 
- export const maskPhoneNumber = (username: string | undefined) => {
-   if (!username) return;
-   return username.replace(/\d{6}(\d{4})/, "******$1");
- };
+export const maskPhoneNumber = (username: string | undefined) => {
+  if (!username) return;
+  return username.replace(/\d{6}(\d{4})/, "******$1");
+};
 
-
- export function removeDuplicates(data: UniversitiesData): UniversitiesData {
+export function removeDuplicates(data: UniversitiesData): UniversitiesData {
   const uniqueUniversities: { [key: number]: Universitylist } = {};
-  
+
   // data.data.forEach(university => {
   //   if (!uniqueUniversities[university.id]) {
   //     uniqueUniversities[university.id] = university;
   //   }
   // });
 
-  data.data.forEach((university)=>{
+  data.data.forEach((university) => {
     if (!uniqueUniversities[university.id]) {
-          uniqueUniversities[university.id] = university;
-        }
-  })
+      uniqueUniversities[university.id] = university;
+    }
+  });
 
   const uniqueData = Object.values(uniqueUniversities);
 
@@ -181,31 +169,41 @@ export const handlePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       ...data.meta,
       pagination: {
         ...data.meta.pagination,
-        total: uniqueData.length
-      }
-    }
+        total: uniqueData.length,
+      },
+    },
   };
 }
-
-
-
-
-
-
 
 const DEFAULT_STREAM_PARAM = "engineering";
 const DEFAULT_RANKING_PARAM = "nirf";
 
-export const buildUniversityListQuery = (baseQuery: string, filterParams: FilterParams, params: { stream: string }) => {
-  const { locationsParam, examsParam, ownershipsParam, rankingParam, streamsParam } = filterParams;
+export const buildUniversityListQuery = (
+  baseQuery: string,
+  filterParams: FilterParams,
+  params: { stream: string }
+) => {
+  const {
+    locationsParam,
+    examsParam,
+    ownershipsParam,
+    rankingParam,
+    streamsParam,
+  } = filterParams;
   let query = baseQuery;
 
   if (locationsParam) {
-    query += `&${locationsParam.split(",").map(location => `filters[indian_state][slug][$eq]=${location}`).join("&")}`;
+    query += `&${locationsParam
+      .split(",")
+      .map((location) => `filters[indian_state][slug][$eq]=${location}`)
+      .join("&")}`;
   }
 
   if (examsParam) {
-    query += `&${examsParam.split(",").map(exam => `filters[exams][slug][$eq]=${exam}`).join("&")}`;
+    query += `&${examsParam
+      .split(",")
+      .map((exam) => `filters[exams][slug][$eq]=${exam}`)
+      .join("&")}`;
   }
 
   if (ownershipsParam) {
@@ -222,12 +220,15 @@ export const buildUniversityListQuery = (baseQuery: string, filterParams: Filter
   return query;
 };
 
-
-
-export const filterUniversities = (universities: Universitylist[]): Universitylist[] => {
+export const filterUniversities = (
+  universities: Universitylist[]
+): Universitylist[] => {
   const uniqueUniversityIds = new Set<number>();
-  return universities.filter(university => 
-    university.rankingStreams?.length > 0 && !uniqueUniversityIds.has(university.id) && uniqueUniversityIds.add(university.id)
+  return universities.filter(
+    (university) =>
+      university.rankingStreams?.length > 0 &&
+      !uniqueUniversityIds.has(university.id) &&
+      uniqueUniversityIds.add(university.id)
   );
 };
 

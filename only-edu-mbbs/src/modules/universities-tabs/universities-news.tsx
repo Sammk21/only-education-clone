@@ -1,5 +1,4 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import Title from "../common/title";
 import React from "react";
 import { ArticleAttributes } from "@/types/types";
 import Image from "next/image";
@@ -19,7 +18,7 @@ const UniversitiesNews = ({ data, className, sticky }: RelatedUniversities) => {
     <div className={`mt-3 ${sticky}`}>
       <Card>
         <CardHeader>
-          <Title>News</Title>
+          <h2 className="font-bold text-xl">News</h2>
         </CardHeader>
         <div className={cn(className, "px-5")}>
           {data.map((newsItem) => (

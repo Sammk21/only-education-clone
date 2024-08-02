@@ -1,26 +1,9 @@
-
-
 import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@/utils/all";
 import { Merriweather } from "next/font/google";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6";
-import { FaLinkedin } from "react-icons/fa";
-import { CiShare1 } from "react-icons/ci";
+import { ShareComponent } from "../share-component";
 import { CiBookmark } from "react-icons/ci";
-
-
 
 const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
@@ -32,7 +15,6 @@ const merriweather = Merriweather({
 export default function PostList({ post, href }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
-
 
   return (
     <section>
@@ -87,36 +69,7 @@ export default function PostList({ post, href }) {
             </Link>
             <div className="flex sm:gap-4 items-center">
               <CiBookmark className="text-black text-xl" />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <CiShare1 className="text-black text-xl" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>Share</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-pink-600">
-                    <FaInstagram />
-                    Instagram
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-blue-600">
-                    <FaFacebookF />
-                    Facebook
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-blue-500">
-                    <FaLinkedin />
-                    LinkdIn
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-green-600">
-                    <FaWhatsapp />
-                    Whatsapp
-                    
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="flex justify-start items-center gap-x-2">
-                    <FaXTwitter />
-                    X-Twitter
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ShareComponent />
             </div>
           </div>
         </div>

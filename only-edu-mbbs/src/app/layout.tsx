@@ -1,7 +1,10 @@
 import { Karla } from "next/font/google";
 
-const karla = Karla({ subsets: ['latin'] , preload:true})
- 
+const karla = Karla({
+  subsets: ["latin"],
+  preload: true,
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+});
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
@@ -15,6 +18,3 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     </html>
   );
 }
-
-
-// ../fonts/karla/static/Karla-VariableFont_wght.ttf
