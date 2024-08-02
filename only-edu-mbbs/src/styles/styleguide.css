@@ -123,6 +123,8 @@ html, body {
    min-height: 100%;
    -webkit-font-smoothing: antialiased;
    position: relative;
+   scroll-behavior: smooth;
+   scroll-margin-top: 500px;
 }
 
 main {

@@ -19,7 +19,7 @@ interface Props {
 
 const QuestionDropdown = ({ data }: Props) => {
   const { title, faq } = data;
-  console.log(data.faq)
+
 
   return (
     <>
