@@ -121,6 +121,7 @@ export interface ArticleAttributes {
   category: CategoryAttributes;
   recommendedArticle: string | null;
   createdAt?: string;
+  createdBy?: string;
 }
 
 interface MetaData {

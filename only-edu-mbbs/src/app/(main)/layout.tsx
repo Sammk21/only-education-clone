@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/normalize.css";
 import Navbar from "@/modules/navbar";
@@ -10,14 +9,11 @@ import NextBreadcrumb from "@/modules/common/breadcrumbs";
 import { ChevronRightIcon } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 
-
 export const metadata: Metadata = {
   title: "Only education",
   description: "Only education is a information hub for the students",
   applicationName: "Only Education",
 };
-
-
 
 export default async function MainLayout({
   children,
@@ -44,9 +40,9 @@ export default async function MainLayout({
         capitalizeLinks
       />
       {children}
-      <Footer navigation={navData.navigation} />
+      <Footer />
 
-      <MySideBar  />
+      <MySideBar />
       <Toaster richColors position="top-center" />
     </div>
   );
