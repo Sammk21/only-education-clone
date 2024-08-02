@@ -68,7 +68,6 @@ export default async function Home() {
     getStrapiData(streamQuery),
     getStrapiData(cityQuery),
     getStrapiData(courseQuery),
-
     getStrapiData(examsQuery),
   ]);
 
