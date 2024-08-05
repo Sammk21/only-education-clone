@@ -4,15 +4,29 @@ import CollegeList from "@/modules/all-universities-list/college-list";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
 import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
-import { FilterParams, SearchParamsProps, UniversitiesData } from "@/types/types";
-import { buildUniversityListQuery, filterUniversities, getStrapiData, getUniversities, getUserData } from "@/utils/utils";
+import {
+  FilterParams,
+  SearchParamsProps,
+  UniversitiesData,
+} from "@/types/types";
+import {
+  buildUniversityListQuery,
+  filterUniversities,
+  getStrapiData,
+  getUniversities,
+  getUserData,
+} from "@/utils/utils";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
-import { examsQuery, indianStatesQuery,  ownershipQuery, rankingQuery,} from "@/app/data/quries/uniList-query";
-
+import {
+  examsQuery,
+  indianStatesQuery,
+  ownershipQuery,
+  rankingQuery,
+} from "@/app/data/quries/uniList-query";
 
 export default async function UniversitiesList({
   searchParams,
-  params
+  params,
 }: {
   searchParams: Readonly<SearchParamsProps>;
   params: { stream: string };
@@ -26,13 +40,17 @@ export default async function UniversitiesList({
     rankingParam: searchParams.rankingParam,
   };
 
-  const baseQuery = "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
-  const universityListQuery = buildUniversityListQuery(baseQuery, filterParams, params);
+  const baseQuery =
+    "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title";
+  // "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
 
-  
-  const examQueryUpdated = examsQuery(params.stream)
-  const indianStatesQueryUpdated = indianStatesQuery(params.stream)
+  const universityListQuery = buildUniversityListQuery(
+    baseQuery,
+    filterParams,
+    params
+  );
 
+<<<<<<< HEAD
   const [ownership, indianStates, exams, ranking, data, user] = await Promise.all([
     getStrapiData(ownershipQuery),
     getStrapiData(indianStatesQueryUpdated),
@@ -41,11 +59,26 @@ export default async function UniversitiesList({
     getUniversities(universityListQuery, currentPage),
     getUserMeLoader(),
   ]);
+=======
+  const examQueryUpdated = examsQuery(params.stream);
+  const indianStatesQueryUpdated = indianStatesQuery(params.stream);
+
+  const [ownership, indianStates, exams, ranking, data, user] =
+    await Promise.all([
+      getStrapiData(ownershipQuery),
+      getStrapiData(indianStatesQueryUpdated),
+      getStrapiData(examQueryUpdated),
+      getStrapiData(rankingQuery),
+      getUniversities(universityListQuery, currentPage),
+      getUserMeLoader(),
+    ]);
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
   const filteredUniversities = filterUniversities(data.data);
-  const finalData: UniversitiesData = filteredUniversities.length > 0
-    ? { data: filteredUniversities, meta: data.meta }
-    : data;
+  const finalData: UniversitiesData =
+    filteredUniversities.length > 0
+      ? { data: filteredUniversities, meta: data.meta }
+      : data;
 
   const newUser = getUserData(user);
   const { pagination } = data.meta;
@@ -97,4 +130,3 @@ export default async function UniversitiesList({
     </>
   );
 }
-

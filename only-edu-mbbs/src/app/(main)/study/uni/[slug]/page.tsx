@@ -18,7 +18,11 @@ import {
 
 import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
+<<<<<<< HEAD
 import RankingUniversityPage from "@/modules/ranking-university-page";
+=======
+import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
 export async function generateMetadata({
   params,
@@ -55,7 +59,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}${halfGetUniQuery}`;
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}${halfGetUniNewsQuery}`;
   const getCourseQuery = `/api/universities?filters[slug]=${params.slug}&populate[collegeCourseManager][populate][spzm][populate][specialization][populate]=true&populate[collegeCourseManager][populate][course][populate]=true&populate[collegeCourseManager][populate][spzm][populate][entrance_exam][populate]=true`;
+
+  // const uniHeader="/api/universities?populate[overviewTabs][populate][latestUpdates][fields][0]=header&populate[overviewTabs][populate][overview][fields][0]=header&populate[overviewTabs][populate][highlights][fields][0]=header&populate[overviewTabs][populate][ranking][fields][0]=header&populate[overviewTabs][populate][whyChoose][fields][0]=header&populate[overviewTabs][populate][academicAdvantages][fields][0]=header"
+  // const header = await getStrapiData(uniHeader);
+
   const data = await getStrapiData(getUniQuery);
+
   const newsData = await getStrapiData(getUniNewsQuery);
   const courseData: CourseDataResponse = await getStrapiData(getCourseQuery);
 
@@ -73,8 +82,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     hostel,
     scholarships,
     ranking,
+    rankingStreams
   } = data.data[0];
-
+console.log(rankingStreams)
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage: ImageAttributes =
     data.data[0].universityProfile.profileImage;
@@ -88,8 +98,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     title: title,
   };
 
+
   return (
-    <div className="mb-16">
+    <div className="">
       <MockComponent data={recentlyViewedData} />
 
       <GlobalProfileLayout
@@ -119,17 +130,27 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="news">News</TabsTrigger>
           <TabsTrigger value="ranking">Ranking</TabsTrigger>
         </TabsList>
+
         <TabsContent
+<<<<<<< HEAD
           className=" bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className=" bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto "
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
+<<<<<<< HEAD
             {courseData && <CourseListUniversity data={courseData} />}
             <QuestionDropdown data={faq} />
             <CallToAction id={id} data={cta} title={title} />
+=======
+            <TableOfConten data={overviewTabs} />
+
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
             )}
@@ -159,13 +180,19 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0  rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
             {coursesFees?.feeDetails && (
               <GlobalUniversitiesTabs data={coursesFees.feeDetails} />
             )}
+            <TableOfConten data={coursesFees} />
+
             <CallToAction id={id} data={cta} title={title} />
             {coursesFees?.entranceExams && (
               <GlobalUniversitiesTabs data={coursesFees.entranceExams} />
@@ -215,7 +242,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -241,7 +272,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="scholarships"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -263,7 +298,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -288,7 +327,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -307,7 +350,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -331,7 +378,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -356,7 +407,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
           className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">

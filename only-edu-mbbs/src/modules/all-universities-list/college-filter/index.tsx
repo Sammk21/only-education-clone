@@ -219,7 +219,7 @@ const AccordionCustom: React.FC<AccordionProps> = ({
   name,
   selectedItems,
 }) => {
-
+  console.log("acc", data)
 
 
 

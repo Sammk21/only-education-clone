@@ -1,5 +1,3 @@
-
-
 import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,40 +7,45 @@ import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import GlobalUniversitiesTabs from "@/modules/universities-tabs/global-universities-tabs";
 import { ImageExtended } from "@/modules/common/extended-image/extended-image";
+import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
+import SideTableOfContent from "@/modules/universities-tabs/side-tableOf-content";
+import PreviousPapers from "@/modules/universities-tabs/previous-paper";
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }): Promise<Metadata> {
-//   const data: MetaProps = await getMetaData("entrance-exams", params.slug);
-//   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
-//   const { seo } = data.data[0];
-//   return {
-//     title:
-//       seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
-//     description:
-//       seo?.metaDescription ||
-//       "Learn how to choose the right college with Education's comprehensive guide",
-//     openGraph: {
-//       images: [
-//         {
-//           url: seo?.metaImage?.url
-//             ? baseUrl + seo.metaImage.url
-//             : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
-//         },
-//       ],
-//     },
-//   };
-// }
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data: MetaProps = await getMetaData("entrance-exams", params.slug);
+  const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+  const { seo } = data.data[0];
+  return {
+    title:
+      seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
+    description:
+      seo?.metaDescription ||
+      "Learn how to choose the right college with Education's comprehensive guide",
+    openGraph: {
+      images: [
+        {
+          url: seo?.metaImage?.url
+            ? baseUrl + seo.metaImage.url
+            : "https://admin.onlyeducation.co.in/uploads/only_education_f_logo_2_b4d4bc1c95.png",
+        },
+      ],
+    },
+  };
+}
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery = `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
+  const getUniQuery =
+    "/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][prepTips][populate]=true&populate[overviewTabs][populate][prepBooks][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[resultsTab][populate][percentCalculate][populate]=true&populate[resultsTab][populate][normalizationProcess][populate]=true&populate[cutoff][populate][categoryWise][populate]=title&populate[cutoff][populate][subjectWise][populate]=true&populate[searchableImage][populate]=true&populate[cta][fields][0]=title&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[previousPapers][populate][previousPapers][populate][paper][fields][0]=url&populate[previousPapers][populate][previousPapers]=true";
+
+  // `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
 
-
-  const entry = data.data.find((item:any) => item.slug === params.slug);
+  const entry = data.data.find((item: any) => item.slug === params.slug);
 
   if (!entry) {
     return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
@@ -54,14 +57,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     overviewTabs,
     resultsTab,
     cutoff,
-    previousPapers,
+   
     searchableImage,
     title,
-    id
+    id,
   } = entry;
 
   // const title = data.data[0].title;
   // const id = data.data[0].id;
+  console.dir("hello", previousPapers)
 
   return (
     <div className="mb-16">
@@ -91,7 +95,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsList>
 
         <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
-          <div className="col-span-2 py-6 hidden lg:block sticky top-0">
+          {/* <div className="col-span-2 py-6 hidden lg:block sticky top-0 mt-3">
             <nav className=" toc-nav-list text-sm border rounded-sm bg-white">
               <div className=" pr-1 pl-2 py-2 my-2 font-medium  text-black/60  hover:text-orange-500 cursor-pointer">
                 <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">
@@ -150,16 +154,19 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                 </span>
               </div>
             </nav>
-          </div>
+          </div> 
+         <SideTableOfContent data={overviewTabs} /> */}
           <div className="lg:col-span-8 col-span-12">
             <TabsContent
-              className="  mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
+              className="  rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
               value="overview"
             >
               <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
                 {overviewTabs?.latestupdates && (
                   <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
                 )}
+            <TableOfConten data={overviewTabs} />
+
                 <CallToAction id={id} data={cta} title={title} />
                 {overviewTabs?.overview && (
                   <GlobalUniversitiesTabs data={overviewTabs.overview} />
@@ -181,6 +188,19 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                 {overviewTabs?.examdates && (
                   <GlobalUniversitiesTabs data={overviewTabs.examdates} />
                 )}
+
+                {overviewTabs?.exampattern && (
+                  <GlobalUniversitiesTabs data={overviewTabs.exampattern} />
+                )}
+                {overviewTabs?.ImpExamDates && (
+                  <GlobalUniversitiesTabs data={overviewTabs.ImpExamDates} />
+                )}
+                {overviewTabs?.prepTips && (
+                  <GlobalUniversitiesTabs data={overviewTabs.prepTips} />
+                )}
+                {overviewTabs?.prepBooks && (
+                  <GlobalUniversitiesTabs data={overviewTabs.prepBooks} />
+                )}
                 <QuestionDropdown data={faq} />
               </div>
             </TabsContent>
@@ -192,9 +212,16 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                 {resultsTab?.resultDates && (
                   <GlobalUniversitiesTabs data={resultsTab.resultDates} />
                 )}
-                <CallToAction id={id} data={cta} title={title} />
+                 <TableOfConten data={resultsTab} />
                 {resultsTab?.checkResult && (
                   <GlobalUniversitiesTabs data={resultsTab.checkResult} />
+                )}
+                <CallToAction id={id} data={cta} title={title} />
+                 {resultsTab?.percentCalculate && (
+                  <GlobalUniversitiesTabs data={resultsTab.percentCalculate} />
+                )}
+                  {resultsTab?.normalizationProcess && (
+                  <GlobalUniversitiesTabs data={resultsTab.normalizationProcess} />
                 )}
 
                 <QuestionDropdown data={faq} />
@@ -222,16 +249,14 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             >
               <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
                 {previousPapers?.previousPapers && (
-                  <GlobalUniversitiesTabs
-                    data={previousPapers.previousPapers}
-                  />
+                  <PreviousPapers data={previousPapers.previousPapers} />
                 )}
 
                 <QuestionDropdown data={faq} />
               </div>
             </TabsContent>
           </div>
-          <div className="col-span-2  hidden lg:block py-6">hello</div>
+          <div className="col-span-4 mt-2 hidden lg:block py-6">hello</div>
         </div>
       </Tabs>
     </div>
