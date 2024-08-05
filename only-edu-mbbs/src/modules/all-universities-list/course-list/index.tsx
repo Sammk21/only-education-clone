@@ -34,7 +34,7 @@ const CourseList = ({ data, user }: Props) => {
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const searchIndex = client.index("top-course	");
+  const searchIndex = client.index("top-course");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

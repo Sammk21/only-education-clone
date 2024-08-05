@@ -99,6 +99,7 @@ const CollegeFilter = ({
   const selectedstreamParam = streamsParam ? streamsParam.split(",") : [];
 
 
+
   const pathname = usePathname();
 
 
@@ -108,7 +109,10 @@ const CollegeFilter = ({
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     await updatedFilters(formData, context, pathname); // Call server-side action
+
+
   };
+
 
   return (
     <div className="lg:w-[20%] hidden lg:block text-dark z-10 relative ">
@@ -242,6 +246,7 @@ const AccordionCustom: React.FC<AccordionProps> = ({
   selectedItems,
 }) => {
  
+  console.log(selectedItems,"dkfjl")
 
 
 

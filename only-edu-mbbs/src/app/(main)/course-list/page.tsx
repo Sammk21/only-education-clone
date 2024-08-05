@@ -73,7 +73,7 @@ export default async function UniversitiesList({
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            // streams={streams}
+            streams={streams}
             duration={duration}
             course={course}
             context="course"
@@ -89,7 +89,7 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-            // streams={streams}
+            streams={streams}
             duration={duration}
             course={course}
             context="course"

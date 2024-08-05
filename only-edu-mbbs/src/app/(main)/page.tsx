@@ -16,8 +16,6 @@ import ExamsSlider from "@/modules/sliders/exams-slidre";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
-const ServicesQuery =
-  "/api/landing-page?populate[services][populate][header][populate]=true&populate[services][populate][ourServiceInfo][populate]=true";
 const WhyUsQuery =
   "/api/landing-page?populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true";
 
@@ -47,7 +45,7 @@ const examsQuery =
 export default async function Home() {
   const [
     heroData,
-    servicesData,
+  
     whyUsData,
     newsData,
     articlesData,
@@ -59,7 +57,6 @@ export default async function Home() {
     examsData,
   ] = await Promise.all([
     getStrapiData(HeroQuery),
-    getStrapiData(ServicesQuery),
     getStrapiData(WhyUsQuery),
     getStrapiData(NewsQuery),
     getStrapiData(ArticlesQuery),
