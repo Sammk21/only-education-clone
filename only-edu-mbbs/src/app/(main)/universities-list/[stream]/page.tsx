@@ -42,7 +42,6 @@ export default async function UniversitiesList({
 
   const baseQuery =
     "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title";
-  // "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
 
   const universityListQuery = buildUniversityListQuery(
     baseQuery,
@@ -50,16 +49,6 @@ export default async function UniversitiesList({
     params
   );
 
-<<<<<<< HEAD
-  const [ownership, indianStates, exams, ranking, data, user] = await Promise.all([
-    getStrapiData(ownershipQuery),
-    getStrapiData(indianStatesQueryUpdated),
-    getStrapiData(examQueryUpdated),
-    getStrapiData(rankingQuery),
-    getUniversities(universityListQuery, currentPage),
-    getUserMeLoader(),
-  ]);
-=======
   const examQueryUpdated = examsQuery(params.stream);
   const indianStatesQueryUpdated = indianStatesQuery(params.stream);
 
@@ -72,7 +61,6 @@ export default async function UniversitiesList({
       getUniversities(universityListQuery, currentPage),
       getUserMeLoader(),
     ]);
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
   const filteredUniversities = filterUniversities(data.data);
   const finalData: UniversitiesData =

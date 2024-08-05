@@ -1,47 +1,69 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
-import { CiShare1 } from "react-icons/ci";
 import { IoMdShare } from "react-icons/io";
+import {
+  FacebookShareButton,
+  FacebookShareCount,
+  LinkedinShareButton,
+  WhatsappShareButton,
+} from "react-share";
+import { usePathname } from "next/navigation";
 
-export const ShareComponent = () => {
+export const ShareComponent = ({ url }: { url: string }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <IoMdShare className="text-orange-600 stroke-1 text-xl" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Share</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-pink-600">
-          <FaInstagram />
-          Instagram
+      <DropdownMenuContent className="w-52 ">
+        <DropdownMenuItem className="flex justify-between">
+          <div className="flex gap-x-2 text-blue-500">
+            <FacebookShareButton url="https://admin.onlyeducation.co.in">
+              <FaFacebookF />
+            </FacebookShareButton>
+            Facebook
+          </div>
+          <div>
+            <FacebookShareCount
+              url={url}
+              className="Demo__some-network__share-count"
+            >
+              {(count) => count}
+            </FacebookShareCount>
+          </div>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-blue-600">
-          <FaFacebookF />
-          Facebook
+        <DropdownMenuItem className="text-blue-700 ">
+          <div className="flex justify-start gap-x-2">
+            <LinkedinShareButton url={url}>
+              <FaLinkedin />
+            </LinkedinShareButton>
+            LinkdIn
+          </div>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-blue-500">
-          <FaLinkedin />
-          LinkdIn
+        <DropdownMenuItem className="text-green-700 ">
+          <div className="flex justify-start gap-x-2">
+            <WhatsappShareButton url={url}>
+              <FaWhatsapp />
+            </WhatsappShareButton>
+            Whatsapp
+          </div>
         </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-start items-center gap-x-2 text-green-600">
-          <FaWhatsapp />
-          Whatsapp
-        </DropdownMenuItem>
-        <DropdownMenuItem className="flex justify-start items-center gap-x-2">
-          <FaXTwitter />
-          X-Twitter
+        <DropdownMenuItem className=" ">
+          <div className="flex justify-start gap-x-2">
+            <WhatsappShareButton url={url}>
+              <FaXTwitter />
+            </WhatsappShareButton>
+            X-Twitter
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

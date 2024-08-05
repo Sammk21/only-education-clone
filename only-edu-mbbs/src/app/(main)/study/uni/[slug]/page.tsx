@@ -18,11 +18,9 @@ import {
 
 import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
-<<<<<<< HEAD
-import RankingUniversityPage from "@/modules/ranking-university-page";
-=======
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
+import RankingUniversityPage from "@/modules/ranking-university-page";
+import CourseRankingUniversityPage from "@/modules/course-university-list/CourseRankingUniversityPage";
 
 export async function generateMetadata({
   params,
@@ -63,9 +61,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   // const uniHeader="/api/universities?populate[overviewTabs][populate][latestUpdates][fields][0]=header&populate[overviewTabs][populate][overview][fields][0]=header&populate[overviewTabs][populate][highlights][fields][0]=header&populate[overviewTabs][populate][ranking][fields][0]=header&populate[overviewTabs][populate][whyChoose][fields][0]=header&populate[overviewTabs][populate][academicAdvantages][fields][0]=header"
   // const header = await getStrapiData(uniHeader);
 
-
-
-  
   const data = await getStrapiData(getUniQuery);
 
   const newsData = await getStrapiData(getUniNewsQuery);
@@ -85,9 +80,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     hostel,
     scholarships,
     ranking,
-    rankingStreams
+    rankingStreams,
   } = data.data[0];
-console.log(rankingStreams)
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage: ImageAttributes =
     data.data[0].universityProfile.profileImage;
@@ -100,7 +94,6 @@ console.log(rankingStreams)
     image: profileImage.formats.thumbnail.url,
     title: title,
   };
-
 
   return (
     <div className="">
@@ -135,25 +128,15 @@ console.log(rankingStreams)
         </TabsList>
 
         <TabsContent
-<<<<<<< HEAD
-          className=" bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className=" bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto "
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
-<<<<<<< HEAD
-            {courseData && <CourseListUniversity data={courseData} />}
-            <QuestionDropdown data={faq} />
-            <CallToAction id={id} data={cta} title={title} />
-=======
             <TableOfConten data={overviewTabs} />
 
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
             )}
@@ -183,11 +166,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0  rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -245,11 +224,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -275,11 +250,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="scholarships"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -301,11 +272,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -330,11 +297,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -353,11 +316,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -381,11 +340,7 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -410,21 +365,17 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
-<<<<<<< HEAD
-          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
-=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
->>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
             <RankingUniversityPage slug={params.slug} />
+            <CourseRankingUniversityPage slug={params.slug} />
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>
           <div className="col-span-4 mt-3 hidden md:block ">
             <CallToAction id={id} data={cta} title={title} />
-
             <UniversitiesNews
               data={newsData.data}
               className="grid grid-cols-1"

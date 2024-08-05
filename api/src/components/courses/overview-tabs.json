@@ -1,0 +1,58 @@
+{
+  "collectionName": "components_courses_overview_tabs",
+  "info": {
+    "displayName": "overviewTabs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "highlights": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "aboutCourse": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "eligibilityCriteria": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "whyChoose": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "admissionProcess": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "Cutoff": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "latestupdates": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "overview": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    }
+  }
+}

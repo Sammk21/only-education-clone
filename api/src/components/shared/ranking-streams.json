@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_ranking_streams",
+  "info": {
+    "displayName": "Ranking Streams",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "stream": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::stream.stream"
+    },
+    "rankingYear": {
+      "type": "date"
+    },
+    "rankingPublisher": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ranking.ranking"
+    },
+    "description": {
+      "type": "text",
+      "minLength": 120,
+      "maxLength": 300
+    },
+    "pdfData": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "rankingNumber": {
+      "type": "integer"
+    }
+  }
+}

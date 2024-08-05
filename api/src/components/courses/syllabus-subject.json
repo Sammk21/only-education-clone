@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_courses_syllabus_subjects",
+  "info": {
+    "displayName": "syllabus-subject",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "subjects": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    }
+  }
+}

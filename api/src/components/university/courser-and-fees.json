@@ -5,19 +5,8 @@
   },
   "options": {},
   "attributes": {
-    "course": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::course.course"
-    },
     "courseFee": {
       "type": "decimal"
-    },
-    "courseSpecialization": {
-      "displayName": "courseSpecialization",
-      "type": "component",
-      "repeatable": true,
-      "component": "university.course-specialization"
     }
   }
 }

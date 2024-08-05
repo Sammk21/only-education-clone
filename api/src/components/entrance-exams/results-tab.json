@@ -9,12 +9,26 @@
     "resultDates": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.overview"
+      "component": "shared.overview",
+      "required": true
     },
     "checkResult": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.overview"
+      "component": "shared.overview",
+      "required": true
+    },
+    "percentCalculate": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
+    },
+    "normalizationProcess": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview",
+      "required": true
     }
   }
 }

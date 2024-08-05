@@ -1,30 +1,21 @@
 {
   "collectionName": "components_university_rankings",
   "info": {
-    "displayName": "ranking",
+    "displayName": "Ranking",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "rankingYear": {
-      "type": "string"
+    "rankinngCourse": {
+      "displayName": "Ranking Component ",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.ranking-component"
     },
-    "course": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::course.course"
-    },
-    "description": {
-      "type": "text",
-      "minLength": 150
-    },
-    "rankings": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::ranking.ranking"
-    },
-    "rankingNumber": {
-      "type": "integer"
+    "rankingStreams": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.ranking-streams"
     }
   }
 }

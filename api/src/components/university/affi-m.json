@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_university_affi_ms",
+  "info": {
+    "displayName": "AffiM",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "isCollege": {
+      "type": "boolean"
+    },
+    "university": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::university.university"
+    }
+  }
+}

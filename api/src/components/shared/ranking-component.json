@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_shared_ranking_component_s",
+  "info": {
+    "displayName": "Ranking Course",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "rankingYear": {
+      "type": "date"
+    },
+    "rankingPublisher": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ranking.ranking"
+    },
+    "description": {
+      "type": "text",
+      "minLength": 120,
+      "maxLength": 400
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "pdfData": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "rankingNumber": {
+      "type": "integer"
+    },
+    "stream": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::stream.stream"
+    }
+  }
+}

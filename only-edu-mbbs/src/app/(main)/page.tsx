@@ -4,7 +4,6 @@ import WhyUs from "@/modules/why-us";
 import NewsLetter from "@/modules/newsletter";
 import { getStrapiData } from "@/utils/utils";
 import InformationSlider from "@/modules/sliders/slider-one";
-
 import UniversitiesRail from "@/modules/sliders/slider-two";
 import LeadingEducationPortal from "@/modules/leading-education-portal";
 import SchedulesSection from "@/modules/schedules-section";
@@ -58,7 +57,6 @@ export default async function Home() {
     examsData,
   ] = await Promise.all([
     getStrapiData(HeroQuery),
-    getStrapiData(ServicesQuery),
     getStrapiData(WhyUsQuery),
     getStrapiData(NewsQuery),
     getStrapiData(ArticlesQuery),
@@ -70,7 +68,7 @@ export default async function Home() {
     getStrapiData(examsQuery),
   ]);
 
-
+  console.log("uni data", cityData);
 
   return (
     <div className="w-full overflow-hidden">

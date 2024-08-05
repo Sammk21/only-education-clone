@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_university_spzms",
+  "info": {
+    "displayName": "spzm",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "specialization": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::specialization.specialization"
+    },
+    "fees": {
+      "type": "string"
+    },
+    "cutoff": {
+      "type": "integer"
+    },
+    "entrance_exam": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::entrance-exam.entrance-exam"
+    }
+  }
+}
