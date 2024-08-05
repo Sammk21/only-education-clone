@@ -279,6 +279,8 @@ export interface Universitylist {
   resultDate: string;
   duration: duration;
   UniRank: UniRanking;
+  fullForm?:string;
+  description?:String;
 
   rankingStreams: ranking[];
 }

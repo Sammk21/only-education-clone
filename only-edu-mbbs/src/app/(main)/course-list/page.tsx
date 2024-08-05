@@ -1,5 +1,4 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
-import CollegeList from "@/modules/all-universities-list/college-list";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
 
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
@@ -11,24 +10,20 @@ import { getUserMeLoader } from "../../data/services/get-user-loader";
 import {
   courseQuery,
   durationQuery,
-  examsQuery,
-  indianStatesQuery,
-  modeQuery,
-  ownershipQuery,
-  streasmQuery,
+  streamsQuery,
 } from "@/app/data/quries/uniList-query";
 import EntranceExamList from "@/modules/all-universities-list/exam-list";
 import CourseList from "@/modules/all-universities-list/course-list";
 
 export default async function UniversitiesList({
   searchParams,
-}: Readonly<SearchParamsProps>) {
+}:{searchParams :Readonly<SearchParamsProps>}) {
   let courseListQuery =
     "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
 
-  const streams = await getStrapiData(streasmQuery);
+  const streams = await getStrapiData(streamsQuery);
   const duration = await getStrapiData(durationQuery);
   const course = await getStrapiData(courseQuery);
 
@@ -94,7 +89,7 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-            streams={streams}
+            // streams={streams}
             duration={duration}
             course={course}
             context="course"

@@ -26,9 +26,7 @@ interface uniProp {
   id: number;
 }
 
-interface entrance_exams{
 
-}
 
 interface Props {
   ownership?: {
@@ -49,6 +47,9 @@ interface Props {
   modes?: {
     data: Option[];
   };
+  streams?:{
+    data: Option[];
+  }
   filterParams: FilterParams;
   context: string;
 }
@@ -77,6 +78,7 @@ const CollegeFilter = ({
   filterParams,
   context,
   course,
+  streams
 }: Props) => {
   const {
     locationsParam,
@@ -94,11 +96,12 @@ const CollegeFilter = ({
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
+  const selectedstreamParam = streamsParam ? streamsParam.split(",") : [];
 
 
   const pathname = usePathname();
 
-  console.log(exams?.data[0].entrance_exams.data)
+
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -168,6 +171,14 @@ const CollegeFilter = ({
                   <span>{course}</span>
                 </div>
               ))}
+                  {selectedstreamParam.map((streams) => (
+                <div
+                  key={streams}
+                  className="px-1 border border-dark inline-block mt-1 justify-center"
+                >
+                  <span>{streams}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -194,6 +205,13 @@ const CollegeFilter = ({
                 selectedItems={selectedOwnerships}
               />
             )}
+              {streams && (
+              <AccordionCustom
+                name={"stream"}
+                data={streams.data}
+                selectedItems={selectedstreamParam}
+              />
+            )}
             {modes && (
               <AccordionCustom
                 name={"Examination Modes"}
@@ -208,6 +226,7 @@ const CollegeFilter = ({
                 selectedItems={selectedcourseParam}
               />
             )}
+           
           </div>
         </form>
       </div>
@@ -222,7 +241,7 @@ const AccordionCustom: React.FC<AccordionProps> = ({
   name,
   selectedItems,
 }) => {
-  console.log("acc", data)
+ 
 
 
 

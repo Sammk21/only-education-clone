@@ -59,6 +59,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   // const uniHeader="/api/universities?populate[overviewTabs][populate][latestUpdates][fields][0]=header&populate[overviewTabs][populate][overview][fields][0]=header&populate[overviewTabs][populate][highlights][fields][0]=header&populate[overviewTabs][populate][ranking][fields][0]=header&populate[overviewTabs][populate][whyChoose][fields][0]=header&populate[overviewTabs][populate][academicAdvantages][fields][0]=header"
   // const header = await getStrapiData(uniHeader);
 
+
+
+  
   const data = await getStrapiData(getUniQuery);
 
   const newsData = await getStrapiData(getUniNewsQuery);

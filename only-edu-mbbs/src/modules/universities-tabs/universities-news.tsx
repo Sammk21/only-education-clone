@@ -28,10 +28,11 @@ const UniversitiesNews = ({ data, className, sticky }: RelatedUniversities) => {
                   <div>
                     <h2 className="line-clamp-2">{newsItem.title}</h2>
                   </div>
-                  <div className="aspect-video">
+                  <div className="aspect-video relative">
                     <Image
                       src={baseUrl + newsItem.image.formats.thumbnail.url}
                       alt="hi"
+                      
                       width={150}
                       height={150}
                       className="mt-2 rounded-lg "
