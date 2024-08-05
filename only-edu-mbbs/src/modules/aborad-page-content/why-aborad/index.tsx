@@ -1,8 +1,6 @@
 import React from "react";
 import FlowDiagram from "../flow-diagram";
 import { HeaderProps, QnaProps } from "@/types/types";
-import Title from "@/modules/common/title";
-// Removed unused import 'parse'
 
 interface Props {
   data: {
@@ -17,7 +15,7 @@ const WhyAbroad = ({ data }: Props) => {
     <>
       <section className=" dark:text-light  text-dark my-8 ">
         <div className=" container mx-auto">
-          <Title>{data.header.title}</Title>
+          <h2 className="text-xl font-semibold">{data.header.title}</h2>
 
           {/* <p>{data.header.description}</p> */}
           <div className="md:grid md:grid-cols-2">

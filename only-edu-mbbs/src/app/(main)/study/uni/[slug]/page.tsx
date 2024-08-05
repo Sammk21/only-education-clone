@@ -18,6 +18,7 @@ import {
 
 import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
+import RankingUniversityPage from "@/modules/ranking-university-page";
 
 export async function generateMetadata({
   params,
@@ -119,13 +120,15 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="ranking">Ranking</TabsTrigger>
         </TabsList>
         <TabsContent
-          className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className=" bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
+            {courseData && <CourseListUniversity data={courseData} />}
+            <QuestionDropdown data={faq} />
             <CallToAction id={id} data={cta} title={title} />
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
@@ -143,8 +146,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
-            {courseData && <CourseListUniversity data={courseData} />}
-            <QuestionDropdown data={faq} />
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
@@ -158,7 +159,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -186,7 +187,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="admission"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -214,7 +215,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -240,7 +241,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="scholarships"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -262,7 +263,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -287,7 +288,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -306,7 +307,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -330,7 +331,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -355,10 +356,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsContent>
 
         <TabsContent
-          className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
+            <RankingUniversityPage slug={params.slug} />
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>

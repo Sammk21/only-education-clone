@@ -47,7 +47,6 @@ const examsQuery =
 export default async function Home() {
   const [
     heroData,
-    servicesData,
     whyUsData,
     newsData,
     articlesData,
@@ -68,11 +67,10 @@ export default async function Home() {
     getStrapiData(streamQuery),
     getStrapiData(cityQuery),
     getStrapiData(courseQuery),
-
     getStrapiData(examsQuery),
   ]);
 
-  // console.log(examsData)
+
 
   return (
     <div className="w-full overflow-hidden">

@@ -29,22 +29,7 @@ interface Props {
     slug: string;
   }[];
 
-  entrance_exams: {
-    data: {
-      id: number;
-      title: string;
-    }[];
-  };
-  top_courses: {
-    data: {
-      id: number;
-      title: string;
-    }[];
-  };
-  id: number;
-  title: string;
-  streamIcon: ImageAttributes;
-  slug: string;
+
 }
 [];
 

@@ -23,7 +23,7 @@ interface Option {
 }
 
 interface uniProp {
-  id: number;
+  id?: number;
 }
 
 interface entrance_exams{
@@ -51,6 +51,7 @@ interface Props {
   };
   filterParams: FilterParams;
   context: string;
+  streamsProp?:any
 }
 
 interface AccordionProps {
@@ -67,6 +68,7 @@ interface FilterParams {
   modesParam?: string;
   durationParam?: string;
   courseParam?: string;
+
 }
 
 const CollegeFilter = ({
@@ -77,6 +79,7 @@ const CollegeFilter = ({
   filterParams,
   context,
   course,
+  streamsProp,
 }: Props) => {
   const {
     locationsParam,
@@ -94,13 +97,7 @@ const CollegeFilter = ({
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
-
-
   const pathname = usePathname();
-
-  console.log(exams?.data[0].entrance_exams.data)
-
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

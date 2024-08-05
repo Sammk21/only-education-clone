@@ -33,8 +33,6 @@ export default async function UniversitiesList({
   const examQueryUpdated = examsQuery(params.stream)
   const indianStatesQueryUpdated = indianStatesQuery(params.stream)
 
-  console.log(examQueryUpdated.toString())
-
   const [ownership, indianStates, exams, ranking, data, user] = await Promise.all([
     getStrapiData(ownershipQuery),
     getStrapiData(indianStatesQueryUpdated),

@@ -1,12 +1,10 @@
 import { halfGetCountryQuery } from "@/app/data/quries/country-query";
-import ElegibilityCriteria from "@/modules/MBBS-abroad-content/elegibility-criteria-mbbs";
 import WhyAbroad from "@/modules/aborad-page-content/why-aborad";
-import Title from "@/modules/common/title";
 import CountryProfileLayout from "@/modules/country-profile-layout";
 import CallToAction from "@/modules/footer/call-to-action";
 import GlobalProfileLayout from "@/modules/global-profile-layout";
 import QuestionDropdown from "@/modules/questions-dropdown";
-import InfoTableLayout from "@/modules/table-layout";
+
 import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
@@ -67,20 +65,6 @@ const StudyCountry = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={countryProfile}
       />
-      <div className=" px-3 container mx-auto">
-        <div className="my-8 ">
-          <Title>{overview.title}</Title>
-          <p className=" w-full mx-auto text-accent">{overview.description}</p>
-        </div>
-
-        <ElegibilityCriteria data={eligibilityCriteria} />
-        <CallToAction id={id} data={cta} title={title} />
-
-        <WhyAbroad data={whyThisCountry} />
-        <InfoTableLayout data={feesStructure} />
-        {/* <TopUniRail />  */}
-        <QuestionDropdown data={faq} />
-      </div>
     </div>
   );
 };

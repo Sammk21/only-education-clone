@@ -17,12 +17,11 @@ import {
   ownershipQuery,
   streasmQuery,
 } from "@/app/data/quries/uniList-query";
-import EntranceExamList from "@/modules/all-universities-list/exam-list";
 import CourseList from "@/modules/all-universities-list/course-list";
 
 export default async function UniversitiesList({
   searchParams,
-}: Readonly<SearchParamsProps>) {
+}:{searchParams: Readonly<SearchParamsProps>}) {
   let courseListQuery =
     "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
 

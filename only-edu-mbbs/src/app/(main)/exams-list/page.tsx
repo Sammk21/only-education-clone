@@ -1,5 +1,4 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
-import CollegeList from "@/modules/all-universities-list/college-list";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
 
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
@@ -19,14 +18,14 @@ import EntranceExamList from "@/modules/all-universities-list/exam-list";
 
 export default async function UniversitiesList({
   searchParams,
-}: Readonly<SearchParamsProps>) {
+
+}:{searchParams: Readonly<SearchParamsProps>}) {
   let examListQuery =
     "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[exams][populate]=true&populate[mode][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
   // const ownership = await getStrapiData(ownershipQuery);
   const streams = await getStrapiData(streasmQuery);
-  const exams = await getStrapiData(examsQuery);
   const modes = await getStrapiData(modeQuery);
 
   let { examsParam, streamsParam, modesParam } = searchParams;
@@ -75,8 +74,7 @@ export default async function UniversitiesList({
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            exams={exams}
-            streams={streams}
+            streamsProp={streams}
             modes={modes}
             context="exams"
             filterParams={filterParams}
@@ -91,7 +89,6 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-            exams={exams}
             streams={streams}
             modes={modes}
             context="exams"
