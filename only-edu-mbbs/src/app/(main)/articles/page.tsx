@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "this is the article page for Article section of only education.",
 };
 
-async function BlogIndexPage({ searchParams }: Readonly<SearchParamsProps>) {
+async function BlogIndexPage({ searchParams }: {searchParams:Readonly<SearchParamsProps>}) {
   const currentPage = Number(searchParams?.page) || 1;
   const data = await getArticles(blogListQuery, currentPage);
 

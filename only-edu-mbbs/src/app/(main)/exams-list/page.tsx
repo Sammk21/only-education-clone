@@ -15,6 +15,7 @@ import EntranceExamList from "@/modules/all-universities-list/exam-list";
 export default async function UniversitiesList({
   searchParams,
 }:{searchParams :Readonly<SearchParamsProps>}) {
+
   let examListQuery =
     "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[exams][populate]=true&populate[mode][populate]=true";
 
@@ -61,8 +62,7 @@ export default async function UniversitiesList({
     <>
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
-          <CollegeFilter
-           
+          <CollegeFilter           
            streams={streams}
             modes={modes}
             context="exams"
@@ -78,7 +78,6 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-         
             streams={streams}
             modes={modes}
             context="exams"

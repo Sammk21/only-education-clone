@@ -50,6 +50,16 @@ export default async function UniversitiesList({
     params
   );
 
+<<<<<<< HEAD
+  const [ownership, indianStates, exams, ranking, data, user] = await Promise.all([
+    getStrapiData(ownershipQuery),
+    getStrapiData(indianStatesQueryUpdated),
+    getStrapiData(examQueryUpdated),
+    getStrapiData(rankingQuery),
+    getUniversities(universityListQuery, currentPage),
+    getUserMeLoader(),
+  ]);
+=======
   const examQueryUpdated = examsQuery(params.stream);
   const indianStatesQueryUpdated = indianStatesQuery(params.stream);
 
@@ -62,6 +72,7 @@ export default async function UniversitiesList({
       getUniversities(universityListQuery, currentPage),
       getUserMeLoader(),
     ]);
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
   const filteredUniversities = filterUniversities(data.data);
   const finalData: UniversitiesData =

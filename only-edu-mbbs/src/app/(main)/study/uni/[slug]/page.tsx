@@ -18,7 +18,11 @@ import {
 
 import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
+<<<<<<< HEAD
+import RankingUniversityPage from "@/modules/ranking-university-page";
+=======
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
 export async function generateMetadata({
   params,
@@ -131,15 +135,25 @@ console.log(rankingStreams)
         </TabsList>
 
         <TabsContent
+<<<<<<< HEAD
+          className=" bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className=" bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto "
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="overview"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
             {overviewTabs?.latestUpdates && (
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
+<<<<<<< HEAD
+            {courseData && <CourseListUniversity data={courseData} />}
+            <QuestionDropdown data={faq} />
+            <CallToAction id={id} data={cta} title={title} />
+=======
             <TableOfConten data={overviewTabs} />
 
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
             )}
@@ -156,8 +170,6 @@ console.log(rankingStreams)
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
-            {courseData && <CourseListUniversity data={courseData} />}
-            <QuestionDropdown data={faq} />
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
@@ -171,7 +183,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0  rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="courses&fees"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -229,7 +245,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="placement"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -255,7 +275,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="scholarships"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -277,7 +301,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="gallery"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -302,7 +330,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="faculty"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -321,7 +353,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="hostel"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -345,7 +381,11 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="news"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
@@ -370,10 +410,15 @@ console.log(rankingStreams)
         </TabsContent>
 
         <TabsContent
+<<<<<<< HEAD
+          className="bg-orange-50 mt-0 rounded-t-xl flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+=======
           className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px xl:px-16 mx-auto"
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
+            <RankingUniversityPage slug={params.slug} />
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>

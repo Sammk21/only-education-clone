@@ -30,7 +30,12 @@ interface Props {
 }[]
 
 
+<<<<<<< HEAD
+}
+[];
+=======
 }[]
+>>>>>>> 237f7d3f8b6f8bf3e0253cc2706aeaedae6c591b
 
 const SchedulesSection = ({ data }: Props) => {
   const extractedData = data.map((item) => ({
