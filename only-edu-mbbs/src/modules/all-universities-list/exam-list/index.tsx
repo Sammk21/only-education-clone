@@ -29,7 +29,7 @@ interface User {
 }
 
 const EntranceExamList = ({ data, user }: Props) => {
-  console.log(data, "by");
+
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -130,10 +130,10 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                   </h3>
 
                   <p className="line-clamp-2  text-dark/70 text-sm">
-                    {exam.exams?.fullForm}
+                    {exam?.fullForm}
                   </p>
-                  <p className="line-clamp-1 my-2 italic text-sm block md:hidden">
-                    {exam.exams?.description}
+                  <p className="line-clamp-1 my-2 italic text-sm block ">
+                    {exam?.description}
                   </p>
                 </div>
               </Link>
@@ -192,7 +192,6 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                         }
                       )}
 
-                    //{exam?.applicationDate}
 
                   </p>
                 </div>
@@ -211,7 +210,6 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                           year: "numeric",
                         }
                       )}
-                    //{exam?.examinationDate}
 
                   </p>
                 </div>
@@ -230,7 +228,7 @@ const FilteredExamsItem = ({ exam, user }: FilteredProps) => {
                           year: "numeric",
                         }
                       )}
-                    //{exam?.resultDate}
+                   
                   </p>
                 </div>
               </div>

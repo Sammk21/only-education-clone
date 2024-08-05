@@ -50,7 +50,7 @@ const TableOfConten = ({ data }: Props) => {
 
 
     return (
-        <section className='rounded-lg border bg-gray-100 text-card-foreground shadow-sm my-3'>
+        <section className='rounded-lg border bg-white text-card-foreground shadow-sm my-3'>
             <div className='pb-2  px-6  p-2 sm:px-6 '>
                 <h4 className='font-semibold'>Table of Contents:</h4>
                 <ol className='my-2 pl-7 '>

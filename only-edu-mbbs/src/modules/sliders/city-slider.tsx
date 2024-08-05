@@ -7,11 +7,12 @@ import { useEffect } from "react";
 import { ImageExtended } from "../common/extended-image/extended-image";
 import Link from "next/link";
 
+
 interface Props {
   data: {
     id:number
     title:string  
-    streamIcon:ImageAttributes;
+    cityIcon:ImageAttributes;
     slug:string
   }[];
 
@@ -20,7 +21,7 @@ interface Props {
 const CitySlider = ({ data }: Props) => {
 
   const flickityOptions = {
-    // wrapAround: data.length >= 8 ? true : false,
+    wrapAround: data.length >= 8 ? true : false,
     initialIndex: 2,
     fade: true,
     autoPlay: true,
@@ -74,7 +75,7 @@ const CitySlider = ({ data }: Props) => {
 
             <div className="flex h-full row-span-3 items-">
             <div className="h-full w-full flex items-end">
-             <ImageExtended src={item.streamIcon.url} alt={item.streamIcon.alternativeText} blurDataURL={item.streamIcon.blurhash} width={100} height={100} />
+             <ImageExtended src={item.cityIcon.url} alt={item.cityIcon.alternativeText} blurDataURL={item.cityIcon.blurhash} width={100} height={100} />
             </div>
             </div>
             <div className="row-span-1">

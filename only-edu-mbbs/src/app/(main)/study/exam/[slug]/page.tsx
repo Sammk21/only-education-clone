@@ -10,6 +10,7 @@ import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
 import SideTableOfContent from "@/modules/universities-tabs/side-tableOf-content";
 import PreviousPapers from "@/modules/universities-tabs/previous-paper";
+import UniversitiesNews from "@/modules/universities-tabs/universities-news";
 
 export async function generateMetadata({
   params,
@@ -43,12 +44,14 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
 
   // `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
 
+  const getExamsNewsQuery=`/api/news?filters[entrance_exams][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[entrance_exams][populate]=true`
   const data = await getStrapiData(getUniQuery);
+  const newsData = await getStrapiData(getExamsNewsQuery);
 
   const entry = data.data.find((item: any) => item.slug === params.slug);
 
   if (!entry) {
-    return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
+    return <div>No data available for this slug</div>; 
   }
 
   const {
@@ -57,18 +60,16 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     overviewTabs,
     resultsTab,
     cutoff,
-   
     searchableImage,
     title,
     id,
+    previousPapers,
   } = entry;
 
-  // const title = data.data[0].title;
-  // const id = data.data[0].id;
-  console.dir("hello", previousPapers)
+ 
 
   return (
-    <div className="mb-16">
+    <div className="">
       <div className="px-2 my-8 items-center sm:px-16 grid grid-cols-12 gap-3 ">
         <div className=" col-span-2 sm:col-span-1 flex justify-end">
           <div className="h-14 relative border-2 w-14 bg-light dark:bg-dark  rounded-full overflow-hidden justify-center flex">
@@ -92,6 +93,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="previousPapers">
             Previous Year Question Papers
           </TabsTrigger>
+          <TabsTrigger value="news">News</TabsTrigger>
         </TabsList>
 
         <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
@@ -165,7 +167,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                 {overviewTabs?.latestupdates && (
                   <GlobalUniversitiesTabs data={overviewTabs.latestupdates} />
                 )}
-            <TableOfConten data={overviewTabs} />
+                <TableOfConten data={overviewTabs} />
 
                 <CallToAction id={id} data={cta} title={title} />
                 {overviewTabs?.overview && (
@@ -212,16 +214,18 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                 {resultsTab?.resultDates && (
                   <GlobalUniversitiesTabs data={resultsTab.resultDates} />
                 )}
-                 <TableOfConten data={resultsTab} />
+                <TableOfConten data={resultsTab} />
                 {resultsTab?.checkResult && (
                   <GlobalUniversitiesTabs data={resultsTab.checkResult} />
                 )}
                 <CallToAction id={id} data={cta} title={title} />
-                 {resultsTab?.percentCalculate && (
+                {resultsTab?.percentCalculate && (
                   <GlobalUniversitiesTabs data={resultsTab.percentCalculate} />
                 )}
-                  {resultsTab?.normalizationProcess && (
-                  <GlobalUniversitiesTabs data={resultsTab.normalizationProcess} />
+                {resultsTab?.normalizationProcess && (
+                  <GlobalUniversitiesTabs
+                    data={resultsTab.normalizationProcess}
+                  />
                 )}
 
                 <QuestionDropdown data={faq} />
@@ -247,14 +251,33 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
               className=" bg-orange-50 mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
               value="previousPapers"
             >
+
               <div className="mt-3 px-1 sm:px-3 lg:col-span-8 col-span-12 ">
-                {previousPapers?.previousPapers && (
-                  <PreviousPapers data={previousPapers.previousPapers} />
-                )}
+              <TableOfConten data={previousPapers} />
+
+                {previousPapers && <PreviousPapers data={previousPapers} />}
 
                 <QuestionDropdown data={faq} />
               </div>
             </TabsContent>
+
+
+            <TabsContent
+          className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px mx-auto"
+          value="news"
+        >
+          <div className="mt-3 px-1 sm:px-3  col-span-12">
+            {newsData?.data && (
+              <UniversitiesNews
+                data={newsData.data}
+                className="grid md:grid-cols-2 gap-4 font-semibold grid-cols-1"
+              />
+            )}
+
+            {faq && <QuestionDropdown data={faq} />}
+          </div>
+        
+        </TabsContent>
           </div>
           <div className="col-span-4 mt-2 hidden lg:block py-6">hello</div>
         </div>

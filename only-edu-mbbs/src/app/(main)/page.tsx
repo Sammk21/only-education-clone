@@ -33,7 +33,7 @@ const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][fields][0]=url&populate[bannerImage][fields][1]=alternativeText&populate[bannerImage][fields][2]=blurhash&populate[bannerImage][fields][3]=formats&populate[bannerImage][fields][4]=name";
 
 const cityQuery =
-  "/api/landing-page?populate[cities][fields][0]=title&populate[cities][fields][1]=slug&populate[cities][populate][streamIcon][fields][1]=url&populate[cities][populate][streamIcon][fields][2]=blurhash&populate[cities][populate][streamIcon][fields][3]=alternativeText";
+  "/api/landing-page?populate[cities][fields][0]=title&populate[cities][fields][1]=slug&populate[cities][populate][cityIcon][fields][1]=url&populate[cities][populate][cityIcon][fields][2]=blurhash&populate[cities][populate][cityIcon][fields][3]=alternativeText";
 
 const streamQuery =
   "/api/streams?populate[universities][fields][1]=title&populate=streamIcon&populate[entrance_exams]=true&populate[courses]=true";

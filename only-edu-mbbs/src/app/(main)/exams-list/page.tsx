@@ -1,6 +1,5 @@
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
-
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
 import { SearchParamsProps } from "@/types/types";
 import { getStrapiData, getUniversities } from "@/utils/utils";
@@ -8,36 +7,26 @@ import { getStrapiData, getUniversities } from "@/utils/utils";
 import React from "react";
 import { getUserMeLoader } from "../../data/services/get-user-loader";
 import {
-  examsQuery,
-  indianStatesQuery,
   modeQuery,
-  ownershipQuery,
-  streasmQuery,
+  streamsQuery,
 } from "@/app/data/quries/uniList-query";
 import EntranceExamList from "@/modules/all-universities-list/exam-list";
 
 export default async function UniversitiesList({
   searchParams,
+}:{searchParams :Readonly<SearchParamsProps>}) {
 
-}:{searchParams: Readonly<SearchParamsProps>}) {
   let examListQuery =
     "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[exams][populate]=true&populate[mode][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
-  // const ownership = await getStrapiData(ownershipQuery);
-  const streams = await getStrapiData(streasmQuery);
+  const streams = await getStrapiData(streamsQuery);
   const modes = await getStrapiData(modeQuery);
 
-  let { examsParam, streamsParam, modesParam } = searchParams;
-  let filterParams = { examsParam, streamsParam, modesParam }; //to send it as a prop
+  let {  streamsParam, modesParam } = searchParams;
+  let filterParams = {  streamsParam, modesParam }; 
   if (searchParams) {
-    if (examsParam) {
-      const examFilters = examsParam
-        .split(",")
-        .map((exam) => `filters[exams][slug][$eq]=${exam}`)
-        .join("&");
-      examListQuery += `&${examFilters}`;
-    }
+   
     if (streamsParam) {
       const streamsFilters = streamsParam
         .split(",")
@@ -73,8 +62,8 @@ export default async function UniversitiesList({
     <>
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
-          <CollegeFilter
-            streamsProp={streams}
+          <CollegeFilter           
+           streams={streams}
             modes={modes}
             context="exams"
             filterParams={filterParams}

@@ -31,9 +31,9 @@ const UniversitiesNews = ({ data, className, sticky }: RelatedUniversities) => {
                   <div className="col-span-3">
                     <h2 className="line-clamp-2">{newsItem.title}</h2>
                   </div>
-                  <div className="col-span-1 ml-3 w-full">
-                    <ImageExtended
-                      src={newsItem.image.formats.thumbnail.url}
+                  <div className="aspect-video relative">
+                    <Image
+                      src={baseUrl + newsItem.image.formats.thumbnail.url}
                       alt="hi"
                       height={150}
                       width={300}
