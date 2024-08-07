@@ -149,12 +149,6 @@ export const maskPhoneNumber = (username: string | undefined) => {
 export function removeDuplicates(data: UniversitiesData): UniversitiesData {
   const uniqueUniversities: { [key: number]: Universitylist } = {};
 
-  // data.data.forEach(university => {
-  //   if (!uniqueUniversities[university.id]) {
-  //     uniqueUniversities[university.id] = university;
-  //   }
-  // });
-
   data.data.forEach((university) => {
     if (!uniqueUniversities[university.id]) {
       uniqueUniversities[university.id] = university;
@@ -202,7 +196,7 @@ export const buildUniversityListQuery = (
   if (examsParam) {
     query += `&${examsParam
       .split(",")
-      .map((exam) => `filters[exams][slug][$eq]=${exam}`)
+      .map((exams) => `filters[entrance_exams][slug][$eq]=${exams}`)
       .join("&")}`;
   }
 

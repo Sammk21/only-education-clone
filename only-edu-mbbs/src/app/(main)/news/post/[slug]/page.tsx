@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import InformationSlider from "@/modules/sliders/slider-one";
 import { halfBlogQuery } from "@/app/data/quries/news-query";
+import { ImageExtended } from "@/modules/common/extended-image/extended-image";
 
 const mosterrat = Montserrat({
   weight: ["300", "400", "700", "900", "100", "200", "500", "600", "800"],
@@ -61,7 +62,6 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     image,
     news,
   } = data.data[0];
-// console.log("newsde", title)
 
 
   const recommendedQuery = `/api/news?filters[recommendedNews][$eq]=true&populate[image]=true`;
@@ -95,9 +95,9 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                   </div>
 
                   <div className="aspect-video relative">
-                    <Image
-                      src={baseUrl + image.url}
-                      alt=""
+                    <ImageExtended
+                      src={image.url}
+                      alt={title}
                       fill={true}
                       className="object-cover object-center  "
                     />

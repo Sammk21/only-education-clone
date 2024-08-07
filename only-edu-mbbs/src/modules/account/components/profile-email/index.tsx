@@ -51,7 +51,6 @@ const ProfileEmail = ({ user }: MyInformationProps) => {
  
 
   const onSubmit: SubmitHandler<IEmailInput> = async (data) => {
-    console.log(data);
     setIsLoading(true); // Start loading
     const res = await updateEmailAction(INITIAL_STATE, data);
     setIsLoading(false); // End loading
@@ -65,6 +64,7 @@ const ProfileEmail = ({ user }: MyInformationProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <AccountInfo
+      disable={false}
         isLoading={isLoading}
         label="Email"
         currentInfo={

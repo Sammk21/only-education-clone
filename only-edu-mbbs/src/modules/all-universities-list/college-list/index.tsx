@@ -176,7 +176,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
 
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <Link href={`study/uni/${university?.slug}`}>
+              <Link href={`/study/uni/${university?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                     {university?.title}

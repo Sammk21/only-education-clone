@@ -118,7 +118,6 @@ const ProfileName = ({ user }: MyInformationProps) => {
   });
 
   const onSubmit: SubmitHandler<INameInput> = async (data) => {
-    console.log(data);
     setIsLoading(true); 
     const res = await updateNamesAction(INITIAL_STATE, data);
     setIsLoading(false); 
@@ -132,6 +131,7 @@ const ProfileName = ({ user }: MyInformationProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <AccountInfo
+        disable={false}
         isLoading={isLoading}
         label="Name"
         currentInfo={

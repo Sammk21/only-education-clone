@@ -42,7 +42,6 @@ export default async function UniversitiesList({
 
   const baseQuery =
     "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title";
-  // "/api/universities?populate[searchableImage][populate]=true&populate[universityProfile][populate][backgroundImage][populate][0]=universityProfile.backgroundImage&populate[streams][populate]=true&populate[indian_state][populate]=true&populate[ownership][populate]=true&populate[exams][populate]=true";
 
   const universityListQuery = buildUniversityListQuery(
     baseQuery,
@@ -62,6 +61,7 @@ export default async function UniversitiesList({
       getUniversities(universityListQuery, currentPage),
       getUserMeLoader(),
     ]);
+    
 
   const filteredUniversities = filterUniversities(data.data);
   const finalData: UniversitiesData =
@@ -84,11 +84,16 @@ export default async function UniversitiesList({
             context="universities"
           />
           <div className="flex flex-col w-full ml-4">
+
+            
+            {/*  !important nirf ranking working properly in assending order but other ranking not working properly need to work on below ranking part after 15 august 2024
+
             <RankingFilter
               ranking={ranking}
               filterParams={filterParams}
               context="/universities"
-            />
+            /> */}
+
             {finalData.data.length > 0 ? (
               <CollegeList
                 user={newUser}

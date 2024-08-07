@@ -19,6 +19,7 @@ import {
 import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
+import RankingUniversityPage from "@/modules/ranking-university-page";
 
 export async function generateMetadata({
   params,
@@ -83,7 +84,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     ranking,
     rankingStreams
   } = data.data[0];
-console.log(rankingStreams)
+
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage: ImageAttributes =
     data.data[0].universityProfile.profileImage;
@@ -156,8 +157,9 @@ console.log(rankingStreams)
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
-            {courseData && <CourseListUniversity data={courseData} />}
+            
             <QuestionDropdown data={faq} />
+
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
@@ -374,6 +376,7 @@ console.log(rankingStreams)
           value="ranking"
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
+            <RankingUniversityPage slug={params.slug} />
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>

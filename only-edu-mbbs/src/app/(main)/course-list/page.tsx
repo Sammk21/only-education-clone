@@ -12,14 +12,14 @@ import {
   durationQuery,
   streamsQuery,
 } from "@/app/data/quries/uniList-query";
-import EntranceExamList from "@/modules/all-universities-list/exam-list";
 import CourseList from "@/modules/all-universities-list/course-list";
 
 export default async function UniversitiesList({
   searchParams,
 }:{searchParams :Readonly<SearchParamsProps>}) {
+
   let courseListQuery =
-    "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
+    "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true&populate[universities][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -55,6 +55,7 @@ export default async function UniversitiesList({
 
   const data = await getUniversities(courseListQuery, currentPage);
   const user = await getUserMeLoader();
+
   interface newUserProp {
     id: number;
     verified: boolean;
@@ -75,7 +76,7 @@ export default async function UniversitiesList({
           <CollegeFilter
             streams={streams}
             duration={duration}
-            course={course}
+            // course={course}
             context="course"
             filterParams={filterParams}
           />
@@ -91,7 +92,7 @@ export default async function UniversitiesList({
           <MobileFilter
             streams={streams}
             duration={duration}
-            course={course}
+            // course={course}
             context="course"
             filterParams={filterParams}
           />

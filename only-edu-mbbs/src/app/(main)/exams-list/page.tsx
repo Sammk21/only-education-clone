@@ -7,6 +7,7 @@ import { getStrapiData, getUniversities } from "@/utils/utils";
 import React from "react";
 import { getUserMeLoader } from "../../data/services/get-user-loader";
 import {
+  examsFilterQuery,
   modeQuery,
   streamsQuery,
 } from "@/app/data/quries/uniList-query";
@@ -15,15 +16,17 @@ import EntranceExamList from "@/modules/all-universities-list/exam-list";
 export default async function UniversitiesList({
   searchParams,
 }:{searchParams :Readonly<SearchParamsProps>}) {
+
   let examListQuery =
-    "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[exams][populate]=true&populate[mode][populate]=true";
+    "/api/entrance-exams?populate[searchableImage][populate]=true&populate[stream][populate]=true&populate[entrance_exam][populate]=true&populate[mode][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
   const streams = await getStrapiData(streamsQuery);
   const modes = await getStrapiData(modeQuery);
+  const exams = await getStrapiData(examsFilterQuery);
 
-  let {  streamsParam, modesParam } = searchParams;
-  let filterParams = {  streamsParam, modesParam }; 
+  let {  streamsParam, modesParam, examsParam } = searchParams;
+  let filterParams = {  streamsParam, modesParam, examsParam }; 
   if (searchParams) {
    
     if (streamsParam) {
@@ -37,10 +40,19 @@ export default async function UniversitiesList({
       const modesFilters = modesParam
         .split(",")
         .map((modes) => `filters[mode][slug][$eq]=${modes}`)
-        .join("&");
+        .join("&"); 
       examListQuery += `&${modesFilters}`;
+      console.log("hdfshfsak", modesFilters)
     }
+    // if (examsParam) {
+    //   const examsFilters = examsParam
+    //     .split(",")
+    //     .map((exams) => `filters[exams][slug][$eq]=${exams}`)
+    //     .join("&");
+    //   examListQuery += `&${examsFilters}`;
+    // }
   }
+  
 
   const data = await getUniversities(examListQuery, currentPage);
   const user = await getUserMeLoader();
@@ -61,10 +73,10 @@ export default async function UniversitiesList({
     <>
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
-          <CollegeFilter
-           
+          <CollegeFilter           
            streams={streams}
             modes={modes}
+            // exams={exams}
             context="exams"
             filterParams={filterParams}
           />
@@ -78,7 +90,6 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-         
             streams={streams}
             modes={modes}
             context="exams"

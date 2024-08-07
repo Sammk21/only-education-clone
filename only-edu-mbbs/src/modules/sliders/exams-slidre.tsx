@@ -5,6 +5,7 @@ import { ImageExtended } from "../common/extended-image/extended-image";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import Link from "next/link";
 
 interface EntranceExamData {
   entrance_exams: {
@@ -51,8 +52,8 @@ const ExamsSlider = ({ data }: Props) => {
           reloadOnUpdate
         >
           {data.entrance_exams.data.map((item) => (
-            <div className="border p-4 relative h-64 w-64  sm:w-72  bg-white rounded-lg mr-4">
-              <a
+            <div key={item.id} className="border p-4 relative h-64 w-64  sm:w-72  bg-white rounded-lg mr-4">
+              <Link
                 className="jsx-3656862976 flex items-center  mb-6"
                 href="/exams/neet"
               >
@@ -72,7 +73,7 @@ const ExamsSlider = ({ data }: Props) => {
                   </Badge>
                   <h3 className="font-medium text-sm ">{item.title}</h3>
                 </div>
-              </a>
+              </Link>
               <div className="flex flex-row justify-between text-black text-lg">
                 <div className="">
                   <p className=" text-black/60">Participating Colleges</p>
