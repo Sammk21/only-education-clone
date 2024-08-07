@@ -12,6 +12,7 @@ import CitySlider from "@/modules/sliders/city-slider";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import InfoButton from "@/modules/info-button/info-button";
 import ExamsSlider from "@/modules/sliders/exams-slidre";
+import MultiStepForm from "@/modules/enquiry-dialog-custom";
 
 const HeroQuery =
   "/api/landing-page?populate[hero][populate][header][populate]=true";
@@ -79,6 +80,7 @@ export default async function Home() {
             />
             <div className="z-[9999]"></div>
             <InformationSlider data={newsData.news} href="news" />
+            <MultiStepForm />
             <LeadingEducationPortal />
             <Separator aria-orientation="vertical" />
             <UniversitiesRail data={topUniversitiesData.topUniversities} />
