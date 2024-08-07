@@ -61,7 +61,6 @@ export default async function UniversitiesList({
       getUniversities(universityListQuery, currentPage),
       getUserMeLoader(),
     ]);
-    
 
   const filteredUniversities = filterUniversities(data.data);
   const finalData: UniversitiesData =

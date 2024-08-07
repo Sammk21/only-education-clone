@@ -1,14 +1,23 @@
 {
   "collectionName": "components_entrance_exams_previous_papers",
   "info": {
-    "displayName": "previousPapers"
+    "displayName": "previousPapers",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "previousPapers": {
+      "displayName": "Previous Exams Papers",
       "type": "component",
-      "repeatable": false,
-      "component": "shared.overview"
+      "repeatable": true,
+      "component": "university.previous-exams-papers",
+      "required": true
+    },
+    "header": {
+      "type": "string"
+    },
+    "subHeading": {
+      "type": "string"
     }
   }
 }

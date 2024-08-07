@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_latestupdates_with_dates",
+  "info": {
+    "displayName": "latestupdatesWithDates"
+  },
+  "options": {},
+  "attributes": {
+    "updateDates": {
+      "type": "date"
+    },
+    "updatesTitle": {
+      "type": "richtext"
+    }
+  }
+}

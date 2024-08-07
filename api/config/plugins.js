@@ -2,27 +2,6 @@ module.exports = ({ env }) => ({
  'strapi-regenerator': {
       enabled: true
     },
-
-    menus: {
-      config: {
-        layouts: {
-          menuItem: {
-            link: [
-              {
-                input: {
-                  label: 'Example Field Label',
-                  name: 'example_field',
-                  type: 'text',
-                },
-                grid: {
-                  col: 6,
-                },
-              },
-            ],
-          },
-        },
-      },
-    },
   'strapi-blurhash-plugin': {
         enabled: true,
         config: {

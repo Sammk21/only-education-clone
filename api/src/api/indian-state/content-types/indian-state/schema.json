@@ -23,6 +23,16 @@
       "relation": "oneToMany",
       "target": "api::university.university",
       "mappedBy": "indian_state"
+    },
+    "streamIcon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

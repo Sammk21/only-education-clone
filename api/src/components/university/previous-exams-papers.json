@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_university_previous_exams_papers",
+  "info": {
+    "displayName": "Previous Exams Papers",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "paper": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

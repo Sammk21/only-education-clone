@@ -74,22 +74,10 @@
       ],
       "required": true
     },
-    "streams": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::stream.stream",
-      "mappedBy": "university"
-    },
     "ownership": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::ownership.ownership"
-    },
-    "exams": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::exam.exam",
-      "mappedBy": "university"
     },
     "searchableImage": {
       "type": "media",
@@ -107,11 +95,6 @@
       "relation": "manyToOne",
       "target": "api::indian-state.indian-state",
       "inversedBy": "universities"
-    },
-    "affiliated": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::university.university"
     },
     "overviewTabs": {
       "displayName": "Overview Tabs",
@@ -169,23 +152,50 @@
       "component": "university.scholarships",
       "required": true
     },
-    "ranking": {
-      "type": "component",
-      "repeatable": true,
-      "component": "university.ranking",
-      "required": true
-    },
     "city": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::city.city",
       "inversedBy": "university"
     },
+    "streams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::stream.stream",
+      "mappedBy": "universities"
+    },
+    "rankingCourses": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.ranking-component"
+    },
+    "rankingStreams": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.ranking-streams"
+    },
+    "collegeCourseManager": {
+      "type": "component",
+      "repeatable": true,
+      "component": "university.college-course-manager"
+    },
+    "affiliatedMan": {
+      "displayName": "AffiM",
+      "type": "component",
+      "repeatable": false,
+      "component": "university.affi-m"
+    },
+    "entrance_exams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::entrance-exam.entrance-exam",
+      "inversedBy": "universities"
+    },
     "courses": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::course.course",
-      "mappedBy": "university"
+      "mappedBy": "universities"
     }
   }
 }

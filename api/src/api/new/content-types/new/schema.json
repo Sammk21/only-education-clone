@@ -127,6 +127,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "admin::user"
+    },
+    "entrance_exams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::entrance-exam.entrance-exam"
     }
   }
 }

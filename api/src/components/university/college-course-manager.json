@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_university_college_course_managers",
+  "info": {
+    "displayName": "College Course Manager",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "applicationDate": {
+      "displayName": "Application Date",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.application-date"
+    },
+    "eligibility": {
+      "type": "string"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course"
+    },
+    "spzm": {
+      "type": "component",
+      "repeatable": true,
+      "component": "university.spzm"
+    },
+    "fees": {
+      "type": "decimal"
+    }
+  }
+}

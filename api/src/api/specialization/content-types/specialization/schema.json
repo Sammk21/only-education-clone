@@ -11,12 +11,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "specializationName": {
+    "title": {
+      "type": "string"
+    },
+    "fullFrom": {
       "type": "string"
     },
     "slug": {
       "type": "uid",
-      "targetField": "specializationName"
+      "targetField": "title"
     }
   }
 }

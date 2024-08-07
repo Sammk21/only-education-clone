@@ -1,7 +1,6 @@
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import React from "react";
 import { ArticleAttributes } from "@/types/types";
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/utils/cn"; // Adjust the path as necessary
 import { ImageExtended } from "../common/extended-image/extended-image";
@@ -32,7 +31,7 @@ const baseUrl="https://admin.onlyeducation.co.in/"
                     <h2 className="line-clamp-2">{newsItem.title}</h2>
                   </div>
                   <div className="aspect-video relative">
-                    <Image
+                    <ImageExtended
                       src={baseUrl+newsItem.image.formats.thumbnail.url}
                       alt="hi"
                       height={150}

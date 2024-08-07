@@ -119,6 +119,9 @@
     },
     "otp_session": {
       "type": "string"
+    },
+    "last_phone_update": {
+      "type": "date"
     }
   }
 }

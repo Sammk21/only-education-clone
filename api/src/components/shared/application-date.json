@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_application_dates",
+  "info": {
+    "displayName": "Application Date"
+  },
+  "options": {},
+  "attributes": {
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    }
+  }
+}

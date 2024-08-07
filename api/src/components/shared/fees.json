@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_shared_fees",
+  "info": {
+    "displayName": "Fees"
+  },
+  "options": {},
+  "attributes": {
+    "firstYear": {
+      "type": "decimal"
+    },
+    "secondYear": {
+      "type": "decimal"
+    },
+    "thirdYear": {
+      "type": "decimal"
+    },
+    "fourthYear": {
+      "type": "decimal"
+    },
+    "fifthYear": {
+      "type": "decimal"
+    }
+  }
+}

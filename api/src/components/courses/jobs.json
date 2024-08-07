@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_courses_jobs",
+  "info": {
+    "displayName": "Jobs"
+  },
+  "options": {},
+  "attributes": {
+    "jobOpportunities": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.overview"
+    }
+  }
+}

@@ -29,46 +29,39 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
   const user = await getUserMeLoader();
   return (
     <>
-
       <header className="w-screen h-20 shadow-sm fixed top-0 bg-white z-30  px-6 ">
-      {user?.ok && !user?.data?.verified ? (
-          <Banner existingPhone={user.data.phone} userId={user.data.id} />
-      ) : null}
-
-      <div className=" grid grid-cols-[auto,1fr,auto] place-items-center h-full ">
-      <Link
-              className=" col-span-1 h-9 w-24 sm:h-12 sm:w-28 relative"
-              href="/"
-            >
-              <Image
-                src={
-                  "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
-                }
-                alt="logo"
-                fill={true}
-                className="object-cover object-center top-4 drop-shadow-lg"
-              />
-            </Link> 
-            <NavigationMenu className="w-full flex items-center justify-center">
-
-        <nav>
-        <div className=" hidden  xlg:block text-xs text-dark font-semibold uppercase">
-
-              <ul className=" flex items-center justify-center   ">
-                <NavbarDrop />
-              </ul>
-            </div>
-        </nav>
-
-      </NavigationMenu>
-      <div>
-        <Button className="bg-gray-800 text-xs flex items-center justify-center">
-          Login
-          <IoLogIn className="mt-[2px] ml-1" size={20} />
-        </Button>
-      </div>
-      </div>
-      
+        <div className=" grid grid-cols-[auto,1fr,auto] place-items-center h-full relative">
+          <Link
+            className=" col-span-1 h-9 w-24 sm:h-12 sm:w-28 relative"
+            href="/"
+          >
+            <Image
+              src={
+                "https://admin.onlyeducation.co.in/uploads/Only_Edu_Logo_c0eb3ea843.png"
+              }
+              alt="logo"
+              fill={true}
+              className="object-cover object-center top-4 drop-shadow-lg"
+            />
+          </Link>
+          <NavigationMenu className="w-full flex items-center justify-center">
+            <nav>
+              <div className=" hidden  xlg:block text-xs text-dark font-semibold uppercase">
+                <ul className=" flex items-center justify-center   ">
+                  <NavbarDrop />
+                </ul>
+              </div>
+            </nav>
+          </NavigationMenu>
+          <div>
+            <Link href={"/auth"}>
+              <Button className="bg-gray-800 text-xs flex items-center justify-center">
+                Login
+                <IoLogIn className="mt-[2px] ml-1" size={20} />
+              </Button>
+            </Link>
+          </div>
+        </div>
       </header>
     </>
   );

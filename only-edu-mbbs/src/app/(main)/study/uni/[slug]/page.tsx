@@ -20,6 +20,7 @@ import MockComponent from "@/modules/mock-component";
 import { CourseListUniversity } from "@/modules/course-list-uni-page";
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
 import RankingUniversityPage from "@/modules/ranking-university-page";
+import CourseRankingUniversityPage from "@/modules/course-university-list/CourseRankingUniversityPage";
 
 export async function generateMetadata({
   params,
@@ -60,9 +61,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   // const uniHeader="/api/universities?populate[overviewTabs][populate][latestUpdates][fields][0]=header&populate[overviewTabs][populate][overview][fields][0]=header&populate[overviewTabs][populate][highlights][fields][0]=header&populate[overviewTabs][populate][ranking][fields][0]=header&populate[overviewTabs][populate][whyChoose][fields][0]=header&populate[overviewTabs][populate][academicAdvantages][fields][0]=header"
   // const header = await getStrapiData(uniHeader);
 
-
-
-  
   const data = await getStrapiData(getUniQuery);
 
   const newsData = await getStrapiData(getUniNewsQuery);
@@ -82,9 +80,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     hostel,
     scholarships,
     ranking,
-    rankingStreams
+    rankingStreams,
   } = data.data[0];
-
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage: ImageAttributes =
     data.data[0].universityProfile.profileImage;
@@ -97,7 +94,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     image: profileImage.formats.thumbnail.url,
     title: title,
   };
-
 
   return (
     <div className="">
@@ -377,12 +373,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8">
             <RankingUniversityPage slug={params.slug} />
+            <CourseRankingUniversityPage slug={params.slug} />
             {ranking && <Ranking data={ranking} />}
             {faq && <QuestionDropdown data={faq} />}
           </div>
           <div className="col-span-4 mt-3 hidden md:block ">
             <CallToAction id={id} data={cta} title={title} />
-
             <UniversitiesNews
               data={newsData.data}
               className="grid grid-cols-1"

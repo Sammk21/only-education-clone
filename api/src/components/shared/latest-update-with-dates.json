@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_latest_update_with_dates",
+  "info": {
+    "displayName": "latestUpdateWithDates",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "latestUpdateWithDates": {
+      "displayName": "latestupdatesWithDates",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.latestupdates-with-dates"
+    }
+  }
+}

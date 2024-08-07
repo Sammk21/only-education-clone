@@ -38,7 +38,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
@@ -86,7 +86,7 @@
         }
       },
       "type": "text",
-      "required": true
+      "required": false
     },
     "authorName": {
       "pluginOptions": {
@@ -108,7 +108,7 @@
         "Zhankana",
         "Parveen"
       ],
-      "required": true
+      "required": false
     },
     "author": {
       "type": "relation",

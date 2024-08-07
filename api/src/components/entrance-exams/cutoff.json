@@ -9,12 +9,14 @@
     "categoryWise": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.overview"
+      "component": "shared.overview",
+      "required": true
     },
     "subjectWise": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.overview"
+      "component": "shared.overview",
+      "required": false
     }
   }
 }

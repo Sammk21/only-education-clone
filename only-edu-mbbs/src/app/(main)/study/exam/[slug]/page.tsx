@@ -100,67 +100,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         </TabsList>
 
         <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
-          {/* <div className="col-span-2 py-6 hidden lg:block sticky top-0 mt-3">
-            <nav className=" toc-nav-list text-sm border rounded-sm bg-white">
-              <div className=" pr-1 pl-2 py-2 my-2 font-medium  text-black/60  hover:text-orange-500 cursor-pointer">
-                <span className="pt-2 px-2 font-semibold text-md rounded-full mr-2 border">
-                  01
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  NEET Application Form Dates
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  02
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  Documents Required for NEET
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  03
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  NEET Registration Process
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  04
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  NEET Application Fees
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  05
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  NEET Application Form Correction
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  06
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  NEET Registration Statistics
-                </span>
-              </div>
-              <div className="pr-1 pl-2 py-2 my-2 font-medium flex  text-black/60 hover:text-orange-500 cursor-pointer">
-                <span className="  pt-2 px-2 font-weight-semi text-md rounded-full mr-2 border">
-                  07
-                </span>
-                <span className="inline-block text-md font-semibold self-center">
-                  Frequently Asked Questions
-                </span>
-              </div>
-            </nav>
-          </div> 
-         <SideTableOfContent data={overviewTabs} /> */}
           <div className="lg:col-span-8 col-span-12">
             <TabsContent
               className="  rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"

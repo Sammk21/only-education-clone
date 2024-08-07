@@ -54,14 +54,30 @@
       "target": "api::new.new"
     },
     "bannerImage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course"
+    },
+    "entrance_exams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::entrance-exam.entrance-exam"
+    },
+    "cities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::city.city"
     }
   }
 }

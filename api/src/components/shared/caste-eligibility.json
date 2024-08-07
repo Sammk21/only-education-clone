@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_caste_eligibilities",
+  "info": {
+    "displayName": "Caste Eligibility"
+  },
+  "options": {},
+  "attributes": {
+    "casteTitle": {
+      "type": "string"
+    },
+    "casteTable": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}
