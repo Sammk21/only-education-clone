@@ -32,8 +32,9 @@ export const updatedFilters = async (formData: FormData, context: string, pathNa
   const course = formData.getAll("Course");
   const ranking = formData.getAll("Ranking");
   const streams = formData.getAll("stream");
+  console.log(exams)
 
-  
+
 
   if (locations.length > 0)
     params.append("locationsParam", locations.join(","));
@@ -44,7 +45,7 @@ export const updatedFilters = async (formData: FormData, context: string, pathNa
   if (duration.length > 0) params.append("durationParam", duration.join(","));
   if (course.length > 0) params.append("courseParam", course.join(","));
   if (ranking.length > 0) params.append("rankingParam", ranking.join(","));
-  if (streams.length > 0) params.append("streamParam", streams.join(","));
+  if (streams.length > 0) params.append("streamsParam", streams.join(","));
 
   if (context === "universities") {
     redirect(`${pathName}?${params.toString()}`);
@@ -57,8 +58,11 @@ export const updatedFilters = async (formData: FormData, context: string, pathNa
   }
 };
 
+
+
 export const deleteFilters = async () => {
-  redirect(`/universities-list`);
+  const params = new URLSearchParams();
+  params.append("","")
 };
 
 export const addRecentlyViewed = async (data: recentlyViewed) => {

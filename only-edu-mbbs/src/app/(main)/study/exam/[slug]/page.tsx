@@ -11,6 +11,8 @@ import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
 import SideTableOfContent from "@/modules/universities-tabs/side-tableOf-content";
 import PreviousPapers from "@/modules/universities-tabs/previous-paper";
 import UniversitiesNews from "@/modules/universities-tabs/universities-news";
+import UpcommingExams from "@/modules/upcomming-exams";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -39,19 +41,16 @@ export async function generateMetadata({
 }
 
 const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
-  const getUniQuery =
-    "/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][prepTips][populate]=true&populate[overviewTabs][populate][prepBooks][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[resultsTab][populate][percentCalculate][populate]=true&populate[resultsTab][populate][normalizationProcess][populate]=true&populate[cutoff][populate][categoryWise][populate]=title&populate[cutoff][populate][subjectWise][populate]=true&populate[searchableImage][populate]=true&populate[cta][fields][0]=title&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[previousPapers][populate][previousPapers][populate][paper][fields][0]=url&populate[previousPapers][populate][previousPapers]=true";
+  const getExamQuery = `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][prepTips][populate]=true&populate[overviewTabs][populate][prepBooks][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[resultsTab][populate][percentCalculate][populate]=true&populate[resultsTab][populate][normalizationProcess][populate]=true&populate[cutoff][populate][categoryWise][populate]=title&populate[cutoff][populate][subjectWise][populate]=true&populate[searchableImage][populate]=true&populate[cta][fields][0]=title&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[previousPapers][populate][previousPapers][populate][paper][fields][0]=url&populate[previousPapers][populate][previousPapers]=true&populate[stream][fields][0]=slug`;
 
-  // `/api/entrance-exams?populate[overviewTabs][populate][latestupdates][populate]=true&populate[overviewTabs][populate][overview][populate]=true&populate[overviewTabs][populate][highlights][populate]=true&populate[overviewTabs][populate][eligibilitycriteria][populate]=true&populate[overviewTabs][populate][exampattern][populate]=true&populate[overviewTabs][populate][examdates][populate]=true&populate[resultsTab][populate][resultDates][populate]=true&populate[resultsTab][populate][checkResult][populate]=true&populate[cutoff][populate][categoryWise][populate]=true&populate[cutoff][populate][subjectWise][populate]=true&populate[previousPapers][populate][previousPapers][populate]=true&populate[faq][populate][fields][0]=title&populate[faq][populate][faq][populate]=true&populate[cta][populate]=true&populate[searchableImage][populate]=true`;
-
-  const getExamsNewsQuery=`/api/news?filters[entrance_exams][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[entrance_exams][populate]=true`
-  const data = await getStrapiData(getUniQuery);
+  const data = await getStrapiData(getExamQuery);
+  const getExamsNewsQuery = `/api/news?filters[entrance_exams][slug][$eq]=${params.slug}&populate[image][populate]=true&populate[entrance_exams][populate]=true`;
   const newsData = await getStrapiData(getExamsNewsQuery);
 
   const entry = data.data.find((item: any) => item.slug === params.slug);
 
   if (!entry) {
-    return <div>No data available for this slug</div>; 
+    return <div>No data available for this slug</div>;
   }
 
   const {
@@ -64,9 +63,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     title,
     id,
     previousPapers,
+    stream,
+    slug,
+    fullForm
   } = entry;
-
- 
 
   return (
     <div className="">
@@ -81,8 +81,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             />
           </div>
         </div>
-        <h2 className="text-xl font-bold dark:text-light text-dark col-span-10 sm:col-span-11">
-          {title} Previous Year Papers PDFs with Solutions
+        <h2 className="text-xl md:text-2xl font-bold dark:text-light text-dark col-span-10 sm:col-span-11">
+          {fullForm} [{title}] : Previous Year Papers PDFs with Solutions
         </h2>
       </div>
       <Tabs defaultValue="overview">
@@ -90,10 +90,13 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="result">Result</TabsTrigger>
           <TabsTrigger value="cutoff">cutoff</TabsTrigger>
-          <TabsTrigger value="previousPapers">
+          {/* <TabsTrigger value="previousPapers">
             Previous Year Question Papers
-          </TabsTrigger>
+          </TabsTrigger> */}
           <TabsTrigger value="news">News</TabsTrigger>
+          <Link href={`/universities-list/${stream?.slug}?examsParam=${slug}`} prefetch={true}>
+            <TabsTrigger value="participate">Participate Colleges</TabsTrigger>
+          </Link>
         </TabsList>
 
         <div className="grid grid-cols-12 bg-orange-50 px-0 lg:px-3 relative">
@@ -130,9 +133,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
                   <GlobalUniversitiesTabs data={overviewTabs.examdates} />
                 )}
 
-                {overviewTabs?.exampattern && (
+                {/* {overviewTabs?.exampattern && (
                   <GlobalUniversitiesTabs data={overviewTabs.exampattern} />
-                )}
+                )} */}
                 {overviewTabs?.ImpExamDates && (
                   <GlobalUniversitiesTabs data={overviewTabs.ImpExamDates} />
                 )}
@@ -200,7 +203,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             </TabsContent>
 
             <TabsContent
-              className="bg-orange-50 mt-0 rounded-t-xl  flex-col lg:grid grid-cols-12 lg:px-10 sm:px-6 px-px mx-auto"
+              className="bg-orange-50 mt-0 rounded-t-xl py-6 flex-col  lg:px-10 sm:px-6 px-px  mx-auto"
               value="news"
             >
               <div className="mt-3 px-1 sm:px-3  col-span-12">
@@ -215,7 +218,14 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
               </div>
             </TabsContent>
           </div>
-          <div className="col-span-4 mt-2 hidden lg:block py-6">hello</div>
+          <div className="col-span-4 hidden lg:block py-6 pr-9">
+            {/* <UpcommingExams searchableImage={searchableImage} /> */}
+            <UniversitiesNews
+              data={newsData.data}
+              className="grid grid-cols-1"
+              sticky="sticky top-28 mb-12"
+            />
+          </div>
         </div>
       </Tabs>
     </div>

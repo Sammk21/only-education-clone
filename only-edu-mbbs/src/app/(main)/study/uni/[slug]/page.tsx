@@ -153,6 +153,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
+            
+            <QuestionDropdown data={faq} />
+
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />

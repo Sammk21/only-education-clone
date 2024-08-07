@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -93,6 +92,7 @@ const CollegeFilter = ({
     courseParam,
   } = filterParams;
 
+
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
   const selectedExams = examsParam ? examsParam.split(",") : [];
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
@@ -100,14 +100,14 @@ const CollegeFilter = ({
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
   const selectedstreamParam = streamsParam ? streamsParam.split(",") : [];
-
-
   const pathname = usePathname();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     await updatedFilters(formData, context, pathname); // Call server-side action
+
   };
+
 
   return (
     <div className="lg:w-[20%] hidden lg:block text-dark z-10 relative ">
@@ -129,12 +129,12 @@ const CollegeFilter = ({
                   <span>{location}</span>
                 </div>
               ))}
-              {selectedExams.map((exam) => (
+              {selectedExams.map((exams) => (
                 <div
-                  key={exam}
+                  key={exams}
                   className="px-1 border border-dark inline-block mt-1 justify-center"
                 >
-                  <span>{exam}</span>
+                  <span>{exams}</span>
                 </div>
               ))}
               {selectedOwnerships.map((ownership) => (
@@ -193,10 +193,12 @@ const CollegeFilter = ({
             {exams && (
               <AccordionCustom
                 name={"Exams"}
-                data={exams?.data[0].entrance_exams.data  }
+                data={exams?.data }
                 selectedItems={selectedExams}
               />
             )}
+
+            
             {ownership && (
               <AccordionCustom
                 name={"Ownership"}

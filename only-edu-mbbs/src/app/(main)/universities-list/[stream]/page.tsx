@@ -83,11 +83,16 @@ export default async function UniversitiesList({
             context="universities"
           />
           <div className="flex flex-col w-full ml-4">
+
+            
+            {/*  !important nirf ranking working properly in assending order but other ranking not working properly need to work on below ranking part after 15 august 2024
+
             <RankingFilter
               ranking={ranking}
               filterParams={filterParams}
               context="/universities"
-            />
+            /> */}
+
             {finalData.data.length > 0 ? (
               <CollegeList
                 user={newUser}

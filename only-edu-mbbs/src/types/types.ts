@@ -235,6 +235,7 @@ interface exams {
   fullForm: string;
   description: string;
 }
+
 export interface UniversityProfile {
   backgroundImage: ImageAttributes;
   fees: string;
@@ -263,6 +264,7 @@ export interface ranking {
   rankingPublisher: { id: number; slug: string };
 }
 
+
 export interface Universitylist {
   title?: string;
   id: number;
@@ -281,8 +283,10 @@ export interface Universitylist {
   UniRank: UniRanking;
   fullForm?:string;
   description?:String;
-
+  courseFullForm?:string
+  durationYear?:Number
   rankingStreams: ranking[];
+  universities:University[];
 }
 
 export interface UniversitiesData {

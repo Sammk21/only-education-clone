@@ -3,15 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { UniversitiesData, Universitylist } from "@/types/types";
-import { FaDownload, FaLock, FaRegPaperPlane } from "react-icons/fa";
-import { FaBuilding, FaLocationDot } from "react-icons/fa6";
+
 import SearchBox from "@/app/(main)/searchbox";
 import MeiliSearch from "meilisearch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { json } from "stream/consumers";
-import { ImageExtended } from "@/modules/common/extended-image/extended-image";
-import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
+
+import { GoDotFill } from "react-icons/go";
 
 interface Props {
   data: UniversitiesData;
@@ -28,13 +26,12 @@ interface User {
 }
 
 const CourseList = ({ data, user }: Props) => {
-  console.log(data, "by");
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
   });
 
-  const searchIndex = client.index("top-course	");
+  const searchIndex = client.index("course");
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Universitylist[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -101,71 +98,36 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
         className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
         <div className="">
-          <Link
-            className=" w-full sm:w-1/4"
-            href={`study/course/${course?.slug}`}
-          >
-            <p className="lowercase bg-gray-200 text-dark w-fit rounded-md px-4 ">
-              {course.mode?.title}
-            </p>
-          </Link>
-
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
+              <div  className="pb-3">
               <Link href={`study/course/${course?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    {course?.title}
+                    {course?.courseFullForm} [{course?.title}]
                   </h3>
-                  <p className="text-sm flex gap-5 mt-1 ">
-                    <span className="text-green-700 ">
-                      {/* {course.duration.title}{" "} */}
+                  <p className="text-sm flex gap-5 mt-1 font-semibold ">
+                    <span className="text-green-700 flex">
+                      <GoDotFill />
+                      {course?.durationYear?.toString()} Years
                     </span>
-                    <span className="text-orange-600">
+                    <span className="text-orange-600 flex">
+                      <GoDotFill />
                       {course.stream?.title}
                     </span>
                   </p>
                 </div>
-              </Link>
+                </Link>
+               
+                </div>
               <div>
-                <Button className="bg-orange-500 hover:bg-orange-400">
+                <Link
+                  href={`/universities-list/${course.stream?.slug}`}
+                  className=" text-white  rounded-md text-sm font-medium h-10 px-4 py-2 bg-orange-500 hover:bg-orange-400"
+                >
                   Find Colleges
-                </Button>
+                </Link>
               </div>
-
-              {/* <div className="flex flex-col justify-end w-full sm:w-auto space-y-2 mt-3 sm:mt-0 mb-3">
-                {user ? (
-                  user.verified ? (
-                    <Button className="bg-orange-500 hover:bg-orange-400">
-                      <Link
-                        className="flex items-center"
-                        href={
-                          "https://admin.onlyeducation.co.in/uploads/276073864_532507680_IIT_1_e2a06150fc.pdf"
-                        }
-                      >
-                        <FaDownload className="mr-1" />
-                        Brochure
-                      </Link>{" "}
-                    </Button>
-                  ) : (
-                    <PhoneInputForm
-                      existingPhone={
-                        user.phone ? user.phone.toString() : undefined
-                      }
-                      userId={user.id}
-                      title="Brochure"
-                      color="bg-orange-500"
-                    />
-                  )
-                ) : (
-                  <Button className="bg-orange-500 hover:bg-orange-400">
-                    <Link className="flex items-center " href="/auth">
-                      <FaLock className="mr-1" />
-                      Brochure
-                    </Link>
-                  </Button>
-                )}
-              </div> */}
             </div>
           </div>
         </div>

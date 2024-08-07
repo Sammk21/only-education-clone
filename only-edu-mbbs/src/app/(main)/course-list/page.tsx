@@ -19,7 +19,7 @@ export default async function UniversitiesList({
 }:{searchParams :Readonly<SearchParamsProps>}) {
 
   let courseListQuery =
-    "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true";
+    "/api/courses?populate[stream][populate]=true&populate[duration][populate]=true&populate[course]=true&populate[universities][populate]=true";
 
   const currentPage = Number(searchParams?.page) || 1;
 
@@ -55,6 +55,7 @@ export default async function UniversitiesList({
 
   const data = await getUniversities(courseListQuery, currentPage);
   const user = await getUserMeLoader();
+
   interface newUserProp {
     id: number;
     verified: boolean;
@@ -73,9 +74,9 @@ export default async function UniversitiesList({
       <div className="bg-white rounded-[30px] my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            // streams={streams}
+            streams={streams}
             duration={duration}
-            course={course}
+            // course={course}
             context="course"
             filterParams={filterParams}
           />
@@ -89,9 +90,9 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-            // streams={streams}
+            streams={streams}
             duration={duration}
-            course={course}
+            // course={course}
             context="course"
             filterParams={filterParams}
           />

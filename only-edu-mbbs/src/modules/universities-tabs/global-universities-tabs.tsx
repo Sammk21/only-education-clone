@@ -31,7 +31,7 @@ const GlobalUniversitiesTabs = ({ data, notification }: UniTabsProps) => {
 
               <Title id={data.id}>{data.header}</Title>
             </CardHeader>
-            <CardContent className=" prose-td:border-[#322f3e] prose-td:border-1 prose-td:border-solid prose-figure:w-full prose-table:w-full prose-h3:text-base sm:prose-h3:text-lg   prose-figure:m-0 w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light prose-th:px-4 prose-th:bg-[#322f3e] prose-th:text-light overflow-x-auto pb-4">
+            <CardContent className="break-words prose-a:text-blue-600 prose-ul:list-disc prose-li:marker:text-dark/70  prose-td:border-[#322f3e] prose-td:border-1 prose-td:border-solid prose-figure:w-full prose-table:w-full prose-h3:text-base sm:prose-h3:text-lg   prose-figure:m-0 w-full max-w-full mx-0 prose prose-figure:mx-0 dark:prose-li:text-light dark:prose-p:text-gray-300 dark:prose-table:text-accent dark:prose-strong:text-light dark:prose-headings:text-light prose-th:px-4 prose-th:bg-[#322f3e] prose-th:text-light overflow-x-auto pb-4">
               {parse(data.content)}
             </CardContent>
           </Card>

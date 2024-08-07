@@ -65,7 +65,7 @@ const PreviousPapers = ({ data }: Props) => {
                     <td className="px-6 py-4">
                     <Link
                        className="text-blue-500 hover:text-orange-500 transition-colors  "
-                        href={item.paper.url}
+                        href={`https://admin.onlyeducation.co.in${item.paper.url}`}
                       >
                         Download
                       </Link>

@@ -11,25 +11,26 @@ interface Props {
         title: string;
       }[];
     };
-    entrance_exams: {
-      data: {
-        id: number;
-        title: string;
-      }[];
-    };
-    courses?: {
-      data: {
-        id: number;
-        title: string;
-      }[];
-    };
-    id: number;
-    title: string;
-    streamIcon: ImageAttributes;
-    slug: string;
-  }[];
-}
-[];
+    entrance_exams:{
+      data:{
+        id:number
+        title:string
+    }[]
+  };
+  courses?:{
+    data:{
+      id:number
+      title:string
+    }[]
+  }
+  id:number
+  title:string  
+  streamIcon:ImageAttributes;
+  slug:string
+}[]
+
+
+}[]
 
 const SchedulesSection = ({ data }: Props) => {
   const extractedData = data.map((item) => ({

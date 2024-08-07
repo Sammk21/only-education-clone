@@ -100,7 +100,6 @@ html {scrollbar-width: none;} Firefox
 /* ------------------------- Body -------------------------------------------------- */
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
-li, ul, figure { padding: 0; margin: 0; list-style: none;}
 
 html {
    scroll-behavior: initial;
