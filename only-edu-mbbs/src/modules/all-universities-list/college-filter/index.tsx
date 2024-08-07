@@ -49,6 +49,7 @@ interface Props {
   streams?:{
     data: Option[];
   }
+ 
   filterParams: FilterParams;
   context: string;
   streamsProp?:any
@@ -79,7 +80,7 @@ const CollegeFilter = ({
   filterParams,
   context,
   course,
-  streams
+  streams,
 
 }: Props) => {
   const {
@@ -100,12 +101,13 @@ const CollegeFilter = ({
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
   const selectedstreamParam = streamsParam ? streamsParam.split(",") : [];
+
   const pathname = usePathname();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     await updatedFilters(formData, context, pathname); // Call server-side action
-
+    console.log(formData)
   };
 
 
@@ -178,6 +180,8 @@ const CollegeFilter = ({
                   <span>{streams}</span>
                 </div>
               ))}
+
+
             </div>
           </div>
 
@@ -227,6 +231,7 @@ const CollegeFilter = ({
                 selectedItems={selectedcourseParam}
               />
             )}
+             
            
           </div>
         </form>

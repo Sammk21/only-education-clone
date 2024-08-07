@@ -1,5 +1,5 @@
 "use client";
-import { ImageAttributes } from "@/types/types";
+import { ImageAttributes, indian_state } from "@/types/types";
 import { UniversityCard } from "../university-card";
 import Flickity from "react-flickity-component";
 import "flickity/css/flickity.css";
@@ -17,8 +17,9 @@ export interface University {
   id: number;
   title: string;
   slug: string;
-
+  fullForm?: string
   universityProfile: UniversityProfile;
+  indian_state: indian_state
 }
 
 interface UniversitiesData {
@@ -62,7 +63,7 @@ export const UniversitiesRail = ({ data }: Props) => {
     <div className="py-9 border-b">
       <div className="container">
         <h4 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">
-          Top Universities/Colleges
+          Top Universities
         </h4>
         <Flickity
           className={"carousel2 flex"} // default ''

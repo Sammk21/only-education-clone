@@ -8,7 +8,7 @@ const LeadingEducationPortal = () => {
     <section className=" text-dark  py-9 border-b">
       <div className="container">
       <h3 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0 ">
-      India's Top Education
+      India's Leading Education Platform
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6 overflow-x-auto">
         <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">

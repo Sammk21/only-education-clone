@@ -32,7 +32,6 @@ export const updatedFilters = async (formData: FormData, context: string, pathNa
   const course = formData.getAll("Course");
   const ranking = formData.getAll("Ranking");
   const streams = formData.getAll("stream");
-  console.log(exams)
 
 
 

@@ -8,7 +8,8 @@ export const courseQuery="/api/courses?populate=true&fields[0]=slug&fields[1]=ti
 export const rankingQuery="/api/rankings?fields[0]=publisherName&fields[1]=slug"
 export const streasmQuery = "/api/streams?populate=true"
 
-export const examsFilterQuery="/api/entrance-exams?fields[0]=slug&fields[1]=title"
+// export const examsFilterQuery="/api/entrance-exams?fields[0]=slug&fields[1]=title"
+export const cityQuery="/api/cities?fields[0]=title&fields[1]=slug"
 
 
 

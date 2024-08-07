@@ -14,7 +14,6 @@ interface Props{
 
 
 key:number
-context?:string
 tab:string
 href:string
 length?:number
@@ -23,14 +22,14 @@ streamIcon:ImageAttributes
 streamSlug:string
 }
 
-const TestCards = ({streamTitle,context,tab,href,length, streamIcon,streamSlug}:Props) => {
+const TestCards = ({streamTitle,tab,href,length, streamIcon,streamSlug}:Props) => {
 
 
   return (
     <>
     
     <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer " >
-     <Link href={`${href}?${context}=${streamSlug}`}>
+     <Link href={`${href}${streamSlug}`}>
       <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
         <figure className="h-14 w-14 relative">
           <ImageExtended

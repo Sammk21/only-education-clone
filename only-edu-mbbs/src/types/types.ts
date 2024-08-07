@@ -218,7 +218,7 @@ interface duration {
   title: string;
   slug: string;
 }
-interface indian_state {
+export interface indian_state {
   id: number;
   title: string;
   slug: string;
@@ -289,6 +289,8 @@ export interface Universitylist {
   universities:University[];
 }
 
+
+
 export interface UniversitiesData {
   data: Universitylist[];
   meta: any;
@@ -305,6 +307,7 @@ export interface SearchParamsProps {
   query?: string;
   page?: number;
   rankingParam?: string;
+  cityParam?:string
 }
 
 export interface searchParamUserId {
@@ -398,6 +401,7 @@ export interface FilterParams {
   examsParam?: string;
   ownershipsParam?: string;
   rankingParam?: string;
+  cityParam?:string;
 }
 
 type Specialization = {
