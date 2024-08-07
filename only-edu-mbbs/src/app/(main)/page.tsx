@@ -40,7 +40,7 @@ const courseQuery =
   "/api/landing-page?populate[courses][fields][0]=title&populate[courses][fields][1]=slug";
 
 const examsQuery =
-  "/api/landing-page?populate[entrance_exams][fields][0]=title&populate[entrance_exams][fields][1]=slug&populate[entrance_exams][populate][searchableImage][fields][0]=url&populate[entrance_exams][populate][searchableImage][fields][1]=alternativeText&populate[entrance_exams][populate][searchableImage][fields][2]=blurhash&populate[entrance_exams][populate][searchableImage][fields][3]=formats&populate[entrance_exams][populate][mode][fields][0]=title";
+"/api/landing-page?populate[entrance_exams][fields][0]=title&populate[entrance_exams][fields][1]=slug&populate[entrance_exams][fields][2]=examlevel&populate[entrance_exams][fields][3]=examinationDate&populate[entrance_exams][fields][4]=applicationDate&populate[entrance_exams][populate][searchableImage][fields][0]=url&populate[entrance_exams][populate][searchableImage][fields][1]=alternativeText&populate[entrance_exams][populate][searchableImage][fields][2]=blurhash&populate[entrance_exams][populate][searchableImage][fields][3]=formats&populate[entrance_exams][populate][mode][fields][0]=title"
 
 export default async function Home() {
   const [

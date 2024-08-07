@@ -238,7 +238,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                           Brochure
                       </Button>
                     </DialogTrigger>
-                    <DialogContent status={null} className="sm:max-w-md rounded-md">
+                    <DialogContent  className="sm:max-w-md rounded-md">
                       <DialogHeader>
                       <DialogTitle>You're not signed in</DialogTitle>
                         <DialogDescription>

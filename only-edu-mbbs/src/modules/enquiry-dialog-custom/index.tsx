@@ -40,7 +40,7 @@ const MultiStepForm = () => {
 
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent className="grid grid-cols-8 max-w-6xl">
         <div className="col-span-3">
           <Left />

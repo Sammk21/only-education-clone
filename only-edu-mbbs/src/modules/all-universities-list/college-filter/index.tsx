@@ -217,14 +217,14 @@ const CollegeFilter = ({
                 selectedItems={selectedstreamParam}
               />
             )}
-            {modes && (
+             {modes && (
               <AccordionCustom
                 name={"Examination Modes"}
                 data={modes.data}
                 selectedItems={selectedmodesParam}
               />
             )}
-            {course && (
+             {course && (
               <AccordionCustom
                 name={"Course"}
                 data={course.data}
