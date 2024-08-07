@@ -11,7 +11,6 @@ import {
 } from "@/types/types";
 import {
   buildUniversityListQuery,
-  filterUniversities,
   getStrapiData,
   getUniversities,
   getUserData,
@@ -62,7 +61,7 @@ export default async function UniversitiesList({
       getUserMeLoader(),
     ]);
 
-  const filteredUniversities = filterUniversities(data.data);
+  const filteredUniversities = data.data;
   const finalData: UniversitiesData =
     filteredUniversities.length > 0
       ? { data: filteredUniversities, meta: data.meta }

@@ -14,23 +14,21 @@ const config = {
 
   prefix: "",
   theme: {
-
     container: {
       center: true,
     },
     extend: {
-      screens:{
-        xlg:"1124px"
+      screens: {
+        xlg: "1124px",
       },
-     
-      container:{
-        center:true,
-       
+
+      container: {
+        center: true,
+
         screens: {
           lg: "1300px",
-        },    
-        padding:"8px", 
-        
+        },
+        padding: "8px",
       },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
@@ -68,7 +66,7 @@ const config = {
         "custom-gradient":
           "linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%)",
       },
-       //remove custom colors
+      //remove custom colors
       colors: {
         transparent: "transparent",
         light: "#fff",
@@ -120,6 +118,14 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "collapsible-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-collapsible-content-height)" },
+        },
+        "collapsible-up": {
+          from: { height: "var(--radix-collapsible-content-height)" },
+          to: { height: "0" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -141,6 +147,8 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "collapsible-down": "collapsible-down 0.2s ease-out",
+        "collapsible-up": "collapsible-up 0.2s ease-out",
         blink: "blink 1s infinite",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
