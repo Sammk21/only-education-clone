@@ -13,9 +13,6 @@ interface RankingFilterProps {
   ranking: rankingFilter;
   filterParams: FilterParams;
   context: string;
-  // rankings?:{
-  //   publisherName:string
-  // }
 }
 
 interface FilterParams {

@@ -4,7 +4,7 @@
 
 
 /* ------------------------- Variables -------------------------------------------------- */
-/* 
+
 :root {
 
    --color-dark-rgb: 50, 32, 24;
@@ -71,7 +71,7 @@
    --nav-bar-height-mobile: calc(var(--btn-height) + (var(--gap) * 0.6));
    --card-width: calc(var(--title-size) * 2.25);
 }
-
+/*
 
 [data-theme-section="dark"] {
    --color-border: rgba(var(--color-light-rgb), 0.15);

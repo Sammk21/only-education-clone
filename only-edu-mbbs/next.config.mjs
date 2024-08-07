@@ -36,8 +36,6 @@ const nextConfig = {
       {
         hostname: "admin.onlyeducation.co.inundefined",
       },
-
-
     ],
   },
 };
