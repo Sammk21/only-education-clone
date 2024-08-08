@@ -16,14 +16,16 @@ interface Props {
   profileImage: string;
   backgroundImage: string;
   universityInfo: Listprops;
+  
   data: {
     id: number;
     name: string;
     description: string;
-
     location: string;
     Approvedby: string;
     establishment: string;
+  fullForm:string
+
   };
 }
 
@@ -64,7 +66,6 @@ const GlobalProfileLayout = async ({
               {name}
             </h2>
 
-            {/* <p className="mt-2 text-accent text-sm">{description}</p> */}
           </div>
 
           <ul className="flex justify-center text-xs font-medium sm:text-sm text-foreground/80 gap-4 sm:gap-6 mt-2 overflow-x-scroll md:overflow-x-hidden ">

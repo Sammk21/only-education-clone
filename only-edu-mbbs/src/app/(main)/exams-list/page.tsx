@@ -32,7 +32,7 @@ export default async function UniversitiesList({
     if (streamsParam) {
       const streamsFilters = streamsParam
         .split(",")
-        .map((streams) => `filters[stream][slug][$eq]=${streams}`)
+        .map((streams) => `filters[streams][slug][$eq]=${streams}`)
         .join("&");
       examListQuery += `&${streamsFilters}`;
     }
@@ -90,7 +90,7 @@ export default async function UniversitiesList({
             </div>
           )}
           <MobileFilter
-            streams={streams}
+streams={streams}
             modes={modes}
             context="exams"
             filterParams={filterParams}

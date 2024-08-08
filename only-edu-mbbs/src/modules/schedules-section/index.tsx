@@ -72,7 +72,6 @@ const SchedulesSection = ({ data }: Props) => {
                 <TestCards
                   key={index}
                   length={item.universitiesLength}
-                  context="streamsParam"
                   tab="Colleges"
                   href="universities-list/"
                   streamTitle={item.streamTitle}
@@ -90,9 +89,8 @@ const SchedulesSection = ({ data }: Props) => {
                 <TestCards
                   key={index}
                   length={item.entranceExamsLength}
-                  context="streamsParam"
                   tab="Exams"
-                  href="/exams-list"
+                  href="/exams-list?streamsParam="
                   streamTitle={item.streamTitle}
                   streamIcon={item.streamIcon}
                   streamSlug={item.streamSlug}
@@ -107,9 +105,8 @@ const SchedulesSection = ({ data }: Props) => {
                 <TestCards
                   key={index}
                   length={item.topCoursesLength}
-                  context="streamsParam"
                   tab="Courses"
-                  href="/course-list"
+                  href="/course-list?streamsParam="
                   streamTitle={item.streamTitle}
                   streamIcon={item.streamIcon}
                   streamSlug={item.streamSlug}

@@ -15,7 +15,8 @@ const merriweather = Merriweather({
 export default function PostList({ post, href }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
-
+  const baseUrl = `localhost:3000${href}/`; 
+  const itemUrl = `${baseUrl}${post.slug}`;
   return (
     <section>
       <div className="border-b border-b-borderLight dark:border-b-border mt-5">
@@ -49,13 +50,14 @@ export default function PostList({ post, href }) {
           </Link>
           <Link
             href={`${href}/${post.slug}`}
-            className="relative col-span-2 h-20 w-20 sm:h-28 sm:w-28"
+            className="relative col-span-2 h-20 w-full sm:h-28 sm:w-full"
           >
             <Image
               src={imageUrl + image}
               alt="Thumbnail"
               className="object-cover transition-all"
               fill={true}
+              // blurDataURL={post.image.blurDataURL}
             />
           </Link>
           <div className="col-span-6 sm:py-3 pb-2 flex justify-between items-center">
@@ -68,8 +70,8 @@ export default function PostList({ post, href }) {
               </div>
             </Link>
             <div className="flex sm:gap-4 items-center">
-              <CiBookmark className="text-black text-xl" />
-              <ShareComponent />
+              {/* <CiBookmark className="text-black text-xl" /> */}
+              <ShareComponent  url={itemUrl}/>
             </div>
           </div>
         </div>

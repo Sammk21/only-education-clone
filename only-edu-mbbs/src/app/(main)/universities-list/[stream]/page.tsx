@@ -11,6 +11,7 @@ import {
 } from "@/types/types";
 import {
   buildUniversityListQuery,
+  filterUniversities,
   getStrapiData,
   getUniversities,
   getUserData,
@@ -43,7 +44,7 @@ export default async function UniversitiesList({
   };
 
   const baseQuery =
-    "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title";
+    "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title&fields[2]=fullForm";
 
   const universityListQuery = buildUniversityListQuery(
     baseQuery,
@@ -66,7 +67,7 @@ export default async function UniversitiesList({
       getUserMeLoader(),
     ]);
 
-  const filteredUniversities = data.data;
+  const filteredUniversities = filterUniversities(data.data);
   const finalData: UniversitiesData =
     filteredUniversities.length > 0
       ? { data: filteredUniversities, meta: data.meta }
@@ -115,7 +116,10 @@ export default async function UniversitiesList({
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}
+            course={courses.data[0].courses}
+
             filterParams={filterParams}
+            
             context="universities"
           />
         </div>

@@ -15,6 +15,7 @@ import { IoLocationSharp } from "react-icons/io5";
 
 import { GoMail } from "react-icons/go";
 import SvgComponent from "@/svg/onlyeducationLogo";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -44,7 +45,7 @@ const Footer = () => {
             <ul className="mt-8 flex gap-6">
               <li>
                 <Link
-                  href="#"
+                  href="https://www.facebook.com/onlyedu.co.in"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75"
@@ -68,7 +69,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/onlyeducationofficial/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75"
@@ -96,15 +97,7 @@ const Footer = () => {
                   target="_blank"
                 >
                   <span className="sr-only">Twitter</span>
-
-                  <svg
-                    className="h-6 w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                  </svg>
+                  <FaXTwitter />
                 </Link>
               </li>
             </ul>
@@ -117,7 +110,7 @@ const Footer = () => {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
-                    href="#"
+                    href="/universities-list/engineering"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     Top engineering colleges
@@ -126,7 +119,7 @@ const Footer = () => {
 
                 <li>
                   <Link
-                    href="#"
+                    href="/universities-list/medical"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     Top medical colleges
@@ -135,7 +128,7 @@ const Footer = () => {
 
                 <li>
                   <Link
-                    href="#"
+                    href="/universities-list/management"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     {" "}
@@ -145,7 +138,7 @@ const Footer = () => {
 
                 <li>
                   <Link
-                    href="#"
+                    href="/exams-list"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     Top entrance exams
@@ -154,7 +147,7 @@ const Footer = () => {
 
                 <li>
                   <Link
-                    href="#"
+                    href="/articles"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     Articles
@@ -162,7 +155,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/news"
                     className="text-gray-700 transition hover:opacity-75 hover:underline"
                   >
                     News
@@ -177,33 +170,24 @@ const Footer = () => {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
-                    href="#"
+                    href="/terms-and-condition"
                     className="text-gray-700 transition hover:opacity-75"
                   >
-                    {" "}
-                    Contact{" "}
+                   Terms & Conditions 
+                    
                   </Link>
                 </li>
 
                 <li>
                   <Link
-                    href="#"
+                    href="/privacy-policy"
                     className="text-gray-700 transition hover:opacity-75"
                   >
-                    {" "}
-                    FAQs{" "}
+                   Privacy policy
                   </Link>
                 </li>
 
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    {" "}
-                    Live Chat{" "}
-                  </Link>
-                </li>
+               
               </ul>
             </div>
 
@@ -216,40 +200,11 @@ const Footer = () => {
                     href="#"
                     className="text-gray-700 transition hover:opacity-75"
                   >
-                    {" "}
-                    Accessibility{" "}
+                    Contact Us
                   </Link>
                 </li>
 
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    {" "}
-                    Returns Policy{" "}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    {" "}
-                    Refund Policy{" "}
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
-                    {" "}
-                    Hiring Statistics{" "}
-                  </Link>
-                </li>
+             
               </ul>
             </div>
           </div>

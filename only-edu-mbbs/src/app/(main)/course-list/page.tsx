@@ -25,7 +25,7 @@ export default async function UniversitiesList({
 
   const streams = await getStrapiData(streamsQuery);
   const duration = await getStrapiData(durationQuery);
-  const course = await getStrapiData(courseQuery);
+  // const course = await getStrapiData(courseQuery);
 
   let { streamsParam, durationParam, courseParam } = searchParams;
   let filterParams = { streamsParam, durationParam, courseParam };
@@ -83,7 +83,7 @@ export default async function UniversitiesList({
           {data.data.length > 0 ? (
             <CourseList user={newUser} data={data} />
           ) : (
-            <div className=" w-[70%] flex justify-center ">
+            <div className=" sm:w-[70%] w-[100%] flex justify-center ">
               <span className=" text-dark bg-accent/10  rounded-xl mb-6 mx-10 w-full h-[200px] justify-center flex items-center">
                 Uh oh... no result found
               </span>
@@ -91,8 +91,7 @@ export default async function UniversitiesList({
           )}
           <MobileFilter
             streams={streams}
-            duration={duration}
-            // course={course}
+           
             context="course"
             filterParams={filterParams}
           />

@@ -20,6 +20,7 @@ export const CourseListUniversity = ({ data }: Props) => {
       [courseId]: !prev[courseId],
     }));
   };
+ 
 
   return (
     <div>
@@ -34,15 +35,15 @@ export const CourseListUniversity = ({ data }: Props) => {
           <div className="mt-4 space-y-4">
             {data.data[0].collegeCourseManager.map((item) => (
               <div key={item.id} className="border rounded-md p-4 bg-white">
-                <div className="px-4 pt-2 pb-1">
+                <div className="sm:px-4 pt-2 pb-1">
                   <div className="course-detail flex justify-between">
                     <Link
                       className="text-lg font-medium text-black underline"
-                      href="/university/25881-iit-madras-indian-institute-of-technology-iitm-chennai/bachelor-of-technology-btech-computer-science-and-engineering-2049"
+                      href={`/study/course/${item.course.slug}`}
                     >
                       {item.course.courseFullForm} [{item.course.title}]
                     </Link>
-                    <div className="text-end ml-4 whitespace-nowrap">
+                    <div className="text-end ml-4 whitespace-nowrap hidden sm:block">
                       <span className="text-sm text-black/70">
                         1st Yr Fees:
                       </span>
@@ -51,21 +52,10 @@ export const CourseListUniversity = ({ data }: Props) => {
                       </span>
                     </div>
                   </div>
-                  <div className="rating-fees text-md font-medium flex justify-between mt-1">
+                  <div className="rating-fees text-md font-medium sm:flex sm:justify-between justify-start mt-1 flex-col sm:flex-row">
                     <div className="text-black/80 flex items-center">
-                      <span className="mr-2 flex items-center">
-                        <span className="font-weight-medium text-primary-black">
-                          4.5
-                        </span>
-                        <span className="clg-sprite star-yellow-20 icon-20 star-icon"></span>
-                        <Link
-                          className="text-gray-500"
-                          href="/university/25881-iit-madras-indian-institute-of-technology-iitm-chennai/reviews?courseTag=18&amp;course=2049"
-                        >
-                          (26 Reviews)
-                        </Link>
-                      </span>
-                      <span className="course-separater pl-3 ml-2 position-relative">
+                      
+                      <span className="course-separater  position-relative">
                         Year: {item.course.durationYear}
                       </span>
                       <span className="course-separater pl-3 ml-2 position-relative">
@@ -74,14 +64,14 @@ export const CourseListUniversity = ({ data }: Props) => {
                     </div>
                     <Button
                       type="button"
-                      className="text-sm border-none flex items-center bg-white p-0 font-medium text-blue-500"
+                      className="text-sm border-none flex items-center bg-white p-0 font-medium text-blue-500 hover:bg-transparent"
                     >
                       Check Detailed Fees
                       <span className="clg-sprite arrow-r-blue-20 icon-20 arrow-icon"></span>
                     </Button>
                   </div>
-                  <div className="flex justify-between items-center gap-4 mt-4">
-                    <div className="eligibility-section">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mt-4 items-start">
+                    <div className="eligibility-section flex items-center gap-2 sm:block">
                       <p className="eligibility mb-0 text-sm font-medium text-black/80">
                         Eligibility:
                       </p>
@@ -89,7 +79,7 @@ export const CourseListUniversity = ({ data }: Props) => {
                         {item.eligibility}
                       </div>
                     </div>
-                    <div className="application-section">
+                    <div className="application-section flex items-center gap-2 sm:block">
                       <p className="mb-0 text-sm font-medium text-black/80">
                         Application Date:
                       </p>
@@ -98,15 +88,20 @@ export const CourseListUniversity = ({ data }: Props) => {
                         {item.applicationDate?.endDate}
                       </div>
                     </div>
+                      <div className="text-end  whitespace-nowrap block sm:hidden">
+                      <span className="text-sm text-black/70 font-medium">
+                        1st Yr Fees:
+                      </span>
+                      <span className="text-lg font-semibold text-green-500 ml-1">
+                        ₹{item.fees}
+                      </span>
+                    </div>
                     <div className="flex gap-x-2 justify-end">
                       <Button type="button" className="">
                         Brochure
                         <span className="jsx-3949341611 icon clg-sprite download-btn ml-1"></span>
                       </Button>
-                      <Button className="border-orange-500 border bg-transparent text-black">
-                        Apply Now
-                        <span className="jsx-3949341611 icon clg-sprite apply-btn ml-1"></span>
-                      </Button>
+                      
                     </div>
                   </div>
                 </div>

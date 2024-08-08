@@ -77,6 +77,7 @@ const CollegeFilter = ({
   context,
   course,
   streams,
+
 }: Props) => {
   const {
     locationsParam,
@@ -103,6 +104,7 @@ const CollegeFilter = ({
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     await updatedFilters(formData, context, pathname); // Call server-side action
+
   };
 
   const handleRemoveFilter = (filterType: string, value: string) => {
@@ -278,6 +280,8 @@ const CollegeFilter = ({
                   </button>
                 </div>
               ))}
+
+
             </div>
           </div>
 
@@ -312,20 +316,21 @@ const CollegeFilter = ({
                 selectedItems={selectedstreamParam}
               />
             )}
-            {modes && (
+             {modes && (
               <AccordionCustom
                 name={"Examination Modes"}
                 data={modes.data}
                 selectedItems={selectedmodesParam}
               />
             )}
-            {course && (
+             {course && (
               <AccordionCustom
                 name={"Course"}
                 data={course.data}
                 selectedItems={selectedcourseParam}
               />
             )}
+
           </div>
         </form>
       </div>

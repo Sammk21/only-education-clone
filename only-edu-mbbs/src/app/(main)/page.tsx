@@ -20,12 +20,12 @@ const WhyUsQuery =
   "/api/landing-page?populate[whyOnlyEducation][populate][header][populate]=true&populate[whyOnlyEducation][populate][qna][populate]=true";
 
 const NewsQuery =
-  "/api/landing-page?populate[news][fields][0]=title&populate[news][fields][1]=slug&populate[news][fields][2]=live&populate[news][fields][3]=description&populate[news][populate][image][fields][0]=url&populate[news][populate][image][fields][1]=formats&populate[news][populate][image][fields][2]=blurhash&populate[news][populate][image][fields][3]=alternativeText";
+  "/api/landing-page?populate[news][fields][0]=title&populate[news][fields][1]=slug&populate[news][fields][2]=live&populate[news][fields][3]=description&populate[news][populate][image][fields][0]=url&populate[news][populate][image][fields][1]=formats&populate[news][populate][image][fields][2]=blurhash&populate[news][populate][image][fields][3]=alternativeText&populate[news][sort][2]=live";
 
 const ArticlesQuery =
   "/api/landing-page?populate[articles][fields][0]=title&populate[articles][fields][1]=slug&populate[articles][fields][2]=createdAt&populate[articles][fields][3]=description&populate[articles][fields][4]=createdBy&populate[articles][populate][image][fields][0]=url&populate[articles][populate][image][fields][1]=blurhash&populate[articles][populate][image][fields][2]=alternativeText&populate[articles][populate][image][fields][3]=formats";
 const TopUniversitiesQuery =
-  "/api/landing-page?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][fields][0]=title&populate[topUniversities][populate][universities][fields][1]=slug&populate[topUniversities][populate][universities][populate][universityProfile][fields][0]=location&populate[topUniversities][populate][universities][populate][universityProfile][fields][1]=Approvedby&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][1]=url&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][2]=blurhash&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][3]=alternativeText&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][4]=formats&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][1]=url&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][2]=blurhash&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][3]=alternativeText&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][4]=formats";
+  "/api/landing-page?populate[topUniversities][populate][header][populate]=true&populate[topUniversities][populate][universities][fields][0]=title&populate[topUniversities][populate][universities][fields][1]=slug&populate[topUniversities][populate][universities][populate][universityProfile][fields][0]=location&populate[topUniversities][populate][universities][populate][universityProfile][fields][1]=Approvedby&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][1]=url&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][2]=blurhash&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][3]=alternativeText&populate[topUniversities][populate][universities][populate][universityProfile][populate][backgroundImage][fields][4]=formats&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][1]=url&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][2]=blurhash&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][3]=alternativeText&populate[topUniversities][populate][universities][populate][universityProfile][populate][profileImage][fields][4]=formats&populate[topUniversities][populate][universities][populate][indian_state][fields][0]=title&populate[topUniversities][populate][universities][fields][2]=fullForm";
 
 const BannerImageQuery =
   "/api/landing-page?populate[bannerImage][fields][0]=url&populate[bannerImage][fields][1]=alternativeText&populate[bannerImage][fields][2]=blurhash&populate[bannerImage][fields][3]=formats&populate[bannerImage][fields][4]=name";
@@ -40,7 +40,7 @@ const courseQuery =
   "/api/landing-page?populate[courses][fields][0]=title&populate[courses][fields][1]=slug";
 
 const examsQuery =
-  "/api/landing-page?populate[entrance_exams][fields][0]=title&populate[entrance_exams][fields][1]=slug&populate[entrance_exams][populate][searchableImage][fields][0]=url&populate[entrance_exams][populate][searchableImage][fields][1]=alternativeText&populate[entrance_exams][populate][searchableImage][fields][2]=blurhash&populate[entrance_exams][populate][searchableImage][fields][3]=formats&populate[entrance_exams][populate][mode][fields][0]=title";
+"/api/landing-page?populate[entrance_exams][fields][0]=title&populate[entrance_exams][fields][1]=slug&populate[entrance_exams][fields][2]=examlevel&populate[entrance_exams][fields][3]=examinationDate&populate[entrance_exams][fields][4]=applicationDate&populate[entrance_exams][populate][searchableImage][fields][0]=url&populate[entrance_exams][populate][searchableImage][fields][1]=alternativeText&populate[entrance_exams][populate][searchableImage][fields][2]=blurhash&populate[entrance_exams][populate][searchableImage][fields][3]=formats&populate[entrance_exams][populate][mode][fields][0]=title"
 
 export default async function Home() {
   const [
@@ -67,7 +67,6 @@ export default async function Home() {
     getStrapiData(examsQuery),
   ]);
 
-  console.log("uni data", cityData);
 
   return (
     <div className="w-full overflow-hidden">

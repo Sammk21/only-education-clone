@@ -13,10 +13,12 @@ interface EntranceExamData {
       id: number;
       title: string;
       slug: string;
-      applicationDate: string;
-      examinationDate: string;
+      applicationDate: Date;
+      examinationDate: Date;
       resultDate: string;
       searchableImage: ImageAttributes;
+      examlevel:string;
+      
       mode: {
         title: string;
       };
@@ -28,6 +30,7 @@ interface Props {
 }
 
 const ExamsSlider = ({ data }: Props) => {
+  console.log("check",data.entrance_exams.data[0].applicationDate)
   const flickityOptions = {
     initialIndex: 2,
     fade: true,
@@ -52,10 +55,10 @@ const ExamsSlider = ({ data }: Props) => {
           reloadOnUpdate
         >
           {data.entrance_exams.data.map((item) => (
-            <div key={item.id} className="border p-4 relative h-64 w-64  sm:w-72  bg-white rounded-lg mr-4">
+            <div key={item.id} className="border p-4 relative h-64 w-72  sm:w-80  bg-white rounded-lg mr-4">
               <Link
                 className="jsx-3656862976 flex items-center  mb-6"
-                href="/exams/neet"
+                href={`/study/exam/${item.slug}`}
               >
                 <div className="exam-img mr-3">
                   <ImageExtended
@@ -63,6 +66,7 @@ const ExamsSlider = ({ data }: Props) => {
                     alt={item.searchableImage.alternativeText}
                     height={50}
                     width={50}
+                    blurDataURL={item.searchableImage.blurhash}
                     className="border rounded-full lazyloaded border-black"
                   />
                 </div>
@@ -76,10 +80,12 @@ const ExamsSlider = ({ data }: Props) => {
               </Link>
               <div className="flex flex-row justify-between text-black text-lg">
                 <div className="">
-                  <p className=" text-black/60">Participating Colleges</p>
+                  <p className=" text-black/60">Appplication Date                  </p>
                 </div>
                 <div className=" font-medium text-right">
-                  <p className="">893</p>
+                  {/* <p className="">{item.applicationDate}</p> */}
+                  <p>{new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(item.applicationDate))}</p>
+
                 </div>
               </div>
               <div className="flex flex-row justify-between text-black text-lg">
@@ -87,7 +93,9 @@ const ExamsSlider = ({ data }: Props) => {
                   <p className=" text-black/60"> Exam Date</p>
                 </div>
                 <div className=" font-medium text-right">
-                  <p className="">{item.applicationDate}</p>
+                  {/* <p className="">{item.examinationDate}</p> */}
+                  <p>{new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(item.examinationDate))}</p>
+
                 </div>
               </div>
               <div className="flex flex-row justify-between text-black text-lg">
@@ -95,10 +103,14 @@ const ExamsSlider = ({ data }: Props) => {
                   <p className=" text-black/60">Exam Level</p>
                 </div>
                 <div className=" font-medium text-right">
-                  <p className="">national</p>
+                  <p className="">{item.examlevel}</p>
                 </div>
               </div>
               <Separator className="mt-3 mb-1" />
+              <Link
+                className=""
+                href={`/study/exam/${item.slug}`}
+              >
               <div className="flex flex-row justify-between hover:text-orange-500 cursor-pointer text-black text-lg">
                 <div className="font-medium">
                   <p className=" ">Application Process</p>
@@ -107,7 +119,12 @@ const ExamsSlider = ({ data }: Props) => {
                   <MdKeyboardArrowRight />
                 </div>
               </div>
+              </Link>
               <Separator className="my-1" />
+              <Link
+                className=""
+                href={`/study/exam/${item.slug}`}
+              >
               <div className="flex flex-row justify-between hover:text-orange-500 cursor-pointer text-black text-lg">
                 <div className="font-medium">
                   <p className="">Exam info</p>
@@ -116,6 +133,7 @@ const ExamsSlider = ({ data }: Props) => {
                   <MdKeyboardArrowRight />
                 </div>
               </div>
+              </Link>
             </div>
           ))}
         </Flickity>
@@ -125,3 +143,5 @@ const ExamsSlider = ({ data }: Props) => {
 };
 
 export default ExamsSlider;
+
+

@@ -110,6 +110,7 @@ const CollegeList = ({ data, user }: Props) => {
           </p>
         </>
       )}
+
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
@@ -170,7 +171,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
               <Link href={`/study/uni/${university?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                    {university?.title}
+                    {university?.fullForm}
                   </h3>
                   <div className="flex my-1 text-xs sm:text-sm">
                     <p className="flex items-center mr-2">

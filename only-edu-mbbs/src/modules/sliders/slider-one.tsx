@@ -15,10 +15,15 @@ interface BlogPageProps {
 
 const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
   const [loading, setLoading] = useState(true);
+  console.log("d",data)
 
   useEffect(() => {
     setLoading(false); // Set loading to false once the component mounts
   }, []);
+    // Check if data is null or empty
+    if (!data.data || data.data.length === 0) {
+      return null; // Do not render anything if data is null or empty
+    }
 
   const flickityOptions = {
     wrapAround: data.data.length >= 8 ? true : false,
