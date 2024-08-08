@@ -53,7 +53,7 @@ const Overview = ({ user }: userProp) => {
                   <span className="flex items-center gap-x-2 my-2">
                     <IoMdCheckmarkCircle className="text-green-500" />
                     <span className="text-dark/60"> Phone:</span>
-                    {user.data?.username}
+                    {user.data?.phone}
                   </span>
                   <span className="flex items-center gap-x-2 my-2">
                     <IoMdCheckmarkCircle className="text-green-500" />

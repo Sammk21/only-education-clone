@@ -91,12 +91,12 @@ export default async function Home() {
             <InfoButton
               title="Admission 2024"
               data={topUniversitiesData.topUniversities.universities.data}
-              href="study/uni/"
+              href="/study/uni/"
             />
             <InfoButton
               title="Top courses 2024"
               data={courseButtonData.courses.data}
-              href="study/course/"
+              href="/study/course/"
             />
             <WhyUs data={whyUsData.whyOnlyEducation} />
             <NewsLetter />

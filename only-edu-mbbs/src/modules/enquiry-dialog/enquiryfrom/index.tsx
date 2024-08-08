@@ -75,7 +75,7 @@ export function EnquiryFrom({ title, user, id, onClose }: EnquiryFromProps) {
             placeholder="Tyler"
             type="text"
             value={user.data?.firstName}
-            disabled={true}
+            disabled={user.data?.firstName ? true : false}
           />
         </LabelInputContainer>
         <LabelInputContainer>
@@ -86,7 +86,7 @@ export function EnquiryFrom({ title, user, id, onClose }: EnquiryFromProps) {
             id="lastName"
             placeholder="Durden"
             defaultValue={user.data?.lastName}
-            disabled={true}
+            disabled={user.data?.lastName ? true : false}
             type="text"
           />
         </LabelInputContainer>

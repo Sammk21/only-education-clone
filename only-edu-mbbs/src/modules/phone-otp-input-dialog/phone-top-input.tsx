@@ -80,7 +80,7 @@ const PhoneInputForm: React.FC<Props> = ({
           {title === "Brochure" && <FaLock className="mr-1" />} {title}
         </Button>
       </DialogTrigger>
-      <DialogContent status={null} className="sm:max-w-[425px] rounded-lg">
+      <DialogContent className="sm:max-w-[425px] rounded-lg">
         <DialogHeader>
           <DialogTitle>Verify Phone</DialogTitle>
           <DialogDescription>

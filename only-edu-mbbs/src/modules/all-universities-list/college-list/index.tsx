@@ -57,10 +57,6 @@ interface FilterParams {
 }
 
 const CollegeList = ({ data, user }: Props) => {
- 
-
-
-
   const client = new MeiliSearch({
     host: "https://search.onlyeducation.co.in",
     apiKey: "c434b12d44e6b8ee0783ac505dbf8a6e61fc701c8d1ce0cd15bdb8a3b08c855a",
@@ -114,11 +110,6 @@ const CollegeList = ({ data, user }: Props) => {
           </p>
         </>
       )}
-      { data.data.length > 0 &&
-      <p className="text-dark text-center my-5 font-medium">
-          {data.data.length} { data.data.length === 1 ? "result" : "results" } found
-          </p>
-}
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem
@@ -140,7 +131,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
     <>
       <div
         key={university?.id}
-        className="m-auto mb-4 p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
+        className="m-auto mb-4 p-2 sm:p-4 flex flex-col w-full border shadow-sm rounded-xl hover:bg-accent/10"
       >
         <div className="flex flex-col w-full sm:grid grid-cols-[auto,auto,1fr] gap-x-3">
           <div className="h-full flex flex-col items-center">
@@ -163,7 +154,7 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
             className=" w-full sm:w-1/4"
             href={`/study/uni/${university?.slug}`}
           >
-            <div className="relative h-40 w-40  rounded-md overflow-hidden">
+            <div className="relative h-48 w-full mx-auto  sm:h-40 sm:w-40  rounded-md overflow-hidden">
               <ImageExtended
                 className="object-cover w-full h-full transition"
                 src={university?.searchableImage?.url}
@@ -234,13 +225,13 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button className="bg-orange-500 hover:bg-orange-400">
-                          <FaLock className="mr-1" />
-                          Brochure
+                        <FaLock className="mr-1" />
+                        Brochure
                       </Button>
                     </DialogTrigger>
-                    <DialogContent status={null} className="sm:max-w-md rounded-md">
+                    <DialogContent className="sm:max-w-md rounded-md">
                       <DialogHeader>
-                      <DialogTitle>You're not signed in</DialogTitle>
+                        <DialogTitle>You're not signed in</DialogTitle>
                         <DialogDescription>
                           You have to login/signup to perfrom this action
                         </DialogDescription>
@@ -251,7 +242,9 @@ const FilteredUniversityItem = ({ university, user }: FilteredProps) => {
                       <DialogFooter className="sm:justify-start">
                         <DialogDescription>
                           <Link className="" href={"/privacypolicy"}>
-                        <p className="underline text-blue-500">privacy and policy</p>  
+                            <p className="underline text-blue-500">
+                              privacy and policy
+                            </p>
                           </Link>
                         </DialogDescription>
                       </DialogFooter>

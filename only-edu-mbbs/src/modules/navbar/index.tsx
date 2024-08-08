@@ -15,10 +15,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown, User } from "lucide-react";
+import { ChevronDown, LogOutIcon, User } from "lucide-react";
 import Banner from "@/components/ui/tailwind-banner";
-import {NavbarDrop} from "./dropdown";
+import { NavbarDrop } from "./dropdown";
 import { NavigationMenu } from "@/components/ui/navigation-menu";
+import { LogoutButton } from "../account/components/logout/logout";
+import { toast } from "sonner";
+import { logoutAction } from "@/app/data/actions/auth-actions";
+import { UserProfileButton } from "./components/UserProfileButton";
 
 export interface NavbarProps {
   navigation: Navigation;
@@ -54,12 +58,16 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
             </nav>
           </NavigationMenu>
           <div>
-            <Link href={"/auth"}>
-              <Button className="bg-gray-800 text-xs flex items-center justify-center">
-                Login
-                <IoLogIn className="mt-[2px] ml-1" size={20} />
-              </Button>
-            </Link>
+            {user.ok ? (
+              <UserProfileButton firstName={user.data.firstName} />
+            ) : (
+              <Link href={"/auth"}>
+                <Button className="bg-gray-800 text-xs flex items-center justify-center">
+                  Login
+                  <IoLogIn className="mt-[2px] ml-1" size={20} />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </header>
@@ -69,9 +77,6 @@ export const Navbar = async ({ navigation, dropdown }: NavbarProps) => {
 
 export default Navbar;
 
-interface Props {
-  firstName: string | undefined | null;
-}
 
 export const AuthLoader = () => {
   return (
@@ -82,36 +87,5 @@ export const AuthLoader = () => {
   );
 };
 
-const UserProfileButton = ({ firstName }: Props) => {
-  return (
-    <div className="flex items-center gap-x-2  text-sm">
-      <Avatar>
-        <AvatarImage
-          src="https://admin.onlyeducation.co.in/uploads/depositphotos_137014128_stock_illustration_user_profile_icon_852499f6e7.jpg"
-          alt="@shadcn"
-        />
-        <AvatarFallback>SA</AvatarFallback>
-      </Avatar>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <p className="flex justify-center items-center ">
-            {firstName ? "hello, " + firstName : "profile"}
-            <ChevronDown className="" size={15} />
-          </p>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <Link href={"/auth"}>
-              <DropdownMenuItem className="hover:bg-accent/10">
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
-              </DropdownMenuItem>
-            </Link>
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
-  );
-};
+
+

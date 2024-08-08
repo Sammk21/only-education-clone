@@ -2,7 +2,7 @@ import React from "react";
 import CollegeFilter from "@/modules/all-universities-list/college-filter";
 import CollegeList from "@/modules/all-universities-list/college-list";
 import MobileFilter from "@/modules/all-universities-list/responsive-filter";
-import RankingFilter from "@/modules/all-universities-list/rankingsFilter";
+import RankingFilter from "@/modules/all-universities-list/rankingsFilter"; //for university ranking
 import { PaginationComponent } from "@/modules/blog-components/blog/pagination";
 import {
   FilterParams,
@@ -17,6 +17,7 @@ import {
 } from "@/utils/utils";
 import { getUserMeLoader } from "@/app/data/services/get-user-loader";
 import {
+  courseQuery,
   examsQuery,
   indianStatesQuery,
   ownershipQuery,
@@ -37,6 +38,8 @@ export default async function UniversitiesList({
     ownershipsParam: searchParams.ownershipsParam,
     streamsParam: searchParams.streamsParam,
     rankingParam: searchParams.rankingParam,
+    courseParam: searchParams.courseParam,
+    cityParam: searchParams.cityParam,
   };
 
   const baseQuery =
@@ -49,15 +52,17 @@ export default async function UniversitiesList({
   );
 
   const examQueryUpdated = examsQuery(params.stream);
+  const courseQueryUpdated = courseQuery(params.stream);
   const indianStatesQueryUpdated = indianStatesQuery(params.stream);
 
-  const [ownership, indianStates, exams, ranking, data, user] =
+  const [ownership, indianStates, exams, ranking, data, courses, user] =
     await Promise.all([
       getStrapiData(ownershipQuery),
       getStrapiData(indianStatesQueryUpdated),
       getStrapiData(examQueryUpdated),
       getStrapiData(rankingQuery),
       getUniversities(universityListQuery, currentPage),
+      getStrapiData(courseQueryUpdated),
       getUserMeLoader(),
     ]);
 
@@ -66,25 +71,23 @@ export default async function UniversitiesList({
     filteredUniversities.length > 0
       ? { data: filteredUniversities, meta: data.meta }
       : data;
-
   const newUser = getUserData(user);
   const { pagination } = data.meta;
 
   return (
     <>
-      <div className="bg-white mx-8 rounded-[30px] my-4">
+      <div className="bg-white lg:mx-8 rounded-[30px] lg:my-4">
         <div className="flex flex-col-reverse relative lg:flex-row justify-center">
           <CollegeFilter
-            exams={exams}
+            exams={exams.data[0].entrance_exams}
             ownership={ownership}
             indianStates={indianStates}
             filterParams={filterParams}
+            course={courses.data[0].courses}
             context="universities"
           />
-          <div className="flex flex-col w-full ml-4">
-
-            
-            {/*  !important nirf ranking working properly in assending order but other ranking not working properly need to work on below ranking part after 15 august 2024
+          <div className="flex flex-col w-full lg:ml-4">
+            {/*  !important nirf ranking working properly in ascending order but other ranking not working properly need to work on below ranking part after 15 august 2024
 
             <RankingFilter
               ranking={ranking}

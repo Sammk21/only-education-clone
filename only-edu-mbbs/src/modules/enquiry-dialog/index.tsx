@@ -36,7 +36,7 @@ export function EnquiryDialog({ title, user, id }: Props) {
             <BottomGradient />
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-white rounded-xl" status={status}>
+        <DialogContent className="bg-white rounded-xl">
           <DialogHeader>
             <DialogTitle>Send Enquiry</DialogTitle>
             <DialogDescription>

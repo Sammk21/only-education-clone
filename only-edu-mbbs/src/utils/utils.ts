@@ -169,8 +169,6 @@ export function removeDuplicates(data: UniversitiesData): UniversitiesData {
   };
 }
 
-const DEFAULT_STREAM_PARAM = "engineering";
-const DEFAULT_RANKING_PARAM = "nirf";
 
 export const buildUniversityListQuery = (
   baseQuery: string,
@@ -182,6 +180,8 @@ export const buildUniversityListQuery = (
     examsParam,
     ownershipsParam,
     rankingParam,
+    courseParam,
+    cityParam,
     streamsParam,
   } = filterParams;
   let query = baseQuery;
@@ -199,18 +199,28 @@ export const buildUniversityListQuery = (
       .map((exams) => `filters[entrance_exams][slug][$eq]=${exams}`)
       .join("&")}`;
   }
+  if (courseParam) {
+    query += `&${courseParam
+      .split(",")
+      .map((course) => `filters[courses][slug][$eq]=${course}`)
+      .join("&")}`;
+  }
 
   if (ownershipsParam) {
     query += `&filters[ownership][slug][$eq]=${ownershipsParam}`;
   }
+  if (cityParam) {
+    query += `&filters[city][slug][$eq]=${cityParam}`;
+  }
 
-  // Add default stream filter
-  query += `&filters[streams][slug][$eq]=${params.stream}`;
-if (rankingParam) {
-  query += `&populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=rankingYear&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${rankingParam}&populate[rankingStreams][filters][stream][slug]=${params.stream}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
-}
+  // Add stream filter only if params.stream is not "all"
+  if (params.stream !== "all") {
+    query += `&filters[streams][slug][$eq]=${params.stream}`;
+  }
 
- 
+  if (rankingParam) {
+    query += `&populate[rankingStreams][fields][0]=rankingNumber&populate[rankingStreams][fields][1]=rankingYear&populate[rankingStreams][populate][stream][fields][0]=slug&populate[rankingStreams][populate][stream][fields][1]=id&populate[rankingStreams][populate][rankingPublisher][fields][1]=slug&populate[rankingStreams][filters][rankingPublisher][slug][$eq]=${rankingParam}&populate[rankingStreams][filters][stream][slug]=${params.stream}&sort[0]=rankingStreams.rankingNumber:asc&filters[rankingStreams][rankingNumber][$notNull]=true&filters[rankingStreams][id][$notNull]=true`;
+  }
 
   return query;
 };

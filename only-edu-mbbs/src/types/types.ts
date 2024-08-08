@@ -302,6 +302,7 @@ export interface SearchParamsProps {
   examsParam?: string;
   ownershipsParam?: string;
   modesParam?: string;
+  cityParam?: string;
   query?: string;
   page?: number;
   rankingParam?: string;
@@ -398,6 +399,8 @@ export interface FilterParams {
   examsParam?: string;
   ownershipsParam?: string;
   rankingParam?: string;
+  courseParam?: string;
+  cityParam?: string;
 }
 
 type Specialization = {
