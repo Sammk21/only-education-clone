@@ -108,52 +108,52 @@ export const navbarLinks = {
           submenu: [
             {
               id: 122,
-              href: "universities-list/management",
+              href: "/universities-list/management",
               title: "Top Management Colleges in India",
             },
             {
               id: 123,
-              href: "universities-list/management?ownershipParam=private",
+              href: "/universities-list/management?ownershipParam=private",
               title: "Top Private Management Colleges in India",
             },
             {
               id: 124,
-              href: "universities-list/management?ownershipParam=goverment",
+              href: "/universities-list/management?ownershipParam=goverment",
               title: "Top Government Management Colleges in India",
             },
             {
               id: 125,
-              href: "universities-list/management?cityParam=mumbai",
+              href: "/universities-list/management?cityParam=mumbai",
               title: "Top Management Colleges in Mumbai",
             },
             {
               id: 126,
-              href: "universities-list/management?cityParam=pune",
+              href: "/universities-list/management?cityParam=pune",
               title: "Top Management Colleges in Pune",
             },
             {
               id: 127,
-              href: "universities-list/management?cityParam=hyderabad",
+              href: "/universities-list/management?cityParam=hyderabad",
               title: "Top Management Colleges in Hyderabad",
             },
             {
               id: 128,
-              href: "universities-list/management?cityParam=chennai",
+              href: "/universities-list/management?cityParam=chennai",
               title: "Top Management Colleges in Chennai",
             },
             {
               id: 129,
-              href: "universities-list/management?cityParam=kolkata",
+              href: "/universities-list/management?cityParam=kolkata",
               title: "Top Management Colleges in Kolkata",
             },
             {
               id: 130,
-              href: "universities-list/management?cityParam=delhi",
+              href: "/universities-list/management?cityParam=delhi",
               title: "Top Management Colleges in Delhi",
             },
             {
               id: 131,
-              href: "universities-list/management?cityParam=kerala",
+              href: "/universities-list/management?cityParam=kerala",
               title: "Top Management Colleges in Kerala",
             },
           ],
