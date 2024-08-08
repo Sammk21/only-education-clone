@@ -32,10 +32,6 @@ const AccountNav = ({
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
         </AccountNavLink>
-        <AccountNavLink href="/auth/settings" route={route!}>
-          <RiSettingsLine className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </AccountNavLink>
       </div>
       <div className="px-2 pb-3 sm:block hidden">
         <Button

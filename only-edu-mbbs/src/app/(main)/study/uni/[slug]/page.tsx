@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
-  const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+  const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
   const { seo } = data.data[0];
   return {
     title:
@@ -57,9 +57,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getUniQuery = `/api/universities?filters[slug][$eq]=${params.slug}${halfGetUniQuery}`;
   const getUniNewsQuery = `/api/news?filters[relatedUniversities][slug][$eq]=${params.slug}${halfGetUniNewsQuery}`;
   const getCourseQuery = `/api/universities?filters[slug]=${params.slug}&populate[collegeCourseManager][populate][spzm][populate][specialization][populate]=true&populate[collegeCourseManager][populate][course][populate]=true&populate[collegeCourseManager][populate][spzm][populate][entrance_exam][populate]=true`;
-
-  // const uniHeader="/api/universities?populate[overviewTabs][populate][latestUpdates][fields][0]=header&populate[overviewTabs][populate][overview][fields][0]=header&populate[overviewTabs][populate][highlights][fields][0]=header&populate[overviewTabs][populate][ranking][fields][0]=header&populate[overviewTabs][populate][whyChoose][fields][0]=header&populate[overviewTabs][populate][academicAdvantages][fields][0]=header"
-  // const header = await getStrapiData(uniHeader);
 
   const data = await getStrapiData(getUniQuery);
 
@@ -136,6 +133,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
               <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
             )}
             <TableOfConten data={overviewTabs} />
+            {courseData.data && <CourseListUniversity data={courseData} />}
 
             {overviewTabs?.overview && (
               <GlobalUniversitiesTabs data={overviewTabs.overview} />
@@ -150,12 +148,12 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             {overviewTabs?.whyChoose && (
               <GlobalUniversitiesTabs data={overviewTabs.whyChoose} />
             )}
+
             {overviewTabs?.academicAdvantages && (
               <GlobalUniversitiesTabs data={overviewTabs.academicAdvantages} />
             )}
-            
-            <QuestionDropdown data={faq} />
 
+            <QuestionDropdown data={faq} />
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
@@ -189,7 +187,6 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
           </div>
           <div className="col-span-4 mt-3 hidden md:block">
             <CallToAction id={id} data={cta} title={title} />
-
             <UniversitiesNews
               data={newsData.data}
               className="grid grid-cols-1"

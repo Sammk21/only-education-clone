@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
   title: "Profile",
-  description: "View and edit your Medusa Store profile.",
+  description: "View and edit your Only education's User Profile.",
 };
 
 export default async function Profile() {

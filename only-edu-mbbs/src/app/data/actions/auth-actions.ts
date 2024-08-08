@@ -200,6 +200,7 @@ export async function loginUserAction(
 }
 
 export async function logoutAction(): Promise<void> {
+  console.log("logging out");
   cookies().set("_jwt", "", { ...config, maxAge: 0 });
   redirect("/auth");
 }

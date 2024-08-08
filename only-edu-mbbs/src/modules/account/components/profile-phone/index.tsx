@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { StrapiErrors } from "@/modules/custom/StrapiErrors";
 import { updatePhoneAction, updatePhoneSchema } from "@/app/data/actions/update-user-actions";
-
+import PhoneInputForm from "@/modules/phone-otp-input-dialog/phone-top-input";
 
 const INITIAL_STATE = {
   zodErrors: null,
@@ -23,8 +23,7 @@ const INITIAL_STATE = {
 export interface IPhoneInput {
   id: number;
   phone: string;
-  last_phone_update:Date | null
-  
+  last_phone_update: Date | null;
 }
 
 type MyInformationProps = {
@@ -39,8 +38,6 @@ const ProfilePhone = ({ user }: MyInformationProps) => {
     setSuccessState(false);
   };
 
-
-
   const {
     register,
     handleSubmit,
@@ -50,33 +47,32 @@ const ProfilePhone = ({ user }: MyInformationProps) => {
     defaultValues: {
       id: user.data?.id,
       phone: user.data?.phone,
-      last_phone_update:  user.data?.last_phone_update || null, 
+      last_phone_update: user.data?.last_phone_update || null,
     },
   });
-
-
-
-  
-
 
   const onSubmit: SubmitHandler<IPhoneInput> = async (data) => {
     setIsLoading(true); // Start loading
     const res = await updatePhoneAction(INITIAL_STATE, data);
     setIsLoading(false); // End loading
-    if(res.strapiErrors){
-      toast.error("failed to update phone")
-    }else{
-      toast.success("updated sucessfully")
+    if (res.strapiErrors) {
+      toast.error("failed to update phone");
+    } else {
+      toast.success("updated sucessfully");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <AccountInfo
-        disable={user.data?.last_phone_update !== null}
+        disable={true}
         isLoading={isLoading}
         label="Phone"
-        currentInfo={user.data ? `${user.data.phone}` : "couldn't fetch data please try later"}
+        currentInfo={
+          user.data
+            ? `${user.data.phone}`
+            : "couldn't fetch data please try later"
+        }
         isSuccess={false}
         isError={true}
         clearState={clearState}
@@ -84,12 +80,13 @@ const ProfilePhone = ({ user }: MyInformationProps) => {
         <div className="grid grid-cols-1 gap-y-2">
           <Label htmlFor="phone">
             Phone Number <span className="text-red-500">*</span>
-          </Label>  
+          </Label>
           <Input
+            disabled={true}
             id="phone"
             type="tel"
             autoComplete="tel"
-            placeholder="123-456-7890"
+            placeholder="no phone number provided"
             {...register("phone")}
             className={errors.phone ? "border-red-500" : ""}
           />
@@ -99,6 +96,14 @@ const ProfilePhone = ({ user }: MyInformationProps) => {
             </p>
           )}
           <StrapiErrors error={strapiError} />
+          {user.data && (
+            <PhoneInputForm
+              color="red"
+              title={`${user.data.phone ? "update phone" : " add phone"}`}
+              userId={user.data.id}
+              existingPhone={user.data.phone}
+            />
+          )}
         </div>
       </AccountInfo>
     </form>

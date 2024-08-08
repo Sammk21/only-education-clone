@@ -72,6 +72,7 @@ import { ImageAttributes } from "@/types/types";
 import Image from "next/image";
 import React, { useState } from "react";
 import FsLightbox from "fslightbox-react";
+import { ImageExtended } from "../common/extended-image/extended-image";
 
 interface GalleryTabsProps {
   event: {
@@ -105,8 +106,8 @@ const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
           onClick={() => openLightbox(images, index)}
           className="aspect-video"
         >
-          <Image
-            src={baseUrl + item.url}
+          <ImageExtended
+            src={item.url}
             alt={item.alternativeText || ""}
             width={300}
             height={200}

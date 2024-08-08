@@ -58,7 +58,7 @@ const CitySlider = ({ data }: Props) => {
     <section className=" py-9 border-b">
       <div className="container">
         <h4 className="capitalize font-semibold mb-4 text-dark md:text-3xl text-2xl pl-2 lg:pl-0">
-         Top Study Places 
+          Top Study Places
         </h4>
         <Flickity
           className={"carousel "}
@@ -67,23 +67,29 @@ const CitySlider = ({ data }: Props) => {
           disableImagesLoaded={true}
           reloadOnUpdate
         >
-        
           {data.map((item) => (
+            <Link
+              key={item.id}
+              href={`/universities-list/all?cityParam=${item.slug}`}
+            >
+              <div className=" mr-3  border mb-4 p-4 h-36  rounded-sm  grid grid-rows-4">
+                <div className="flex h-full row-span-3 items-">
+                  <div className="h-full w-full flex items-end">
+                    <ImageExtended
+                      src={item.cityIcon.url}
+                      alt={item.cityIcon.alternativeText}
+                      blurDataURL={item.cityIcon.blurhash}
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                </div>
 
-
-            <div key={item.id} className=" mr-3  border mb-4 p-4 h-36  rounded-sm  grid grid-rows-4">
-
-            <div className="flex h-full row-span-3 items-">
-            <div className="h-full w-full flex items-end">
-             <ImageExtended src={item.cityIcon.url} alt={item.cityIcon.alternativeText} blurDataURL={item.cityIcon.blurhash} width={100} height={100} />
-            </div>
-            </div>
-            <div className="row-span-1">
-            <p className="text-center mt-2">{item.title}</p>
-
-            </div>
-           
-            </div>
+                <div className="row-span-1">
+                  <p className="text-center mt-2">{item.title}</p>
+                </div>
+              </div>
+            </Link>
           ))}
         </Flickity>
       </div>
