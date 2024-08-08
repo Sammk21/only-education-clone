@@ -67,7 +67,6 @@ export default async function Home() {
     getStrapiData(examsQuery),
   ]);
 
-
   return (
     <div className="w-full overflow-hidden">
       <div className="relative">

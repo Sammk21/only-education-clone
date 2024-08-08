@@ -1,10 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaTrophy } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { ImageExtended } from "../common/extended-image/extended-image";
-import { ImageAttributes } from "@/types/types";
 
 interface Listprops {
   id: number;
@@ -16,16 +14,15 @@ interface Props {
   profileImage: string;
   backgroundImage: string;
   universityInfo: Listprops;
-  
+
   data: {
     id: number;
     name: string;
+    fullForm: string;
     description: string;
     location: string;
     Approvedby: string;
     establishment: string;
-  fullForm:string
-
   };
 }
 
@@ -35,10 +32,7 @@ const GlobalProfileLayout = async ({
   profileImage,
   universityInfo,
 }: Props) => {
-  const { name, description } = data;
-
-  const baseUrl = "https://admin.onlyeducation.co.in";
-
+  const { name, description, fullForm } = data;
   return (
     <div className=" bg-light  dark:bg-dark flex flex-wrap items-center border-none  justify-center  ">
       <div className="w-full   bg-light dark:bg-dark   transform  border-none   duration-200 easy-in-out">
@@ -64,6 +58,7 @@ const GlobalProfileLayout = async ({
           <div className="text-center px-4 md:px-14">
             <h2 className=" text-3xl font-bold dark:text-light text-dark">
               {name}
+              {fullForm}
             </h2>
 
           </div>
