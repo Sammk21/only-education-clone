@@ -116,7 +116,10 @@ export default async function UniversitiesList({
             exams={exams}
             ownership={ownership}
             indianStates={indianStates}
+            course={courses.data[0].courses}
+
             filterParams={filterParams}
+            
             context="universities"
           />
         </div>

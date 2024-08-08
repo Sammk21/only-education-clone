@@ -1,3 +1,5 @@
+
+
 "use client";
 import React, { useState } from "react";
 import { Drawer } from "vaul";
@@ -78,6 +80,7 @@ const MobileFilter: React.FC<FilterProps> = ({
   modes,
   duration,
   course,
+  streams,
   filterParams,
 }) => {
   const {
@@ -94,13 +97,13 @@ const MobileFilter: React.FC<FilterProps> = ({
   const selectedLocations = locationsParam ? locationsParam.split(",") : [];
   const selectedExams = examsParam ? examsParam.split(",") : [];
   const selectedOwnerships = ownershipsParam ? ownershipsParam.split(",") : [];
-  const selectedStreamsParam = streamsParam ? streamsParam.split(",") : [];
+  const selectedstreamParam = streamsParam ? streamsParam.split(",") : [];
   const selectedmodesParam = modesParam ? modesParam.split(",") : [];
   const selecteddurationParam = durationParam ? durationParam.split(",") : [];
   const selectedcourseParam = courseParam ? courseParam.split(",") : [];
 
   const handleSubmit = (event: React.FormEvent) => {
-    setIsDrawerOpen(false); // Close the drawer after submitting the form
+    setIsDrawerOpen(false); 
   };
 
   const pathname = usePathname();
@@ -166,7 +169,7 @@ const MobileFilter: React.FC<FilterProps> = ({
                       </div>
                     ))}
 
-                    {selectedStreamsParam.map((streams) => (
+                    {selectedstreamParam.map((streams) => (
                       <div
                         key={streams}
                         className="px-1 border border-dark inline-block mt-1 justify-center"
@@ -246,6 +249,13 @@ const MobileFilter: React.FC<FilterProps> = ({
                       selectedItems={selectedcourseParam}
                     />
                   )}
+                   {streams && (
+              <AccordionCustom
+                name={"stream"}
+                data={streams.data}
+                selectedItems={selectedstreamParam}
+              />
+            )}
                 </div>
               </form>
             </div>

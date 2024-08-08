@@ -100,7 +100,7 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
         <div className="">
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <div  className="pb-3 w-[85%]">
+              <div  className="pb-3 w-full sm:w-[85%]">
               <Link href={`study/course/${course?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">

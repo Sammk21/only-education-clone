@@ -67,7 +67,6 @@ export default async function Home() {
     getStrapiData(examsQuery),
   ]);
 
-  console.log("uni data", cityData);
 
   return (
     <div className="w-full overflow-hidden">

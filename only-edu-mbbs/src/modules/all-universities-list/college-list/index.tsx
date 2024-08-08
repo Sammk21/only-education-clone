@@ -110,7 +110,7 @@ const CollegeList = ({ data, user }: Props) => {
           </p>
         </>
       )}
-51
+
       {(query && results.length > 0 ? results : data.data).map(
         (university: Universitylist) => (
           <FilteredUniversityItem

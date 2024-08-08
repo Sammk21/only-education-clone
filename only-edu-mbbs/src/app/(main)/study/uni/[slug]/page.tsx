@@ -21,6 +21,7 @@ import { CourseListUniversity } from "@/modules/course-list-uni-page";
 import TableOfConten from "@/modules/universities-tabs/tableOf-conten";
 import RankingUniversityPage from "@/modules/ranking-university-page";
 import CourseRankingUniversityPage from "@/modules/course-university-list/CourseRankingUniversityPage";
+import DataNotFound from "@/modules/data-not-found/DataNotFound";
 
 export async function generateMetadata({
   params,
@@ -29,7 +30,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
   const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
-  const { seo } = data.data[0];
+  const { seo } = data?.data[0];
   return {
     title:
       seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
@@ -92,7 +93,9 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     title: title,
   };
 
-  return (
+
+
+  return(
     <div className="">
       <MockComponent data={recentlyViewedData} />
 

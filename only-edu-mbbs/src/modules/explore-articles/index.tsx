@@ -102,7 +102,7 @@ const ExploreArticles = ({ data, href }: BlogPageProps) => {
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 py-4 gap-3">
           {data.data.map((item) => {
-            const itemUrl = `${baseUrl}${item.slug}`; // Construct the URL using the slug
+            const itemUrl = `${baseUrl}${item.slug}`; 
 
             return (
               <div key={item.id} className="grid grid-rows-[1fr,auto] px-3 py-2 border bg-white rounded-lg">

@@ -20,6 +20,7 @@ export const CourseListUniversity = ({ data }: Props) => {
       [courseId]: !prev[courseId],
     }));
   };
+ 
 
   return (
     <div>
