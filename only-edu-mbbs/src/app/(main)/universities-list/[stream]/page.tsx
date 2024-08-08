@@ -41,7 +41,7 @@ export default async function UniversitiesList({
   };
 
   const baseQuery =
-    "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title";
+    "/api/universities?fields[0]=title&fields[1]=slug&populate[searchableImage][fields][0]=url&populate[searchableImage][fields][1]=alternativeText&populate[searchableImage][fields][2]=blurhash&populate[searchableImage][fields][3]=formats&populate[universityProfile][fields][0]=description&populate[universityProfile][fields][1]=fees&populate[universityProfile][fields][2]=avgPackage&populate[universityProfile][fields][3]=location&populate[ownership][fields][0]=title&populate[indian_state][fields][0]=title&populate[entrance_exams][fields][0]=title&fields[2]=fullForm";
 
   const universityListQuery = buildUniversityListQuery(
     baseQuery,

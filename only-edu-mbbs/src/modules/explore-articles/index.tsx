@@ -106,6 +106,7 @@ const ExploreArticles = ({ data, href }: BlogPageProps) => {
 
             return (
               <div key={item.id} className="grid grid-rows-[1fr,auto] px-3 py-2 border bg-white rounded-lg">
+                <Link href={`${baseUrl}${item.slug}`} >
                 <div className="grid grid-cols-3">
                   <div className="col-span-2 mr-3">
                     <h3 className="font-bold text-dark text-base line-clamp-2">
@@ -137,6 +138,7 @@ const ExploreArticles = ({ data, href }: BlogPageProps) => {
 
                   <ShareComponent url={itemUrl} /> {/* Pass the constructed URL */}
                 </div>
+                </Link>
               </div>
             );
           })}

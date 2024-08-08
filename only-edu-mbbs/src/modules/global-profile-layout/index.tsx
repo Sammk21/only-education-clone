@@ -11,6 +11,7 @@ interface Listprops {
   location: string;
   Approvedby: string;
   establishment: string;
+  fullForm:string
 }
 interface Props {
   profileImage: string;
@@ -33,6 +34,7 @@ const GlobalProfileLayout = async ({
   profileImage,
   universityInfo,
 }: Props) => {
+  console.log("jjj",data)
   const { name, description } = data;
 
   const baseUrl = "https://admin.onlyeducation.co.in";

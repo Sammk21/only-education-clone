@@ -18,7 +18,7 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
       <div className="relative z-10 w-full flex space-x-3  border mb-3 bg-background rounded-lg  text-dark">
         <div className="flex-[1_0_0%]">
           <Label htmlFor="article" className="sr-only">
-            Search Universities
+            Search...
           </Label>
           <Input
             onChange={handleChange}
@@ -26,7 +26,7 @@ const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
             type="text"
             className="h-full"
             id="university"
-            placeholder="Search Universities"
+            placeholder="Search..."
           />
         </div>
       </div>

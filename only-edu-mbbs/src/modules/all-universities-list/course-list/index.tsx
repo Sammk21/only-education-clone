@@ -100,13 +100,18 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
         <div className="">
           <div className="flex-1 sm:pl-4 py-4 sm:py-0">
             <div className="flex flex-col sm:flex-row justify-between items-start">
-              <div  className="pb-3">
+              <div  className="pb-3 w-[85%]">
               <Link href={`study/course/${course?.slug}`}>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800 dark:text-white">
                     {course?.courseFullForm} [{course?.title}]
                   </h3>
-                  <p className="text-sm flex gap-5 mt-1 font-semibold ">
+                  <p className="line-clamp-1 my-2 italic text-sm block ">{course.description}</p>
+                 
+                </div>
+                </Link>
+                
+                <p className="text-sm flex gap-5 mt-1 font-semibold border-t border-b border-dashed py-2">
                     <span className="text-green-700 flex">
                       <GoDotFill />
                       {course?.durationYear?.toString()} Years
@@ -116,8 +121,6 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
                       {course.stream?.title}
                     </span>
                   </p>
-                </div>
-                </Link>
                
                 </div>
               <div>
@@ -128,6 +131,7 @@ const FilteredExamsItem = ({ course, user }: FilteredProps) => {
                   Find Colleges
                 </Link>
               </div>
+              
             </div>
           </div>
         </div>

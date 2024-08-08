@@ -102,7 +102,7 @@ export const UniversityCard = ({ university }: UniversityProps) => {
 
 export const InformationCard = ({ item, href }: InformationProps) => {
   return (
-    <div className="grid   h-64 w-64 border rounded-md sm:h-72 sm:w-80 justify-center">
+    <div className="grid   h-64 w-64 border rounded-md sm:h-72 sm:w-80 justify-center bg-white">
       <div className=" shadow-sm   h-36 w-full text-sm sm:text-lg md:text-xl rounded-sm rounded-b-none  relative group overflow-hidden cursor-pointer">
         <Link className="" href={`/${href}/post/${item.slug}`}>
           <ImageExtended
