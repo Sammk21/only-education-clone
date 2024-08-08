@@ -30,7 +30,6 @@ interface Props {
 }
 
 const ExamsSlider = ({ data }: Props) => {
-  console.log("check",data.entrance_exams.data[0].applicationDate)
   const flickityOptions = {
     initialIndex: 2,
     fade: true,

@@ -42,7 +42,7 @@ export default async function UniversitiesList({
         .map((modes) => `filters[mode][slug][$eq]=${modes}`)
         .join("&"); 
       examListQuery += `&${modesFilters}`;
-      console.log("hdfshfsak", modesFilters)
+      
     }
     // if (examsParam) {
     //   const examsFilters = examsParam
