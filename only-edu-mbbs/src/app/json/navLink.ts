@@ -533,5 +533,15 @@ export const navbarLinks = {
         },
       ],
     },
+    {
+      id: 202,
+      title: "Articles",
+      href: "/articles",
+    },
+    {
+      id: 203,
+      title: "News",
+      href: "/news",
+    }
   ],
 };
