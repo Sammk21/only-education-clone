@@ -52,7 +52,7 @@ const RecentlyViewedUniversity = () => {
                     </div>
                   </Link>
                   <p className="text-xs text-center line-clamp-2">
-                    {viewedItem.title}
+                    {viewedItem.slug}
                   </p>
                 </div>
               </div>

@@ -27,9 +27,9 @@ import { recentlyViewed } from "@/types/types";
 const config = {
   maxAge: 60 * 60 * 24 * 7,
   path: "/",
-  domain: process.env.HOST ?? "test.onlyeducation.co.in",
+  domain: ".onlyeducation.co.in", // Set to parent domain
   secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
+  sameSite: "lax" as const, // Use lowercase "lax"
 };
 
 interface IActionResult {

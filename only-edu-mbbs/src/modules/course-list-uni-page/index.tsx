@@ -9,6 +9,9 @@ interface Props {
 }
 
 export const CourseListUniversity = ({ data }: Props) => {
+console.log("dddd",data)
+
+  
   const { title, slug } = data.data[0];
   const [showSpecializations, setShowSpecializations] = useState<{
     [key: number]: boolean;

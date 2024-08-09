@@ -74,7 +74,6 @@ export function Register({ setCurrentView }: Props) {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
 
     setIsLoading(true); // Start loading
     const response = await registerUserAction(INITIAL_STATE, data);
