@@ -10,7 +10,7 @@ import { updatedFilters } from "@/app/action";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import ResetButton from "../resetButton";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Option {
   id: number;

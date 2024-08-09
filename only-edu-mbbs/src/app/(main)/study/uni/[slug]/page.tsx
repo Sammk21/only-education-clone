@@ -30,7 +30,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("universities", params.slug);
   const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
-  const { seo } = data?.data[0];
+
+  if (!data.data[0]) return {};
+  const { seo } = data.data[0];
   return {
     title:
       seo?.metaTitle || "Colleges with the Best Campus Life | Only Education",
@@ -60,6 +62,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const getCourseQuery = `/api/universities?filters[slug]=${params.slug}&populate[collegeCourseManager][populate][spzm][populate][specialization][populate]=true&populate[collegeCourseManager][populate][course][populate]=true&populate[collegeCourseManager][populate][spzm][populate][entrance_exam][populate]=true`;
 
   const data = await getStrapiData(getUniQuery);
+
+  if (!data.data[0]) return <DataNotFound />;
 
   const newsData = await getStrapiData(getUniNewsQuery);
   const courseData: CourseDataResponse = await getStrapiData(getCourseQuery);
@@ -94,9 +98,8 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     title: title,
   };
 
-
-
   return(
+
     <div className="">
       <MockComponent data={recentlyViewedData} />
 

@@ -27,7 +27,7 @@ import { recentlyViewed } from "@/types/types";
 const config = {
   maxAge: 60 * 60 * 24 * 7,
   path: "/",
-  domain: process.env.HOST ?? "localhost",
+  domain: process.env.API_URL ?? "",
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
 };

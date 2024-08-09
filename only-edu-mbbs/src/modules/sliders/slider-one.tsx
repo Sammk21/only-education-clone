@@ -15,7 +15,6 @@ interface BlogPageProps {
 
 const InformationSlider: React.FC<BlogPageProps> = ({ data, href }) => {
   const [loading, setLoading] = useState(true);
-  
 
   useEffect(() => {
     setLoading(false); // Set loading to false once the component mounts

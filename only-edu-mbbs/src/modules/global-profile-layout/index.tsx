@@ -1,10 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaTrophy } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { ImageExtended } from "../common/extended-image/extended-image";
-import { ImageAttributes } from "@/types/types";
 
 interface Listprops {
   id: number;
@@ -16,10 +14,11 @@ interface Props {
   profileImage: string;
   backgroundImage: string;
   universityInfo: Listprops;
-  
+
   data: {
     id: number;
     name: string;
+    fullForm: string;
     description: string;
     location: string;
     Approvedby: string;

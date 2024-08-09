@@ -21,6 +21,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const data: MetaProps = await getMetaData("entrance-exams", params.slug);
   const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+  if (!data.data[0]) return {};
   const { seo } = data.data[0];
   return {
     title:
