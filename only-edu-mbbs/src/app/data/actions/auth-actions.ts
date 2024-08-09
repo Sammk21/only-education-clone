@@ -29,6 +29,7 @@ const config = {
   path: "/",
   domain: process.env.HOST ?? "test.onlyeducation.co.in",
   secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
 };
 
 interface IActionResult {
