@@ -95,7 +95,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const recentlyViewedData = {
     slug: params.slug,
     image: profileImage.formats.thumbnail.url,
-    title: title,
+    title: data.data[0].title,
   };
 
   return(
@@ -138,7 +138,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         >
           <div className="mt-3 px-1 sm:px-3 col-span-8 ">
             {overviewTabs?.latestUpdates && (
-              <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} />
+              <GlobalUniversitiesTabs data={overviewTabs.latestUpdates} isLatestUpdate={true} />
             )}
             <TableOfConten data={overviewTabs} />
             {courseData.data && <CourseListUniversity data={courseData} />}

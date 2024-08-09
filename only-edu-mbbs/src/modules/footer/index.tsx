@@ -30,11 +30,11 @@ const Footer = () => {
             <ul className="mt-3 gap-y-1">
               <li className="flex gap-x-3 text-sm">
                 <AiFillMail className=" text-lg text-orange-500" />
-                <p>info@onlyEducation.com</p>
+                <p>info@onlyeducation.in</p>
               </li>
               <li className="flex gap-x-3 text-sm ">
                 <FaPhone className=" text-blue-500 text-sm rotate-90" />
-                <p>+91 9191919191</p>
+                <p>+91-6262929248</p>
               </li>
               <li className="flex gap-x-3 text-sm">
                 <IoLocationSharp className=" text-lg text-red-500" />
