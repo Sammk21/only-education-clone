@@ -85,7 +85,7 @@ interface GalleryTabsProps {
 }
 
 const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
-  const baseUrl = process.env.API_URL || "http://admin.onlyeducation.co.in";
+  const baseUrl = process.env.API_URL || "https://admin.onlyeducation.co.in";
 
   const [lightboxToggler, setLightboxToggler] = useState(false);
   const [lightboxSources, setLightboxSources] = useState<string[]>([]);
