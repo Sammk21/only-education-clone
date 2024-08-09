@@ -91,7 +91,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
   return (
     <>
       <div className="relative text-white">
-        <div className="absolute left-0 right-0  bottom-0 flex items-center justify-center h-[80vh] sm:h-[60vh] z-20">
+        <div className="absolute left-0 right-0 sm:top-auto top-0 bottom-0 flex items-center justify-center h-[80vh] sm:h-[60vh] z-20">
           <div className="text-center">
             <h1 className="md:text-5xl text-3xl font-semibold drop-shadow-lg">
               Right choice, Better future
@@ -190,7 +190,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
               {bannerImage.data.map((item) => (
                 <SwiperSlide key={item.id} className="">
                   <div className="  ">
-                    <div className="w-full h-[70svh] relative ">
+                    <div className="w-full h-[80svh] sm:h-[70svh] relative ">
                       <Image
                         src={"https://admin.onlyeducation.co.in" + item.url}
                         alt={item.name}

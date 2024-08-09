@@ -83,6 +83,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     scholarships,
     ranking,
     rankingStreams,
+    fullForm
   } = data.data[0];
   const backgroundImage = data.data[0].universityProfile.backgroundImage.url;
   const profileImage: ImageAttributes =
@@ -107,6 +108,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
         backgroundImage={backgroundImage}
         data={universityProfile}
         universityInfo={universityInfo}
+        fullForm={fullForm}
       />
       <Tabs defaultValue="overview">
         <TabsList className="sm:w-full justify-start sm:justify-center w-screen overflow-x-scroll md:overflow-hidden sticky top-16 sm:top-[4.5rem] z-20">

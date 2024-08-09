@@ -23,7 +23,9 @@ interface Props {
     location: string;
     Approvedby: string;
     establishment: string;
+    
   };
+  fullForm:string
 }
 
 const GlobalProfileLayout = async ({
@@ -31,8 +33,13 @@ const GlobalProfileLayout = async ({
   backgroundImage,
   profileImage,
   universityInfo,
+  fullForm
 }: Props) => {
-  const { name, description, fullForm } = data;
+  const { name, description } = data;
+  console.log("e",fullForm)
+
+  const baseUrl = "https://admin.onlyeducation.co.in";
+
   return (
     <div className=" bg-light  dark:bg-dark flex flex-wrap items-center border-none  justify-center  ">
       <div className="w-full   bg-light dark:bg-dark   transform  border-none   duration-200 easy-in-out">
@@ -56,9 +63,8 @@ const GlobalProfileLayout = async ({
         </div>
         <div className="">
           <div className="text-center px-4 md:px-14">
-            <h2 className=" text-3xl font-bold dark:text-light text-dark">
-              {name}
-              {fullForm}
+            <h2 className=" text-2xl sm:text-3xl font-bold dark:text-light text-dark">
+              {fullForm} 
             </h2>
 
           </div>

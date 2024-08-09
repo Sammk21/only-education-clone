@@ -252,7 +252,7 @@ export default async function Blog({ params }: { params: { slug: string } }) {
   const recommendedQuery = `/api/articles?filters[recommendedArticle][$eq]=true&populate[image]=true`;
   const recommendedData = await getStrapiData(recommendedQuery);
 
-  const socialBaseUrl = `localhost:3000/articles/post/`;
+  const socialBaseUrl = `https://test.onlyeducation.co.in/articles/post/`;
   const itemUrl = `${socialBaseUrl}${params.slug}`;
 
   return (
@@ -275,11 +275,14 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                             {title}
                           </h3>
                         </div>
-                        <div className="flex border-2 rounded-full gap-1 items-center px-2 h-fit py-1">
+                        <div className="hidden sm:block">
+                        <div className="flex border-2 rounded-full gap-1 items-center  px-2 h-fit py-1 ">
                           <ShareComponent url={itemUrl} />
-                          <span className="font-semibold text-sm">Share</span>
+                          <span className="font-semibold text-sm"> Share</span>
+                        </div>
                         </div>
                       </div>
+                      <div className="flex justify-between">
                       <div className="flex font-semibold text-sm gap-1 text-dark/40 mb-2">
                         <CiStopwatch className="text-lg" />
                         {createdAt
@@ -289,6 +292,11 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                               day: "numeric",
                             })
                           : ""}
+                      </div>
+                      <div className="block sm:hidden">
+                          <ShareComponent url={itemUrl} />
+                          
+                        </div>
                       </div>
                     </div>
                     <div className="bg-[#f7f7f7] rounded-sm px-3 py-3">

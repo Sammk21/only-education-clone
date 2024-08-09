@@ -51,7 +51,11 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const entry = data.data.find((item: any) => item.slug === params.slug);
 
   if (!entry) {
-    return <div>No data available for this slug</div>;
+    return (
+      <div className="h-[100dvh] w-[100dvh] flex justify-center items-center text-black text-3xl">
+        <h4>Data not found we are still working on correct our data</h4>
+      </div>
+    );
   }
 
   const {
@@ -66,7 +70,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
     previousPapers,
     stream,
     slug,
-    fullForm
+    fullForm,
   } = entry;
 
   return (
@@ -95,7 +99,10 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
             Previous Year Question Papers
           </TabsTrigger> */}
           <TabsTrigger value="news">News</TabsTrigger>
-          <Link href={`/universities-list/${stream?.slug}?examsParam=${slug}`} prefetch={true}>
+          <Link
+            href={`/universities-list/${stream?.slug}?examsParam=${slug}`}
+            prefetch={true}
+          >
             <TabsTrigger value="participate">Participate Colleges</TabsTrigger>
           </Link>
         </TabsList>
