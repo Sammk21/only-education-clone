@@ -34,6 +34,8 @@ export const enquiryAction = async (
     };
   }
 
+  console.log("triggered");
+
   try {
     const response = await axios.post(
       "http://localhost:8000/api/submit-enquiry",
