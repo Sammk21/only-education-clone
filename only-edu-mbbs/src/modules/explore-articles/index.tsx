@@ -92,7 +92,7 @@ interface BlogPageProps {
 }
 
 const ExploreArticles = ({ data, href }: BlogPageProps) => {
-  const baseUrl = 'localhost:3000/articles/post/'; 
+  const baseUrl = 'https://test.onlyeducation.co.in/articles/post/'; 
 
   return (
     <div className="py-9 border-b bg-orange-50">

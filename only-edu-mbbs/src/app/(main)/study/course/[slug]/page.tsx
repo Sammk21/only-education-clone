@@ -58,7 +58,7 @@ const StudyUniversity = async ({ params }: { params: { slug: string } }) => {
   const entry = data.data.find((item: any) => item.slug === params.slug);
 
   if (!entry) {
-    return <div>No data available for this slug</div>; // Handle case where no data is returned for the slug
+    return <div>No data available for this slug</div>; 
   }
 
   const { cta, overviewTabs, syllabus_subject, jobs, title, id, faq, stream } =

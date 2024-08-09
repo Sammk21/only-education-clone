@@ -15,7 +15,7 @@ const merriweather = Merriweather({
 export default function PostList({ post, href }) {
   const imageUrl = "https://admin.onlyeducation.co.in";
   const image = post.image.url;
-  const baseUrl = `localhost:3000${href}/`; 
+  const baseUrl = `https://test.onlyeducation.co.in${href}/`; 
   const itemUrl = `${baseUrl}${post.slug}`;
   return (
     <section>

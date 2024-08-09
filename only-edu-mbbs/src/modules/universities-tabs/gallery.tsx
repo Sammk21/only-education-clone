@@ -93,6 +93,8 @@ const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
 
   const openLightbox = (images: ImageAttributes[], index: number) => {
     const sources = images.map((item) => baseUrl + item.url);
+  
+
     setLightboxSources(sources);
     setSelectedIndex(index);
     setLightboxToggler(!lightboxToggler);
@@ -112,6 +114,7 @@ const GalleryTabs = ({ event, infra, className }: GalleryTabsProps) => {
             width={300}
             height={200}
             className="rounded-lg cursor-pointer object-cover w-full h-full"
+            blurDataURL={item.blurhash}
           />
         </div>
       ))}

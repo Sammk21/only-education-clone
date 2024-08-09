@@ -13,8 +13,8 @@ const LeadingEducationPortal = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-6 overflow-x-auto">
         <Card className="border sm:aspect-[1/1] rounded-lg hover:shadow-lg transition cursor-pointer ">
           <Link href="/universities-list/all">
-            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2">
-              <figure className="h-14 w-14 relative">
+            <CardContent className="flex justify-center h-full items-center flex-col gap-y-2 ">
+              <figure className="h-14 w-14 relative mt-3 sm:mt-0">
                 <Image
                   src={
                     "https://www.onlyeducation.in/assets/img/icon/college.png"
@@ -25,7 +25,7 @@ const LeadingEducationPortal = () => {
                 />
               </figure>
               <p className="text-center text-lg font-semibold">College</p>
-              <p className="text-center text-sm">
+              <p className="text-center text-sm mb-3 sm:mb-0">
                 Find your dream college! Explore over 12,000+ colleges to find
                 the right one for you.
               </p>

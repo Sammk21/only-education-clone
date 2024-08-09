@@ -190,7 +190,7 @@ export default function Hero({ data, bannerImage }: HeroProps) {
               {bannerImage.data.map((item) => (
                 <SwiperSlide key={item.id} className="">
                   <div className="  ">
-                    <div className="w-full h-[70svh] relative ">
+                    <div className="w-full h-[80svh] sm:h-[70svh] relative ">
                       <Image
                         src={"https://admin.onlyeducation.co.in" + item.url}
                         alt={item.name}
