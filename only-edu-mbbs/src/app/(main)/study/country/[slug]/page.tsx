@@ -9,7 +9,6 @@ import { MetaProps } from "@/types/types";
 import { getMetaData, getStrapiData } from "@/utils/utils";
 import { Metadata } from "next";
 import React from "react";
-``;
 
 export async function generateMetadata({
   params,
